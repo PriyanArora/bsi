@@ -1,10 +1,10 @@
 # Progress
 
-**Current Gate:** G3 (Enquiry Model + Seed)
-**Current Phase:** P3
+**Current Gate:** G4 (Express Server + Enquiry Endpoint)
+**Current Phase:** P4
 **Project Category:** web
 **Last Updated:** 2026-03-23
-**Session Notes:** G1 and G2 complete. P1 repo structure set up, P2 MongoDB Atlas connected with Mongoose. Starting P3 — Enquiry Model + Seed.
+**Session Notes:** G1, G2, G3 complete. Repo set up, MongoDB connected, Enquiry model + seed script done. Starting P4 — Express Server + Enquiry Endpoint.
 
 > Each gate (G) corresponds to a phase (P): G1 = P1, G2 = P2, etc.
 > ALL checkboxes must be `[x]` with proof shown to pass a gate.
@@ -38,12 +38,12 @@
 - [x] Config comes from env, not hardcoded
 - [x] Connection test passes (server starts and connects)
 
-## P3 — Enquiry Model + Seed `[in progress]`
-- [ ] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, source, createdAt)
-- [ ] Field validations on schema (required fields, enum for source)
-- [ ] Seed script inserts 3-5 realistic sample enquiries
-- [ ] Seed is idempotent (safe to run multiple times)
-- [ ] Data visible in MongoDB Atlas dashboard
+## P3 — Enquiry Model + Seed `[complete]`
+- [x] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, source, createdAt)
+- [x] Field validations on schema (required fields, enum for source)
+- [x] Seed script inserts 3-5 realistic sample enquiries
+- [x] Seed is idempotent (safe to run multiple times)
+- [x] Data visible in MongoDB Atlas dashboard
 
 ## P4 — Express Server + Enquiry Endpoint `[locked — requires P3]`
 - [ ] Express server starts on PORT from .env
