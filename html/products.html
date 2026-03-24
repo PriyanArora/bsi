@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Products | BSI Solutionz - Authorized Bajaj Indef Dealer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#d5e3fc",
+              "on-surface-variant": "#43474e",
+              "tertiary-fixed": "#ffddb8",
+              "surface-variant": "#e0e3e5",
+              "on-tertiary-container": "#dd8d00",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-container": "#86a0cd",
+              "on-primary-fixed": "#001b3c",
+              "surface-container-high": "#e6e8ea",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "surface-tint": "#455f88",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-secondary-fixed-variant": "#3a485b",
+              "on-secondary-fixed": "#0d1c2e",
+              "on-error-container": "#93000a",
+              "secondary-container": "#d5e3fc",
+              "surface-bright": "#f7f9fb",
+              "on-surface": "#191c1e",
+              "inverse-on-surface": "#eff1f3",
+              "outline": "#74777f",
+              "surface-container": "#eceef0",
+              "primary": "#002045",
+              "surface-container-low": "#f2f4f6",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#adc7f7",
+              "on-primary-fixed-variant": "#2d476f",
+              "outline-variant": "#c4c6cf",
+              "surface-container-highest": "#e0e3e5",
+              "primary-fixed": "#d6e3ff",
+              "primary-fixed-dim": "#adc7f7",
+              "on-tertiary-fixed-variant": "#653e00",
+              "tertiary": "#311c00",
+              "on-background": "#191c1e",
+              "background": "#f7f9fb",
+              "surface": "#f7f9fb",
+              "inverse-surface": "#2d3133",
+              "on-secondary": "#ffffff",
+              "secondary-fixed-dim": "#b9c7df",
+              "surface-dim": "#d8dadc",
+              "on-tertiary-fixed": "#2a1700",
+              "secondary": "#515f74",
+              "on-primary": "#ffffff",
+              "tertiary-container": "#4e2f00",
+              "on-error": "#ffffff",
+              "primary-container": "#1a365d",
+              "on-secondary-container": "#57657a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tracing-beam-path {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+        }
+        .perspective-card {
+            perspective: 1000px;
+        }
+        .inner-card {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+        .perspective-card:hover .inner-card {
+            transform: rotateX(4deg) rotateY(-4deg) scale(1.02);
+        }
+        .enquire-button-fixed {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+        .moving-border {
+            position: relative;
+            background: #1a365d;
+            overflow: hidden;
+        }
+        .moving-border::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, transparent, transparent, #dd8d00);
+            animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-on-tertiary-container selection:text-white overflow-x-hidden">
+<!-- Floating "Enquire Now" Button (from SCREEN_6) -->
+<div class="fixed right-0 top-1/2 -translate-y-1/2 z-[110]">
+<div class="inline-block p-[2px] rounded-l-lg moving-border">
+<button class="relative z-10 bg-primary-container text-white px-3 py-8 rounded-l-lg font-bold text-sm flex items-center gap-2 hover:bg-primary transition-colors enquire-button-fixed" onclick="document.getElementById('enquiryModal').classList.remove('hidden')">
+            ENQUIRE NOW
+        </button>
+</div>
+</div>
+<!-- Enquiry Modal (from SCREEN_6) -->
+<div class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4" id="enquiryModal">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="document.getElementById('enquiryModal').classList.add('hidden')"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden border border-white/20 animate-in fade-in zoom-in duration-300">
+<button class="absolute top-4 right-4 text-slate-400 hover:text-primary transition-colors" onclick="document.getElementById('enquiryModal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="p-8">
+<h2 class="font-headline text-3xl font-bold text-primary mb-6">Send an Enquiry</h2>
+<form class="space-y-4" id="enquiryForm" onsubmit="event.preventDefault(); document.getElementById('enquiryModal').classList.add('hidden'); document.getElementById('successToast').classList.remove('hidden'); setTimeout(() =&gt; document.getElementById('successToast').classList.add('hidden'), 5000);">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-on-tertiary-container outline-none bg-surface-container-low text-sm" placeholder="Full Name" required="" type="text"/>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-on-tertiary-container outline-none bg-surface-container-low text-sm" placeholder="Company Name" required="" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-on-tertiary-container outline-none bg-surface-container-low text-sm" placeholder="Phone Number" required="" type="tel"/>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-on-tertiary-container outline-none bg-surface-container-low text-sm" placeholder="Email Address" required="" type="email"/>
+</div>
+<select class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-on-tertiary-container outline-none bg-surface-container-low text-sm text-slate-500" required="">
+<option disabled="" selected="" value="">Product of Interest</option>
+<option>Electric Chain Hoists</option>
+<option>Wire Rope Hoists</option>
+<option>Manual Hoists</option>
+<option>Jib Cranes</option>
+<option>EOT Cranes</option>
+</select>
+<textarea class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-on-tertiary-container outline-none bg-surface-container-low text-sm" placeholder="Message" required="" rows="4"></textarea>
+<div class="inline-block p-[2px] rounded-lg moving-border w-full mt-2">
+<button class="relative z-10 bg-primary-container text-white w-full py-4 rounded-lg font-bold text-lg hover:bg-primary transition-colors flex justify-center items-center gap-2" type="submit">
+                        Submit Enquiry
+                        <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Success Toast -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[250] hidden" id="successToast">
+<div class="bg-primary-container text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-3 animate-bounce">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+<span class="font-bold">Your enquiry has been sent! We'll get back to you shortly.</span>
+</div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl rounded-full border border-white/10 bg-surface-container-lowest/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,32,69,0.05)] flex justify-between items-center px-8 py-3 z-[100]">
+<div class="text-xl font-bold tracking-tighter text-primary">BSI Solutionz</div>
+<div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-tight font-headline">
+<a class="text-slate-600 hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-primary font-bold border-b-2 border-on-tertiary-container pb-1" href="#">Products</a>
+<a class="text-slate-600 hover:text-primary transition-colors" href="#">About</a>
+<a class="text-slate-600 hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<button class="text-white px-6 py-2 rounded-full font-headline text-sm font-semibold transition-all active:scale-[0.98] flex items-center gap-2 bg-primary-container hover:bg-primary">
+<span class="material-symbols-outlined text-lg">smart_toy</span>
+            Help me choose
+        </button>
+</nav>
+<!-- Tracing Beam Simulation Container -->
+<div class="relative w-full overflow-hidden">
+<!-- Structural "Beam" Line (SVG Overlay) -->
+<div class="absolute left-4 md:left-20 top-0 bottom-0 w-[2px] bg-slate-200 z-0 opacity-50">
+<div class="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-transparent via-on-tertiary-container to-transparent"></div>
+</div>
+<main class="relative z-10 max-w-7xl mx-auto px-8 pt-32 pb-24">
+<!-- Hero Header -->
+<header class="mb-20 pl-4 md:pl-20">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/15 text-xs font-bold text-primary tracking-widest uppercase mb-6">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+                    Authorized Bajaj Indef Dealer
+                </div>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-primary leading-[1.1] mb-8 max-w-4xl">
+                    Precision Engineered <br/>
+<span class="text-slate-400">Lifting Solutions.</span>
+</h1>
+<p class="text-secondary text-lg max-w-2xl leading-relaxed">
+                    Elevating industrial productivity with high-performance hoists and cranes. Built for durability, safety, and architectural precision in heavy-duty environments.
+                </p>
+</header>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pl-4 md:pl-20">
+<!-- Card 1: Electric Chain Hoists -->
+<div class="perspective-card group">
+<div class="inner-card relative bg-surface-container-lowest rounded-xl border border-outline-variant/15 p-6 h-full flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.02)] overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 -mr-16 -mt-16 rounded-full blur-3xl"></div>
+<div class="h-48 w-full rounded-lg overflow-hidden mb-6 bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Close-up of a high-duty industrial electric chain hoist with steel links and high-vis safety yellow hook in a factory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZhKu0GHPC3VcduWduc5YL-KVbmIAg2ZuWXB-K2gkWR8ZZ7UwZX_0QK5_6Z44dsNKM0lRAd7VTkCtE7cWhhCLdrtFYr1LPy0uEgB-_AT2TYmoVHbivTA9Y9rQXaCof5_5dm8tYD6qE9gYoYCpu4LUCEf4s7d92r_bhNV-zhi210LCgDwr0aKHPUkdbgdLnWRq2SRbkGRKAH6VV09fLAmXaATapiuft5yOES0NePf_WPF_NjEaGl-dklIS5BamffJAg0kHESvj_3E4o"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-2">Electric Chain Hoists</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6 flex-grow">
+                            Designed for precision lifting in medium to heavy duty workshops. Featuring dual speed options and robust mechanical brakes.
+                        </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Capacity</span>
+<span class="text-sm font-semibold text-primary">0.5 to 5.0 Tonnes</span>
+</div>
+<button class="relative group/btn overflow-hidden px-4 py-2 rounded-lg bg-primary-container text-white text-xs font-bold uppercase tracking-widest transition-all" onclick="document.getElementById('enquiryModal').classList.remove('hidden')">
+<span class="relative z-10">Enquire Now</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Wire Rope Hoists -->
+<div class="perspective-card group">
+<div class="inner-card relative bg-surface-container-lowest rounded-xl border border-outline-variant/15 p-6 h-full flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.02)] overflow-hidden">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-6 bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Heavy duty steel wire rope hoist mechanism with large drum and intricate cable winding system in industrial blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsJuErUFBi7tjozYldZGWv-pVIpBeytwALJ_P1jQuFUb60GcIkHaS7AsVHsEZ1dZ9n7v3US6CCPDaSbvSeLsh551OA3r9olYUX8K2-pE9hyaWKR9eAE6PFvv3TdIkA02QIuGUd36ZwvOId0Pll5a0upVD71P4jGExWKfbRJRGetFFPfJzHmi0AiuIw2qIymcOzwaH_Gf0E6bKJOEgqxrgFawN1ku0VGOz1LwjJ2k3oySLTImo27pFtNueY7CrU_jVqwJX3jHH7dbc"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-2">Wire Rope Hoists</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6 flex-grow">
+                            The industry standard for high-volume manufacturing. Engineered for maximum headroom and extreme duty cycles.
+                        </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Capacity</span>
+<span class="text-sm font-semibold text-primary">1 to 20 Tonnes</span>
+</div>
+<button class="relative group/btn overflow-hidden px-4 py-2 rounded-lg bg-primary-container text-white text-xs font-bold uppercase tracking-widest transition-all" onclick="document.getElementById('enquiryModal').classList.remove('hidden')">
+<span class="relative z-10">Enquire Now</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Manual Chain Pulley Blocks -->
+<div class="perspective-card group">
+<div class="inner-card relative bg-surface-container-lowest rounded-xl border border-outline-variant/15 p-6 h-full flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.02)] overflow-hidden">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-6 bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Rugged manual chain pulley block with heavy steel gears and chain hanging in an engineering workshop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtMI6ELvPT2zwAYEhlJRuLv-b-JLV4F2QArT46W97gm-maxtiAN8H0jPfLnvTjd_DdhZrKCuT8Z37gSg_jd15CNEIcC9FFK_QIh-_RSL0xQvr2rmTXfA9gj5NQ841vfuyyQY3fU7ilOYb1HcQbb7cc6nd6XUifPYPkwyzSHIBkt60Ii9uSi9S3gsSQr-8tK5dHYv3jCNwpeNAWeRvh7-vxUAqvvuuaeE99O80ymYANZLLGU1Bx6L2qC9YcemzACO_ctVz71TjlJNmb"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-2">Manual Chain Pulley Blocks</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6 flex-grow">
+                            Reliable, portable lifting solutions for maintenance and localized assembly. High-strength steel construction.
+                        </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Capacity</span>
+<span class="text-sm font-semibold text-primary">0.5 to 40 Tonnes</span>
+</div>
+<button class="relative group/btn overflow-hidden px-4 py-2 rounded-lg bg-primary-container text-white text-xs font-bold uppercase tracking-widest transition-all" onclick="document.getElementById('enquiryModal').classList.remove('hidden')">
+<span class="relative z-10">Enquire Now</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4: Jib Cranes -->
+<div class="perspective-card group">
+<div class="inner-card relative bg-surface-container-lowest rounded-xl border border-outline-variant/15 p-6 h-full flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.02)] overflow-hidden">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-6 bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Yellow pillar-mounted jib crane with a sweeping arm in a clean manufacturing plant environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsK4d0NAg6Zkzzw1b0o42V2vNFsKzWRKZd2AhWsgCtOVn5QsiQuDQv7KLB4wKum7_p5jtiPC8ultT-LIECTsljW_QE5HkjdNu_6T4AxluThcKM4_Gjiv9iQpPtLn2US0uXNp_lKgUjnnHtcDgOExtzgxt7zCrfwNwrmVidhfzzZNxljilYJc13zwClT7lpHbvB8BfXs1_dWFUsHsi8Qo7HVv-s5qHdEaQdtLNl9nkU8Rg5bus_PSvHNVNXCkhzhe3qwEN_j5gCGH2-"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-2">Jib Cranes</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6 flex-grow">
+                            Versatile material handling for individual workstations. Available in wall-mounted or floor-mounted configurations.
+                        </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Span</span>
+<span class="text-sm font-semibold text-primary">Up to 6 Meters</span>
+</div>
+<button class="relative group/btn overflow-hidden px-4 py-2 rounded-lg bg-primary-container text-white text-xs font-bold uppercase tracking-widest transition-all" onclick="document.getElementById('enquiryModal').classList.remove('hidden')">
+<span class="relative z-10">Enquire Now</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 5: Overhead (EOT) Cranes -->
+<div class="perspective-card group md:col-span-2 lg:col-span-2">
+<div class="inner-card relative bg-surface-container-lowest rounded-xl border border-outline-variant/15 p-6 h-full flex flex-col md:flex-row gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] overflow-hidden">
+<div class="absolute -bottom-10 -right-10 w-64 h-64 bg-on-tertiary-container/5 rounded-full blur-3xl"></div>
+<div class="h-64 md:h-full w-full md:w-1/2 rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Wide shot of a massive overhead EOT crane spanning a large industrial warehouse, steel girders and electric trolleys" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKUO569QEpcz2ppUSrn_rDKab5XdGOp2c2rhjGEJG-GD-n2tQAXjcRcyVfdm0abWmvcTFu6uWRJVThreKXY9xqrM83M_vZesGlYYlQNxveGHtGdGzHSDY2tahuvF4E-ibmGG0eCuThpdH1yTSN_7QbQks5y__htahhjrMHJuOnsbydLy9x78uLiyMH5tFjPmyDSXWXPTmOxlKIRTjw_qeRLmMcGUD88nxe3ARYa4eqj_AJAqRHZxxN0lSyly16R70wVA9MczdlUcW_"/>
+</div>
+<div class="w-full md:w-1/2 flex flex-col py-4">
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-tertiary-container">settings_input_component</span>
+<span class="text-[10px] font-extrabold text-primary tracking-widest uppercase">Premium Industrial Gear</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-primary mb-4">Overhead (EOT) Cranes</h3>
+<p class="text-secondary text-base leading-relaxed mb-8">
+                                Complete facility-wide lifting systems. Single and Double Girder options customized for your floor layout and load requirements. Integrated with advanced safety controls and wireless remotes.
+                            </p>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Capacity Range</span>
+<span class="text-xl font-bold text-primary">1 to 100 Tonnes</span>
+</div>
+<button class="relative group/btn overflow-hidden px-8 py-3 rounded-lg bg-on-tertiary-container text-white text-sm font-bold uppercase tracking-widest transition-all" onclick="document.getElementById('enquiryModal').classList.remove('hidden')">
+<span class="relative z-10">Custom Consultation</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- CTA Section (Transition Layer) -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-8">
+<div class="bg-primary-container rounded-2xl p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+<div class="relative z-10 max-w-xl text-center md:text-left mb-8 md:mb-0">
+<h2 class="font-headline text-3xl md:text-4xl font-bold text-white mb-4">Need a Specialized Configuration?</h2>
+<p class="text-on-primary-container text-lg">Our engineering team designs bespoke lifting solutions for unique architectural constraints.</p>
+</div>
+<div class="relative z-10">
+<button class="bg-white text-primary px-10 py-4 rounded-lg font-headline font-extrabold tracking-tight hover:bg-on-tertiary-container hover:text-white transition-all transform hover:-translate-y-1">
+                        Download Product Catalog
+                    </button>
+</div>
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 bg-surface dark:bg-slate-950">
+<div class="max-w-7xl mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-4">
+<div class="text-lg font-bold text-primary">BSI Solutionz</div>
+<p class="text-slate-500 text-sm max-w-xs leading-relaxed">
+                    Premium lifting equipment and engineering services. Serving industrial hubs with excellence and mechanical precision.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-primary uppercase text-xs tracking-widest">Quick Links</h4>
+<div class="flex flex-col gap-2 font-body text-sm">
+<a class="text-slate-500 hover:text-primary transition-colors hover:underline decoration-on-tertiary-container underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-primary transition-colors hover:underline decoration-on-tertiary-container underline-offset-4" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-primary transition-colors hover:underline decoration-on-tertiary-container underline-offset-4" href="#">Sitemap</a>
+<a class="text-slate-500 hover:text-primary transition-colors hover:underline decoration-on-tertiary-container underline-offset-4" href="#">Contact Us</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-primary uppercase text-xs tracking-widest">Connect</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:border-primary hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:border-primary hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</a>
+</div>
+<p class="text-slate-400 text-xs mt-4">© 2024 BSI Solutionz. Authorized Bajaj Indef Dealer.</p>
+</div>
+</div>
+</footer>
+</body></html>
