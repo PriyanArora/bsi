@@ -1,10 +1,10 @@
 # Progress
 
-**Current Gate:** G1 (Repo Setup)
-**Current Phase:** P1
+**Current Gate:** G3 (Enquiry Model + Seed)
+**Current Phase:** P3
 **Project Category:** web
 **Last Updated:** 2026-03-23
-**Session Notes:** G0 complete. Starting P1 — Repo Setup.
+**Session Notes:** G1 and G2 complete. P1 repo structure set up, P2 MongoDB Atlas connected with Mongoose. Starting P3 — Enquiry Model + Seed.
 
 > Each gate (G) corresponds to a phase (P): G1 = P1, G2 = P2, etc.
 > ALL checkboxes must be `[x]` with proof shown to pass a gate.
@@ -25,20 +25,20 @@
 
 ---
 
-## P1 — Repo Setup `[locked — requires G0]`
-- [ ] Conventional initial commit
-- [ ] .gitignore covers secrets, deps, build artifacts (node_modules, .env, dist)
-- [ ] Folder structure: client/ (React+Vite) and server/ (Express)
-- [ ] .env.example in server/ with all keys listed (no values)
-- [ ] Dependencies install cleanly in both client/ and server/
+## P1 — Repo Setup `[complete]`
+- [x] Conventional initial commit
+- [x] .gitignore covers secrets, deps, build artifacts (node_modules, .env, dist)
+- [x] Folder structure: client/ (React+Vite) and server/ (Express)
+- [x] .env.example in server/ with all keys listed (no values)
+- [x] Dependencies install cleanly in both client/ and server/
 
-## P2 — MongoDB Connection `[locked — requires P1]`
-- [ ] Mongoose connection module reads MONGODB_URI from .env
-- [ ] Connection success/failure logged with structured logging
-- [ ] Config comes from env, not hardcoded
-- [ ] Connection test passes (server starts and connects)
+## P2 — MongoDB Connection `[complete]`
+- [x] Mongoose connection module reads MONGODB_URI from .env
+- [x] Connection success/failure logged with structured logging
+- [x] Config comes from env, not hardcoded
+- [x] Connection test passes (server starts and connects)
 
-## P3 — Enquiry Model + Seed `[locked — requires P2]`
+## P3 — Enquiry Model + Seed `[in progress]`
 - [ ] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, source, createdAt)
 - [ ] Field validations on schema (required fields, enum for source)
 - [ ] Seed script inserts 3-5 realistic sample enquiries
