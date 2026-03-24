@@ -1,10 +1,10 @@
 # Progress
 
-**Current Gate:** G4 (Express Server + Enquiry Endpoint)
-**Current Phase:** P4
+**Current Gate:** G5 (Enquiry Validation + Rate Limiting + Tests)
+**Current Phase:** P5
 **Project Category:** web
-**Last Updated:** 2026-03-23
-**Session Notes:** G1, G2, G3 complete. Repo set up, MongoDB connected, Enquiry model + seed script done. Starting P4 — Express Server + Enquiry Endpoint.
+**Last Updated:** 2026-03-24
+**Session Notes:** G1–G4 complete. Express server running, health + enquiry endpoints working, input sanitized, CORS configured, error handler in place. Starting P5 — Zod validation, rate limiting, integration tests.
 
 > Each gate (G) corresponds to a phase (P): G1 = P1, G2 = P2, etc.
 > ALL checkboxes must be `[x]` with proof shown to pass a gate.
@@ -45,15 +45,15 @@
 - [x] Seed is idempotent (safe to run multiple times)
 - [x] Data visible in MongoDB Atlas dashboard
 
-## P4 — Express Server + Enquiry Endpoint `[locked — requires P3]`
-- [ ] Express server starts on PORT from .env
-- [ ] POST /api/enquiry validates and saves enquiry to MongoDB
-- [ ] GET /api/health returns JSON status
-- [ ] Input sanitized (no raw user input stored)
-- [ ] CORS configured to allow FRONTEND_URL only
-- [ ] Error path returns meaningful JSON error (not stack trace)
+## P4 — Express Server + Enquiry Endpoint `[complete]`
+- [x] Express server starts on PORT from .env
+- [x] POST /api/enquiry validates and saves enquiry to MongoDB
+- [x] GET /api/health returns JSON status
+- [x] Input sanitized (no raw user input stored)
+- [x] CORS configured to allow FRONTEND_URL only
+- [x] Error path returns meaningful JSON error (not stack trace)
 
-## P5 — Enquiry Validation + Rate Limiting + Tests `[locked — requires P4]`
+## P5 — Enquiry Validation + Rate Limiting + Tests `[not started]`
 - [ ] Zod schema validates: fullName required, phone required (Indian 10-digit), email optional (valid format), other fields optional
 - [ ] express-rate-limit applied to POST /api/enquiry
 - [ ] Integration tests: valid submission → 201, missing fullName → 400, invalid phone → 400, rate limit exceeded → 429

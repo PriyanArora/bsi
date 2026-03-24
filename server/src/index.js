@@ -32,3 +32,6 @@ const startServer = async() =>{
 }
 
 startServer();
+
+//for jest testing
+module.exports = app;
