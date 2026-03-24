@@ -11,7 +11,7 @@ export default function Navbar({ onHelpClick }) {
   const { pathname } = useLocation()
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl rounded-full border border-white/10 bg-white/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,32,69,0.05)] flex justify-between items-center px-8 py-3 z-100">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-100 flex w-[90%] max-w-7xl items-center justify-between rounded-full border border-white/10 bg-white/70 px-8 py-3 backdrop-blur-xl shadow-none">
       {/* Logo */}
       <Link to="/" className="text-xl font-bold tracking-tighter text-bsi-primary font-headline">
         BSI Solutionz
@@ -26,7 +26,7 @@ export default function Navbar({ onHelpClick }) {
             className={
               pathname === to
                 ? 'font-bold text-sm tracking-tight text-bsi-primary border-b-2 border-bsi-accent pb-1'
-                : 'font-semibold text-sm tracking-tight text-slate-600 hover:text-bsi-primary transition-colors'
+                : 'inline-block text-sm font-semibold tracking-tight text-slate-600 transition-all duration-200 hover:scale-105 hover:font-bold hover:text-bsi-primary'
             }
           >
             {label}
@@ -37,9 +37,8 @@ export default function Navbar({ onHelpClick }) {
       {/* Navbar CTA */}
       <button
         onClick={() => onHelpClick?.()}
-        className="bg-bsi-primary text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-bsi-primary-container transition-all flex items-center gap-2"
+        className="inline-flex rounded-full bg-bsi-primary px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-bsi-primary-container"
       >
-        <span className="material-symbols-outlined text-sm">smart_toy</span>
         Help me choose
       </button>
     </nav>
