@@ -1,10 +1,10 @@
 # Progress
 
-**Current Gate:** G6 (Nodemailer Service)
-**Current Phase:** P6
+**Current Gate:** G7 (React Skeleton + Routing)
+**Current Phase:** P7
 **Project Category:** web
 **Last Updated:** 2026-03-24
-**Session Notes:** G1–G5 complete. Zod validation (phone or email required), rate limiting, 6 integration tests all passing. Starting P6 — Nodemailer email service.
+**Session Notes:** G1–G6 complete. Nodemailer OAuth2 email service built — Gmail SMTP scope, getAccessToken helper, separate emailService module, DB-first flow with email-failure tolerance, 8 tests passing. Starting P7 — React skeleton + routing.
 
 > Each gate (G) corresponds to a phase (P): G1 = P1, G2 = P2, etc.
 > ALL checkboxes must be `[x]` with proof shown to pass a gate.
@@ -59,15 +59,15 @@
 - [x] Integration tests: valid submission → 201, missing fullName → 400, invalid phone → 400, rate limit exceeded → 429
 - [x] All tests pass
 
-## P6 — Nodemailer Service `[locked — requires P5]`
-- [ ] Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)
-- [ ] Email service is a separate module (not inline in route handler)
-- [ ] Enquiry endpoint: save to DB first, then send email. DB save failure → 500. Email failure → log error but still return success.
-- [ ] Email contains formatted enquiry details (name, phone, product, message, source)
-- [ ] No hardcoded credentials — all from .env
-- [ ] Unit tests for email service (mock transporter)
+## P6 — Nodemailer Service `[complete]`
+- [x] Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)
+- [x] Email service is a separate module (not inline in route handler)
+- [x] Enquiry endpoint: save to DB first, then send email. DB save failure → 500. Email failure → log error but still return success.
+- [x] Email contains formatted enquiry details (name, phone, product, message, source)
+- [x] No hardcoded credentials — all from .env
+- [x] Unit tests for email service (mock transporter)
 
-## P7 — React Skeleton + Routing `[locked — requires P6]`
+## P7 — React Skeleton + Routing `[not started]`
 - [ ] React + Vite app in client/ with Tailwind CSS configured
 - [ ] Shadcn/ui initialised
 - [ ] React Router v7 with routes: /, /products, /about, /contact, /* (404)
