@@ -1,13 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: 'Inter', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -127,4 +128,74 @@
   html {
     @apply font-sans;
     }
+}
+
+/* ── BSI Brand Tokens ─────────────────────────── */
+:root {
+  --bsi-primary: #002045;
+  --bsi-primary-container: #1a365d;
+  --bsi-on-primary: #ffffff;
+  --bsi-on-primary-container: #86a0cd;
+  --bsi-tertiary-accent: #dd8d00;
+  --bsi-surface: #f7f9fb;
+  --bsi-surface-container-lowest: #ffffff;
+  --bsi-surface-container-low: #f2f4f6;
+  --bsi-surface-container: #eceef0;
+  --bsi-outline-variant: #c4c6cf;
+  --bsi-secondary: #515f74;
+  --bsi-secondary-container: #d5e3fc;
+}
+
+@theme inline {
+  --color-bsi-primary: var(--bsi-primary);
+  --color-bsi-primary-container: var(--bsi-primary-container);
+  --color-bsi-on-primary: var(--bsi-on-primary);
+  --color-bsi-on-primary-container: var(--bsi-on-primary-container);
+  --color-bsi-accent: var(--bsi-tertiary-accent);
+  --color-bsi-surface: var(--bsi-surface);
+  --color-bsi-surface-lowest: var(--bsi-surface-container-lowest);
+  --color-bsi-surface-low: var(--bsi-surface-container-low);
+  --color-bsi-surface-container: var(--bsi-surface-container);
+  --color-bsi-outline: var(--bsi-outline-variant);
+  --color-bsi-secondary: var(--bsi-secondary);
+  --color-bsi-secondary-container: var(--bsi-secondary-container);
+  --font-headline: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ── BSI Utilities ────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.moving-border {
+  position: relative;
+  background: #1a365d;
+  overflow: hidden;
+}
+.moving-border::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, transparent, transparent, #dd8d00);
+  animation: bsi-rotate 4s linear infinite;
+}
+
+@keyframes bsi-rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes bsi-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-bsi-marquee {
+  animation: bsi-marquee 60s linear infinite;
+}
+.animate-bsi-marquee:hover {
+  animation-play-state: paused;
 }
