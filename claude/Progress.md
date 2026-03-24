@@ -1,10 +1,10 @@
 # Progress
 
-**Current Gate:** G5 (Enquiry Validation + Rate Limiting + Tests)
-**Current Phase:** P5
+**Current Gate:** G6 (Nodemailer Service)
+**Current Phase:** P6
 **Project Category:** web
 **Last Updated:** 2026-03-24
-**Session Notes:** G1–G4 complete. Express server running, health + enquiry endpoints working, input sanitized, CORS configured, error handler in place. Starting P5 — Zod validation, rate limiting, integration tests.
+**Session Notes:** G1–G5 complete. Zod validation (phone or email required), rate limiting, 6 integration tests all passing. Starting P6 — Nodemailer email service.
 
 > Each gate (G) corresponds to a phase (P): G1 = P1, G2 = P2, etc.
 > ALL checkboxes must be `[x]` with proof shown to pass a gate.
@@ -53,11 +53,11 @@
 - [x] CORS configured to allow FRONTEND_URL only
 - [x] Error path returns meaningful JSON error (not stack trace)
 
-## P5 — Enquiry Validation + Rate Limiting + Tests `[not started]`
-- [ ] Zod schema validates: fullName required, phone required (Indian 10-digit), email optional (valid format), other fields optional
-- [ ] express-rate-limit applied to POST /api/enquiry
-- [ ] Integration tests: valid submission → 201, missing fullName → 400, invalid phone → 400, rate limit exceeded → 429
-- [ ] All tests pass
+## P5 — Enquiry Validation + Rate Limiting + Tests `[complete]`
+- [x] Zod schema validates: fullName required, phone required (Indian 10-digit), email optional (valid format), other fields optional
+- [x] express-rate-limit applied to POST /api/enquiry
+- [x] Integration tests: valid submission → 201, missing fullName → 400, invalid phone → 400, rate limit exceeded → 429
+- [x] All tests pass
 
 ## P6 — Nodemailer Service `[locked — requires P5]`
 - [ ] Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)

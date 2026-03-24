@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Enquiry = require("../models/Enquiry.js");
-const rateLimit = require("express-rate-limit");                                                                                                                                                                                                                          
+const rateLimit = require("express-rate-limit");   
+const {sendEnquiryEmail} = require("../services/emailService.js");                                                                                                                                                                                                          
 
 const { EnquirySchema } = require("../validators/enquiry.js");
 
@@ -21,6 +22,13 @@ router.post("/", enquiryLimiter, async (req, res) => {
     
     const enquiry = new Enquiry({ fullName, phone, email, companyName, productOfInterest, message, source });
     await enquiry.save();  
+
+    try{
+      await sendEnquiryEmail(enquiry);
+    }
+    catch(err){
+      console.error("Failure to send email");
+    }
     return res.status(201).json({message: "Enquiry received"});
   } 
   catch (err) {                                                                                                                       
