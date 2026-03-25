@@ -1,16 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import craneImg from '../../../sgeot-2.png'
 
 export default function HeroSection() {
-  const [parallaxOffset, setParallaxOffset] = useState(0)
+  const parallaxRef = useRef(null)
 
   useEffect(() => {
     let rafId = 0
     let ticking = false
+    const parallaxElement = parallaxRef.current
+
+    if (!parallaxElement) {
+      return undefined
+    }
 
     const updateParallax = () => {
       // Keep desktop motion unchanged and disable parallax below desktop widths.
-      setParallaxOffset(window.innerWidth >= 1024 ? window.scrollY * 0.4 : 0)
+      const offset = window.innerWidth >= 1024 ? window.scrollY * 0.4 : 0
+      parallaxElement.style.transform = `translate3d(0, ${offset}px, 0)`
       ticking = false
     }
 
@@ -22,10 +28,12 @@ export default function HeroSection() {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
     handleScroll()
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
       window.cancelAnimationFrame(rafId)
     }
   }, [])
@@ -33,7 +41,7 @@ export default function HeroSection() {
   return (
     <section className="hero-mobile-shell hero-gradient-wash section-pad relative flex min-h-screen w-full items-center overflow-x-clip overflow-y-hidden pt-(--bsi-navbar-height)">
       <div className="relative z-10 w-full">
-        <div className="relative" style={{ transform: `translateY(${parallaxOffset}px)` }}>
+        <div ref={parallaxRef} className="relative will-change-transform">
           <img
             src={craneImg}
             alt="BSI crane installation"
