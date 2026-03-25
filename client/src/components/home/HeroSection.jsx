@@ -31,7 +31,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="section-pad relative flex min-h-screen w-full items-center overflow-hidden bg-[#F4F6F9] pt-28">
+    <section className="section-pad relative flex min-h-screen w-full items-center overflow-hidden bg-[#F4F6F9] pt-24 md:pt-28">
       <div className="relative z-10 w-full">
         <div className="relative" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <img
@@ -42,9 +42,9 @@ export default function HeroSection() {
           />
         </div>
 
-        <div className="absolute top-[12%] left-4 z-20 sm:left-8 md:left-12 lg:left-16">
+        <div className="absolute top-[8%] left-4 z-20 sm:top-[10%] sm:left-8 md:top-[12%] md:left-12 lg:left-16">
           <div className="hero-text-container">
-            <h1 className="font-headline text-[2.4rem] leading-[1.02] font-extrabold tracking-tight text-[#0D1F3C] md:text-[2.75rem] lg:text-[3rem]">
+            <h1 className="font-headline text-[2rem] leading-[1.03] font-extrabold tracking-tight text-[#0D1F3C] sm:text-[2.2rem] md:text-[2.75rem] lg:text-[3rem]">
               BSI Solutionz
             </h1>
             <p className="hero-text-description mt-4 text-[1.1rem] leading-[1.7] font-normal text-[#3E4C62]">

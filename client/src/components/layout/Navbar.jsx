@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logoImg from '../../../logo-whitebg.png'
+import MobileNav from './MobileNav'
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -10,6 +12,7 @@ const NAV_LINKS = [
 
 export default function Navbar({ onHelpClick }) {
   const { pathname } = useLocation()
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
     <nav className="fixed top-0 z-100 w-full border-b-4 border-[#FFD100] bg-[#EFEFEF] shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
@@ -34,15 +37,32 @@ export default function Navbar({ onHelpClick }) {
         ))}
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => onHelpClick?.()}
             className="inline-flex rounded bg-[#FFD100] px-3 py-2 font-headline text-xs font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] sm:px-4 sm:text-sm"
           >
             Help me choose
           </button>
+
+          <button
+            onClick={() => setIsMobileNavOpen(true)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C] md:hidden"
+            aria-label="Open menu"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
       </div>
+
+      <MobileNav
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        onHelpClick={onHelpClick}
+        pathname={pathname}
+      />
     </nav>
   )
 }
