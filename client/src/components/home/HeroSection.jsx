@@ -40,8 +40,8 @@ export default function HeroSection() {
 
   return (
     <section className="hero-mobile-shell hero-gradient-wash section-pad relative flex min-h-screen w-full items-center overflow-x-clip overflow-y-hidden pt-(--bsi-navbar-height)">
-      <div className="relative z-10 w-full">
-        <div ref={parallaxRef} className="relative will-change-transform">
+      <div className="hero-layout relative z-10 w-full">
+        <div ref={parallaxRef} className="hero-crane-wrap relative will-change-transform">
           <img
             src={craneImg}
             alt="BSI crane installation"
