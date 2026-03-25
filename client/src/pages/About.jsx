@@ -25,7 +25,7 @@ export default function About({ onEnquireClick }) {
                 <meta property="og:image" content="/og-about-placeholder.jpg" />
             </Helmet>
 
-            <main className="relative overflow-hidden px-6 pb-24 pt-32 md:px-0">
+            <main className="relative overflow-hidden px-6 pb-24 pt-32 lg:px-0">
                 <div className="relative z-10 mx-auto max-w-7xl">
                     <AboutHero />
                     <AboutBento onEnquireClick={onEnquireClick} />

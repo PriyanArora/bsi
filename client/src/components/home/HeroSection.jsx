@@ -9,8 +9,8 @@ export default function HeroSection() {
     let ticking = false
 
     const updateParallax = () => {
-      // Positive offset counters natural upward scroll to create slower visual motion.
-      setParallaxOffset(window.scrollY * 0.4)
+      // Keep desktop motion unchanged and disable parallax below desktop widths.
+      setParallaxOffset(window.innerWidth >= 1024 ? window.scrollY * 0.4 : 0)
       ticking = false
     }
 
@@ -42,7 +42,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <div className="hero-text-anchor absolute left-4 z-20 max-[390px]:left-3 sm:left-8 md:left-12 lg:left-16">
+        <div className="hero-text-anchor absolute left-3 z-20 sm:left-8 md:left-12 lg:left-16">
           <div className="hero-text-container">
             <h1 className="hero-title font-headline font-extrabold tracking-tight text-[#0D1F3C]">
               BSI Solutionz

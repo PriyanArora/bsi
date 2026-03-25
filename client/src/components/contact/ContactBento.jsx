@@ -1,6 +1,6 @@
 export default function ContactBento() {
   return (
-    <section className="grid grid-cols-1 gap-6 md:pl-24 lg:grid-cols-12">
+    <section className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:pl-24">
       <article className="border-bsi-outline/20 bg-bsi-surface-lowest rounded-xl border p-8 shadow-[0_20px_40px_rgba(0,32,69,0.02)] md:p-12 lg:col-span-7">
         <p className="text-bsi-accent text-xs font-bold uppercase tracking-[0.16em]">Contact Guidance</p>
         <h3 className="font-headline text-bsi-primary mt-2 text-3xl font-bold">Speak with BSI specialists</h3>
@@ -9,7 +9,7 @@ export default function ContactBento() {
           review your requirement and connect with you quickly.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
           <div className="bg-bsi-surface-low rounded-xl p-5">
             <p className="text-bsi-primary text-sm font-bold">Registered Office</p>
             <p className="text-bsi-secondary mt-2 text-sm leading-relaxed">

@@ -77,7 +77,7 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed top-0 right-0 z-140 flex h-full w-[82%] max-w-xs flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-6 shadow-2xl transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 z-140 flex h-full w-[88%] max-w-sm flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-5 shadow-2xl transition-transform duration-300 ease-out sm:w-[82%] sm:max-w-xs sm:p-6 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

@@ -51,7 +51,7 @@ const PRODUCTS = [
 
 export default function ProductGrid({ onEnquireClick }) {
   return (
-    <div className="grid grid-cols-1 gap-8 pl-4 md:grid-cols-2 md:pl-20 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 pl-4 md:grid-cols-2 md:pl-8 lg:grid-cols-3 lg:gap-8 lg:pl-20">
       {PRODUCTS.map((product) => (
         <Motion.article
           key={product.title}
@@ -59,11 +59,11 @@ export default function ProductGrid({ onEnquireClick }) {
           transition={{ duration: 0.2 }}
           className={[
             'border-bsi-outline/30 bg-bsi-surface-lowest group rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]',
-            product.featured ? 'md:col-span-2 lg:col-span-2' : ''
+            product.featured ? 'md:col-span-1 lg:col-span-2' : ''
           ].join(' ')}
         >
-          <div className={product.featured ? 'flex flex-col gap-6 md:flex-row' : ''}>
-            <div className={product.featured ? 'h-64 w-full overflow-hidden rounded-lg md:h-auto md:w-1/2' : 'mb-6 h-48 overflow-hidden rounded-lg'}>
+          <div className={product.featured ? 'flex flex-col gap-6 lg:flex-row' : ''}>
+            <div className={product.featured ? 'h-64 w-full overflow-hidden rounded-lg lg:h-auto lg:w-1/2' : 'mb-6 h-48 overflow-hidden rounded-lg'}>
               {/* TODO: replace with real client images */}
               <img
                 src={product.image}
@@ -73,8 +73,8 @@ export default function ProductGrid({ onEnquireClick }) {
               />
             </div>
 
-            <div className={product.featured ? 'flex w-full flex-col md:w-1/2' : 'flex flex-col'}>
-              <h3 className={product.featured ? 'font-headline text-bsi-primary mb-3 text-3xl font-bold' : 'font-headline text-bsi-primary mb-2 text-xl font-bold'}>
+            <div className={product.featured ? 'flex w-full flex-col lg:w-1/2' : 'flex flex-col'}>
+              <h3 className={product.featured ? 'font-headline text-bsi-primary mb-3 text-2xl font-bold lg:text-3xl' : 'font-headline text-bsi-primary mb-2 text-xl font-bold'}>
                 {product.title}
               </h3>
               <p className={product.featured ? 'text-bsi-secondary mb-8 text-base leading-relaxed' : 'text-bsi-secondary mb-6 grow text-sm leading-relaxed'}>

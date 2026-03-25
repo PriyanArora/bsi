@@ -1,6 +1,6 @@
 export default function ProductsHero() {
   return (
-    <header className="mb-20 pl-4 md:pl-20">
+    <header className="mb-16 pl-4 lg:mb-20 lg:pl-20">
       <div className="border-bsi-outline/40 bg-bsi-surface-low mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-bsi-primary">
         <span className="bg-bsi-accent h-2 w-2 rounded-full" />
         Authorized Bajaj Indef Dealer

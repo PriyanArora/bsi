@@ -25,7 +25,7 @@ export default function Contact() {
                 <meta property="og:image" content="/og-contact-placeholder.jpg" />
             </Helmet>
 
-            <main className="relative min-h-screen px-6 pb-24 pt-32 md:px-0">
+            <main className="relative min-h-screen px-6 pb-24 pt-32 lg:px-0">
                 <div className="relative z-10 mx-auto max-w-6xl">
                     <ContactHero />
                     <ContactBento />

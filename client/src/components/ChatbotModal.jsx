@@ -53,7 +53,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
       onClick={resetAndClose}
     >
       <div
-        className="border-bsi-outline/20 bg-bsi-surface-lowest w-full max-w-xl rounded-2xl border p-6 shadow-2xl md:p-8"
+        className="border-bsi-outline/20 bg-bsi-surface-lowest max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-2xl border p-4 shadow-2xl sm:p-6 md:p-8"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-6 flex items-start justify-between gap-4">
