@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logoImg from '../../../logo-whitebg.png'
+import logoImg from '../../../bsilogofinal.png'
 import MobileNav from './MobileNav'
+import { Button } from '../ui/button'
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -15,10 +16,10 @@ export default function Navbar({ onHelpClick }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 z-100 w-full border-b-2 border-[#FFD100] bg-[#EFEFEF] shadow-[0_2px_8px_rgba(0,0,0,0.08)] md:border-b-4">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3 md:px-8">
+    <nav className="fixed top-0 z-100 w-full px-3 pt-3 sm:px-6 sm:pt-4 md:px-8">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-[2rem] border border-white/70 bg-white/68 px-3 py-2.5 shadow-[0_10px_32px_rgba(0,32,69,0.13)] backdrop-blur-xl supports-backdrop-filter:bg-white/58 sm:px-5 sm:py-3 md:px-6">
         <Link to="/" className="shrink-0">
-          <img src={logoImg} alt="BSI Solutionz logo" className="h-9 w-auto sm:h-11 md:h-14" loading="eager" />
+          <img src={logoImg} alt="BSI Solutionz logo" className="h-9 w-auto sm:h-10 md:h-12" loading="eager" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -38,12 +39,14 @@ export default function Navbar({ onHelpClick }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <button
+          <Button
             onClick={() => onHelpClick?.()}
-            className="inline-flex min-h-10 whitespace-nowrap rounded bg-[#FFD100] px-3 py-2 font-headline text-xs font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] sm:px-4 sm:py-2 sm:text-sm"
+            variant="secondary"
+            size="lg"
+            className="min-h-10 whitespace-nowrap rounded-full border border-[#D2DAE6] bg-[#0D2E5A] px-4 py-2 font-headline text-xs font-bold text-white shadow-sm transition-colors duration-200 ease-in-out hover:bg-[#12386B] sm:text-sm"
           >
             Help me choose
-          </button>
+          </Button>
 
           <button
             onClick={() => setIsMobileNavOpen(true)}

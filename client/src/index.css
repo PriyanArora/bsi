@@ -151,16 +151,20 @@
   --bsi-primary: #002045;
   --bsi-primary-container: #1a365d;
   --bsi-on-primary: #ffffff;
-  --bsi-on-primary-container: #86a0cd;
+  --bsi-on-primary-container: #9db2d7;
   --bsi-tertiary-accent: #dd8d00;
-  --bsi-surface: #f7f9fb;
+  --bsi-surface: #f9fafc;
   --bsi-surface-container-lowest: #ffffff;
-  --bsi-surface-container-low: #f2f4f6;
-  --bsi-surface-container: #eceef0;
-  --bsi-outline-variant: #c4c6cf;
-  --bsi-secondary: #515f74;
-  --bsi-secondary-container: #d5e3fc;
+  --bsi-surface-container-low: #f5f6f8;
+  --bsi-surface-container: #eef1f5;
+  --bsi-outline-variant: #c8d1de;
+  --bsi-secondary: #4f5f78;
+  --bsi-secondary-container: #dce6f7;
   --bsi-navbar-height: 72px;
+  --bsi-gradient-navy: rgba(188, 208, 228, 0.52);
+  --bsi-gradient-navy-soft: rgba(223, 233, 244, 0.44);
+  --bsi-gradient-warm: rgba(248, 225, 225, 0.48);
+  --bsi-gradient-warm-soft: rgba(252, 243, 241, 0.58);
 }
 
 @theme inline {
@@ -188,6 +192,12 @@
 .hero-mobile-shell {
   min-height: 80vh;
   padding-bottom: 16px;
+}
+
+.hero-gradient-wash {
+  background:
+    linear-gradient(90deg, var(--bsi-gradient-navy) 0%, var(--bsi-gradient-navy-soft) 31%, var(--bsi-gradient-warm-soft) 68%, var(--bsi-gradient-warm) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.15) 100%);
 }
 
 .hero-text-anchor {

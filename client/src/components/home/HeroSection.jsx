@@ -31,7 +31,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="hero-mobile-shell section-pad relative flex min-h-screen w-full items-center overflow-x-clip overflow-y-hidden bg-[#F4F6F9] pt-(--bsi-navbar-height)">
+    <section className="hero-mobile-shell hero-gradient-wash section-pad relative flex min-h-screen w-full items-center overflow-x-clip overflow-y-hidden pt-(--bsi-navbar-height)">
       <div className="relative z-10 w-full">
         <div className="relative" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <img
