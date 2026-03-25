@@ -23,7 +23,7 @@ const ABOUT_IMAGES = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-bsi-surface py-24">
+    <section className="section-pad bg-white">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2 md:px-8">
         <div className="h-fit lg:sticky lg:top-32">
           <h2 className="font-headline text-bsi-primary text-4xl leading-tight font-extrabold md:text-5xl">

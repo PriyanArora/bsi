@@ -21,21 +21,21 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-bsi-primary relative overflow-hidden py-24 text-white">
-      <div className="absolute inset-0 opacity-10 [background-image:radial-gradient(#dd8d00_1px,transparent_1px)] [background-size:20px_20px]" />
+    <section className="section-pad relative overflow-hidden bg-[#F4F6F9] text-[#0D1F3C]">
+      <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(#d5dce8_1px,transparent_1px)] [background-size:20px_20px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
-        <h2 className="font-headline mb-12 text-3xl font-bold">Trusted by Heavy Industry Leaders</h2>
+        <h2 className="font-headline mb-12 text-3xl font-bold text-[#0D1F3C]">Trusted by Heavy Industry Leaders</h2>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((item) => (
-            <article key={item.name} className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-lg">
-              <p className="text-sm leading-relaxed italic text-slate-200">&quot;{item.quote}&quot;</p>
+            <article key={item.name} className="rounded-xl border border-[#d8dee8] bg-white p-8 shadow-sm">
+              <p className="text-sm leading-relaxed italic text-[#4A5568]">&quot;{item.quote}&quot;</p>
               <div className="mt-6 flex items-center gap-4">
                 <div className="bg-bsi-accent h-10 w-10 rounded-full" />
                 <div>
-                  <p className="text-sm font-bold">{item.name}</p>
-                  <p className="text-xs text-slate-400">{item.role}</p>
+                  <p className="text-sm font-bold text-[#0D1F3C]">{item.name}</p>
+                  <p className="text-xs text-[#6b7280]">{item.role}</p>
                 </div>
               </div>
             </article>

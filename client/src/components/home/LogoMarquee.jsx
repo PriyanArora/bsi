@@ -20,7 +20,7 @@ function LogoRow() {
 
 export default function LogoMarquee() {
   return (
-    <section className="border-bsi-outline/30 bg-bsi-surface-lowest overflow-hidden border-y py-16">
+    <section className="section-pad border-bsi-outline/30 bg-[#F4F6F9] overflow-hidden border-y">
       <div className="mx-auto mb-8 max-w-7xl px-6 md:px-8">
         <h3 className="text-bsi-secondary text-center text-xs font-semibold uppercase tracking-[0.25em] md:text-left">
           Trusted by Industries Across the Region

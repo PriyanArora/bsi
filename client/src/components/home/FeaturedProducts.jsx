@@ -26,7 +26,7 @@ const featuredProducts = [
 
 export default function FeaturedProducts() {
   return (
-    <section className="bg-bsi-surface-low py-24">
+    <section className="section-pad bg-white">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="mb-16 text-center">
           <h2 className="font-headline text-bsi-primary text-4xl font-bold">Engineered Performance</h2>

@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import PageTransition from '../components/PageTransition'
 import HeroSection from '../components/home/HeroSection'
+import TrustStrip from '../components/home/TrustStrip'
 import FeaturedProducts from '../components/home/FeaturedProducts'
 import LogoMarquee from '../components/home/LogoMarquee'
 import WhyChooseUs from '../components/home/WhyChooseUs'
@@ -28,6 +29,7 @@ export default function Home() {
             </Helmet>
 
             <HeroSection />
+            <TrustStrip />
             <FeaturedProducts />
             <LogoMarquee />
             <WhyChooseUs />
