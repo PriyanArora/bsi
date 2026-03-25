@@ -42,15 +42,16 @@ export default function HeroSection() {
           />
         </div>
 
-        <div className="absolute top-[12%] left-4 z-20 max-w-[16rem] sm:left-8 sm:max-w-[24rem] md:left-12 md:max-w-105 lg:left-16">
-          <h1 className="font-headline text-[2.4rem] leading-[1.02] font-extrabold tracking-tight text-[#0D1F3C] md:text-[2.75rem] lg:text-[3rem]">
-            BSI Solutionz
-          </h1>
-          <p className="mt-4 max-w-105 text-[1.1rem] leading-[1.7] font-normal text-[#4A5568]">
-            Authorized Bajaj Indef Dealer. Providing high-performance lifting solutions designed for maximum safety
-            and operational efficiency
-          </p>
-
+        <div className="absolute top-[12%] left-4 z-20 sm:left-8 md:left-12 lg:left-16">
+          <div className="hero-text-container">
+            <h1 className="font-headline text-[2.4rem] leading-[1.02] font-extrabold tracking-tight text-[#0D1F3C] md:text-[2.75rem] lg:text-[3rem]">
+              BSI Solutionz
+            </h1>
+            <p className="hero-text-description mt-4 text-[1.1rem] leading-[1.7] font-normal text-[#3E4C62]">
+              Authorized Bajaj Indef Dealer. Providing high-performance lifting solutions designed for maximum safety
+              and operational efficiency
+            </p>
+          </div>
         </div>
       </div>
     </section>

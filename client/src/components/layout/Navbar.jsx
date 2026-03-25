@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: 'Contact', to: '/contact' },
 ]
 
-export default function Navbar({ onHelpClick, onEnquireClick }) {
+export default function Navbar({ onHelpClick }) {
   const { pathname } = useLocation()
 
   return (
@@ -34,18 +34,12 @@ export default function Navbar({ onHelpClick, onEnquireClick }) {
         ))}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center">
           <button
             onClick={() => onHelpClick?.()}
             className="inline-flex rounded bg-[#FFD100] px-3 py-2 font-headline text-xs font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] sm:px-4 sm:text-sm"
           >
             Help me choose
-          </button>
-          <button
-            onClick={() => onEnquireClick?.()}
-            className="inline-flex rounded border-2 border-[#0D1F3C] bg-transparent px-3 py-2 font-headline text-xs font-bold text-[#0D1F3C] transition-all duration-200 ease-in-out hover:bg-[#0D1F3C] hover:text-white sm:px-4 sm:text-sm"
-          >
-            Contact Us
           </button>
         </div>
       </div>
