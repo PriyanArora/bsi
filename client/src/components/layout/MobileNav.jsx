@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const NAV_LINKS = [
@@ -9,14 +9,42 @@ const NAV_LINKS = [
 ]
 
 export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
+  const panelRef = useRef(null)
+  const previousActiveElementRef = useRef(null)
+
   useEffect(() => {
     if (!isOpen) {
       return undefined
     }
 
+    previousActiveElementRef.current = document.activeElement
+
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         onClose?.()
+      }
+
+      if (event.key === 'Tab' && panelRef.current) {
+        const focusableElements = panelRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
+
+        if (!focusableElements.length) {
+          return
+        }
+
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault()
+          firstElement.focus()
+        }
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault()
+          lastElement.focus()
+        }
       }
     }
 
@@ -24,9 +52,13 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleEscape)
 
+    const closeButton = panelRef.current?.querySelector('[aria-label="Close menu"]')
+    closeButton?.focus()
+
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', handleEscape)
+      previousActiveElementRef.current?.focus?.()
     }
   }, [isOpen, onClose])
 
@@ -35,16 +67,17 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
       <div
         aria-hidden="true"
         onClick={() => onClose?.()}
-        className={`fixed inset-0 z-[130] bg-[#0D1F3C]/35 transition-opacity duration-200 ${
+        className={`fixed inset-0 z-130 bg-[#0D1F3C]/35 transition-opacity duration-200 ${
           isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       />
 
       <aside
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed top-0 right-0 z-[140] flex h-full w-[82%] max-w-xs flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-6 shadow-2xl transition-transform duration-250 ease-out ${
+        className={`fixed top-0 right-0 z-140 flex h-full w-[82%] max-w-xs flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-6 shadow-2xl transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

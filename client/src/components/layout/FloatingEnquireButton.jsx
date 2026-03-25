@@ -1,6 +1,6 @@
 export default function FloatingEnquireButton({ onClick }) {
   return (
-    <div className="fixed right-5 bottom-5 z-[120] sm:right-6 sm:bottom-6 md:right-8 md:bottom-8">
+    <div className="fixed right-5 bottom-5 z-90 sm:right-6 sm:bottom-6 md:right-8 md:bottom-8">
       <div className="inline-block p-px">
         <button
           onClick={onClick}

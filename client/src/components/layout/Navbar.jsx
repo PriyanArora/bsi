@@ -16,9 +16,9 @@ export default function Navbar({ onHelpClick }) {
 
   return (
     <nav className="fixed top-0 z-100 w-full border-b-4 border-[#FFD100] bg-[#EFEFEF] shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 md:px-8">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-3 py-2.5 max-[420px]:px-2.5 sm:px-6 sm:py-3 md:px-8">
         <Link to="/" className="shrink-0">
-          <img src={logoImg} alt="BSI Solutionz logo" className="h-14 w-auto" loading="eager" />
+          <img src={logoImg} alt="BSI Solutionz logo" className="h-9 w-auto max-[420px]:h-8 sm:h-11 md:h-14" loading="eager" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -40,17 +40,17 @@ export default function Navbar({ onHelpClick }) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => onHelpClick?.()}
-            className="inline-flex rounded bg-[#FFD100] px-3 py-2 font-headline text-xs font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] sm:px-4 sm:text-sm"
+            className="inline-flex whitespace-nowrap rounded bg-[#FFD100] px-2.5 py-1.5 font-headline text-[0.68rem] font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] max-[420px]:px-2 max-[420px]:text-[0.62rem] sm:px-4 sm:py-2 sm:text-sm"
           >
             Help me choose
           </button>
 
           <button
             onClick={() => setIsMobileNavOpen(true)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C] md:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C] max-[420px]:h-7 max-[420px]:w-7 md:hidden"
             aria-label="Open menu"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 max-[420px]:h-3.5 max-[420px]:w-3.5" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
