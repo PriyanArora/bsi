@@ -293,7 +293,7 @@
   .hero-mobile-shell {
     min-height: auto;
     padding-top: calc(var(--bsi-navbar-height) + 0.5rem);
-    padding-bottom: 0;
+    padding-bottom: 3rem;
   }
 
   .hero-layout {
