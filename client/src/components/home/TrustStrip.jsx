@@ -1,25 +1,15 @@
-import { BriefcaseBusiness, LockKeyhole, MapPin, ShieldCheck } from 'lucide-react'
+import indefLogo from '../../../indef-logo.png'
 
-const TRUST_ITEMS = [
-  { icon: LockKeyhole, label: 'Authorized Bajaj Indef Dealer' },
-  { icon: BriefcaseBusiness, label: '10+ Years Experience' },
-  { icon: MapPin, label: 'Pan-India Service' },
-  { icon: ShieldCheck, label: 'ISO Certified' },
-]
+const TRUST_ITEM = { imageSrc: indefLogo, label: 'Authorized Bajaj Indef Dealer' }
 
 export default function TrustStrip() {
   return (
-    <section className="w-full bg-[#EAECF0] py-6">
+    <section className="w-full bg-[#EAECF0] py-7 sm:py-8">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-4 px-6 sm:gap-6 md:gap-9 md:px-8">
-        {TRUST_ITEMS.map((item) => {
-          const ItemIcon = item.icon
-          return (
-            <div key={item.label} className="flex items-center gap-2.5 text-sm font-medium text-[#0D1F3C] sm:text-[0.9rem]">
-              <ItemIcon size={18} color="#FFD100" aria-hidden="true" />
-              <span>{item.label}</span>
-            </div>
-          )
-        })}
+        <div className="flex items-center gap-3 text-base font-semibold text-[#0D1F3C] sm:text-[1.05rem]">
+          <img src={TRUST_ITEM.imageSrc} alt="" aria-hidden="true" className="h-[40px] w-[40px] object-contain" />
+          <span>{TRUST_ITEM.label}</span>
+        </div>
       </div>
     </section>
   )
