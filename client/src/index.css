@@ -293,7 +293,7 @@
   .hero-mobile-shell {
     min-height: auto;
     padding-top: calc(var(--bsi-navbar-height) + 0.5rem);
-    padding-bottom: 3rem;
+    padding-bottom: 2.5rem;
   }
 
   .hero-layout {
@@ -323,11 +323,24 @@
 
   .hero-crane-wrap {
     order: 2;
-    margin-top: -2.10rem;
+    margin-top: -0.75rem;
   }
 
   .hero-crane-image {
     margin-top: 0;
+  }
+
+  .home-mobile-stack-order {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-logo-marquee-slot {
+    order: 2;
+  }
+
+  .home-featured-products-slot {
+    order: 3;
   }
 }
 

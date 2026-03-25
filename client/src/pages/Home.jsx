@@ -29,9 +29,17 @@ export default function Home() {
             </Helmet>
 
             <HeroSection />
-            <TrustStrip />
-            <FeaturedProducts />
-            <LogoMarquee />
+            <div className="home-mobile-stack-order">
+                <div className="home-trust-strip-slot">
+                    <TrustStrip />
+                </div>
+                <div className="home-featured-products-slot">
+                    <FeaturedProducts />
+                </div>
+                <div className="home-logo-marquee-slot">
+                    <LogoMarquee />
+                </div>
+            </div>
             <WhyChooseUs />
             <Testimonials />
         </PageTransition>
