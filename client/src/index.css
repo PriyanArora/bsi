@@ -124,10 +124,12 @@
     }
   body {
     @apply bg-white text-foreground;
+    overflow-x: hidden;
     }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    overflow-x: hidden;
     }
   h1,
   h2,
@@ -158,6 +160,7 @@
   --bsi-outline-variant: #c4c6cf;
   --bsi-secondary: #515f74;
   --bsi-secondary-container: #d5e3fc;
+  --bsi-navbar-height: 72px;
 }
 
 @theme inline {
@@ -192,8 +195,8 @@
 }
 
 .hero-crane-image {
-  width: 126%;
-  margin-top: -2.5rem;
+  width: 114%;
+  margin-top: -2rem;
 }
 
 .hero-title {
@@ -235,12 +238,12 @@
 
 @media (max-width: 767px) {
   .hero-text-container {
-    max-width: 17rem;
+    max-width: 18rem;
     margin-right: 12px;
   }
 
   .hero-text-description {
-    max-width: 17rem;
+    max-width: 18rem;
     padding: 8px 14px 8px 0;
     border-radius: 6px;
   }
@@ -257,8 +260,8 @@
   }
 
   .hero-crane-image {
-    width: 122%;
-    margin-top: -2.75rem;
+    width: 110%;
+    margin-top: -2.3rem;
   }
 
   .hero-text-anchor {
@@ -266,11 +269,11 @@
   }
 
   .hero-text-container {
-    max-width: 15rem;
+    max-width: 16.5rem;
   }
 
   .hero-text-description {
-    max-width: 15rem;
+    max-width: 16.5rem;
     padding: 6px 10px 6px 0;
   }
 
@@ -288,7 +291,7 @@
   }
 
   .hero-crane-image {
-    width: 116%;
+    width: 112%;
     margin-top: -0.8rem;
   }
 
@@ -327,6 +330,18 @@
 
   .hero-title {
     font-size: 3rem;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --bsi-navbar-height: 82px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --bsi-navbar-height: 96px;
   }
 }
 
@@ -375,4 +390,10 @@
 }
 .animate-bsi-marquee:hover {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bsi-marquee {
+    animation: none;
+  }
 }

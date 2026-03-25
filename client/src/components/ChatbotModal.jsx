@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { chatbotQuestions, getRecommendation } from '../lib/chatbotTree'
 
 export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
@@ -12,11 +12,11 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
     return getRecommendation(answers)
   }, [answers, stepIndex])
 
-  const resetAndClose = () => {
+  const resetAndClose = useCallback(() => {
     setStepIndex(0)
     setAnswers({})
     onClose?.()
-  }
+  }, [onClose])
 
   const handleAnswer = (value) => {
     const question = chatbotQuestions[stepIndex]
@@ -39,6 +39,27 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
     setStepIndex((prev) => prev - 1)
   }
 
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined
+    }
+
+    const previousOverflow = document.body.style.overflow
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        resetAndClose()
+      }
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [isOpen, resetAndClose])
+
   if (!isOpen) {
     return null
   }
@@ -49,11 +70,11 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-190 flex items-center justify-center bg-black/60 p-4"
+      className="fixed inset-0 z-190 flex items-start justify-center overflow-y-auto bg-black/60 p-3 pt-24 sm:items-center sm:p-4"
       onClick={resetAndClose}
     >
       <div
-        className="border-bsi-outline/20 bg-bsi-surface-lowest max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-2xl border p-4 shadow-2xl sm:p-6 md:p-8"
+        className="border-bsi-outline/20 bg-bsi-surface-lowest max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto overscroll-contain rounded-2xl border p-4 shadow-2xl sm:max-h-[92vh] sm:p-6 md:p-8"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-6 flex items-start justify-between gap-4">

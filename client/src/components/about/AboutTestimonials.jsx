@@ -13,7 +13,7 @@ const ABOUT_TESTIMONIALS = [
 
 export default function AboutTestimonials() {
   return (
-    <section className="mt-16 rounded-2xl bg-bsi-primary p-8 text-white md:p-10">
+    <section className="mt-14 rounded-2xl bg-bsi-primary p-6 text-white sm:mt-16 sm:p-8 md:p-10">
       <div className="mb-8 flex items-center justify-between gap-4">
         <h3 className="font-headline text-2xl font-bold md:text-3xl">Client Voice</h3>
         <span className="text-bsi-accent text-xs font-bold uppercase tracking-[0.2em]">Proof of trust</span>

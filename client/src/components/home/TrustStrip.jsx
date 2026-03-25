@@ -10,11 +10,11 @@ const TRUST_ITEMS = [
 export default function TrustStrip() {
   return (
     <section className="w-full bg-[#EAECF0] py-6">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-5 px-6 md:gap-10 md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-4 px-6 sm:gap-6 md:gap-9 md:px-8">
         {TRUST_ITEMS.map((item) => {
           const ItemIcon = item.icon
           return (
-            <div key={item.label} className="flex items-center gap-2.5 text-[0.9rem] font-medium text-[#0D1F3C]">
+            <div key={item.label} className="flex items-center gap-2.5 text-sm font-medium text-[#0D1F3C] sm:text-[0.9rem]">
               <ItemIcon size={18} color="#FFD100" aria-hidden="true" />
               <span>{item.label}</span>
             </div>

@@ -26,7 +26,7 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
 
       if (event.key === 'Tab' && panelRef.current) {
         const focusableElements = panelRef.current.querySelectorAll(
-          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+          'a[href], button:not([disabled]), textarea, input, select'
         )
 
         if (!focusableElements.length) {
@@ -67,7 +67,7 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
       <div
         aria-hidden="true"
         onClick={() => onClose?.()}
-        className={`fixed inset-0 z-130 bg-[#0D1F3C]/35 transition-opacity duration-200 ${
+        className={`fixed inset-0 z-130 bg-black/45 transition-opacity duration-200 ${
           isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       />
@@ -77,7 +77,7 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed top-0 right-0 z-140 flex h-full w-[88%] max-w-sm flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-5 shadow-2xl transition-transform duration-300 ease-out sm:w-[82%] sm:max-w-xs sm:p-6 ${
+        className={`fixed top-0 right-0 z-140 flex h-full w-[90%] max-w-[20rem] flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-5 shadow-2xl transition-transform duration-300 ease-out sm:w-[84%] sm:max-w-sm sm:p-6 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

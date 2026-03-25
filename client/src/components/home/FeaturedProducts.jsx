@@ -29,7 +29,7 @@ export default function FeaturedProducts() {
     <section className="section-pad bg-white">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="mb-16 text-center">
-          <h2 className="font-headline text-bsi-primary text-4xl font-bold">Engineered Performance</h2>
+          <h2 className="font-headline text-bsi-primary text-3xl font-bold sm:text-4xl">Engineered Performance</h2>
           <p className="text-bsi-secondary mt-4">Explore our flagship industrial lifting solutions</p>
         </div>
 
@@ -39,9 +39,9 @@ export default function FeaturedProducts() {
               key={product.title}
               whileHover={{ y: -4, scale: 1.01 }}
               transition={{ duration: 0.2 }}
-              className="border-bsi-outline/30 bg-bsi-surface-lowest group rounded-2xl border p-8 shadow-sm"
+              className="border-bsi-outline/30 bg-bsi-surface-lowest group rounded-2xl border p-6 shadow-sm sm:p-8"
             >
-              <div className="bg-bsi-surface mb-6 h-48 overflow-hidden rounded-lg">
+              <div className="bg-bsi-surface mb-6 h-44 overflow-hidden rounded-lg sm:h-48">
                 {/* TODO: replace with real client images */}
                 <img
                   src={product.image}

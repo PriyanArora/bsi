@@ -1,9 +1,9 @@
 export default function AboutBento({ onEnquireClick }) {
   return (
-    <section className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:auto-rows-[240px]">
-      <article className="border-bsi-outline/30 bg-bsi-surface-lowest relative overflow-hidden rounded-xl border p-8 sm:p-10 lg:col-span-8 lg:row-span-2">
-        <h2 className="font-headline text-bsi-primary mb-6 text-3xl font-bold">Our Mission</h2>
-        <p className="text-bsi-secondary max-w-xl text-xl leading-relaxed">
+    <section className="grid grid-cols-1 gap-6 md:grid-cols-6 lg:grid-cols-12 lg:auto-rows-[240px]">
+      <article className="border-bsi-outline/30 bg-bsi-surface-lowest relative overflow-hidden rounded-xl border p-6 sm:p-8 md:col-span-4 lg:col-span-8 lg:row-span-2 lg:p-10">
+        <h2 className="font-headline text-bsi-primary mb-6 text-2xl font-bold sm:text-3xl">Our Mission</h2>
+        <p className="text-bsi-secondary max-w-xl text-lg leading-relaxed sm:text-xl">
           To empower industrial growth through engineered reliability. We bridge the gap between heavy-duty requirements
           and seamless execution, ensuring every facility operates at peak safety and efficiency.
         </p>
@@ -15,19 +15,19 @@ export default function AboutBento({ onEnquireClick }) {
         </div>
       </article>
 
-      <article className="bg-bsi-primary-container relative rounded-xl p-8 text-center text-white lg:col-span-4">
+      <article className="bg-bsi-primary-container relative rounded-xl p-6 text-center text-white md:col-span-2 lg:col-span-4 lg:p-8">
         <span className="material-symbols-outlined text-bsi-accent mb-3 text-5xl">verified</span>
         <h3 className="font-headline text-xl font-bold">Authorized Dealer</h3>
         <p className="text-bsi-on-primary-container mt-2">Bajaj Indef Material Handling</p>
       </article>
 
-      <article className="border-bsi-outline/30 bg-bsi-surface-lowest rounded-xl border p-8 lg:col-span-4">
+      <article className="border-bsi-outline/30 bg-bsi-surface-lowest rounded-xl border p-6 md:col-span-2 lg:col-span-4 lg:p-8">
         <div className="font-headline text-bsi-accent mb-2 text-5xl font-extrabold">20+</div>
         <div className="text-bsi-primary text-lg font-bold">Years of Experience</div>
         <p className="text-bsi-secondary mt-2 text-sm">Pioneering material handling solutions since 2004.</p>
       </article>
 
-      <article className="border-bsi-outline/30 bg-bsi-surface-lowest rounded-xl border p-8 sm:p-10 lg:col-span-12 lg:row-span-2">
+      <article className="border-bsi-outline/30 bg-bsi-surface-lowest rounded-xl border p-6 sm:p-8 md:col-span-6 lg:col-span-12 lg:row-span-2 lg:p-10">
         <div className="grid h-full grid-cols-1 items-center gap-10 lg:grid-cols-2">
           <div>
             <h3 className="font-headline text-bsi-primary mb-6 text-3xl font-bold">Industries We Serve</h3>
@@ -56,7 +56,7 @@ export default function AboutBento({ onEnquireClick }) {
             </div>
           </div>
 
-          <div className="relative min-h-[300px] overflow-hidden rounded-xl shadow-2xl">
+          <div className="relative h-72 overflow-hidden rounded-xl shadow-2xl sm:h-80">
             {/* TODO: replace with real client images */}
             <img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzUYhPxUGcFtvKC18mIlKaFkCYJEFhhi-Zagv6t4D6yD6fnDOI9WhrXUSi7RmXGklzZuYIzIBRnAaWk8fwRWIOZRL23uat-vxZ0swSZjCZSQO6qNsAkm1FzVHy3ywhJR-adJuJXnbQ3hyG-TgDzQQKk8RbOp-DxnKmjakIl7EYKR4W9FNtWBM7wCQnv27xOv1eH2cFTMmfVadlLYp3ZYhGhdp_x-GhARq-BjafV7ZiRjZzYoOOaDgrIWE5XpWkuzaTZCAtKnXkYrej"
@@ -64,7 +64,7 @@ export default function AboutBento({ onEnquireClick }) {
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bsi-primary/60 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-bsi-primary/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
               <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-80">Project Spotlight</p>
               <p className="font-headline text-lg font-semibold">Logistics Hub Integration</p>
@@ -73,7 +73,7 @@ export default function AboutBento({ onEnquireClick }) {
         </div>
       </article>
 
-      <article className="border-bsi-outline/30 bg-bsi-surface-lowest flex items-center justify-between rounded-xl border p-8 lg:col-span-6">
+      <article className="border-bsi-outline/30 bg-bsi-surface-lowest flex items-center justify-between rounded-xl border p-6 md:col-span-3 lg:col-span-6 lg:p-8">
         <div>
           <h4 className="font-headline text-bsi-primary text-xl font-bold">Pan-India Support</h4>
           <p className="text-bsi-secondary mt-1 text-sm">A robust network of technicians and service hubs.</p>
@@ -84,7 +84,7 @@ export default function AboutBento({ onEnquireClick }) {
       <button
         type="button"
         onClick={() => onEnquireClick?.()}
-        className="bg-bsi-accent group flex cursor-pointer items-center justify-between rounded-xl p-8 text-left text-white lg:col-span-6"
+        className="bg-bsi-accent group flex cursor-pointer items-center justify-between rounded-xl p-6 text-left text-white md:col-span-3 lg:col-span-6 lg:p-8"
       >
         <div>
           <h4 className="font-headline text-xl font-bold">Ready for an Audit?</h4>

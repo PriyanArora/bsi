@@ -28,11 +28,11 @@ export default function LogoMarquee() {
       </div>
 
       <div className="flex overflow-hidden">
-        <div className="animate-bsi-marquee flex min-w-max gap-20 whitespace-nowrap px-8">
-          <div className="flex items-center gap-20">
+        <div className="animate-bsi-marquee flex min-w-max gap-10 whitespace-nowrap px-6 sm:gap-14 sm:px-8 lg:gap-20">
+          <div className="flex items-center gap-10 sm:gap-14 lg:gap-20">
             <LogoRow />
           </div>
-          <div className="flex items-center gap-20">
+          <div className="flex items-center gap-10 sm:gap-14 lg:gap-20">
             <LogoRow />
           </div>
         </div>

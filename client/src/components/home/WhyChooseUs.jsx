@@ -24,14 +24,14 @@ const ABOUT_IMAGES = [
 export default function WhyChooseUs() {
   return (
     <section className="section-pad bg-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2 md:px-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:gap-14 md:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="h-fit lg:sticky lg:top-32">
-          <h2 className="font-headline text-bsi-primary text-4xl leading-tight font-extrabold md:text-5xl">
+          <h2 className="font-headline text-bsi-primary text-3xl leading-tight font-extrabold sm:text-4xl md:text-5xl">
             Why the Industry <br />
             <span className="text-bsi-accent">Trusts BSI Solutionz</span>
           </h2>
 
-          <div className="mt-10 flex flex-col gap-10">
+          <div className="mt-8 flex flex-col gap-8 sm:mt-10 sm:gap-10">
             {TRUST_POINTS.map((point) => (
               <article key={point.title} className="flex gap-5">
                 <div className="bg-bsi-primary-container flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-white">

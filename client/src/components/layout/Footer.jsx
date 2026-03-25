@@ -15,7 +15,7 @@ const LEGAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-bsi-surface w-full border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-12 sm:grid-cols-2 sm:px-8 sm:py-14 lg:grid-cols-4 lg:gap-12 lg:py-16">
         {/* Brand */}
         <div className="md:col-span-1">
           <div className="text-lg font-bold text-bsi-primary font-headline mb-6">BSI Solutionz</div>
@@ -66,7 +66,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="max-w-7xl mx-auto px-8 py-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-slate-100 px-6 py-6 sm:px-8 md:flex-row md:py-8">
         <p className="text-slate-500 text-xs">© 2024 BSI Solutionz. Authorized Bajaj Indef Dealer.</p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

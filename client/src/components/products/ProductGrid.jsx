@@ -51,7 +51,7 @@ const PRODUCTS = [
 
 export default function ProductGrid({ onEnquireClick }) {
   return (
-    <div className="grid grid-cols-1 gap-6 pl-4 md:grid-cols-2 md:pl-8 lg:grid-cols-3 lg:gap-8 lg:pl-20">
+    <div className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-2 md:px-8 lg:grid-cols-3 lg:gap-8 lg:px-20">
       {PRODUCTS.map((product) => (
         <Motion.article
           key={product.title}
@@ -59,11 +59,11 @@ export default function ProductGrid({ onEnquireClick }) {
           transition={{ duration: 0.2 }}
           className={[
             'border-bsi-outline/30 bg-bsi-surface-lowest group rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]',
-            product.featured ? 'md:col-span-1 lg:col-span-2' : ''
+            product.featured ? 'md:col-span-2 lg:col-span-2' : ''
           ].join(' ')}
         >
           <div className={product.featured ? 'flex flex-col gap-6 lg:flex-row' : ''}>
-            <div className={product.featured ? 'h-64 w-full overflow-hidden rounded-lg lg:h-auto lg:w-1/2' : 'mb-6 h-48 overflow-hidden rounded-lg'}>
+            <div className={product.featured ? 'h-56 w-full overflow-hidden rounded-lg sm:h-64 lg:h-auto lg:w-1/2' : 'mb-6 h-44 overflow-hidden rounded-lg sm:h-48'}>
               {/* TODO: replace with real client images */}
               <img
                 src={product.image}
@@ -84,7 +84,7 @@ export default function ProductGrid({ onEnquireClick }) {
               <div className="mt-auto flex items-end justify-between gap-4">
                 <div className="flex flex-col">
                   <span className="text-bsi-secondary text-[10px] font-bold uppercase tracking-[0.2em]">{product.specLabel}</span>
-                  <span className={product.featured ? 'text-bsi-primary text-xl font-bold' : 'text-bsi-primary text-sm font-semibold'}>
+                  <span className={product.featured ? 'text-bsi-primary text-lg font-bold sm:text-xl' : 'text-bsi-primary text-sm font-semibold'}>
                     {product.spec}
                   </span>
                 </div>
@@ -92,7 +92,7 @@ export default function ProductGrid({ onEnquireClick }) {
                 <button
                   type="button"
                   onClick={() => onEnquireClick?.(product.title)}
-                  className={product.featured ? 'bg-bsi-accent rounded-lg px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90' : 'bg-bsi-primary-container rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary'}
+                  className={product.featured ? 'bg-bsi-accent rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 sm:px-6 sm:py-3 sm:text-sm' : 'bg-bsi-primary-container rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary sm:px-5 sm:py-2.5'}
                 >
                   Enquire Now
                 </button>

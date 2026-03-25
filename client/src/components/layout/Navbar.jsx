@@ -15,10 +15,10 @@ export default function Navbar({ onHelpClick }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 z-100 w-full border-b-4 border-[#FFD100] bg-[#EFEFEF] shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-2.5 py-2 sm:px-6 sm:py-3 md:px-8">
+    <nav className="fixed top-0 z-100 w-full border-b-2 border-[#FFD100] bg-[#EFEFEF] shadow-[0_2px_8px_rgba(0,0,0,0.08)] md:border-b-4">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3 md:px-8">
         <Link to="/" className="shrink-0">
-          <img src={logoImg} alt="BSI Solutionz logo" className="h-8 w-auto sm:h-11 md:h-14" loading="eager" />
+          <img src={logoImg} alt="BSI Solutionz logo" className="h-9 w-auto sm:h-11 md:h-14" loading="eager" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -40,14 +40,14 @@ export default function Navbar({ onHelpClick }) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => onHelpClick?.()}
-            className="inline-flex whitespace-nowrap rounded bg-[#FFD100] px-2 py-1.5 font-headline text-[0.62rem] font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] sm:px-4 sm:py-2 sm:text-sm"
+            className="inline-flex min-h-10 whitespace-nowrap rounded bg-[#FFD100] px-3 py-2 font-headline text-xs font-bold text-[#0D1F3C] transition-colors duration-200 ease-in-out hover:bg-[#E6B800] sm:px-4 sm:py-2 sm:text-sm"
           >
             Help me choose
           </button>
 
           <button
             onClick={() => setIsMobileNavOpen(true)}
-            className="inline-flex h-7 w-7 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C] sm:h-8 sm:w-8 md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C] sm:h-9 sm:w-9 md:hidden"
             aria-label="Open menu"
           >
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" xmlns="http://www.w3.org/2000/svg">

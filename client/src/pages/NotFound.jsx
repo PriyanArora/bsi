@@ -12,7 +12,7 @@ export default function NotFound() {
                 <meta property="og:description" content="The page you requested could not be found." />
             </Helmet>
 
-            <section className="bg-bsi-surface flex min-h-[70vh] items-center justify-center px-6 pb-16 pt-32 text-center">
+            <section className="bg-bsi-surface flex min-h-[70vh] items-center justify-center px-6 pb-16 pt-[calc(var(--bsi-navbar-height)+2rem)] text-center">
                 <div className="max-w-xl">
                     <p className="font-headline text-bsi-accent text-8xl font-extrabold tracking-tight">404</p>
                     <h1 className="font-headline text-bsi-primary mt-4 text-3xl font-bold">Page not found</h1>

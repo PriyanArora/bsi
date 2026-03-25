@@ -31,7 +31,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="hero-mobile-shell section-pad relative flex min-h-screen w-full items-center overflow-hidden bg-[#F4F6F9] pt-20 md:pt-28">
+    <section className="hero-mobile-shell section-pad relative flex min-h-screen w-full items-center overflow-x-clip overflow-y-hidden bg-[#F4F6F9] pt-(--bsi-navbar-height)">
       <div className="relative z-10 w-full">
         <div className="relative" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <img
@@ -42,12 +42,12 @@ export default function HeroSection() {
           />
         </div>
 
-        <div className="hero-text-anchor absolute left-3 z-20 sm:left-8 md:left-12 lg:left-16">
+        <div className="hero-text-anchor absolute left-3 z-20 sm:left-6 md:left-10 lg:left-16">
           <div className="hero-text-container">
             <h1 className="hero-title font-headline font-extrabold tracking-tight text-[#0D1F3C]">
               BSI Solutionz
             </h1>
-            <p className="hero-text-description mt-4 text-[1.1rem] leading-[1.7] font-normal text-[#3E4C62]">
+            <p className="hero-text-description mt-4 text-base leading-[1.6] font-normal text-[#3E4C62] sm:text-[1.05rem]">
               Authorized Bajaj Indef Dealer. Providing high-performance lifting solutions designed for maximum safety
               and operational efficiency
             </p>

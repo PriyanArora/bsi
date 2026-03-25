@@ -25,7 +25,7 @@ export default function Products({ onEnquireClick }) {
                 <meta property="og:image" content="/og-products-placeholder.jpg" />
             </Helmet>
 
-            <main className="relative overflow-hidden pb-24 pt-32">
+            <main className="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
                 <div className="mx-auto max-w-7xl px-6 md:px-8">
                     <ProductsHero />
                     <ProductGrid onEnquireClick={onEnquireClick} />

@@ -56,6 +56,27 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     }
   }, [isOpen, defaultProduct, source, reset])
 
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined
+    }
+
+    const previousOverflow = document.body.style.overflow
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onClose?.()
+      }
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [isOpen, onClose])
+
   const onSubmit = async (formData) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/enquiry`, {
@@ -94,11 +115,11 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-200 flex items-center justify-center bg-black/55 p-4"
+      className="fixed inset-0 z-200 flex items-start justify-center overflow-y-auto bg-black/55 p-3 pt-24 sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="border-bsi-outline/20 bg-bsi-surface-lowest max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border p-4 shadow-2xl sm:p-6 md:p-8"
+        className="border-bsi-outline/20 bg-bsi-surface-lowest max-h-[calc(100dvh-2rem)] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-2xl border p-4 shadow-2xl sm:max-h-[92vh] sm:p-6 md:p-8"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-6 flex items-start justify-between gap-4">
@@ -182,7 +203,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
             <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Message</label>
             <textarea
               {...register('message')}
-              rows="4"
+              rows="3"
               placeholder="Share your lifting requirements"
               className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
             />
