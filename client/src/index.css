@@ -246,6 +246,11 @@
     );
 }
 
+.trust-indef-logo {
+  width: 60px;
+  height: 60px;
+}
+
 @media (max-width: 767px) {
   .hero-text-container {
     max-width: 18rem;
@@ -341,6 +346,11 @@
 
   .home-featured-products-slot {
     order: 3;
+  }
+
+  .trust-indef-logo {
+    width: 50px;
+    height: 50px;
   }
 }
 
