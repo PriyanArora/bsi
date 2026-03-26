@@ -112,7 +112,7 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
             onClose?.()
             onHelpClick?.()
           }}
-          className="mt-6 inline-flex w-full justify-center rounded bg-[#FFD100] px-4 py-2.5 font-headline text-sm font-bold text-[#0D1F3C] transition-colors duration-200 hover:bg-[#E6B800]"
+          className="mt-6 inline-flex w-full justify-center rounded-full border border-[#D2DAE6] bg-[#0D2E5A] px-4 py-2.5 font-headline text-sm font-bold text-white transition-colors duration-200 hover:bg-[#12386B]"
         >
           Help me choose
         </button>
