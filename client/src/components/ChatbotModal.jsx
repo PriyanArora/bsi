@@ -97,9 +97,14 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
             <div className="bg-bsi-primary rounded-xl p-6 text-white">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/70">Recommended Product</p>
               <h3 className="font-headline mt-2 text-2xl font-bold">{recommendation.primaryProduct}</h3>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
+                Category: {recommendation.category}
+              </p>
               <p className="mt-3 text-sm leading-relaxed text-slate-200">{recommendation.description}</p>
               {recommendation.products.length > 1 ? (
-                <p className="mt-3 text-xs text-white/70">Also suitable: {recommendation.products.slice(1).join(', ')}</p>
+                <p className="mt-3 text-xs text-white/70">
+                  Also suitable models: {recommendation.products.filter((product) => product !== recommendation.primaryProduct).slice(0, 3).join(', ')}
+                </p>
               ) : null}
             </div>
 

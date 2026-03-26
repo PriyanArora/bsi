@@ -1,105 +1,46 @@
 import { motion as Motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { CATEGORY_CATALOG } from '../../lib/productCatalog'
 
-const PRODUCTS = [
-  {
-    title: 'Electric Chain Hoists',
-    description:
-      'Designed for precision lifting in medium to heavy duty workshops. Featuring dual speed options and robust mechanical brakes.',
-    specLabel: 'Capacity',
-    spec: '0.5 to 5.0 Tonnes',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBZhKu0GHPC3VcduWduc5YL-KVbmIAg2ZuWXB-K2gkWR8ZZ7UwZX_0QK5_6Z44dsNKM0lRAd7VTkCtE7cWhhCLdrtFYr1LPy0uEgB-_AT2TYmoVHbivTA9Y9rQXaCof5_5dm8tYD6qE9gYoYCpu4LUCEf4s7d92r_bhNV-zhi210LCgDwr0aKHPUkdbgdLnWRq2SRbkGRKAH6VV09fLAmXaATapiuft5yOES0NePf_WPF_NjEaGl-dklIS5BamffJAg0kHESvj_3E4o'
-  },
-  {
-    title: 'Wire Rope Hoists',
-    description:
-      'The industry standard for high-volume manufacturing. Engineered for maximum headroom and extreme duty cycles.',
-    specLabel: 'Capacity',
-    spec: '1 to 20 Tonnes',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBsJuErUFBi7tjozYldZGWv-pVIpBeytwALJ_P1jQuFUb60GcIkHaS7AsVHsEZ1dZ9n7v3US6CCPDaSbvSeLsh551OA3r9olYUX8K2-pE9hyaWKR9eAE6PFvv3TdIkA02QIuGUd36ZwvOId0Pll5a0upVD71P4jGExWKfbRJRGetFFPfJzHmi0AiuIw2qIymcOzwaH_Gf0E6bKJOEgqxrgFawN1ku0VGOz1LwjJ2k3oySLTImo27pFtNueY7CrU_jVqwJX3jHH7dbc'
-  },
-  {
-    title: 'Manual Chain Pulley Blocks',
-    description:
-      'Reliable, portable lifting solutions for maintenance and localized assembly. High-strength steel construction.',
-    specLabel: 'Capacity',
-    spec: '0.5 to 40 Tonnes',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDtMI6ELvPT2zwAYEhlJRuLv-b-JLV4F2QArT46W97gm-maxtiAN8H0jPfLnvTjd_DdhZrKCuT8Z37gSg_jd15CNEIcC9FFK_QIh-_RSL0xQvr2rmTXfA9gj5NQ841vfuyyQY3fU7ilOYb1HcQbb7cc6nd6XUifPYPkwyzSHIBkt60Ii9uSi9S3gsSQr-8tK5dHYv3jCNwpeNAWeRvh7-vxUAqvvuuaeE99O80ymYANZLLGU1Bx6L2qC9YcemzACO_ctVz71TjlJNmb'
-  },
-  {
-    title: 'Jib Cranes',
-    description:
-      'Versatile material handling for individual workstations. Available in wall-mounted or floor-mounted configurations.',
-    specLabel: 'Span',
-    spec: 'Up to 6 Meters',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBsK4d0NAg6Zkzzw1b0o42V2vNFsKzWRKZd2AhWsgCtOVn5QsiQuDQv7KLB4wKum7_p5jtiPC8ultT-LIECTsljW_QE5HkjdNu_6T4AxluThcKM4_Gjiv9iQpPtLn2US0uXNp_lKgUjnnHtcDgOExtzgxt7zCrfwNwrmVidhfzzZNxljilYJc13zwClT7lpHbvB8BfXs1_dWFUsHsi8Qo7HVv-s5qHdEaQdtLNl9nkU8Rg5bus_PSvHNVNXCkhzhe3qwEN_j5gCGH2-'
-  },
-  {
-    title: 'EOT Cranes',
-    description:
-      'Complete facility-wide lifting systems with Single and Double Girder options customized for layout and load requirements.',
-    specLabel: 'Capacity Range',
-    spec: '1 to 100 Tonnes',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDKUO569QEpcz2ppUSrn_rDKab5XdGOp2c2rhjGEJG-GD-n2tQAXjcRcyVfdm0abWmvcTFu6uWRJVThreKXY9xqrM83M_vZesGlYYlQNxveGHtGdGzHSDY2tahuvF4E-ibmGG0eCuThpdH1yTSN_7QbQks5y__htahhjrMHJuOnsbydLy9x78uLiyMH5tFjPmyDSXWXPTmOxlKIRTjw_qeRLmMcGUD88nxe3ARYa4eqj_AJAqRHZxxN0lSyly16R70wVA9MczdlUcW_',
-    featured: true
-  }
-]
-
-export default function ProductGrid({ onEnquireClick }) {
+export default function ProductGrid() {
   return (
     <div className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-2 md:px-8 lg:grid-cols-3 lg:gap-8 lg:px-20">
-      {PRODUCTS.map((product) => (
-        <Motion.article
-          key={product.title}
-          whileHover={{ y: -4, scale: 1.01 }}
-          transition={{ duration: 0.2 }}
-          className={[
-            'border-bsi-outline/30 bg-bsi-surface-lowest group rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]',
-            product.featured ? 'md:col-span-2 lg:col-span-2' : ''
-          ].join(' ')}
-        >
-          <div className={product.featured ? 'flex flex-col gap-6 lg:flex-row' : ''}>
-            <div className={product.featured ? 'h-56 w-full overflow-hidden rounded-lg sm:h-64 lg:h-auto lg:w-1/2' : 'mb-6 h-44 overflow-hidden rounded-lg sm:h-48'}>
-              {/* TODO: replace with real client images */}
-              <img
-                src={product.image}
-                alt={product.title}
-                loading="lazy"
-                className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
-              />
+      {CATEGORY_CATALOG.map((category) => (
+        <Link key={category.slug} to={`/products/${category.slug}`} className="group block">
+          <Motion.article
+            whileHover={{ y: -5, scale: 1.01 }}
+            transition={{ duration: 0.2 }}
+            className="border-bsi-outline/30 bg-bsi-surface-lowest h-full rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-shadow group-hover:shadow-[0_14px_40px_rgb(0,0,0,0.08)]"
+          >
+            <div className="bg-bsi-primary-container/8 mb-5 flex h-40 items-center justify-center rounded-lg border border-white/60">
+              <span className="text-bsi-primary/45 font-headline text-[3rem] font-extrabold uppercase tracking-tight">
+                {category.categoryName
+                  .split(' ')
+                  .map((word) => word[0])
+                  .join('')}
+              </span>
             </div>
 
-            <div className={product.featured ? 'flex w-full flex-col lg:w-1/2' : 'flex flex-col'}>
-              <h3 className={product.featured ? 'font-headline text-bsi-primary mb-3 text-2xl font-bold lg:text-3xl' : 'font-headline text-bsi-primary mb-2 text-xl font-bold'}>
-                {product.title}
-              </h3>
-              <p className={product.featured ? 'text-bsi-secondary mb-8 text-base leading-relaxed' : 'text-bsi-secondary mb-6 grow text-sm leading-relaxed'}>
-                {product.description}
-              </p>
+            <h3 className="font-headline text-bsi-primary mb-2 text-xl font-bold">{category.categoryName}</h3>
+            <p className="text-bsi-secondary mb-8 text-sm leading-relaxed">{category.description}</p>
 
-              <div className="mt-auto flex items-end justify-between gap-4">
-                <div className="flex flex-col">
-                  <span className="text-bsi-secondary text-[10px] font-bold uppercase tracking-[0.2em]">{product.specLabel}</span>
-                  <span className={product.featured ? 'text-bsi-primary text-lg font-bold sm:text-xl' : 'text-bsi-primary text-sm font-semibold'}>
-                    {product.spec}
-                  </span>
-                </div>
+            <div className="mt-auto flex items-center justify-between gap-4">
+              <div className="flex flex-col">
+                <span className="text-bsi-secondary text-[10px] font-bold uppercase tracking-[0.2em]">Sub Products</span>
+                <span className="text-bsi-primary text-sm font-semibold">{category.productsCount}</span>
+              </div>
 
-                <button
-                  type="button"
-                  onClick={() => onEnquireClick?.(product.title)}
-                  className={product.featured ? 'bg-bsi-accent rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 sm:px-6 sm:py-3 sm:text-sm' : 'bg-bsi-primary-container rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary sm:px-5 sm:py-2.5'}
-                >
-                  Enquire Now
-                </button>
+              <div
+                aria-hidden="true"
+                className="bg-bsi-primary-container text-white flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-1"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 12h12M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
             </div>
-          </div>
-        </Motion.article>
+          </Motion.article>
+        </Link>
       ))}
     </div>
   )

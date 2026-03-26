@@ -8,6 +8,7 @@ const EnquiryModal = lazy(() => import('./components/EnquiryModal'))
 const ChatbotModal = lazy(() => import('./components/ChatbotModal'))
 const Home = lazy(() => import('./pages/Home'))
 const Products = lazy(() => import('./pages/Products'))
+const ProductCategory = lazy(() => import('./pages/ProductCategory'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 const NotFound = lazy(() => import('./pages/NotFound'))
@@ -66,7 +67,8 @@ export default function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home onEnquireClick={handleEnquireClick} />} />
-              <Route path="/products" element={<Products onEnquireClick={handleEnquireClick} />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:categorySlug" element={<ProductCategory onEnquireClick={handleEnquireClick} />} />
               <Route path="/about" element={<About onEnquireClick={handleEnquireClick} />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

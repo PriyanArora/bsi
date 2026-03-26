@@ -4,7 +4,7 @@ import ProductsHero from '../components/products/ProductsHero'
 import ProductGrid from '../components/products/ProductGrid'
 import ProductsCTA from '../components/products/ProductsCTA'
 
-export default function Products({ onEnquireClick }) {
+export default function Products() {
     return (
         <PageTransition>
             <Helmet>
@@ -28,7 +28,7 @@ export default function Products({ onEnquireClick }) {
             <main className="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
                 <div className="mx-auto max-w-7xl px-6 md:px-8">
                     <ProductsHero />
-                    <ProductGrid onEnquireClick={onEnquireClick} />
+                    <ProductGrid />
                 </div>
                 <ProductsCTA />
             </main>

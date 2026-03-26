@@ -3,14 +3,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { enquirySchema } from '../lib/enquirySchema'
+import { CATEGORY_CATALOG, getProductsByCategory } from '../lib/productCatalog'
 
-const PRODUCT_OPTIONS = [
-  'Electric Chain Hoists',
-  'Wire Rope Hoists',
-  'Manual Chain Pulley Blocks',
-  'Jib Cranes',
-  'EOT Cranes',
-]
+const PRODUCT_GROUPS = CATEGORY_CATALOG.map((category) => ({
+  categoryName: category.categoryName,
+  products: getProductsByCategory(category.categoryName),
+}))
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
@@ -191,10 +189,15 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
               className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
             >
               <option value="">Select a product</option>
-              {PRODUCT_OPTIONS.map((product) => (
-                <option key={product} value={product}>
-                  {product}
-                </option>
+              {PRODUCT_GROUPS.map((group) => (
+                <optgroup key={group.categoryName} label={group.categoryName}>
+                  <option value={group.categoryName}>{group.categoryName} (Category)</option>
+                  {group.products.map((product) => (
+                    <option key={product.id} value={product.title}>
+                      {product.title}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
           </div>
