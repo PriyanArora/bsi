@@ -323,7 +323,9 @@
   }
 
   .hero-text-description {
-    max-width: 100%;
+    width: 82%;
+    max-width: 82%;
+    font-size: 0.7rem;
     padding-right: 0;
   }
 

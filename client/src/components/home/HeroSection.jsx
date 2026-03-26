@@ -55,7 +55,7 @@ export default function HeroSection() {
             <h1 className="hero-title font-headline font-extrabold tracking-tight text-[#0D1F3C]">
               BSI Solutionz
             </h1>
-            <p className="hero-text-description mt-4 text-base leading-[1.6] font-semibold text-[#1F2F47] sm:text-[1.05rem]">
+            <p className="hero-text-description mt-4 text-base leading-[1.6] font-normal text-[#1F2F47] sm:text-[1.05rem]">
               We've spent 10+ years making sure India never stops moving — your one stop for Bajaj Indef electric hoists, rentals, and complete AMC care, Pan-India.
             </p>
           </div>
