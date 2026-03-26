@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logoImg from '../../../bsilogofinal.png'
+import logoImg from '../../assets/logos/bsilogofinal.png'
 import MobileNav from './MobileNav'
 import { Button } from '../ui/button'
 

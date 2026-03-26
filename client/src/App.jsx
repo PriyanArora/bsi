@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useLayoutEffect, useState } from 'react'
+import { Suspense, lazy, useLayoutEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'sonner'

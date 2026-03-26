@@ -25,7 +25,7 @@ export default function Home() {
                     property="og:description"
                     content="Premium industrial lifting solutions. Authorized Bajaj Indef Dealer."
                 />
-                <meta property="og:image" content="/og-home-placeholder.jpg" />
+                <meta property="og:image" content="/og-home-placeholder.png" />
             </Helmet>
 
             <HeroSection />

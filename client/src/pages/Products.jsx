@@ -22,7 +22,7 @@ export default function Products({ onEnquireClick }) {
                     property="og:description"
                     content="Discover engineered lifting products for warehouse, manufacturing and construction operations."
                 />
-                <meta property="og:image" content="/og-products-placeholder.jpg" />
+                <meta property="og:image" content="/og-products-placeholder.png" />
             </Helmet>
 
             <main className="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">

@@ -22,7 +22,7 @@ export default function About({ onEnquireClick }) {
                     property="og:description"
                     content="Discover our mission, decades of engineering experience, and pan-India support network."
                 />
-                <meta property="og:image" content="/og-about-placeholder.jpg" />
+                <meta property="og:image" content="/og-about-placeholder.png" />
             </Helmet>
 
             <main className="relative overflow-hidden px-6 pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)] lg:px-0">
