@@ -78,12 +78,7 @@ export default function ProductCategory({ onEnquireClick }) {
                   />
                 </div>
 
-                <h3
-                  className={[
-                    'font-headline text-bsi-primary mb-3 font-bold',
-                    product.featured ? 'text-2xl lg:text-3xl' : 'text-xl'
-                  ].join(' ')}
-                >
+                <h3 className="font-headline text-bsi-primary mb-3 text-xl font-bold">
                   {product.title}
                 </h3>
 
@@ -94,7 +89,7 @@ export default function ProductCategory({ onEnquireClick }) {
                 <div className="mt-auto flex items-end justify-between gap-4">
                   <div className="flex flex-col">
                     <span className="text-bsi-secondary text-[10px] font-bold uppercase tracking-[0.2em]">{product.specLabel}</span>
-                    <span className={product.featured ? 'text-bsi-primary text-lg font-bold sm:text-xl' : 'text-bsi-primary text-sm font-semibold'}>
+                    <span className="text-bsi-primary text-sm font-semibold">
                       {product.spec}
                     </span>
                   </div>
