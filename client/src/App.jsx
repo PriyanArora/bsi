@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from 'react'
+import { Suspense, lazy, useEffect, useLayoutEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -35,6 +35,26 @@ export default function App() {
     setIsChatbotOpen(false)
     setIsEnquiryOpen(true)
   }
+
+  useLayoutEffect(() => {
+    const resetToTop = () => {
+      const lenis = window.__lenis
+
+      if (lenis && typeof lenis.scrollTo === 'function') {
+        lenis.scrollTo(0, { immediate: true, force: true })
+        return
+      }
+
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+
+    resetToTop()
+    const rafId = window.requestAnimationFrame(resetToTop)
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+    }
+  }, [location.pathname])
 
   return (
     <>

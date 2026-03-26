@@ -12,6 +12,8 @@ export default function SmoothScrollProvider({ children }) {
       syncTouch: true,
     })
 
+    window.__lenis = lenis
+
     let rafId = 0
     const raf = (time) => {
       lenis.raf(time)
@@ -23,6 +25,7 @@ export default function SmoothScrollProvider({ children }) {
     return () => {
       window.cancelAnimationFrame(rafId)
       lenis.destroy()
+      delete window.__lenis
     }
   }, [])
 
