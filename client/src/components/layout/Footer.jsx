@@ -4,12 +4,10 @@ const QUICK_LINKS = [
   { label: 'Products', to: '/products' },
   { label: 'About Us', to: '/about' },
   { label: 'Contact Us', to: '/contact' },
-  { label: 'Sitemap', to: '#' },
 ]
 
 const LEGAL_LINKS = [
   { label: 'Privacy Policy', to: '#' },
-  { label: 'Terms of Service', to: '#' },
 ]
 
 export default function Footer() {
@@ -20,7 +18,7 @@ export default function Footer() {
         <div className="md:col-span-1">
           <div className="font-headline mb-6 text-lg font-bold text-slate-100">BSI Solutionz</div>
           <p className="text-sm leading-relaxed text-slate-300">
-            Authorized Bajaj Indef Dealer and your partner in premium industrial material handling systems.
+            Authorized Bajaj Indef Dealer and your partner in premium industrial material handling systems and AMC care.
           </p>
         </div>
 
@@ -55,9 +53,9 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h5 className="mb-6 font-bold text-slate-100">Contact Us</h5>
-          {/* TODO: Replace with real address and email from client */}
-          <p className="mb-4 text-sm text-slate-300">123 Engineering Hub, Industrial Area, Phase II, Pune - 411001</p>
-          <p className="mb-4 text-sm text-slate-300">info@bsisolutionz.com</p>
+          <p className="mb-4 text-sm text-slate-300">515, Vishal Chamber, Sector-18, Noida, Gautam Buddha Nagar, U.P-201301</p>
+          <p className="mb-3 text-sm text-slate-300">bsisolutionz@gmail.com</p>
+          <p className="text-sm text-slate-300">+91 9717897960</p>
           <div className="flex gap-4 mt-6">
             <span className="material-symbols-outlined cursor-pointer text-slate-200 transition-colors hover:text-[#FFD100]">share</span>
             <span className="material-symbols-outlined cursor-pointer text-slate-200 transition-colors hover:text-[#FFD100]">public</span>
@@ -67,7 +65,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-[#223554] px-6 py-6 sm:px-8 md:flex-row md:py-8">
-        <p className="text-xs text-slate-300">© 2024 BSI Solutionz. Authorized Bajaj Indef Dealer.</p>
+        <p className="text-xs text-slate-300">© 2026 BSI Solutionz- All rights reserved</p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="flex items-center gap-2 text-xs font-medium text-slate-100 hover:text-[#FFD100]"
