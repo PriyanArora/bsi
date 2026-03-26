@@ -67,11 +67,17 @@ export default function ProductCategory({ onEnquireClick }) {
                 key={product.id}
                 whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ duration: 0.2 }}
-                className={[
-                  'border-bsi-outline/30 bg-bsi-surface-lowest group rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]',
-                  product.featured ? 'md:col-span-2' : ''
-                ].join(' ')}
+                className="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-[28rem] flex-col rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
               >
+                <div className="bg-bsi-surface-low border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-lg border">
+                  <img
+                    src="/product-placeholder.svg"
+                    alt={`${product.title} placeholder`}
+                    loading="lazy"
+                    className="h-full w-full rounded-lg object-cover"
+                  />
+                </div>
+
                 <h3
                   className={[
                     'font-headline text-bsi-primary mb-3 font-bold',
@@ -81,7 +87,7 @@ export default function ProductCategory({ onEnquireClick }) {
                   {product.title}
                 </h3>
 
-                <p className={['text-bsi-secondary mb-7 leading-relaxed', product.featured ? 'text-base' : 'text-sm'].join(' ')}>
+                <p className={['text-bsi-secondary mb-7 grow leading-relaxed', product.featured ? 'text-base' : 'text-sm'].join(' ')}>
                   {product.description}
                 </p>
 
@@ -96,7 +102,7 @@ export default function ProductCategory({ onEnquireClick }) {
                   <button
                     type="button"
                     onClick={() => onEnquireClick?.(product.title)}
-                    className={product.featured ? 'bg-bsi-accent rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90 sm:px-6 sm:py-3 sm:text-sm' : 'bg-bsi-primary-container rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary sm:px-5 sm:py-2.5'}
+                    className="bg-bsi-primary-container rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary sm:px-6 sm:py-3 sm:text-sm"
                   >
                     Enquire Now
                   </button>
