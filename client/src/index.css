@@ -202,7 +202,7 @@
 }
 
 .hero-text-anchor {
-  top: 0%;
+  top: -1.6%;
 }
 
 .hero-crane-image {
@@ -211,7 +211,7 @@
 }
 
 .hero-title {
-  font-size: 1.9rem;
+  font-size: 2.15rem;
   line-height: 1.03;
 }
 
@@ -227,6 +227,7 @@
 
 .hero-text-description {
   font-family: 'Mada', sans-serif;
+  font-size: 1.25rem;
   max-width: 34rem;
   padding: 10px 18px 10px 0;
   border-radius: 8px;
@@ -266,7 +267,7 @@
   }
 
   .hero-title {
-    font-size: 1.68rem;
+    font-size: 1.86rem;
   }
 }
 
@@ -282,7 +283,7 @@
   }
 
   .hero-text-anchor {
-    top: -2%;
+    top: -3.5%;
   }
 
   .hero-text-container {
@@ -324,10 +325,14 @@
   }
 
   .hero-text-description {
-    width: 82%;
-    max-width: 82%;
-    font-size: 0.7rem;
+    width: 60%;
+    max-width: 60%;
+    font-size: 0.60rem;
     padding-right: 0;
+  }
+
+  .hero-title {
+    font-size: 2rem;
   }
 
   .hero-crane-wrap {
@@ -366,7 +371,7 @@
   }
 
   .hero-text-anchor {
-    top: 9%;
+    top: 7.2%;
   }
 
   .hero-crane-image {
@@ -383,7 +388,7 @@
   }
 
   .hero-title {
-    font-size: 2.35rem;
+    font-size: 2.65rem;
   }
 }
 
@@ -399,7 +404,7 @@
   }
 
   .hero-text-anchor {
-    top: 12%;
+    top: 7.8%;
   }
 
   .hero-crane-image {
@@ -408,7 +413,7 @@
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 4.35rem;
   }
 }
 
