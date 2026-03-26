@@ -4,7 +4,7 @@ import ProductsHero from '../components/products/ProductsHero'
 import ProductGrid from '../components/products/ProductGrid'
 import ProductsCTA from '../components/products/ProductsCTA'
 
-export default function Products() {
+export default function Products({ onEnquireClick }) {
     return (
         <PageTransition>
             <Helmet>
@@ -30,7 +30,7 @@ export default function Products() {
                     <ProductsHero />
                     <ProductGrid />
                 </div>
-                <ProductsCTA />
+                <ProductsCTA onEnquireClick={onEnquireClick} />
             </main>
         </PageTransition>
     )

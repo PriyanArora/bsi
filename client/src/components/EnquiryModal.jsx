@@ -199,6 +199,9 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                   ))}
                 </optgroup>
               ))}
+              <optgroup label="Services">
+                <option value="AMC Care">AMC Care</option>
+              </optgroup>
             </select>
           </div>
 

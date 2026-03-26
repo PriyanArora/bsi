@@ -67,7 +67,7 @@ export default function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home onEnquireClick={handleEnquireClick} />} />
-              <Route path="/products" element={<Products />} />
+              <Route path="/products" element={<Products onEnquireClick={handleEnquireClick} />} />
               <Route path="/products/:categorySlug" element={<ProductCategory onEnquireClick={handleEnquireClick} />} />
               <Route path="/about" element={<About onEnquireClick={handleEnquireClick} />} />
               <Route path="/contact" element={<Contact />} />
