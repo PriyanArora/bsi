@@ -247,12 +247,12 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-200 flex items-start justify-center overflow-y-auto bg-black/55 p-3 pt-12 sm:items-center sm:p-4"
+      className="fixed inset-0 z-200 flex items-start justify-center overflow-y-auto bg-black/55 p-3 pt-12 sm:items-center sm:p-3 md:p-4"
       onClick={onClose}
     >
       <div
         ref={modalContentRef}
-        className="border-bsi-outline/20 bg-bsi-surface-lowest w-full max-w-2xl max-h-[92dvh] overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:max-h-[90dvh] sm:p-5 md:max-h-[88dvh] md:p-6"
+        className="border-bsi-outline/20 bg-bsi-surface-lowest w-full max-w-2xl max-h-[92dvh] overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:max-h-[94dvh] sm:p-5 md:max-h-[95dvh] md:p-6"
         onScroll={() => {
           if (isProductMenuOpen) {
             updateProductMenuPosition()
