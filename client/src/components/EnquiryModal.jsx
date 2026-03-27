@@ -84,12 +84,14 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   } = useForm({
     resolver: zodResolver(enquirySchema),
     defaultValues: {
-      fullName: '',
+      firstName: '',
+      lastName: '',
       companyName: '',
       phone: '',
       email: '',
       productOfInterest: defaultProduct ? [defaultProduct] : [],
       message: '',
+      dataProtectionAccepted: false,
       source,
     },
   })
@@ -105,12 +107,14 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   useEffect(() => {
     if (!isOpen) {
       reset({
-        fullName: '',
+        firstName: '',
+        lastName: '',
         companyName: '',
         phone: '',
         email: '',
         productOfInterest: defaultProduct ? [defaultProduct] : [],
         message: '',
+        dataProtectionAccepted: false,
         source,
       })
       setIsProductMenuOpen(false)
@@ -192,8 +196,11 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   }, [isProductMenuOpen, updateProductMenuPosition])
 
   const onSubmit = async (formData) => {
+    const fullName = `${formData.firstName} ${formData.lastName}`.trim()
+
     const payload = {
       ...formData,
+      fullName,
       productOfInterest: (formData.productOfInterest || []).join(', '),
     }
 
@@ -212,12 +219,14 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
 
       toast.success('Enquiry submitted successfully')
       reset({
-        fullName: '',
+        firstName: '',
+        lastName: '',
         companyName: '',
         phone: '',
         email: '',
         productOfInterest: defaultProduct ? [defaultProduct] : [],
         message: '',
+        dataProtectionAccepted: false,
         source,
       })
       onClose()
@@ -239,7 +248,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     >
       <div
         ref={modalContentRef}
-        className="border-bsi-outline/20 bg-bsi-surface-lowest h-[88dvh] w-full max-w-2xl overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:h-[95vh] sm:p-6 md:p-8"
+        className="enquiry-modal-shell border-bsi-outline/20 bg-bsi-surface-lowest h-[88dvh] w-full max-w-2xl overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:h-[95vh] sm:p-6 md:p-8"
         onScroll={() => {
           if (isProductMenuOpen) {
             updateProductMenuPosition()
@@ -247,7 +256,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
         }}
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="mb-4 flex items-center justify-end">
+        <div className="enquiry-close-row mb-4 flex items-center justify-end">
           <button
             type="button"
             onClick={onClose}
@@ -258,54 +267,80 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
           </button>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="enquiry-modal-form space-y-4">
           <input type="hidden" {...register('source')} />
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="enquiry-name-row grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
-              <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Full Name*</label>
+              <label htmlFor="firstName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">First Name*</label>
               <input
-                {...register('fullName')}
-                placeholder="Your full name"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+                id="firstName"
+                {...register('firstName')}
+                required
+                aria-invalid={errors.firstName ? 'true' : 'false'}
+                aria-describedby={errors.firstName ? 'firstName-error' : undefined}
+                placeholder="First name"
+                className="enquiry-name-input enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
               />
-              {errors.fullName ? <p className="mt-1 text-xs text-red-600">{errors.fullName.message}</p> : null}
+              {errors.firstName ? <p id="firstName-error" className="mt-1 text-xs text-red-600">{errors.firstName.message}</p> : null}
             </div>
 
             <div>
-              <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Company Name</label>
+              <label htmlFor="lastName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Last Name*</label>
               <input
-                {...register('companyName')}
-                placeholder="Company"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+                id="lastName"
+                {...register('lastName')}
+                required
+                aria-invalid={errors.lastName ? 'true' : 'false'}
+                aria-describedby={errors.lastName ? 'lastName-error' : undefined}
+                placeholder="Last name"
+                className="enquiry-name-input enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
               />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Phone*</label>
-              <input
-                {...register('phone')}
-                placeholder="10-digit mobile number"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
-              />
-              {errors.phone ? <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p> : null}
-            </div>
-
-            <div>
-              <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Email</label>
-              <input
-                {...register('email')}
-                placeholder="name@company.com"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
-              />
-              {errors.email ? <p className="mt-1 text-xs text-red-600">{errors.email.message}</p> : null}
+              {errors.lastName ? <p id="lastName-error" className="mt-1 text-xs text-red-600">{errors.lastName.message}</p> : null}
             </div>
           </div>
 
           <div>
-            <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Product of Interest</label>
+            <label htmlFor="companyName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Company Name</label>
+            <input
+              id="companyName"
+              {...register('companyName')}
+              placeholder="Company"
+              className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+              <label htmlFor="phone" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Phone*</label>
+              <input
+                id="phone"
+                {...register('phone')}
+                required
+                aria-invalid={errors.phone ? 'true' : 'false'}
+                aria-describedby={errors.phone ? 'phone-error' : undefined}
+                placeholder="10-digit mobile number"
+                className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+              />
+              {errors.phone ? <p id="phone-error" className="mt-1 text-xs text-red-600">{errors.phone.message}</p> : null}
+            </div>
+
+            <div>
+              <label htmlFor="email" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Email</label>
+              <input
+                id="email"
+                {...register('email')}
+                aria-invalid={errors.email ? 'true' : 'false'}
+                aria-describedby={errors.email ? 'email-error' : undefined}
+                placeholder="name@company.com"
+                className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+              />
+              {errors.email ? <p id="email-error" className="mt-1 text-xs text-red-600">{errors.email.message}</p> : null}
+            </div>
+          </div>
+
+          <div>
+            <label id="productOfInterest-label" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Product of Interest</label>
             <Controller
               name="productOfInterest"
               control={control}
@@ -349,7 +384,8 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                       aria-haspopup="listbox"
                       aria-expanded={isProductMenuOpen}
                       aria-controls="product-interest-options"
-                      className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left text-sm focus:border-bsi-primary focus:outline-none"
+                      aria-labelledby="productOfInterest-label"
+                      className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left text-sm focus:border-bsi-primary focus:outline-none"
                     >
                       <span>
                         {selectedProducts.length > 0
@@ -359,12 +395,12 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                       <span className="text-bsi-secondary text-xs">▼</span>
                     </button>
 
-                    <div className="mt-2 min-h-8 max-h-16 overflow-y-auto pr-1">
+                    <div className="enquiry-selected-chips mt-2 min-h-8 max-h-16 overflow-y-auto pr-1">
                       <div className="flex flex-wrap gap-2">
                         {selectedProducts.map((item) => (
                           <span
                             key={item}
-                            className="bg-bsi-primary-container/10 text-bsi-primary inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold"
+                            className="enquiry-chip bg-bsi-primary-container/10 text-bsi-primary inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold"
                           >
                             {item}
                           </span>
@@ -464,19 +500,41 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
           </div>
 
           <div>
-            <label className="text-bsi-secondary mb-2 block text-xs font-bold uppercase tracking-[0.15em]">Message</label>
+            <label htmlFor="message" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Message</label>
             <textarea
+              id="message"
               {...register('message')}
+              aria-invalid={errors.message ? 'true' : 'false'}
               rows="3"
               placeholder="Share your lifting requirements"
-              className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary h-28 w-full resize-none overflow-y-auto rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+              className="enquiry-message-box border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary h-28 w-full resize-none overflow-y-auto rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
             />
+          </div>
+
+          <div>
+            <label htmlFor="dataProtectionAccepted" className="text-bsi-secondary flex cursor-pointer items-start gap-2 text-xs leading-relaxed">
+              <input
+                id="dataProtectionAccepted"
+                type="checkbox"
+                {...register('dataProtectionAccepted')}
+                required
+                aria-invalid={errors.dataProtectionAccepted ? 'true' : 'false'}
+                aria-describedby={errors.dataProtectionAccepted ? 'dataProtectionAccepted-error' : undefined}
+                className="enquiry-consent-input border-bsi-outline/50 mt-0.5 h-4 w-4 rounded border text-bsi-primary focus:ring-bsi-primary"
+              />
+              <span className="enquiry-consent-text">I have read and understood the relevant data protection notice.</span>
+            </label>
+            {errors.dataProtectionAccepted ? (
+              <p id="dataProtectionAccepted-error" className="mt-1 text-xs text-red-600">
+                {errors.dataProtectionAccepted.message}
+              </p>
+            ) : null}
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-bsi-primary-container w-full rounded-lg px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary disabled:cursor-not-allowed disabled:opacity-60"
+            className="enquiry-submit-button bg-bsi-primary-container w-full rounded-lg px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? 'Submitting...' : 'Send Enquiry'}
           </button>

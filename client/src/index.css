@@ -364,6 +364,78 @@
     width: 50px;
     height: 50px;
   }
+
+  .enquiry-modal-shell {
+    height: 76dvh;
+    padding-top: 0rem;
+    padding-bottom: 0.65rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .enquiry-close-row {
+    margin-bottom: 0.5rem;
+  }
+
+  .enquiry-modal-form {
+    gap: 0.55rem;
+  }
+
+  .enquiry-modal-shell label {
+    font-size: 0.64rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .enquiry-name-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .enquiry-field-input,
+  .enquiry-name-input {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    font-size: 0.8rem;
+    border-radius: 0.55rem;
+  }
+
+  .enquiry-selected-chips {
+    margin-top: 0.35rem;
+    min-height: 1.45rem;
+    max-height: 2.4rem;
+  }
+
+  .enquiry-chip {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.62rem;
+  }
+
+  .enquiry-consent-input {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-top: 0.18rem;
+  }
+
+  .enquiry-consent-text {
+    font-size: 0.66rem;
+    line-height: 1.15;
+  }
+
+  .enquiry-message-box {
+    height: 4.8rem;
+    font-size: 0.78rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .enquiry-submit-button {
+    padding-top: 0.58rem;
+    padding-bottom: 0.58rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
 }
 
 /* Compact website widths */
