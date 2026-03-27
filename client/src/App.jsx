@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import Layout from './components/layout/Layout'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 const EnquiryModal = lazy(() => import('./components/EnquiryModal'))
 const ChatbotModal = lazy(() => import('./components/ChatbotModal'))
@@ -71,6 +72,7 @@ export default function App() {
               <Route path="/products/:categorySlug" element={<ProductCategory onEnquireClick={handleEnquireClick} />} />
               <Route path="/about" element={<About onEnquireClick={handleEnquireClick} />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AnimatePresence>

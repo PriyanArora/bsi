@@ -7,7 +7,7 @@ const QUICK_LINKS = [
 ]
 
 const LEGAL_LINKS = [
-  { label: 'Privacy Policy', to: '#' },
+  { label: 'Privacy Policy', to: '/privacy-policy' },
 ]
 
 export default function Footer() {
