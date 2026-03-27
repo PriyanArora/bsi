@@ -29,7 +29,7 @@ export default function Testimonials() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((item) => (
-            <article key={item.name} className="rounded-xl border border-[#d8dee8] bg-white p-6 shadow-sm sm:p-8">
+            <article key={item.name} className="rounded-lg border border-[#d8dee8] bg-white p-6 shadow-sm sm:p-8">
               <p className="text-sm leading-relaxed italic text-[#4A5568]">&quot;{item.quote}&quot;</p>
               <div className="mt-6 flex items-center gap-4">
                 <div className="bg-bsi-accent h-10 w-10 rounded-full" />
