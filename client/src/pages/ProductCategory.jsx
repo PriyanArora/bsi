@@ -45,7 +45,7 @@ export default function ProductCategory({ onEnquireClick }) {
 
       <main className="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
         <div className="mx-auto max-w-7xl px-6 md:px-8">
-          <header className="mb-12 pl-2 sm:pl-4 md:mb-14 md:pl-8 lg:mb-16 lg:pl-20">
+          <header className="mb-12 pl-2 sm:pl-4 md:mb-14 md:pl-8 lg:mb-16 lg:pl-16">
             <Link
               to="/products"
               className="text-bsi-secondary hover:text-bsi-primary mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] transition"
@@ -61,7 +61,7 @@ export default function ProductCategory({ onEnquireClick }) {
             <p className="text-bsi-secondary max-w-3xl text-base leading-relaxed sm:text-lg">{category.description}</p>
           </header>
 
-          <section className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-2 md:px-8 lg:gap-8 lg:px-20">
+          <section className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-3 md:px-8 lg:gap-8 lg:px-16">
             {products.map((product) => (
               <Motion.article
                 key={product.id}

@@ -26,7 +26,7 @@ export default function Products({ onEnquireClick }) {
             </Helmet>
 
             <main className="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
-                <div className="mx-auto max-w-7xl px-6 md:px-8">
+                <div className="mx-auto max-w-7xl px-6 md:px-8 lg:max-w-368 xl:max-w-392">
                     <ProductsHero />
                     <ProductGrid />
                 </div>
