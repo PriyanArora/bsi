@@ -485,3 +485,21 @@
     animation: none;
   }
 }
+
+@keyframes enquireGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.floating-enquire-gradient {
+  background: linear-gradient(120deg, #8e1010 0%, #a81818 45%, #7b0e0e 100%);
+  background-size: 220% 220%;
+  animation: enquireGradientShift 6s ease-in-out infinite;
+}

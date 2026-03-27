@@ -16,7 +16,7 @@ const INFO_ITEMS = [
 
 export default function ContactInfo() {
   return (
-    <section className="mt-16 md:mt-20 md:pl-8 lg:mt-24 lg:pl-24">
+    <section className="mt-16 mx-2 md:mt-20 md:mx-8 lg:mt-24 lg:mx-16">
       <div className="border-bsi-outline/30 grid grid-cols-1 gap-10 border-t pt-12 md:grid-cols-3 md:gap-12 md:pt-16">
         {INFO_ITEMS.map((item) => (
           <article key={item.title}>

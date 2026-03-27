@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async'
 import PageTransition from '../components/PageTransition'
 import ContactHero from '../components/contact/ContactHero'
 import ContactBento from '../components/contact/ContactBento'
-import ContactInfo from '../components/contact/ContactInfo'
 
 export default function Contact() {
     return (
@@ -25,11 +24,10 @@ export default function Contact() {
                 <meta property="og:image" content="/shared/brand-logo.png" />
             </Helmet>
 
-            <main className="relative min-h-screen px-6 pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)] lg:px-0">
-                <div className="relative z-10 mx-auto max-w-6xl">
+            <main className="relative min-h-screen overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
+                <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8 lg:max-w-368 xl:max-w-392">
                     <ContactHero />
                     <ContactBento />
-                    <ContactInfo />
                 </div>
             </main>
         </PageTransition>

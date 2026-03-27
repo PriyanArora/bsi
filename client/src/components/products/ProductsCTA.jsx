@@ -16,7 +16,7 @@ export default function ProductsCTA({ onEnquireClick }) {
             <div className="flex flex-col gap-3">
               <Link
                 to="/contact"
-                className="text-bsi-primary bg-white rounded-lg px-8 py-4 text-center font-headline text-base font-extrabold tracking-tight transition hover:bg-bsi-accent hover:text-white"
+                className="bg-white text-bsi-primary rounded-lg px-8 py-4 text-center font-headline text-base font-extrabold tracking-tight transition hover:bg-bsi-accent"
               >
                 Contact us
               </Link>
@@ -24,7 +24,7 @@ export default function ProductsCTA({ onEnquireClick }) {
               <button
                 type="button"
                 onClick={() => onEnquireClick?.('AMC Care')}
-                className="bg-bsi-primary rounded-lg px-8 py-4 font-headline text-base font-extrabold tracking-tight text-white transition hover:opacity-90"
+                className="bg-white text-bsi-primary rounded-lg px-8 py-4 font-headline text-base font-extrabold tracking-tight transition hover:bg-bsi-accent"
               >
                 Enquire now
               </button>

@@ -7,7 +7,7 @@ export default function FloatingEnquireButton({ onClick }) {
       <div className="inline-block p-px">
         <button
           onClick={onClick}
-          className="relative z-10 rounded-lg bg-[#D62828] px-5 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#BC2020] sm:px-6 sm:py-3 sm:text-base md:px-7 md:text-lg"
+          className="floating-enquire-gradient relative z-10 rounded-none px-5 py-3 text-sm font-bold text-white transition-all duration-300 hover:brightness-110 sm:px-6 sm:py-3 sm:text-base md:px-7 md:text-lg"
         >
           Enquire Now
         </button>

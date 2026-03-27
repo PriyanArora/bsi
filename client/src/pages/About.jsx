@@ -25,8 +25,8 @@ export default function About({ onEnquireClick }) {
                 <meta property="og:image" content="/shared/brand-logo.png" />
             </Helmet>
 
-            <main className="relative overflow-hidden px-6 pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)] lg:px-0">
-                <div className="relative z-10 mx-auto max-w-7xl">
+            <main className="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
+                <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8 lg:max-w-368 xl:max-w-392">
                     <AboutHero />
                     <AboutBento onEnquireClick={onEnquireClick} />
                     <AboutTestimonials />

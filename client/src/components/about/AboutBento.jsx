@@ -1,6 +1,6 @@
 export default function AboutBento({ onEnquireClick }) {
   return (
-    <section className="grid grid-cols-1 gap-6 md:grid-cols-6 lg:grid-cols-12 lg:auto-rows-[240px]">
+    <section className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-6 md:px-8 lg:grid-cols-12 lg:auto-rows-[240px] lg:px-16">
       <article className="border-bsi-outline/30 bg-bsi-surface-lowest relative overflow-hidden rounded-xl border p-6 sm:p-8 md:col-span-4 lg:col-span-8 lg:row-span-2 lg:p-10">
         <h2 className="font-headline text-bsi-primary mb-6 text-2xl font-bold sm:text-3xl">Our Mission</h2>
         <p className="text-bsi-secondary max-w-xl text-lg leading-relaxed sm:text-xl">
