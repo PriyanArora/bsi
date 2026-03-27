@@ -51,6 +51,10 @@ export const chatbotQuestions = [
 
 const recommendationDetails = {
   'Storage and Retrieval': 'Good for handling, stacking, and retrieving goods in warehouse operations.',
+  'Overhead Cranes':
+    'Good for bay-wide material movement with EOT, gantry, underslung and light-rail based overhead handling setups.',
+  'Material Handling':
+    'Good for end-to-end handling with hoists, crane kits and warehouse-assist products across light to heavy-duty operations.',
   'Ergonomic Handling Solutions': 'Good for reducing operator effort and making load handling safer.',
   'Manual Hoists':
     'Good for simple lifting needs without electrical power.',
@@ -60,12 +64,6 @@ const recommendationDetails = {
     'Good for heavier loads and higher lifts in demanding use.',
   'EOT Cranes':
     'Good for moving loads across larger factory bays.',
-  'Gantry Cranes':
-    'Good when you need a crane that can work without building-mounted support.',
-  'Jib Cranes':
-    'Good for single-station lifting around a fixed point.',
-  'Light Rail Crane Systems':
-    'Good for light loads where smooth movement and low effort are important.',
 }
 
 function createRecommendation(categoryName, primaryProductName, fallbackDescription) {
@@ -123,7 +121,7 @@ export function getRecommendation(answers) {
     }
 
     if (loadBand === 'Under 1T') {
-      return createRecommendation('Storage and Retrieval', 'Floor Operated Stacker')
+      return createRecommendation('Storage and Retrieval', 'Roll Out Rack')
     }
 
     return createRecommendation('Storage and Retrieval', 'Roll Out Rack')
@@ -135,10 +133,10 @@ export function getRecommendation(answers) {
     siteType === 'Construction site'
   ) {
     if (loadBand === 'Over 20T' || loadBand === '5-20T') {
-      return createRecommendation('Gantry Cranes', 'Gantry Crane')
+      return createRecommendation('Overhead Cranes', 'Gantry Crane')
     }
 
-    return createRecommendation('Gantry Cranes', 'Semi-Gantry Crane')
+    return createRecommendation('Overhead Cranes', 'Semi Gantry Crane')
   }
 
   if (mainNeed === 'Move loads across a large area') {
@@ -151,7 +149,7 @@ export function getRecommendation(answers) {
     }
 
     if (loadBand === 'Under 1T') {
-      return createRecommendation('Light Rail Crane Systems', 'LR+ System')
+      return createRecommendation('Overhead Cranes', 'Light Rail System')
     }
 
     if (loadBand === '1-3T' && dailyUse === 'Few times a day') {
@@ -163,15 +161,15 @@ export function getRecommendation(answers) {
 
   if (mainNeed === 'Move loads in one workstation') {
     if (loadBand === 'Under 1T' && !isHighLift(liftHeight) && powerType !== 'Manual') {
-      return createRecommendation('Jib Cranes', 'Jib Crane')
+      return createRecommendation('Overhead Cranes', 'JIB Crane')
     }
 
     if (powerType === 'Manual' && dailyUse === 'Few times a day') {
-      return createRecommendation('Manual Hoists', 'Ratchet Lever Hoist')
+      return createRecommendation('Manual Hoists', 'STIER RLH')
     }
 
     if (powerType === 'Manual' && mountingType === 'Existing beam or rail') {
-      return createRecommendation('Manual Hoists', 'Trolley')
+      return createRecommendation('Manual Hoists', 'ET / PT / GT')
     }
 
     return createRecommendation('Electric Chain Hoists', 'HC+ Hoist')
@@ -191,18 +189,22 @@ export function getRecommendation(answers) {
 
   if (powerType === 'Manual') {
     if (loadBand === 'Under 1T') {
-      return createRecommendation('Manual Hoists', 'Ratchet Lever Hoist')
+      return createRecommendation('Manual Hoists', 'STIER RLH')
     }
 
-    if (loadBand === '1-3T' || loadBand === '3-5T') {
-      return createRecommendation('Manual Hoists', 'Chain Pulley Block')
+    if (loadBand === '1-3T') {
+      return createRecommendation('Manual Hoists', 'Indef R')
     }
 
-    return createRecommendation('Manual Hoists', 'Pulling Lifting Machine')
+    if (loadBand === '3-5T') {
+      return createRecommendation('Manual Hoists', 'Indef M')
+    }
+
+    return createRecommendation('Manual Hoists', 'Indef P')
   }
 
   if (loadBand === 'Under 1T' && dailyUse === 'Few times a day') {
-    return createRecommendation('Manual Hoists', 'Chain Pulley Block')
+    return createRecommendation('Manual Hoists', 'STIER RLH')
   }
 
   if (loadBand === 'Under 1T' && ['Many times a day', 'All day, every day'].includes(dailyUse)) {

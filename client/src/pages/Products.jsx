@@ -11,11 +11,11 @@ export default function Products({ onEnquireClick }) {
                 <title>Products - BSI Solutionz Industrial Lifting Systems</title>
                 <meta
                     name="description"
-                    content="Explore BSI Solutionz product range including electric chain hoists, wire rope hoists, jib cranes and EOT cranes for industrial lifting."
+                    content="Explore BSI Solutionz product range including overhead cranes, material handling systems, electric chain hoists and wire rope hoists for industrial lifting."
                 />
                 <meta
                     name="keywords"
-                    content="electric chain hoist, wire rope hoist, jib crane, EOT crane, industrial lifting products"
+                    content="overhead cranes, material handling systems, electric chain hoist, wire rope hoist, EOT crane, industrial lifting products"
                 />
                 <meta property="og:title" content="BSI Solutionz Products" />
                 <meta

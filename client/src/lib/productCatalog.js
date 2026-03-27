@@ -10,8 +10,8 @@ export const CATEGORY_CATALOG = [
     categoryName: 'Manual Hoists',
     slug: 'manual-hoists',
     description:
-      'Manual lifting and pulling equipment including chain pulley blocks, ratchet lever hoists, pulling lifting machines and trolley systems.',
-    productsCount: 4
+      'Manual chain pulley blocks, ratchet lever hoists and monorail travelling trolleys shown in the provided Bajaj Indef manual hoists section.',
+    productsCount: 6
   },
   {
     categoryName: 'Wire Rope Hoists',
@@ -28,32 +28,25 @@ export const CATEGORY_CATALOG = [
     productsCount: 4
   },
   {
-    categoryName: 'Gantry Cranes',
-    slug: 'gantry-cranes',
+    categoryName: 'Overhead Cranes',
+    slug: 'overhead-cranes',
     description:
-      'Gantry and semi-gantry cranes for indoor or outdoor lifting where relocation and independent support are required.',
-    productsCount: 2
+      'Overhead crane systems for factory bays and industrial spans, including EOT, gantry, underslung, light rail and storage-assist solutions.',
+    productsCount: 9
   },
   {
-    categoryName: 'Jib Cranes',
-    slug: 'jib-cranes',
+    categoryName: 'Material Handling',
+    slug: 'material-handling',
     description:
-      'Compact jib cranes for localized lifting with wide rotation and flexible installation requirements.',
-    productsCount: 1
-  },
-  {
-    categoryName: 'Light Rail Crane Systems',
-    slug: 'light-rail-crane-systems',
-    description:
-      'Light rail overhead crane systems designed to reduce structural stress while supporting ergonomic load movement.',
-    productsCount: 1
+      'Integrated material handling portfolio with hoists, crane kits, EOT variants and warehousing aids for light to heavy-duty applications.',
+    productsCount: 13
   },
   {
     categoryName: 'Storage and Retrieval',
     slug: 'storage-and-retrieval',
     description:
       'Warehouse storage and retrieval systems including stackers and rack solutions for vertical space optimization.',
-    productsCount: 3
+    productsCount: 2
   },
   {
     categoryName: 'Ergonomic Handling Solutions',
@@ -102,38 +95,56 @@ export const PRODUCT_CATALOG = [
     featured: true
   },
   {
-    id: 'manual-hoist-chain-pulley-block',
-    title: 'Chain Pulley Block',
-    description: 'Manual chain pulley block for robust heavy load handling across facilities.',
+    id: 'manual-hoists-indef-r',
+    title: 'Indef R',
+    description: '360-degree chain pulley block for efficient medium-duty manual lifting.',
     specLabel: 'Capacity',
-    spec: '0.5T to 40T',
+    spec: '1 Ton to 20 Ton',
+    categoryName: 'Manual Hoists',
+    featured: false
+  },
+  {
+    id: 'manual-hoists-et-pt-gt',
+    title: 'ET / PT / GT',
+    description: 'Trolley range for cross travel of hoist-mounted loads on beams.',
+    specLabel: 'Capacity',
+    spec: '1T to 15T',
+    categoryName: 'Manual Hoists',
+    featured: false
+  },
+  {
+    id: 'manual-hoists-indef-p',
+    title: 'Indef P',
+    description: 'Heavy-duty chain pulley block with customizable design and broad load range.',
+    specLabel: 'Capacity',
+    spec: '1 Ton to 40 Ton',
     categoryName: 'Manual Hoists',
     featured: true
   },
   {
-    id: 'manual-hoist-ratchet-lever-hoist',
-    title: 'Ratchet Lever Hoist',
-    description: 'Ergonomic manual hoist for precision-controlled lifting and supervisory handling tasks.',
-    specLabel: 'Control',
-    spec: 'Free running mode',
+    id: 'manual-hoists-indef-m',
+    title: 'Indef M',
+    description: 'Medium-duty manual chain pulley block with overload-tested durable construction.',
+    specLabel: 'Lift Height',
+    spec: 'Up to 40 meters',
+    categoryName: 'Manual Hoists',
+    featured: true
+  },
+  {
+    id: 'manual-hoists-stier-rlh',
+    title: 'STIER RLH',
+    description: 'Ratchet lever hoist for controlled manual lifting across varied capacities.',
+    specLabel: 'Capacity',
+    spec: '0.5T to 9T',
     categoryName: 'Manual Hoists',
     featured: false
   },
   {
-    id: 'manual-hoist-pulling-lifting-machine',
-    title: 'Pulling Lifting Machine',
-    description: 'Manual pulling and lifting machine with galvanised rope and precision-grip jaws.',
-    specLabel: 'Application',
-    spec: 'Horizontal Pulling',
-    categoryName: 'Manual Hoists',
-    featured: false
-  },
-  {
-    id: 'manual-hoist-trolley',
-    title: 'Trolley',
-    description: 'Beam-compatible trolley for smooth cross travel of hoist-connected loads.',
-    specLabel: 'Compatibility',
-    spec: 'I/H Monorail Beams',
+    id: 'manual-hoists-indef-c',
+    title: 'Indef C',
+    description: 'Compact chain pulley block built for efficient and reliable lifting.',
+    specLabel: 'Capacity',
+    spec: '1 Ton to 20 Ton',
     categoryName: 'Manual Hoists',
     featured: false
   },
@@ -228,40 +239,202 @@ export const PRODUCT_CATALOG = [
     featured: false
   },
   {
-    id: 'gantry-crane',
-    title: 'Gantry Crane',
-    description: 'Relocatable gantry crane for indoor and outdoor industrial lifting needs.',
+    id: 'overhead-cranes-crane-kit',
+    title: 'Crane Kit',
+    description: 'Pre-engineered crane kit with hoist and controls for efficient assembly.',
     specLabel: 'Capacity',
-    spec: '5 tons to 70 tons',
-    categoryName: 'Gantry Cranes',
-    featured: true
-  },
-  {
-    id: 'semi-gantry-crane',
-    title: 'Semi-Gantry Crane',
-    description: 'Semi-gantry crane with one-end support and safety-focused structural design.',
-    specLabel: 'Span',
-    spec: 'Up to 30 meters',
-    categoryName: 'Gantry Cranes',
+    spec: '2 tons to 10 tons',
+    categoryName: 'Overhead Cranes',
     featured: false
   },
   {
-    id: 'jib-crane',
-    title: 'Jib Crane',
-    description: 'Compact jib crane with 360-degree rotation for flexible localized lifting.',
+    id: 'overhead-cranes-gantry-crane',
+    title: 'Gantry Crane',
+    description: 'Relocatable gantry crane for indoor and outdoor industrial lifting.',
     specLabel: 'Capacity',
-    spec: 'Up to 1 ton',
-    categoryName: 'Jib Cranes',
+    spec: '5 tons to 70 tons',
+    categoryName: 'Overhead Cranes',
     featured: true
   },
   {
-    id: 'light-rail-crane-lr-plus-system',
-    title: 'LR+ System',
-    description: 'Light rail crane system designed to reduce support structure stress.',
+    id: 'overhead-cranes-istacker',
+    title: 'iStacker',
+    description: 'Automated stacker for pallet storage, retrieval and multilevel warehousing.',
+    specLabel: 'Operation',
+    spec: 'Semi/Full Automatic',
+    categoryName: 'Overhead Cranes',
+    featured: false
+  },
+  {
+    id: 'overhead-cranes-useot-crane',
+    title: 'USEOT Crane',
+    description: 'Underslung EOT crane for suspended standard-duty overhead lifting applications.',
+    specLabel: 'Span',
+    spec: 'Up to 25 meters',
+    categoryName: 'Overhead Cranes',
+    featured: false
+  },
+  {
+    id: 'overhead-cranes-light-rail-system',
+    title: 'Light Rail System',
+    description: 'Light rail system for ergonomic handling and reduced structural stress.',
     specLabel: 'Capacity',
     spec: 'Up to 2 tons',
-    categoryName: 'Light Rail Crane Systems',
+    categoryName: 'Overhead Cranes',
+    featured: false
+  },
+  {
+    id: 'overhead-cranes-sgeot-crane',
+    title: 'SGEOT Crane',
+    description: 'Single-girder EOT crane for standard-duty nominal load handling.',
+    specLabel: 'Span',
+    spec: 'Up to 30 meters',
+    categoryName: 'Overhead Cranes',
     featured: true
+  },
+  {
+    id: 'overhead-cranes-dgeot-crane',
+    title: 'DGEOT Crane',
+    description: 'Double-girder EOT crane for heavier production loads and wider spans.',
+    specLabel: 'Capacity',
+    spec: '5 tons to 70 tons',
+    categoryName: 'Overhead Cranes',
+    featured: true
+  },
+  {
+    id: 'overhead-cranes-jib-crane',
+    title: 'JIB Crane',
+    description: 'Localized crane with 360-degree rotation for flexible workstation lifting.',
+    specLabel: 'Capacity',
+    spec: 'Up to 1 ton',
+    categoryName: 'Overhead Cranes',
+    featured: false
+  },
+  {
+    id: 'overhead-cranes-semi-gantry-crane',
+    title: 'Semi Gantry Crane',
+    description: 'Hybrid crane with one self-supported end for flexible installations.',
+    specLabel: 'Span',
+    spec: 'Up to 35 meters',
+    categoryName: 'Overhead Cranes',
+    featured: false
+  },
+  {
+    id: 'material-handling-hw-series',
+    title: 'HW Series',
+    description: 'Heavy-duty wire rope hoist with modular design and up to 50m lift.',
+    specLabel: 'Capacity',
+    spec: '1T to 40T',
+    categoryName: 'Material Handling',
+    featured: true
+  },
+  {
+    id: 'material-handling-electric-chain-hoist-eh-ii-baby',
+    title: 'Electric Chain Hoist EH II (Baby)',
+    description: 'Plug-and-play electric chain hoist for light and medium-duty lifting.',
+    specLabel: 'Capacity',
+    spec: '0.5T to 2T',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-electric-chain-hoist-hc-plus',
+    title: 'Electric Chain Hoist HC+',
+    description: 'Medium-duty electric chain hoist with durable low-maintenance construction.',
+    specLabel: 'Capacity',
+    spec: '0.25T to 5T',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-gantry-crane',
+    title: 'Gantry Crane',
+    description: 'Relocatable gantry crane for indoor and outdoor industrial lifting.',
+    specLabel: 'Capacity',
+    spec: '5 tons to 70 tons',
+    categoryName: 'Material Handling',
+    featured: true
+  },
+  {
+    id: 'material-handling-istacker',
+    title: 'iStacker',
+    description: 'Stacker solution for pallet receipt, storage and retrieval operations.',
+    specLabel: 'Operation',
+    spec: 'Semi/Full Automatic',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-wrh-i-ii-iii-hoist',
+    title: 'WRH I II III Hoist',
+    description: 'Wire rope hoist for demanding medium and heavy-duty lifting.',
+    specLabel: 'Capacity',
+    spec: '1T to 10T',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-indef-r',
+    title: 'Indef R',
+    description: '360-degree manual chain pulley block for medium-duty lifting.',
+    specLabel: 'Capacity',
+    spec: '1 Ton to 20 Ton',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-indef-p',
+    title: 'Indef P',
+    description: 'Heavy-duty chain pulley block with customizable design and high capacity.',
+    specLabel: 'Capacity',
+    spec: '1 Ton to 40 Ton',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-ir-series',
+    title: 'iR Series',
+    description: 'Modular wire rope hoist with overload protection and low noise.',
+    specLabel: 'Capacity',
+    spec: '1 Ton to 20 Ton',
+    categoryName: 'Material Handling',
+    featured: true
+  },
+  {
+    id: 'material-handling-sgeot-crane',
+    title: 'SGEOT Crane',
+    description: 'Single-girder EOT crane for standard-duty overhead lifting.',
+    specLabel: 'Span',
+    spec: 'Up to 30 meters',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-dgeot-crane',
+    title: 'DGEOT Crane',
+    description: 'Double-girder EOT crane for heavier production loads and wider spans.',
+    specLabel: 'Capacity',
+    spec: '5 tons to 70 tons',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-jib-crane',
+    title: 'JIB Crane',
+    description: 'Localized rotating crane for flexible workstation lifting tasks.',
+    specLabel: 'Capacity',
+    spec: 'Up to 1 ton',
+    categoryName: 'Material Handling',
+    featured: false
+  },
+  {
+    id: 'material-handling-crane-kit',
+    title: 'Crane Kit',
+    description: 'Cost-effective crane kit with hoist and controls for faster assembly.',
+    specLabel: 'Capacity',
+    spec: '2 tons to 10 tons',
+    categoryName: 'Material Handling',
+    featured: false
   },
   {
     id: 'storage-retrieval-istacker',
@@ -278,15 +451,6 @@ export const PRODUCT_CATALOG = [
     description: 'Vertical storage rack with easy move-in and move-out access.',
     specLabel: 'Storage Type',
     spec: 'Vertical Storage',
-    categoryName: 'Storage and Retrieval',
-    featured: false
-  },
-  {
-    id: 'storage-retrieval-floor-operated-stacker',
-    title: 'Floor Operated Stacker',
-    description: 'Floor operated stacker for precise and easy warehouse material handling.',
-    specLabel: 'Use',
-    spec: 'Warehouse Handling',
     categoryName: 'Storage and Retrieval',
     featured: false
   },
