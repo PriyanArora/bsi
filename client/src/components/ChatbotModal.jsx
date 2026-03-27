@@ -64,6 +64,14 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
     return null
   }
 
+  const confidenceLabel = recommendation
+    ? recommendation.confidence === 'high'
+      ? 'High confidence'
+      : recommendation.confidence === 'medium'
+        ? 'Medium confidence'
+        : 'Needs confirmation'
+    : null
+
   const currentQuestion = chatbotQuestions[stepIndex]
 
   return (
@@ -100,10 +108,23 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
                 Category: {recommendation.category}
               </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/75">
+                Decision Confidence: {confidenceLabel}
+              </p>
               <p className="mt-3 text-sm leading-relaxed text-slate-200">{recommendation.description}</p>
-              {recommendation.products.length > 1 ? (
+              {recommendation.shortlist?.length > 0 ? (
+                <p className="mt-3 text-xs text-white/75">
+                  Shortlisted models to confirm: {recommendation.shortlist.join(', ')}
+                </p>
+              ) : null}
+              {recommendation.shortlist?.length === 0 && recommendation.products.length > 1 ? (
                 <p className="mt-3 text-xs text-white/70">
                   Also suitable models: {recommendation.products.filter((product) => product !== recommendation.primaryProduct).slice(0, 3).join(', ')}
+                </p>
+              ) : null}
+              {recommendation.requiresConfirmation ? (
+                <p className="mt-2 text-xs text-white/70">
+                  Final model confirmation may require site data such as exact duty cycle, span and hazardous classification.
                 </p>
               ) : null}
             </div>
