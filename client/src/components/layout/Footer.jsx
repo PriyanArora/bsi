@@ -56,10 +56,6 @@ export default function Footer() {
           <p className="mb-4 text-sm text-slate-300">515, Vishal Chamber, Sector-18, Noida, Gautam Buddha Nagar, U.P-201301</p>
           <p className="mb-3 text-sm text-slate-300">bsisolutionz@gmail.com</p>
           <p className="text-sm text-slate-300">+91 9717897960</p>
-          <div className="flex gap-4 mt-6">
-            <span className="material-symbols-outlined cursor-pointer text-slate-200 transition-colors hover:text-[#FFD100]">share</span>
-            <span className="material-symbols-outlined cursor-pointer text-slate-200 transition-colors hover:text-[#FFD100]">public</span>
-          </div>
         </div>
       </div>
 

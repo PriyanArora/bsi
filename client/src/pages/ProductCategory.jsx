@@ -99,8 +99,8 @@ export default function ProductCategory({ onEnquireClick }) {
                   {product.description}
                 </p>
 
-                <div className="mt-auto flex items-end justify-between gap-4">
-                  <div className="flex flex-col">
+                <div className="mt-auto flex items-start justify-between gap-4 pt-2">
+                  <div className="flex min-h-10 flex-col justify-start">
                     <span className="text-bsi-secondary text-[10px] font-bold uppercase tracking-[0.2em]">{product.specLabel}</span>
                     <span className="text-bsi-primary text-sm font-semibold">
                       {product.spec}
@@ -110,7 +110,7 @@ export default function ProductCategory({ onEnquireClick }) {
                   <button
                     type="button"
                     onClick={() => onEnquireClick?.(product.title)}
-                    className="bg-bsi-primary-container rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary sm:px-6 sm:py-3 sm:text-sm"
+                    className="bg-bsi-primary-container h-10 w-32 shrink-0 rounded-none px-0 text-sm font-bold tracking-[0.08em] whitespace-nowrap text-white transition hover:bg-bsi-primary"
                   >
                     Enquire Now
                   </button>
