@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
-import craneImg from '../../assets/products/sgeot-2.png'
 
 export default function HeroSection() {
   const parallaxRef = useRef(null)
+  const craneImg = '/og-products-placeholder.png'
 
   useEffect(() => {
     let rafId = 0

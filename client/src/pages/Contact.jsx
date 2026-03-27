@@ -22,7 +22,7 @@ export default function Contact() {
                     property="og:description"
                     content="Reach our team for product consultation, support requests, and partnership opportunities."
                 />
-                <meta property="og:image" content="/og-contact-placeholder.png" />
+                <meta property="og:image" content="/shared/brand-logo.png" />
             </Helmet>
 
             <main className="relative min-h-screen px-6 pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)] lg:px-0">

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logoImg from '../../assets/logos/bsilogofinal.png'
 import MobileNav from './MobileNav'
 import { Button } from '../ui/button'
+
+const logoImg = '/shared/brand-logo.png'
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },

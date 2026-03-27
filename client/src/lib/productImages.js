@@ -14,6 +14,49 @@ const CATEGORY_FOLDER_BY_SLUG = {
   'ergonomic-handling-solutions': 'ErgonomicHandling',
 }
 
+const SHARED_FOLDER = 'shared'
+
+const CATEGORY_TITLE_SHARED_IMAGE_BY_SLUG = {
+  'electric-chain-hoists': 'hc-plus',
+  'manual-hoists': 'indef-c',
+}
+
+const SHARED_IMAGE_BY_PRODUCT_ID = {
+  'electric-chain-hoist-eh-ii-baby': 'eh-ii-baby',
+  'material-handling-electric-chain-hoist-eh-ii-baby': 'eh-ii-baby',
+  'electric-chain-hoist-hc-plus': 'hc-plus',
+  'material-handling-electric-chain-hoist-hc-plus': 'hc-plus',
+  'eot-crane-kit': 'crane-kit',
+  'overhead-cranes-crane-kit': 'crane-kit',
+  'material-handling-crane-kit': 'crane-kit',
+  'eot-crane-double-girder': 'dgeot-crane',
+  'overhead-cranes-dgeot-crane': 'dgeot-crane',
+  'material-handling-dgeot-crane': 'dgeot-crane',
+  'eot-crane-single-girder': 'sgeot-crane',
+  'overhead-cranes-sgeot-crane': 'sgeot-crane',
+  'material-handling-sgeot-crane': 'sgeot-crane',
+  'eot-crane-underslung': 'underslung-eot',
+  'overhead-cranes-useot-crane': 'underslung-eot',
+  'manual-hoists-indef-p': 'indef-p',
+  'material-handling-indef-p': 'indef-p',
+  'manual-hoists-indef-r': 'indef-r',
+  'material-handling-indef-r': 'indef-r',
+  'manual-hoists-indef-c': 'indef-c',
+  'wire-rope-hoist-hw': 'hw-wire-rope-hoist',
+  'material-handling-hw-series': 'hw-wire-rope-hoist',
+  'wire-rope-hoist-ir': 'ir-hoist',
+  'material-handling-ir-series': 'ir-hoist',
+  'wire-rope-hoist-wrh-i-ii-iii': 'wrh-i-ii-iii',
+  'material-handling-wrh-i-ii-iii-hoist': 'wrh-i-ii-iii',
+  'overhead-cranes-istacker': 'istacker',
+  'material-handling-istacker': 'istacker',
+  'storage-retrieval-istacker': 'istacker',
+  'overhead-cranes-jib-crane': 'jib-crane',
+  'material-handling-jib-crane': 'jib-crane',
+  'overhead-cranes-gantry-crane': 'semi-gantry-ur-5t',
+  'material-handling-gantry-crane': 'semi-gantry-ur-5t',
+}
+
 const PRODUCT_IMAGE_HINT_BY_ID = {
   'electric-chain-hoist-eh-ii-baby': 'EH-II-Baby',
   'electric-chain-hoist-hc-plus': 'HC+ electric chain',
@@ -130,8 +173,25 @@ function getBestMatch(candidates, query) {
   return best?.src || ''
 }
 
+function getSharedImageByName(baseName) {
+  const sharedImages = IMAGE_INDEX.get(SHARED_FOLDER) || []
+  if (!sharedImages.length || !baseName) return ''
+
+  const normalizedBaseName = normalize(baseName)
+  const exactSharedImage = sharedImages.find((image) => image.normalizedBase === normalizedBaseName)
+  if (exactSharedImage) return exactSharedImage.src
+
+  return getBestMatch(sharedImages, baseName)
+}
+
 export function getCategoryTitleImage(category) {
   const folder = getCategoryFolder(category)
+  const categoryTitleSharedImage = CATEGORY_TITLE_SHARED_IMAGE_BY_SLUG[category?.slug]
+  if (categoryTitleSharedImage) {
+    const sharedImage = getSharedImageByName(categoryTitleSharedImage)
+    if (sharedImage) return sharedImage
+  }
+
   const images = IMAGE_INDEX.get(folder) || []
 
   const titleImage = images.find((image) => image.isTitle)
@@ -141,6 +201,9 @@ export function getCategoryTitleImage(category) {
 }
 
 export function getProductImage(category, product) {
+  const sharedProductImage = getSharedImageByName(SHARED_IMAGE_BY_PRODUCT_ID[product?.id])
+  if (sharedProductImage) return sharedProductImage
+
   const folder = getCategoryFolder(category)
   const images = (IMAGE_INDEX.get(folder) || []).filter((image) => !image.isTitle)
 
