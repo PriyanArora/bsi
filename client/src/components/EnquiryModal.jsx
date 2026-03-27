@@ -28,6 +28,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 export default function EnquiryModal({ isOpen, onClose, defaultProduct, source = 'website' }) {
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false)
+  const [modalScale, setModalScale] = useState(1)
   const [productMenuPosition, setProductMenuPosition] = useState({
     top: 0,
     left: 0,
@@ -40,6 +41,32 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   const productTriggerRef = useRef(null)
   const productMenuListRef = useRef(null)
   const productMenuRafRef = useRef(0)
+
+  const updateModalScale = useCallback(() => {
+    const modalElement = modalContentRef.current
+    if (!modalElement) {
+      return
+    }
+
+    const viewportHeight = window.innerHeight
+    const isLandscape = window.matchMedia('(orientation: landscape)').matches
+    let edgePadding = window.innerWidth >= 768 ? 20 : 16
+
+    if (isLandscape && viewportHeight < 600) {
+      edgePadding = 12
+    }
+
+    const availableHeight = Math.max(320, viewportHeight - edgePadding * 2)
+    const contentHeight = modalElement.offsetHeight
+
+    if (!contentHeight) {
+      setModalScale(1)
+      return
+    }
+
+    const nextScale = Math.min(1, Math.max(0.72, availableHeight / contentHeight))
+    setModalScale((prevScale) => (Math.abs(prevScale - nextScale) > 0.01 ? nextScale : prevScale))
+  }, [])
 
   const updateProductMenuPosition = useCallback(() => {
     const triggerElement = productTriggerRef.current
@@ -147,6 +174,47 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   }, [isOpen, onClose])
 
   useEffect(() => {
+    if (!isOpen) {
+      setModalScale(1)
+      return undefined
+    }
+
+    updateModalScale()
+
+    const handleViewportChange = () => {
+      requestAnimationFrame(() => {
+        updateModalScale()
+      })
+    }
+
+    window.addEventListener('resize', handleViewportChange)
+    window.addEventListener('orientationchange', handleViewportChange)
+
+    let resizeObserver
+    if (typeof ResizeObserver !== 'undefined' && modalContentRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        updateModalScale()
+      })
+      resizeObserver.observe(modalContentRef.current)
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleViewportChange)
+      window.removeEventListener('orientationchange', handleViewportChange)
+
+      if (resizeObserver) {
+        resizeObserver.disconnect()
+      }
+    }
+  }, [isOpen, updateModalScale])
+
+  useEffect(() => {
+    if (isProductMenuOpen) {
+      updateProductMenuPosition()
+    }
+  }, [isProductMenuOpen, modalScale, updateProductMenuPosition])
+
+  useEffect(() => {
     if (!isProductMenuOpen) {
       return undefined
     }
@@ -247,16 +315,15 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-200 flex items-start justify-center overflow-y-auto bg-black/55 p-3 pt-12 sm:items-center sm:p-3 md:p-4"
+      className="fixed inset-0 z-200 flex items-center justify-center overflow-hidden bg-black/55 p-4 sm:p-4 md:p-5"
       onClick={onClose}
     >
       <div
         ref={modalContentRef}
-        className="border-bsi-outline/20 bg-bsi-surface-lowest w-full max-w-2xl max-h-[92dvh] overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:max-h-[94dvh] sm:p-5 md:max-h-[95dvh] md:p-6"
-        onScroll={() => {
-          if (isProductMenuOpen) {
-            updateProductMenuPosition()
-          }
+        className="border-bsi-outline/20 bg-bsi-surface-lowest w-full max-w-2xl rounded-2xl border p-4 shadow-2xl sm:p-5 md:p-6"
+        style={{
+          transform: `scale(${modalScale})`,
+          transformOrigin: 'center center',
         }}
         onClick={(event) => event.stopPropagation()}
       >
@@ -406,7 +473,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                       <span className="text-bsi-secondary text-xs">▼</span>
                     </button>
 
-                    <div className="mt-2 min-h-8 max-h-20 overflow-y-auto pr-1">
+                    <div className="mt-2 min-h-8 pr-1">
                       <div className="flex flex-wrap gap-2">
                         {selectedProducts.map((item) => (
                           <span
