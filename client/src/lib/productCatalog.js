@@ -3,56 +3,56 @@ export const CATEGORY_CATALOG = [
     categoryName: 'Electric Chain Hoists',
     slug: 'electric-chain-hoists',
     description:
-      'Electric chain hoists for light, medium and heavy-duty lifting across factories, construction sites and industrial operations.',
+      'Electric chain hoists for 0.25T to 30T lifting in light, medium and heavy-duty applications.',
     productsCount: 4
   },
   {
     categoryName: 'Manual Hoists',
     slug: 'manual-hoists',
     description:
-      'Manual chain pulley blocks, ratchet lever hoists and monorail travelling trolleys shown in the provided Bajaj Indef manual hoists section.',
+      'Manual chain pulley blocks, ratchet lever hoists and ET/PT/GT trolleys for lifting and beam travel where electric power is limited.',
     productsCount: 6
   },
   {
     categoryName: 'Wire Rope Hoists',
     slug: 'wire-rope-hoists',
     description:
-      'Electric wire rope hoists and variants for heavy-duty vertical lifting on monorails and EOT cranes.',
+      'Electric wire rope hoists for monorail and EOT use, with capacities up to 90T and lift heights up to 175 m.',
     productsCount: 6
   },
   {
     categoryName: 'EOT Cranes',
     slug: 'eot-cranes',
     description:
-      'Single girder, double girder, underslung and kit-based EOT cranes for overhead material handling.',
+      'EOT crane range including single girder, double girder, underslung and crane kit configurations for overhead bay handling.',
     productsCount: 4
   },
   {
     categoryName: 'Overhead Cranes',
     slug: 'overhead-cranes',
     description:
-      'Overhead crane systems for factory bays and industrial spans, including EOT, gantry, underslung, light rail and storage-assist solutions.',
+      'Overhead crane solutions including EOT, gantry, semi-gantry, jib, light rail and stacker systems.',
     productsCount: 9
   },
   {
     categoryName: 'Material Handling',
     slug: 'material-handling',
     description:
-      'Integrated material handling portfolio with hoists, crane kits, EOT variants and warehousing aids for light to heavy-duty applications.',
+      'Material handling portfolio covering hoists, cranes, crane kits and warehouse movement solutions across industrial duty classes.',
     productsCount: 13
   },
   {
     categoryName: 'Storage and Retrieval',
     slug: 'storage-and-retrieval',
     description:
-      'Warehouse storage and retrieval systems including stackers and rack solutions for vertical space optimization.',
+      'Storage and retrieval solutions such as iStacker and Roll Out Rack for multilevel warehousing and vertical space use.',
     productsCount: 2
   },
   {
     categoryName: 'Ergonomic Handling Solutions',
     slug: 'ergonomic-handling-solutions',
     description:
-      'Operator-assist handling systems bridging manual lifting and fully automated robotics.',
+      'Ergonomic handling solutions including manipulators and balancers to reduce repetitive manual strain.',
     productsCount: 4
   }
 ]
@@ -61,7 +61,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'electric-chain-hoist-eh-ii-baby',
     title: 'EH II Hoist (Baby)',
-    description: 'Plug-and-play electric chain hoist for light and medium-duty industrial lifting.',
+    description: 'Plug-and-play electric chain hoist for light and medium-duty lifting, with conical rotor motor brake and flameproof variants.',
     specLabel: 'Capacity',
     spec: 'Up to 2T',
     categoryName: 'Electric Chain Hoists',
@@ -70,7 +70,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'electric-chain-hoist-hc-plus',
     title: 'HC+ Hoist',
-    description: 'Medium-duty electric chain hoist for reliable lifting in moderate operating cycles.',
+    description: 'Electric chain hoist for medium-duty lifting with a robust low-maintenance design.',
     specLabel: 'Capacity',
     spec: 'Up to 5T',
     categoryName: 'Electric Chain Hoists',
@@ -79,7 +79,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'electric-chain-hoist-ch-iii-electron',
     title: 'CH III Hoist (Electron)',
-    description: 'Versatile chain hoist for demanding lifts with high lift height capability.',
+    description: 'Electric chain hoist for light to heavy-duty lifting, with cylindrical rotor motor brake and lift heights up to 100 m.',
     specLabel: 'Lift Height',
     spec: 'Up to 100 meters',
     categoryName: 'Electric Chain Hoists',
@@ -88,7 +88,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'electric-chain-hoist-ch-iv-proton',
     title: 'CH IV Hoist (Proton)',
-    description: 'Heavy-duty electric chain hoist with high capacity and advanced safety switches.',
+    description: 'Heavy-duty electric chain hoist for high-capacity lifting with micro-limit switch safety.',
     specLabel: 'Capacity',
     spec: '5T to 30T',
     categoryName: 'Electric Chain Hoists',
@@ -97,7 +97,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'manual-hoists-indef-r',
     title: 'Indef R',
-    description: '360-degree chain pulley block for efficient medium-duty manual lifting.',
+    description: 'Manual chain pulley block with 360-degree hand-chain rotation for operation from any angle.',
     specLabel: 'Capacity',
     spec: '1 Ton to 20 Ton',
     categoryName: 'Manual Hoists',
@@ -106,7 +106,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'manual-hoists-et-pt-gt',
     title: 'ET / PT / GT',
-    description: 'Trolley range for cross travel of hoist-mounted loads on beams.',
+    description: 'Manual trolley range for moving hoist-mounted loads on I/H monorail and single-girder crane beams.',
     specLabel: 'Capacity',
     spec: '1T to 15T',
     categoryName: 'Manual Hoists',
@@ -115,7 +115,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'manual-hoists-indef-p',
     title: 'Indef P',
-    description: 'Heavy-duty chain pulley block with customizable design and broad load range.',
+    description: 'Heavy-duty manual chain pulley block with triple spur gear design and wide capacity range.',
     specLabel: 'Capacity',
     spec: '1 Ton to 40 Ton',
     categoryName: 'Manual Hoists',
@@ -124,7 +124,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'manual-hoists-indef-m',
     title: 'Indef M',
-    description: 'Medium-duty manual chain pulley block with overload-tested durable construction.',
+    description: 'Manual chain pulley block built for medium-duty lifting and routine industrial use.',
     specLabel: 'Lift Height',
     spec: 'Up to 40 meters',
     categoryName: 'Manual Hoists',
@@ -133,7 +133,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'manual-hoists-stier-rlh',
     title: 'STIER RLH',
-    description: 'Ratchet lever hoist for controlled manual lifting across varied capacities.',
+    description: 'Ratchet lever hoist for controlled lifting and pulling, with reversing lever and free-running mode.',
     specLabel: 'Capacity',
     spec: '0.5T to 9T',
     categoryName: 'Manual Hoists',
@@ -142,7 +142,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'manual-hoists-indef-c',
     title: 'Indef C',
-    description: 'Compact chain pulley block built for efficient and reliable lifting.',
+    description: 'Manual chain pulley block with triple spur gear design for heavy-duty lifting.',
     specLabel: 'Capacity',
     spec: '1 Ton to 20 Ton',
     categoryName: 'Manual Hoists',
@@ -151,7 +151,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'wire-rope-hoist-ir',
     title: 'iR Wire Rope Hoist',
-    description: 'Electric wire rope hoist variant for crane and monorail heavy-duty lifting.',
+    description: 'Low-noise wire rope hoist series with lifetime-lubricated gearbox for monorail and crane applications.',
     specLabel: 'Capacity',
     spec: '1T to 90T',
     categoryName: 'Wire Rope Hoists',
@@ -160,7 +160,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'wire-rope-hoist-wrh-n-series',
     title: 'WRH N Series',
-    description: 'Wire rope hoist series for industrial vertical lifting with flexible speed options.',
+    description: 'Wire rope hoist series for medium-duty lifting where higher lift and travel speeds are needed.',
     specLabel: 'Lift Height',
     spec: 'Up to 175 mtrs.',
     categoryName: 'Wire Rope Hoists',
@@ -169,7 +169,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'wire-rope-hoist-wrh-i-ii-iii',
     title: 'WRH I-II-III',
-    description: 'Industrial wire rope hoist series for high-capacity lifting across crane systems.',
+    description: 'Wire rope hoist series for medium to heavy-duty lifting in production and process applications.',
     specLabel: 'Capacity',
     spec: '1T to 90T',
     categoryName: 'Wire Rope Hoists',
@@ -178,7 +178,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'wire-rope-hoist-hw',
     title: 'HW Wire Rope Hoist',
-    description: 'Heavy-duty wire rope hoist variant for monorail and EOT crane usage.',
+    description: 'Modular wire rope hoist series for heavy-duty lifting, with direct gearbox coupling for efficient power transmission.',
     specLabel: 'Lift Height',
     spec: 'Up to 175 mtrs.',
     categoryName: 'Wire Rope Hoists',
@@ -187,7 +187,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'wire-rope-hoist-ur',
     title: 'UR Wire Rope Hoist',
-    description: 'High-capacity wire rope hoist variant for demanding industrial lifting applications.',
+    description: 'Wire rope hoist series used for heavy-duty lifting in monorail and EOT crane configurations.',
     specLabel: 'Capacity',
     spec: '1T to 90T',
     categoryName: 'Wire Rope Hoists',
@@ -196,7 +196,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'wire-rope-hoist-smd',
     title: 'SMD Wire Rope Hoist',
-    description: 'Electric wire rope hoist variant for heavy-duty lifting and long lift heights.',
+    description: 'Steel mill duty wire rope hoist variant for heavy impact and high-duty industrial lifting.',
     specLabel: 'Lift Height',
     spec: 'Up to 175 mtrs.',
     categoryName: 'Wire Rope Hoists',
@@ -205,7 +205,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'eot-crane-single-girder',
     title: 'Single Girder EOT Crane',
-    description: 'Single girder overhead crane for standard duty industrial lifting operations.',
+    description: 'Single-girder EOT crane for standard-duty overhead handling with trolley-mounted hoist.',
     specLabel: 'Span',
     spec: 'Up to 30 meters',
     categoryName: 'EOT Cranes',
@@ -214,7 +214,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'eot-crane-double-girder',
     title: 'Double Girder EOT Crane',
-    description: 'Dual girder EOT crane for medium to heavy load production handling.',
+    description: 'Double-girder EOT crane for medium to heavy-duty loads and larger spans.',
     specLabel: 'Capacity',
     spec: '5 tons to 70 tons',
     categoryName: 'EOT Cranes',
@@ -223,7 +223,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'eot-crane-underslung',
     title: 'Underslung EOT Crane',
-    description: 'Suspended EOT crane for shed-mounted overhead lifting with compact integration.',
+    description: 'Underslung EOT crane with suspended runway arrangement for nominal loads where top-runway space is limited.',
     specLabel: 'Capacity',
     spec: 'Up to 12.5 tons',
     categoryName: 'EOT Cranes',
@@ -232,7 +232,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'eot-crane-kit',
     title: 'Crane Kit',
-    description: 'Pre-engineered crane kit with hoist and controls for fast assembly.',
+    description: 'Crane kit with end carriages, control panel, festooning and hoist for assembling EOT systems.',
     specLabel: 'Capacity',
     spec: '2 tons to 10 tons',
     categoryName: 'EOT Cranes',
@@ -241,7 +241,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-crane-kit',
     title: 'Crane Kit',
-    description: 'Pre-engineered crane kit with hoist and controls for efficient assembly.',
+    description: 'Crane kit with end carriages, control panel, festooning and hoist for assembling EOT systems.',
     specLabel: 'Capacity',
     spec: '2 tons to 10 tons',
     categoryName: 'Overhead Cranes',
@@ -250,7 +250,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-gantry-crane',
     title: 'Gantry Crane',
-    description: 'Relocatable gantry crane for indoor and outdoor industrial lifting.',
+    description: 'Standalone gantry crane for indoor or outdoor lifting where full building runway support is not available.',
     specLabel: 'Capacity',
     spec: '5 tons to 70 tons',
     categoryName: 'Overhead Cranes',
@@ -259,7 +259,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-istacker',
     title: 'iStacker',
-    description: 'Automated stacker for pallet storage, retrieval and multilevel warehousing.',
+    description: 'Warehouse stacker for pallet receipt, storage and retrieval with multilevel handling.',
     specLabel: 'Operation',
     spec: 'Semi/Full Automatic',
     categoryName: 'Overhead Cranes',
@@ -268,7 +268,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-useot-crane',
     title: 'USEOT Crane',
-    description: 'Underslung EOT crane for suspended standard-duty overhead lifting applications.',
+    description: 'Underslung EOT crane configuration mounted from shed structure for nominal load handling.',
     specLabel: 'Span',
     spec: 'Up to 25 meters',
     categoryName: 'Overhead Cranes',
@@ -277,7 +277,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-light-rail-system',
     title: 'Light Rail System',
-    description: 'Light rail system for ergonomic handling and reduced structural stress.',
+    description: 'LR+ light rail crane system for up to 2T loads, designed to reduce horizontal forces on supporting structures.',
     specLabel: 'Capacity',
     spec: 'Up to 2 tons',
     categoryName: 'Overhead Cranes',
@@ -286,7 +286,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-sgeot-crane',
     title: 'SGEOT Crane',
-    description: 'Single-girder EOT crane for standard-duty nominal load handling.',
+    description: 'Single-girder EOT crane for standard-duty operations and bay movement.',
     specLabel: 'Span',
     spec: 'Up to 30 meters',
     categoryName: 'Overhead Cranes',
@@ -295,7 +295,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-dgeot-crane',
     title: 'DGEOT Crane',
-    description: 'Double-girder EOT crane for heavier production loads and wider spans.',
+    description: 'Double-girder EOT crane for medium to heavy-duty operations and wider bay spans.',
     specLabel: 'Capacity',
     spec: '5 tons to 70 tons',
     categoryName: 'Overhead Cranes',
@@ -304,7 +304,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-jib-crane',
     title: 'JIB Crane',
-    description: 'Localized crane with 360-degree rotation for flexible workstation lifting.',
+    description: 'Jib crane with rotating boom for loading, unloading and maintenance tasks at fixed workstations.',
     specLabel: 'Capacity',
     spec: 'Up to 1 ton',
     categoryName: 'Overhead Cranes',
@@ -313,7 +313,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'overhead-cranes-semi-gantry-crane',
     title: 'Semi Gantry Crane',
-    description: 'Hybrid crane with one self-supported end for flexible installations.',
+    description: 'Hybrid crane with one runway-supported side and one leg-supported side for mixed-structure bays.',
     specLabel: 'Span',
     spec: 'Up to 35 meters',
     categoryName: 'Overhead Cranes',
@@ -322,7 +322,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-hw-series',
     title: 'HW Series',
-    description: 'Heavy-duty wire rope hoist with modular design and up to 50m lift.',
+    description: 'Modular wire rope hoist series for heavy-duty lifting, with direct gearbox coupling for efficient power transmission.',
     specLabel: 'Capacity',
     spec: '1T to 40T',
     categoryName: 'Material Handling',
@@ -331,7 +331,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-electric-chain-hoist-eh-ii-baby',
     title: 'Electric Chain Hoist EH II (Baby)',
-    description: 'Plug-and-play electric chain hoist for light and medium-duty lifting.',
+    description: 'Plug-and-play electric chain hoist for light and medium-duty lifting, with conical rotor motor brake and flameproof variants.',
     specLabel: 'Capacity',
     spec: '0.5T to 2T',
     categoryName: 'Material Handling',
@@ -340,7 +340,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-electric-chain-hoist-hc-plus',
     title: 'Electric Chain Hoist HC+',
-    description: 'Medium-duty electric chain hoist with durable low-maintenance construction.',
+    description: 'Electric chain hoist for medium-duty lifting with a robust low-maintenance design.',
     specLabel: 'Capacity',
     spec: '0.25T to 5T',
     categoryName: 'Material Handling',
@@ -349,7 +349,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-gantry-crane',
     title: 'Gantry Crane',
-    description: 'Relocatable gantry crane for indoor and outdoor industrial lifting.',
+    description: 'Standalone gantry crane for indoor or outdoor lifting where full building runway support is not available.',
     specLabel: 'Capacity',
     spec: '5 tons to 70 tons',
     categoryName: 'Material Handling',
@@ -358,7 +358,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-istacker',
     title: 'iStacker',
-    description: 'Stacker solution for pallet receipt, storage and retrieval operations.',
+    description: 'Warehouse stacker for pallet receipt, storage and retrieval with multilevel handling.',
     specLabel: 'Operation',
     spec: 'Semi/Full Automatic',
     categoryName: 'Material Handling',
@@ -367,7 +367,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-wrh-i-ii-iii-hoist',
     title: 'WRH I II III Hoist',
-    description: 'Wire rope hoist for demanding medium and heavy-duty lifting.',
+    description: 'Wire rope hoist series for medium to heavy-duty lifting in production and process applications.',
     specLabel: 'Capacity',
     spec: '1T to 10T',
     categoryName: 'Material Handling',
@@ -376,7 +376,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-indef-r',
     title: 'Indef R',
-    description: '360-degree manual chain pulley block for medium-duty lifting.',
+    description: 'Manual chain pulley block with 360-degree hand-chain rotation for operation from any angle.',
     specLabel: 'Capacity',
     spec: '1 Ton to 20 Ton',
     categoryName: 'Material Handling',
@@ -385,7 +385,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-indef-p',
     title: 'Indef P',
-    description: 'Heavy-duty chain pulley block with customizable design and high capacity.',
+    description: 'Heavy-duty manual chain pulley block with triple spur gear design and wide capacity range.',
     specLabel: 'Capacity',
     spec: '1 Ton to 40 Ton',
     categoryName: 'Material Handling',
@@ -394,7 +394,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-ir-series',
     title: 'iR Series',
-    description: 'Modular wire rope hoist with overload protection and low noise.',
+    description: 'Low-noise wire rope hoist series with lifetime-lubricated gearbox for monorail and crane applications.',
     specLabel: 'Capacity',
     spec: '1 Ton to 20 Ton',
     categoryName: 'Material Handling',
@@ -403,7 +403,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-sgeot-crane',
     title: 'SGEOT Crane',
-    description: 'Single-girder EOT crane for standard-duty overhead lifting.',
+    description: 'Single-girder EOT crane for standard-duty operations and bay movement.',
     specLabel: 'Span',
     spec: 'Up to 30 meters',
     categoryName: 'Material Handling',
@@ -412,7 +412,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-dgeot-crane',
     title: 'DGEOT Crane',
-    description: 'Double-girder EOT crane for heavier production loads and wider spans.',
+    description: 'Double-girder EOT crane for medium to heavy-duty operations and wider bay spans.',
     specLabel: 'Capacity',
     spec: '5 tons to 70 tons',
     categoryName: 'Material Handling',
@@ -421,7 +421,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-jib-crane',
     title: 'JIB Crane',
-    description: 'Localized rotating crane for flexible workstation lifting tasks.',
+    description: 'Jib crane with rotating boom for loading, unloading and maintenance tasks at fixed workstations.',
     specLabel: 'Capacity',
     spec: 'Up to 1 ton',
     categoryName: 'Material Handling',
@@ -430,7 +430,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'material-handling-crane-kit',
     title: 'Crane Kit',
-    description: 'Cost-effective crane kit with hoist and controls for faster assembly.',
+    description: 'Crane kit with end carriages, control panel, festooning and hoist for assembling EOT systems.',
     specLabel: 'Capacity',
     spec: '2 tons to 10 tons',
     categoryName: 'Material Handling',
@@ -439,7 +439,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'storage-retrieval-istacker',
     title: 'iStacker',
-    description: 'Warehouse stacker solution for multilevel storage, retrieval and pallet handling.',
+    description: 'Warehouse stacker for pallet receipt, storage and retrieval with multilevel handling.',
     specLabel: 'Operation',
     spec: 'Semi/Full Automatic',
     categoryName: 'Storage and Retrieval',
@@ -448,7 +448,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'storage-retrieval-roll-out-rack',
     title: 'Roll Out Rack',
-    description: 'Vertical storage rack with easy move-in and move-out access.',
+    description: 'Vertical storage rack system with move-in and move-out drawers for dense warehouse storage.',
     specLabel: 'Storage Type',
     spec: 'Vertical Storage',
     categoryName: 'Storage and Retrieval',
@@ -457,7 +457,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'ergonomic-handling-parallelogram',
     title: 'Parallelogram',
-    description: 'Ergonomic handling solution for safe, precise and operator-friendly load movement.',
+    description: 'Ergonomic manipulator solution for assisted lifting and precise load positioning.',
     specLabel: 'Type',
     spec: 'Ergonomic Handling',
     categoryName: 'Ergonomic Handling Solutions',
@@ -466,7 +466,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'ergonomic-handling-pivot-arm',
     title: 'Pivot Arm',
-    description: 'Operator-assist pivot arm system for flexible and intelligent material handling.',
+    description: 'Ergonomic pivot-arm manipulator for guided rotation and positioning at workstations.',
     specLabel: 'Type',
     spec: 'Ergonomic Handling',
     categoryName: 'Ergonomic Handling Solutions',
@@ -475,7 +475,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'ergonomic-handling-pneumatic-balancers',
     title: 'Pneumatic Balancers',
-    description: 'Pneumatic ergonomic handling solution for faster and safer assisted movement.',
+    description: 'Compressed-air balancing solution for assisted lifting, lowering and positioning of loads.',
     specLabel: 'Power',
     spec: 'Pneumatic',
     categoryName: 'Ergonomic Handling Solutions',
@@ -484,7 +484,7 @@ export const PRODUCT_CATALOG = [
   {
     id: 'ergonomic-handling-z-lifts',
     title: 'Z-Lifts',
-    description: 'Ergonomic lift solution for intelligent movement and reduced handling strain.',
+    description: 'Ergonomic lifting solution for repetitive handling tasks with reduced operator effort.',
     specLabel: 'Type',
     spec: 'Ergonomic Handling',
     categoryName: 'Ergonomic Handling Solutions',
