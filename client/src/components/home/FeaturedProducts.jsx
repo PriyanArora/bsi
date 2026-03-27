@@ -39,9 +39,9 @@ export default function FeaturedProducts() {
               key={product.title}
               whileHover={{ y: -4, scale: 1.01 }}
               transition={{ duration: 0.2 }}
-              className="border-bsi-outline/30 bg-bsi-surface-lowest group rounded-2xl border p-6 shadow-sm sm:p-8"
+              className="border-bsi-outline/30 bg-bsi-surface-lowest group rounded-xl border p-6 shadow-sm sm:p-8"
             >
-              <div className="bg-bsi-surface mb-6 h-44 overflow-hidden rounded-lg sm:h-48">
+              <div className="bg-bsi-surface mb-6 h-44 overflow-hidden rounded-md sm:h-48">
                 {/* TODO: replace with real client images */}
                 <img
                   src={product.image}

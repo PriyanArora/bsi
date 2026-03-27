@@ -1,10 +1,6 @@
 export default function ProductsHero() {
   return (
-    <header className="mb-14 pl-2 sm:pl-4 md:mb-16 md:pl-8 lg:mb-20 lg:pl-20">
-      <div className="border-bsi-outline/40 bg-bsi-surface-low mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-bsi-primary">
-        <span className="bg-bsi-accent h-2 w-2 rounded-full" />
-        Authorized Bajaj Indef Dealer
-      </div>
+    <header className="-mt-1 mb-14 pl-2 sm:-mt-2 sm:pl-4 md:mb-16 md:pl-8 lg:mb-20 lg:pl-20">
 
       <h1 className="font-headline text-bsi-primary mb-8 max-w-4xl text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
         Precision Engineered <br />

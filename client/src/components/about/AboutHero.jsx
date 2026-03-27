@@ -1,9 +1,6 @@
 export default function AboutHero() {
   return (
-    <header className="mb-14 max-w-3xl sm:mb-16 md:mb-20">
-      <span className="bg-bsi-secondary-container text-bsi-primary mb-6 inline-block rounded-sm px-3 py-1 text-xs font-bold uppercase tracking-[0.2em]">
-        Established Excellence
-      </span>
+    <header className="-mt-1 mb-14 max-w-3xl sm:-mt-2 sm:mb-16 md:mb-20">
 
       <h1 className="font-headline text-bsi-primary mb-8 text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
         Precision in Motion. Authority in Engineering.

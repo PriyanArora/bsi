@@ -80,7 +80,8 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     handleSubmit,
     reset,
     setValue,
-    formState: { errors, isSubmitting },
+    watch,
+    formState: { errors, isSubmitting, submitCount },
   } = useForm({
     resolver: zodResolver(enquirySchema),
     defaultValues: {
@@ -95,6 +96,9 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
       source,
     },
   })
+
+  const isConsentChecked = watch('dataProtectionAccepted')
+  const showConsentError = Boolean(errors.dataProtectionAccepted) || (submitCount > 0 && !isConsentChecked)
 
   useEffect(() => {
     setValue('productOfInterest', defaultProduct ? [defaultProduct] : [])
@@ -277,11 +281,13 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
               <input
                 id="firstName"
                 {...register('firstName')}
-                required
                 aria-invalid={errors.firstName ? 'true' : 'false'}
                 aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                 placeholder="First name"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
+                className={[
+                  'bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:outline-none',
+                  errors.firstName ? 'border-red-500 focus:border-red-500' : 'border-bsi-outline/40 focus:border-bsi-primary'
+                ].join(' ')}
               />
               {errors.firstName ? <p id="firstName-error" className="mt-1 text-xs text-red-600">{errors.firstName.message}</p> : null}
             </div>
@@ -291,11 +297,13 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
               <input
                 id="lastName"
                 {...register('lastName')}
-                required
                 aria-invalid={errors.lastName ? 'true' : 'false'}
                 aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                 placeholder="Last name"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
+                className={[
+                  'bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:outline-none',
+                  errors.lastName ? 'border-red-500 focus:border-red-500' : 'border-bsi-outline/40 focus:border-bsi-primary'
+                ].join(' ')}
               />
               {errors.lastName ? <p id="lastName-error" className="mt-1 text-xs text-red-600">{errors.lastName.message}</p> : null}
             </div>
@@ -317,11 +325,13 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
               <input
                 id="phone"
                 {...register('phone')}
-                required
                 aria-invalid={errors.phone ? 'true' : 'false'}
                 aria-describedby={errors.phone ? 'phone-error' : undefined}
                 placeholder="10-digit mobile number"
-                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
+                className={[
+                  'bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:outline-none',
+                  errors.phone ? 'border-red-500 focus:border-red-500' : 'border-bsi-outline/40 focus:border-bsi-primary'
+                ].join(' ')}
               />
               {errors.phone ? <p id="phone-error" className="mt-1 text-xs text-red-600">{errors.phone.message}</p> : null}
             </div>
@@ -514,22 +524,30 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
 
           <div className="w-full min-w-0">
             <label htmlFor="dataProtectionAccepted" className="text-bsi-secondary flex w-full min-w-0 cursor-pointer items-start gap-2 text-xs leading-relaxed">
-              <input
-                id="dataProtectionAccepted"
-                type="checkbox"
-                {...register('dataProtectionAccepted')}
-                required
-                aria-invalid={errors.dataProtectionAccepted ? 'true' : 'false'}
-                aria-describedby={errors.dataProtectionAccepted ? 'dataProtectionAccepted-error' : undefined}
-                className="border-bsi-outline/50 mt-0.5 h-4 w-4 shrink-0 rounded border text-bsi-primary focus:ring-bsi-primary"
-              />
+              <span className="relative mt-0.5 h-4 w-4 shrink-0">
+                <input
+                  id="dataProtectionAccepted"
+                  type="checkbox"
+                  {...register('dataProtectionAccepted')}
+                  aria-invalid={showConsentError ? 'true' : 'false'}
+                  className={[
+                    'absolute inset-0 m-0 h-4 w-4 appearance-none rounded border bg-bsi-surface-low focus:ring-2 focus:ring-bsi-primary/35 focus:outline-none',
+                    showConsentError ? 'border-red-500' : 'border-bsi-outline/50',
+                    isConsentChecked ? 'border-bsi-primary bg-bsi-surface-low' : ''
+                  ].join(' ')}
+                />
+                <span
+                  aria-hidden="true"
+                  className={[
+                    'pointer-events-none absolute inset-0 flex items-center justify-center text-[10px] font-bold text-bsi-primary transition-opacity',
+                    isConsentChecked ? 'opacity-100' : 'opacity-0'
+                  ].join(' ')}
+                >
+                  ✓
+                </span>
+              </span>
               <span className="min-w-0 wrap-break-word">I have read and understood the relevant data protection notice.</span>
             </label>
-            {errors.dataProtectionAccepted ? (
-              <p id="dataProtectionAccepted-error" className="mt-1 text-xs text-red-600">
-                {errors.dataProtectionAccepted.message}
-              </p>
-            ) : null}
           </div>
 
           <button

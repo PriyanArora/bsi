@@ -124,14 +124,15 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
           <div>
             <div className="mb-5 flex items-center justify-between">
               <p className="text-bsi-secondary text-sm">Step {stepIndex + 1} of {chatbotQuestions.length}</p>
-              <button
-                type="button"
-                onClick={handleBack}
-                disabled={stepIndex === 0}
-                className="text-bsi-primary disabled:text-bsi-secondary text-xs font-bold uppercase tracking-[0.14em] disabled:cursor-not-allowed"
-              >
-                Back
-              </button>
+              {stepIndex > 0 ? (
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="text-bsi-primary text-xs font-bold uppercase tracking-[0.14em]"
+                >
+                  Back
+                </button>
+              ) : null}
             </div>
 
             <div className="bg-bsi-surface-low mb-5 h-2 w-full rounded-full">

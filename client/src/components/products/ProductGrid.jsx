@@ -10,9 +10,9 @@ export default function ProductGrid() {
           <Motion.article
             whileHover={{ y: -5, scale: 1.01 }}
             transition={{ duration: 0.2 }}
-            className="border-bsi-outline/30 bg-bsi-surface-lowest h-full rounded-xl border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-shadow group-hover:shadow-[0_14px_40px_rgb(0,0,0,0.08)]"
+            className="border-bsi-outline/30 bg-bsi-surface-lowest h-full rounded-lg border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-shadow group-hover:shadow-[0_14px_40px_rgb(0,0,0,0.08)]"
           >
-            <div className="bg-bsi-primary-container/8 mb-5 flex h-40 items-center justify-center rounded-lg border border-white/60">
+            <div className="bg-bsi-primary-container/8 mb-5 flex h-40 items-center justify-center rounded-md border border-white/60">
               <span className="text-bsi-primary/45 font-headline text-[3rem] font-extrabold uppercase tracking-tight">
                 {category.categoryName
                   .split(' ')
