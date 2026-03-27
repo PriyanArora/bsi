@@ -24,7 +24,8 @@ const PRODUCT_GROUPS = CATEGORY_CATALOG.map((category) => ({
 
 const SERVICE_OPTIONS = [{ id: 'service-amc-care', title: 'AMC Care', value: 'AMC Care' }]
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '')
+const ENQUIRY_ENDPOINT = `${API_BASE_URL}/api/enquiry`
 
 export default function EnquiryModal({ isOpen, onClose, defaultProduct, source = 'website' }) {
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false)
@@ -37,6 +38,8 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   })
 
   const modalContentRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const previousActiveElementRef = useRef(null)
   const productMenuRef = useRef(null)
   const productTriggerRef = useRef(null)
   const productMenuListRef = useRef(null)
@@ -157,19 +160,50 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
       return undefined
     }
 
+    previousActiveElementRef.current = document.activeElement
+
     const previousOverflow = document.body.style.overflow
     const onKeyDown = (event) => {
       if (event.key === 'Escape') {
         onClose?.()
+        return
+      }
+
+      if (event.key === 'Tab' && modalContentRef.current) {
+        const focusableElements = modalContentRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
+
+        if (!focusableElements.length) {
+          return
+        }
+
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault()
+          firstElement.focus()
+        }
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault()
+          lastElement.focus()
+        }
       }
     }
 
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKeyDown)
 
+    requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
+      previousActiveElementRef.current?.focus?.()
     }
   }, [isOpen, onClose])
 
@@ -270,23 +304,23 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   const onSubmit = async (formData) => {
     const fullName = `${formData.firstName} ${formData.lastName}`.trim()
 
-    const payload = {
+    const requestPayload = {
       ...formData,
       fullName,
       productOfInterest: (formData.productOfInterest || []).join(', '),
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/enquiry`, {
+      const response = await fetch(ENQUIRY_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(requestPayload),
       })
 
-      const payload = await response.json().catch(() => ({}))
+      const responsePayload = await response.json().catch(() => ({}))
 
       if (!response.ok) {
-        throw new Error(payload.error || 'Failed to submit enquiry')
+        throw new Error(responsePayload.error || 'Failed to submit enquiry')
       }
 
       toast.success('Enquiry submitted successfully')
@@ -330,6 +364,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
         <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
           <h2 className="font-headline text-bsi-primary text-xl font-extrabold sm:text-2xl">Tell Us Your Requirement</h2>
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             className="text-bsi-secondary hover:text-bsi-primary rounded-full p-2 transition"

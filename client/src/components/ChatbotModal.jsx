@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRef } from 'react'
 import { chatbotQuestions, getRecommendation } from '../lib/chatbotTree'
 
 export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
   const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState({})
+  const modalPanelRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const previousActiveElementRef = useRef(null)
 
   const recommendation = useMemo(() => {
     if (stepIndex < chatbotQuestions.length) {
@@ -44,19 +48,50 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
       return undefined
     }
 
+    previousActiveElementRef.current = document.activeElement
+
     const previousOverflow = document.body.style.overflow
     const onKeyDown = (event) => {
       if (event.key === 'Escape') {
         resetAndClose()
+        return
+      }
+
+      if (event.key === 'Tab' && modalPanelRef.current) {
+        const focusableElements = modalPanelRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
+
+        if (!focusableElements.length) {
+          return
+        }
+
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault()
+          firstElement.focus()
+        }
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault()
+          lastElement.focus()
+        }
       }
     }
 
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKeyDown)
 
+    requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
+      previousActiveElementRef.current?.focus?.()
     }
   }, [isOpen, resetAndClose])
 
@@ -82,6 +117,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
       onClick={resetAndClose}
     >
       <div
+        ref={modalPanelRef}
         className="border-bsi-outline/20 bg-bsi-surface-lowest max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto overscroll-contain rounded-2xl border p-4 shadow-2xl sm:max-h-[92vh] sm:p-6 md:p-8"
         onClick={(event) => event.stopPropagation()}
       >
@@ -91,6 +127,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
             <h2 className="font-headline text-bsi-primary mt-2 text-3xl font-extrabold">Help me choose</h2>
           </div>
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={resetAndClose}
             className="text-bsi-secondary hover:text-bsi-primary rounded-full p-2 transition"
