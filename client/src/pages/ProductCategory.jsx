@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { motion as Motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import { getCategoryBySlug, getProductsByCategory } from '../lib/productCatalog'
+import { getProductImage } from '../lib/productImages'
 
 export default function ProductCategory({ onEnquireClick }) {
   const { categorySlug = '' } = useParams()
@@ -62,20 +63,32 @@ export default function ProductCategory({ onEnquireClick }) {
           </header>
 
           <section className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-3 md:px-8 lg:gap-8 lg:px-16">
-            {products.map((product) => (
+            {products.map((product) => {
+              const productImage = getProductImage(category, product)
+
+              return (
               <Motion.article
                 key={product.id}
                 whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ duration: 0.2 }}
-                className="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-[28rem] flex-col rounded-lg border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+                className="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-112 flex-col rounded-lg border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
               >
-                <div className="bg-bsi-surface-low border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-md border">
-                  <img
-                    src="/product-placeholder.svg"
-                    alt={`${product.title} placeholder`}
-                    loading="lazy"
-                    className="h-full w-full rounded-md object-cover"
-                  />
+                <div className="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-md border bg-white p-3">
+                  {productImage ? (
+                    <img
+                      src={productImage}
+                      alt={product.title}
+                      loading="lazy"
+                      className="h-full w-full rounded-md object-contain"
+                    />
+                  ) : (
+                    <img
+                      src="/product-placeholder.svg"
+                      alt={`${product.title} placeholder`}
+                      loading="lazy"
+                      className="h-full w-full rounded-md object-contain"
+                    />
+                  )}
                 </div>
 
                 <h3 className="font-headline text-bsi-primary mb-3 text-xl font-bold">
@@ -103,7 +116,8 @@ export default function ProductCategory({ onEnquireClick }) {
                   </button>
                 </div>
               </Motion.article>
-            ))}
+              )
+            })}
           </section>
         </div>
       </main>
