@@ -257,6 +257,30 @@
   height: 60px;
 }
 
+.trust-strip-live-gradient {
+  background: linear-gradient(
+    115deg,
+    var(--bsi-surface-container-lowest) 0%,
+    var(--bsi-surface-container) 38%,
+    var(--bsi-outline-variant) 62%,
+    var(--bsi-surface-container) 100%
+  );
+  background-size: 180% 180%;
+  animation: trustStripGradientShift 14s ease-in-out infinite;
+}
+
+@keyframes trustStripGradientShift {
+  0% {
+    background-position: 30% 50%;
+  }
+  50% {
+    background-position: 70% 50%;
+  }
+  100% {
+    background-position: 30% 50%;
+  }
+}
+
 @media (max-width: 767px) {
   .hero-text-container {
     max-width: 18rem;
@@ -482,6 +506,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .animate-bsi-marquee {
+    animation: none;
+  }
+
+  .trust-strip-live-gradient {
     animation: none;
   }
 }
