@@ -60,7 +60,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
       ? Math.max(viewportPadding, triggerRect.top - calculatedMaxHeight - dropdownGap)
       : Math.min(viewportHeight - viewportPadding - 180, triggerRect.bottom + dropdownGap)
 
-    const width = Math.max(240, Math.min(triggerRect.width, viewportWidth - viewportPadding * 2))
+    const width = Math.min(triggerRect.width, viewportWidth - viewportPadding * 2)
     const left = Math.min(
       Math.max(viewportPadding, triggerRect.left),
       viewportWidth - viewportPadding - width
@@ -248,7 +248,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
     >
       <div
         ref={modalContentRef}
-        className="enquiry-modal-shell border-bsi-outline/20 bg-bsi-surface-lowest h-[88dvh] w-full max-w-2xl overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:h-[95vh] sm:p-6 md:p-8"
+        className="border-bsi-outline/20 bg-bsi-surface-lowest w-full max-w-2xl max-h-[92dvh] overflow-y-auto overscroll-contain touch-pan-y rounded-2xl border p-4 shadow-2xl sm:max-h-[90dvh] sm:p-5 md:max-h-[88dvh] md:p-6"
         onScroll={() => {
           if (isProductMenuOpen) {
             updateProductMenuPosition()
@@ -256,7 +256,8 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
         }}
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="enquiry-close-row mb-4 flex items-center justify-end">
+        <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
+          <h2 className="font-headline text-bsi-primary text-xl font-extrabold sm:text-2xl">Tell Us Your Requirement</h2>
           <button
             type="button"
             onClick={onClose}
@@ -267,11 +268,11 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
           </button>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="enquiry-modal-form space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4 sm:space-y-5">
           <input type="hidden" {...register('source')} />
 
-          <div className="enquiry-name-row grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+            <div className="w-full min-w-0">
               <label htmlFor="firstName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">First Name*</label>
               <input
                 id="firstName"
@@ -280,12 +281,12 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                 aria-invalid={errors.firstName ? 'true' : 'false'}
                 aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                 placeholder="First name"
-                className="enquiry-name-input enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
               />
               {errors.firstName ? <p id="firstName-error" className="mt-1 text-xs text-red-600">{errors.firstName.message}</p> : null}
             </div>
 
-            <div>
+            <div className="w-full min-w-0">
               <label htmlFor="lastName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Last Name*</label>
               <input
                 id="lastName"
@@ -294,24 +295,24 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                 aria-invalid={errors.lastName ? 'true' : 'false'}
                 aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                 placeholder="Last name"
-                className="enquiry-name-input enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
               />
               {errors.lastName ? <p id="lastName-error" className="mt-1 text-xs text-red-600">{errors.lastName.message}</p> : null}
             </div>
           </div>
 
-          <div>
+          <div className="w-full min-w-0">
             <label htmlFor="companyName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Company Name</label>
             <input
               id="companyName"
               {...register('companyName')}
               placeholder="Company"
-              className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+              className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+            <div className="w-full min-w-0">
               <label htmlFor="phone" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Phone*</label>
               <input
                 id="phone"
@@ -320,12 +321,12 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                 aria-invalid={errors.phone ? 'true' : 'false'}
                 aria-describedby={errors.phone ? 'phone-error' : undefined}
                 placeholder="10-digit mobile number"
-                className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
               />
               {errors.phone ? <p id="phone-error" className="mt-1 text-xs text-red-600">{errors.phone.message}</p> : null}
             </div>
 
-            <div>
+            <div className="w-full min-w-0">
               <label htmlFor="email" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Email</label>
               <input
                 id="email"
@@ -333,13 +334,13 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                 aria-invalid={errors.email ? 'true' : 'false'}
                 aria-describedby={errors.email ? 'email-error' : undefined}
                 placeholder="name@company.com"
-                className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+                className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
               />
               {errors.email ? <p id="email-error" className="mt-1 text-xs text-red-600">{errors.email.message}</p> : null}
             </div>
           </div>
 
-          <div>
+          <div className="w-full min-w-0">
             <label id="productOfInterest-label" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Product of Interest</label>
             <Controller
               name="productOfInterest"
@@ -385,9 +386,9 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                       aria-expanded={isProductMenuOpen}
                       aria-controls="product-interest-options"
                       aria-labelledby="productOfInterest-label"
-                      className="enquiry-field-input border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left text-sm focus:border-bsi-primary focus:outline-none"
+                      className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary flex w-full min-w-0 items-center justify-between rounded-lg border px-3 py-2.5 text-left text-sm focus:border-bsi-primary focus:outline-none"
                     >
-                      <span>
+                      <span className="truncate pr-2">
                         {selectedProducts.length > 0
                           ? `${selectedProducts.length} option${selectedProducts.length > 1 ? 's' : ''} selected`
                           : 'Select one or more products'}
@@ -395,12 +396,12 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                       <span className="text-bsi-secondary text-xs">▼</span>
                     </button>
 
-                    <div className="enquiry-selected-chips mt-2 min-h-8 max-h-16 overflow-y-auto pr-1">
+                    <div className="mt-2 min-h-8 max-h-20 overflow-y-auto pr-1">
                       <div className="flex flex-wrap gap-2">
                         {selectedProducts.map((item) => (
                           <span
                             key={item}
-                            className="enquiry-chip bg-bsi-primary-container/10 text-bsi-primary inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold"
+                            className="bg-bsi-primary-container/10 text-bsi-primary inline-flex max-w-full items-center rounded-full px-2 py-1 text-[11px] font-semibold"
                           >
                             {item}
                           </span>
@@ -499,7 +500,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
             {errors.productOfInterest ? <p className="mt-1 text-xs text-red-600">{errors.productOfInterest.message}</p> : null}
           </div>
 
-          <div>
+          <div className="w-full min-w-0">
             <label htmlFor="message" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">Message</label>
             <textarea
               id="message"
@@ -507,12 +508,12 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
               aria-invalid={errors.message ? 'true' : 'false'}
               rows="3"
               placeholder="Share your lifting requirements"
-              className="enquiry-message-box border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary h-28 w-full resize-none overflow-y-auto rounded-lg border px-4 py-3 text-sm focus:border-bsi-primary focus:outline-none"
+              className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary min-h-28 w-full min-w-0 resize-none overflow-y-auto rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
             />
           </div>
 
-          <div>
-            <label htmlFor="dataProtectionAccepted" className="text-bsi-secondary flex cursor-pointer items-start gap-2 text-xs leading-relaxed">
+          <div className="w-full min-w-0">
+            <label htmlFor="dataProtectionAccepted" className="text-bsi-secondary flex w-full min-w-0 cursor-pointer items-start gap-2 text-xs leading-relaxed">
               <input
                 id="dataProtectionAccepted"
                 type="checkbox"
@@ -520,9 +521,9 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                 required
                 aria-invalid={errors.dataProtectionAccepted ? 'true' : 'false'}
                 aria-describedby={errors.dataProtectionAccepted ? 'dataProtectionAccepted-error' : undefined}
-                className="enquiry-consent-input border-bsi-outline/50 mt-0.5 h-4 w-4 rounded border text-bsi-primary focus:ring-bsi-primary"
+                className="border-bsi-outline/50 mt-0.5 h-4 w-4 shrink-0 rounded border text-bsi-primary focus:ring-bsi-primary"
               />
-              <span className="enquiry-consent-text">I have read and understood the relevant data protection notice.</span>
+              <span className="min-w-0 wrap-break-word">I have read and understood the relevant data protection notice.</span>
             </label>
             {errors.dataProtectionAccepted ? (
               <p id="dataProtectionAccepted-error" className="mt-1 text-xs text-red-600">
@@ -534,7 +535,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
           <button
             type="submit"
             disabled={isSubmitting}
-            className="enquiry-submit-button bg-bsi-primary-container w-full rounded-lg px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary disabled:cursor-not-allowed disabled:opacity-60"
+            className="bg-bsi-primary-container w-full rounded-lg px-4 py-2.5 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-bsi-primary disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? 'Submitting...' : 'Send Enquiry'}
           </button>
