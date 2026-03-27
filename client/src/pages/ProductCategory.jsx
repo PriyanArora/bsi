@@ -71,22 +71,22 @@ export default function ProductCategory({ onEnquireClick }) {
                 key={product.id}
                 whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ duration: 0.2 }}
-                className="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-112 flex-col rounded-lg border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+                className="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-112 flex-col rounded-none border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
               >
-                <div className="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-md border bg-white p-3">
+                <div className="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
                   {productImage ? (
                     <img
                       src={productImage}
                       alt={product.title}
                       loading="lazy"
-                      className="h-full w-full rounded-md object-contain"
+                      className="h-full w-full rounded-none object-contain"
                     />
                   ) : (
                     <img
                       src="/product-placeholder.svg"
                       alt={`${product.title} placeholder`}
                       loading="lazy"
-                      className="h-full w-full rounded-md object-contain"
+                      className="h-full w-full rounded-none object-contain"
                     />
                   )}
                 </div>
