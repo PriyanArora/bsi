@@ -1,3 +1,5 @@
+import IndustrialGridBackground from '../ui/IndustrialGridBackground'
+
 const TRUST_POINTS = [
   {
     icon: 'verified',
@@ -18,8 +20,18 @@ const TRUST_POINTS = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="section-pad bg-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:gap-14 md:px-8 lg:grid-cols-2 lg:gap-16">
+    <section className="section-pad relative overflow-hidden bg-white">
+      <IndustrialGridBackground
+        theme="light"
+        cellSize={92}
+        lineOpacity={0.2}
+        markerOpacity={0.2}
+        markerSize={5}
+        fadeEdges={false}
+        className="absolute inset-0"
+      />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:gap-14 md:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="h-fit lg:sticky lg:top-32">
           <h2 className="font-headline text-bsi-primary text-3xl leading-tight font-extrabold sm:text-4xl md:text-5xl">
             Why BSI Solutionz ? 

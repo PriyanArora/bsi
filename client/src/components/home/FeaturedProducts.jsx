@@ -1,4 +1,5 @@
 import { motion as Motion } from 'framer-motion'
+import IndustrialGridBackground from '../ui/IndustrialGridBackground'
 
 const featuredProducts = [
   {
@@ -32,8 +33,18 @@ const featuredProducts = [
 
 export default function FeaturedProducts() {
   return (
-    <section className="section-pad bg-white">
-      <div className="mx-auto max-w-7xl px-6 md:px-8 xl:max-w-368">
+    <section className="section-pad relative overflow-hidden bg-white">
+      <IndustrialGridBackground
+        theme="light"
+        cellSize={92}
+        lineOpacity={0.2}
+        markerOpacity={0.2}
+        markerSize={5}
+        fadeEdges={false}
+        className="absolute inset-0"
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8 xl:max-w-368">
         <div className="mb-16 text-center">
           <h2 className="font-headline text-bsi-primary text-3xl font-bold sm:text-4xl">Engineered Performance</h2>
           <p className="text-bsi-secondary mt-4">Explore our flagship industrial lifting solutions</p>
