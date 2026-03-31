@@ -33,6 +33,7 @@ export default function ProductCategory({ onEnquireClick }) {
   }
 
   const products = getProductsByCategory(category.categoryName)
+  const isGeneratorRentalsCategory = category.slug === 'generator-rentals' || category.slug === 'rental-generators'
 
   return (
     <PageTransition>
@@ -64,38 +65,43 @@ export default function ProductCategory({ onEnquireClick }) {
 
           <section className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-3 md:px-8 lg:gap-8 lg:px-16">
             {products.map((product) => {
-              const productImage = getProductImage(category, product)
+              const productImage = isGeneratorRentalsCategory ? '' : getProductImage(category, product)
 
               return (
               <Motion.article
                 key={product.id}
                 whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ duration: 0.2 }}
-                className="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-112 flex-col rounded-none border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
+                className={[
+                  'border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full flex-col rounded-none border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)]',
+                  isGeneratorRentalsCategory ? 'min-h-84' : 'min-h-112',
+                ].join(' ')}
               >
-                <div className="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
-                  {productImage ? (
-                    <img
-                      src={productImage}
-                      alt={product.title}
-                      loading="lazy"
-                      className="h-full w-full rounded-none object-contain"
-                    />
-                  ) : (
-                    <img
-                      src="/product-placeholder.svg"
-                      alt={`${product.title} placeholder`}
-                      loading="lazy"
-                      className="h-full w-full rounded-none object-contain"
-                    />
-                  )}
-                </div>
+                {!isGeneratorRentalsCategory ? (
+                  <div className="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
+                    {productImage ? (
+                      <img
+                        src={productImage}
+                        alt={product.title}
+                        loading="lazy"
+                        className="h-full w-full rounded-none object-contain"
+                      />
+                    ) : (
+                      <img
+                        src="/product-placeholder.svg"
+                        alt={`${product.title} placeholder`}
+                        loading="lazy"
+                        className="h-full w-full rounded-none object-contain"
+                      />
+                    )}
+                  </div>
+                ) : null}
 
                 <h3 className="font-headline text-bsi-primary mb-3 text-xl font-bold">
                   {product.title}
                 </h3>
 
-                <p className={['text-bsi-secondary mb-7 grow leading-relaxed', product.featured ? 'text-base' : 'text-sm'].join(' ')}>
+                <p className={['text-bsi-secondary grow leading-relaxed', isGeneratorRentalsCategory ? 'mb-4' : 'mb-7', product.featured ? 'text-base' : 'text-sm'].join(' ')}>
                   {product.description}
                 </p>
 
@@ -110,9 +116,12 @@ export default function ProductCategory({ onEnquireClick }) {
                   <button
                     type="button"
                     onClick={() => onEnquireClick?.(product.title)}
-                    className="bg-bsi-primary-container h-10 w-32 shrink-0 rounded-none px-0 text-sm font-bold tracking-[0.08em] whitespace-nowrap text-white transition hover:bg-bsi-primary"
+                    className={[
+                      'bg-bsi-primary-container h-10 shrink-0 rounded-none px-0 text-sm font-bold tracking-[0.08em] whitespace-nowrap text-white transition hover:bg-bsi-primary',
+                      isGeneratorRentalsCategory ? 'w-44' : 'w-32',
+                    ].join(' ')}
                   >
-                    Enquire Now
+                    {isGeneratorRentalsCategory ? 'Check Availability' : 'Enquire Now'}
                   </button>
                 </div>
               </Motion.article>

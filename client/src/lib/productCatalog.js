@@ -83,10 +83,10 @@ export const JAKSON_CATEGORY_CATALOG = [
     productsCount: 8
   },
   {
-    categoryName: 'Generator Rentals',
-    slug: 'generator-rentals',
-    description: 'Rental diesel generators for temporary and emergency power requirements.',
-    productsCount: 0
+    categoryName: 'Rental Generators',
+    slug: 'rental-generators',
+    description: 'Available rental generator capacity bands for events, offices, construction, industrial backup and infrastructure applications.',
+    productsCount: 5
   }
 ]
 
@@ -791,6 +791,51 @@ export const PRODUCT_CATALOG = [
     specLabel: 'Power',
     spec: '3750 kVA',
     categoryName: 'Industrial Range Gensets',
+    featured: true
+  },
+  {
+    id: 'rental-generators-15-62-5-kva',
+    title: '15 - 62.5 kVA Rental Generator',
+    description: 'Silent rental generators for small events, shops and offices.',
+    specLabel: 'Capacity',
+    spec: '15 - 62.5 kVA',
+    categoryName: 'Rental Generators',
+    featured: false
+  },
+  {
+    id: 'rental-generators-75-125-kva',
+    title: '75 - 125 kVA Rental Generator',
+    description: 'Silent/open rental generators for events and construction sites.',
+    specLabel: 'Capacity',
+    spec: '75 - 125 kVA',
+    categoryName: 'Rental Generators',
+    featured: false
+  },
+  {
+    id: 'rental-generators-160-250-kva',
+    title: '160 - 250 kVA Rental Generator',
+    description: 'Silent/open rental generators for large events and backup use.',
+    specLabel: 'Capacity',
+    spec: '160 - 250 kVA',
+    categoryName: 'Rental Generators',
+    featured: true
+  },
+  {
+    id: 'rental-generators-320-500-kva',
+    title: '320 - 500 kVA Rental Generator',
+    description: 'Open rental generators for major events and heavy industry.',
+    specLabel: 'Capacity',
+    spec: '320 - 500 kVA',
+    categoryName: 'Rental Generators',
+    featured: true
+  },
+  {
+    id: 'rental-generators-625-1010-kva',
+    title: '625 - 1010 kVA Rental Generator',
+    description: 'Open rental generators for infrastructure and factory operations.',
+    specLabel: 'Capacity',
+    spec: '625 - 1010 kVA',
+    categoryName: 'Rental Generators',
     featured: true
   }
 ]
