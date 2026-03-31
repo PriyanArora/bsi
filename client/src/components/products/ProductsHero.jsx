@@ -7,10 +7,9 @@ export default function ProductsHero() {
         <span className="text-bsi-secondary">Lifting Solutions.</span>
       </h1>
 
-      <p className="text-bsi-secondary max-w-2xl text-base leading-relaxed sm:text-lg">
-        Elevating industrial productivity with high-performance hoists and cranes. Built for durability, safety, and
-        architectural precision in heavy-duty environments.
-      </p>
+      <h2 className="text-bsi-secondary relative top-9 max-w-2xl text-base font-semibold tracking-[0.08em] uppercase sm:text-lg">
+        Indef Cranes and Hoists
+      </h2>
     </header>
   )
 }

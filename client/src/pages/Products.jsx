@@ -29,6 +29,9 @@ export default function Products({ onEnquireClick }) {
                 <div className="mx-auto max-w-7xl px-6 md:px-8 lg:max-w-368 xl:max-w-392">
                     <ProductsHero />
                     <ProductGrid />
+                    <h2 className="text-bsi-secondary mt-14 px-2 text-base font-semibold tracking-[0.08em] uppercase sm:px-4 sm:text-lg md:px-8 lg:px-16">
+                        Jakson Diesel generators
+                    </h2>
                 </div>
                 <ProductsCTA onEnquireClick={onEnquireClick} />
             </main>

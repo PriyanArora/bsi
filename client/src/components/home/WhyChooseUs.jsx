@@ -16,10 +16,6 @@ const TRUST_POINTS = [
   }
 ]
 
-const ABOUT_IMAGES = [
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuAKPk4Q-Kdg-DvD48qvoJGN8nHuLnrxJT-lxLqFok0Ksp8TXjM00GORwuPyGMQnYa-RDhoUC23hTEMn5yUVfwikBStlb_03L6P7sVRpNaElwQLpey426n1oAOQFu8vyh9HV3TXgwPSeFSHETQhqhRT55zB2H583hsy0NRbLzQBwfbzSfCkiEGejgOWTsG0-B449joAo-grPqUZrHoFGE5klNp8_GpNeWK0bYeUGV8uQk1Enyg9TLPBakiDk5d-zDGTB28NwoHyMp-9p'
-]
-
 export default function WhyChooseUs() {
   return (
     <section className="section-pad bg-white">
@@ -44,18 +40,10 @@ export default function WhyChooseUs() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-10 pt-4 lg:pt-12">
-          {ABOUT_IMAGES.map((image, index) => (
-            <div key={image} className="overflow-hidden rounded-2xl shadow-2xl">
-              {/* TODO: replace with real client images */}
-              <img
-                src={image}
-                alt={index === 0 ? 'Industrial engineering team' : 'Engineering planning session'}
-                loading="lazy"
-                className="aspect-square w-full object-cover"
-              />
-            </div>
-          ))}
+        <div className="flex pt-4 lg:self-stretch lg:pt-0">
+          <div className="bg-white text-bsi-secondary flex h-64 w-full items-center justify-center rounded-none border border-slate-200 text-sm font-medium uppercase tracking-[0.08em] sm:h-80 lg:h-full">
+            placeholder image
+          </div>
         </div>
       </div>
     </section>
