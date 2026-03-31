@@ -57,6 +57,39 @@ export const CATEGORY_CATALOG = [
   }
 ]
 
+export const JAKSON_CATEGORY_CATALOG = [
+  {
+    categoryName: 'Small Range Gensets',
+    slug: 'small-range-gensets',
+    description: 'Jakson RLHP diesel gensets for small businesses, shops and residential backup applications.',
+    productsCount: 9
+  },
+  {
+    categoryName: 'Medium Range Gensets',
+    slug: 'medium-range-gensets',
+    description: 'Jakson LHP and MHP diesel gensets for medium industries, commercial complexes and hospitals.',
+    productsCount: 8
+  },
+  {
+    categoryName: 'Large Range Gensets',
+    slug: 'large-range-gensets',
+    description: 'Jakson MHP and HHP diesel gensets for large industries, data centers and heavy-duty operations.',
+    productsCount: 5
+  },
+  {
+    categoryName: 'Industrial Range Gensets',
+    slug: 'industrial-range-gensets',
+    description: 'Jakson HHP diesel gensets for heavy industrial applications, power plants and large infrastructure.',
+    productsCount: 8
+  },
+  {
+    categoryName: 'Generator Rentals',
+    slug: 'generator-rentals',
+    description: 'Rental diesel generators for temporary and emergency power requirements.',
+    productsCount: 0
+  }
+]
+
 export const PRODUCT_CATALOG = [
   {
     id: 'electric-chain-hoist-eh-ii-baby',
@@ -489,10 +522,282 @@ export const PRODUCT_CATALOG = [
     spec: 'Ergonomic Handling',
     categoryName: 'Ergonomic Handling Solutions',
     featured: false
+  },
+  {
+    id: 'jakson-genset-7-5-kva',
+    title: '7.5 kVA Genset',
+    description: 'Compact RLHP silent genset for residential and small business backup.',
+    specLabel: 'Power',
+    spec: '7.5 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-10-kva',
+    title: '10 kVA Genset',
+    description: 'Silent RLHP genset for compact retail and residential backup needs.',
+    specLabel: 'Power',
+    spec: '10 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-15-kva',
+    title: '15 kVA Genset',
+    description: 'Three-phase RLHP genset for light commercial backup continuity.',
+    specLabel: 'Power',
+    spec: '15 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-20-kva',
+    title: '20 kVA Genset',
+    description: 'Silent RLHP genset for shops, clinics and small facilities.',
+    specLabel: 'Power',
+    spec: '20 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-25-kva',
+    title: '25 kVA Genset',
+    description: 'Three-phase RLHP genset for small industrial and commercial backup.',
+    specLabel: 'Power',
+    spec: '25 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-30-kva',
+    title: '30 kVA Genset',
+    description: 'Silent RLHP genset for business and facility standby power.',
+    specLabel: 'Power',
+    spec: '30 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-40-kva',
+    title: '40 kVA Genset',
+    description: 'Three-phase RLHP genset for commercial and institutional backup.',
+    specLabel: 'Power',
+    spec: '40 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-50-kva',
+    title: '50 kVA Genset',
+    description: 'Silent RLHP genset for resilient mixed-use standby applications.',
+    specLabel: 'Power',
+    spec: '50 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-62-5-kva',
+    title: '62.5 kVA Genset',
+    description: 'Upper small-range genset retained from the supplied model list.',
+    specLabel: 'Power',
+    spec: '62.5 kVA',
+    categoryName: 'Small Range Gensets',
+    featured: true
+  },
+  {
+    id: 'jakson-genset-75-kva',
+    title: '75 kVA Genset',
+    description: 'Medium-range genset retained from the supplied model list.',
+    specLabel: 'Power',
+    spec: '75 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-100-kva',
+    title: '100 kVA Genset',
+    description: 'Three-phase LHP genset for commercial and industrial continuity power.',
+    specLabel: 'Power',
+    spec: '100 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-125-kva',
+    title: '125 kVA Genset',
+    description: 'LHP genset for hospitals, complexes and industrial backup applications.',
+    specLabel: 'Power',
+    spec: '125 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-140-kva',
+    title: '140 kVA Genset',
+    description: 'Telematics-enabled LHP genset for dependable medium-scale standby power.',
+    specLabel: 'Power',
+    spec: '140 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-160-kva',
+    title: '160 kVA Genset',
+    description: 'LHP genset for medium industrial and healthcare continuity power.',
+    specLabel: 'Power',
+    spec: '160 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-180-kva',
+    title: '180 kVA Genset',
+    description: 'MHP genset for industries, hospitals and monitored backup applications.',
+    specLabel: 'Power',
+    spec: '180 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-200-kva',
+    title: '200 kVA Genset',
+    description: 'MHP genset with smart monitoring for medium-scale operations.',
+    specLabel: 'Power',
+    spec: '200 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-250-kva',
+    title: '250 kVA Genset',
+    description: 'MHP genset for critical commercial and hospital backup support.',
+    specLabel: 'Power',
+    spec: '250 kVA',
+    categoryName: 'Medium Range Gensets',
+    featured: true
+  },
+  {
+    id: 'jakson-genset-320-kva',
+    title: '320 kVA Genset',
+    description: 'Open MHP genset for large industries and data center support.',
+    specLabel: 'Power',
+    spec: '320 kVA',
+    categoryName: 'Large Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-380-kva',
+    title: '380 kVA Genset',
+    description: 'Open MHP genset for large industrial backup applications.',
+    specLabel: 'Power',
+    spec: '380 kVA',
+    categoryName: 'Large Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-400-kva',
+    title: '400 kVA Genset',
+    description: 'Open MHP genset for high-demand facility and data center use.',
+    specLabel: 'Power',
+    spec: '400 kVA',
+    categoryName: 'Large Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-500-kva',
+    title: '500 kVA Genset',
+    description: 'High-capacity MHP genset for large industries and heavy-duty backup.',
+    specLabel: 'Power',
+    spec: '500 kVA',
+    categoryName: 'Large Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-625-kva',
+    title: '625 kVA Genset',
+    description: 'Large-range genset retained from the supplied model list.',
+    specLabel: 'Power',
+    spec: '625 kVA',
+    categoryName: 'Large Range Gensets',
+    featured: true
+  },
+  {
+    id: 'jakson-genset-750-kva',
+    title: '750 kVA Genset',
+    description: 'HHP genset for heavy industrial applications and infrastructure backup.',
+    specLabel: 'Power',
+    spec: '750 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-1010-kva',
+    title: '1010 kVA Genset',
+    description: 'High-load HHP genset for industrial and infrastructure applications.',
+    specLabel: 'Power',
+    spec: '1010 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-1250-kva',
+    title: '1250 kVA Genset',
+    description: 'HHP genset for demanding plant, utility and infrastructure power.',
+    specLabel: 'Power',
+    spec: '1250 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-1500-kva',
+    title: '1500 kVA Genset',
+    description: 'Very high-capacity HHP genset for major standby operations.',
+    specLabel: 'Power',
+    spec: '1500 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-2000-kva',
+    title: '2000 kVA Genset',
+    description: 'Mission-critical HHP genset for large industrial backup systems.',
+    specLabel: 'Power',
+    spec: '2000 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-2500-kva',
+    title: '2500 kVA Genset',
+    description: 'High-capacity HHP genset for plants and infrastructure environments.',
+    specLabel: 'Power',
+    spec: '2500 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-3000-kva',
+    title: '3000 kVA Genset',
+    description: 'Ultra-high-capacity HHP genset for industrial standby support.',
+    specLabel: 'Power',
+    spec: '3000 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: false
+  },
+  {
+    id: 'jakson-genset-3750-kva',
+    title: '3750 kVA Genset',
+    description: 'Flagship HHP genset for very large industrial and infrastructure loads.',
+    specLabel: 'Power',
+    spec: '3750 kVA',
+    categoryName: 'Industrial Range Gensets',
+    featured: true
   }
 ]
 
-export const getCategoryBySlug = (slug) => CATEGORY_CATALOG.find((category) => category.slug === slug)
+export const ALL_CATEGORY_CATALOG = [...CATEGORY_CATALOG, ...JAKSON_CATEGORY_CATALOG]
+
+export const getCategoryBySlug = (slug) => ALL_CATEGORY_CATALOG.find((category) => category.slug === slug)
 
 export const getProductsByCategory = (categoryName) =>
   PRODUCT_CATALOG.filter((product) => product.categoryName === categoryName)

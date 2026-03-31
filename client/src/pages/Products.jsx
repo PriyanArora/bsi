@@ -3,6 +3,7 @@ import PageTransition from '../components/PageTransition'
 import ProductsHero from '../components/products/ProductsHero'
 import ProductGrid from '../components/products/ProductGrid'
 import ProductsCTA from '../components/products/ProductsCTA'
+import { JAKSON_CATEGORY_CATALOG } from '../lib/productCatalog'
 
 export default function Products({ onEnquireClick }) {
     return (
@@ -32,6 +33,7 @@ export default function Products({ onEnquireClick }) {
                     <h2 className="text-bsi-secondary mt-14 px-2 text-base font-semibold tracking-[0.08em] uppercase sm:px-4 sm:text-lg md:px-8 lg:px-16">
                         Jakson Diesel generators
                     </h2>
+                    <ProductGrid categories={JAKSON_CATEGORY_CATALOG} showPlaceholderOnMissingImage sortCategories={false} />
                 </div>
                 <ProductsCTA onEnquireClick={onEnquireClick} />
             </main>

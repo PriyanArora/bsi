@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import { CATEGORY_CATALOG } from '../../lib/productCatalog'
 import { getCategoryTitleImage } from '../../lib/productImages'
 
-const SORTED_CATEGORY_CATALOG = [...CATEGORY_CATALOG].sort(
-  (a, b) => b.productsCount - a.productsCount || a.categoryName.localeCompare(b.categoryName)
-)
+export default function ProductGrid({ categories = CATEGORY_CATALOG, showPlaceholderOnMissingImage = false, sortCategories = true }) {
+  const visibleCategories = sortCategories
+    ? [...categories].sort((a, b) => b.productsCount - a.productsCount || a.categoryName.localeCompare(b.categoryName))
+    : categories
 
-export default function ProductGrid() {
   return (
     <div className="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-2 md:px-8 lg:grid-cols-4 lg:gap-8 lg:px-16">
-      {SORTED_CATEGORY_CATALOG.map((category) => {
+      {visibleCategories.map((category) => {
         const categoryImage = getCategoryTitleImage(category)
 
         return (
@@ -25,6 +25,13 @@ export default function ProductGrid() {
                 <img
                   src={categoryImage}
                   alt={`${category.categoryName} title`}
+                  loading="lazy"
+                  className="h-full w-full object-contain"
+                />
+              ) : showPlaceholderOnMissingImage ? (
+                <img
+                  src="/product-placeholder.svg"
+                  alt={`${category.categoryName} placeholder`}
                   loading="lazy"
                   className="h-full w-full object-contain"
                 />
