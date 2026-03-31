@@ -1,6 +1,12 @@
 import { getProductsByCategory } from './productCatalog'
 
-export const chatbotQuestions = [
+const ENTRY_QUESTION = {
+  id: 'solutionTrack',
+  label: 'What are you interested in?',
+  options: ['Cranes / Hoists', 'Generators'],
+}
+
+const CRANE_HOIST_QUESTIONS = [
   {
     id: 'siteType',
     label: 'Where will you use this?',
@@ -89,6 +95,56 @@ export const chatbotQuestions = [
   },
 ]
 
+const GENERATOR_DISCOVERY_QUESTIONS = [
+  {
+    id: 'generatorUseCase',
+    label: 'What best describes your application?',
+    options: [
+      'Small business, retail or office backup',
+      'Commercial complex, hospital or institutional backup',
+      'Large industry or data center backup',
+      'Heavy industrial or infrastructure power',
+      'Temporary event or construction power',
+      'Not sure',
+    ],
+  },
+  {
+    id: 'generatorPowerBand',
+    label: 'What power band best matches your need?',
+    options: ['15 to 62.5 kVA', '75 to 160 kVA', '180 to 250 kVA', '320 to 625 kVA', '750 to 3750 kVA', 'Not sure'],
+  },
+  {
+    id: 'generatorProcurement',
+    label: 'Do you want to purchase or rent?',
+    options: ['Purchase new generator', 'Rental generator only', 'Open to either purchase or rental'],
+  },
+  {
+    id: 'generatorNoisePreference',
+    label: 'Preferred generator configuration?',
+    options: ['Silent preferred', 'Open acceptable', 'Either / Not sure'],
+  },
+  {
+    id: 'generatorRuntimeNeed',
+    label: 'Expected operating pattern?',
+    options: ['Up to 8 hours per day', 'More than 8 hours per day', 'Continuous heavy load operation', 'Not sure'],
+  },
+]
+
+export function getChatbotQuestions(answers = {}) {
+  const flow = [ENTRY_QUESTION]
+
+  if (answers.solutionTrack === 'Generators') {
+    flow.push(...GENERATOR_DISCOVERY_QUESTIONS)
+    return flow
+  }
+
+  if (answers.solutionTrack === 'Cranes / Hoists') {
+    flow.push(...CRANE_HOIST_QUESTIONS)
+  }
+
+  return flow
+}
+
 const recommendationDetails = {
   'Storage and Retrieval': 'Best for pallet receipt, storage and retrieval in multilevel warehouse operations.',
   'Overhead Cranes':
@@ -104,6 +160,12 @@ const recommendationDetails = {
     'Best for higher capacities and longer lift heights in medium to heavy-duty operations.',
   'EOT Cranes':
     'Best for moving loads across larger bays with single girder, double girder or underslung configurations.',
+  'Small Range Gensets': 'Best for compact standby power in small commercial and office environments.',
+  'Medium Range Gensets': 'Best for medium duty backup in commercial complexes, hospitals and process utilities.',
+  'Large Range Gensets': 'Best for higher demand industrial and data center backup applications.',
+  'Industrial Range Gensets': 'Best for critical heavy-duty and infrastructure-scale power continuity.',
+  'Rental Generators': 'Best for temporary and project-based power where flexible deployment is required.',
+  'Generator Rentals': 'Best for temporary and project-based power where flexible deployment is required.',
 }
 
 const CAPACITY_UPPER_TON = {
@@ -200,6 +262,217 @@ function createRecommendation(categoryName, primaryProductName, options = {}) {
     shortlist,
     requiresConfirmation: options.requiresConfirmation ?? shortlist.length > 0,
   }
+}
+
+function recommendGeneratorRental(answers) {
+  const powerBand = answers.generatorPowerBand
+
+  if (powerBand === '15 to 62.5 kVA') {
+    return createRecommendation('Rental Generators', '15 - 62.5 kVA Rental Generator', {
+      confidence: 'high',
+      requiresConfirmation: false,
+    })
+  }
+
+  if (powerBand === '75 to 160 kVA') {
+    return createRecommendation('Rental Generators', '75 - 125 kVA Rental Generator', {
+      confidence: 'high',
+      requiresConfirmation: false,
+    })
+  }
+
+  if (powerBand === '180 to 250 kVA') {
+    return createRecommendation('Rental Generators', '160 - 250 kVA Rental Generator', {
+      confidence: 'high',
+      requiresConfirmation: false,
+    })
+  }
+
+  if (powerBand === '320 to 625 kVA') {
+    return createRecommendation('Rental Generators', '320 - 500 kVA Rental Generator', {
+      confidence: 'high',
+      requiresConfirmation: false,
+    })
+  }
+
+  if (powerBand === '750 to 3750 kVA') {
+    return createRecommendation('Rental Generators', '625 - 1010 kVA Rental Generator', {
+      confidence: 'high',
+      requiresConfirmation: false,
+    })
+  }
+
+  if (answers.generatorUseCase === 'Temporary event or construction power') {
+    return createRecommendation('Rental Generators', '75 - 125 kVA Rental Generator', {
+      confidence: 'high',
+      shortlist: ['160 - 250 kVA Rental Generator', '320 - 500 kVA Rental Generator'],
+      description: 'Rental options shortlisted for temporary power. Final rating depends on connected load and start-up surge profile.',
+    })
+  }
+
+  return createRecommendation('Rental Generators', '160 - 250 kVA Rental Generator', {
+    confidence: 'medium',
+    shortlist: ['75 - 125 kVA Rental Generator', '320 - 500 kVA Rental Generator'],
+    description: 'Rental options are shortlisted. Final generator sizing should be confirmed from site load and duty cycle.',
+  })
+}
+
+function recommendGeneratorPurchase(answers) {
+  const powerBand = answers.generatorPowerBand
+  const runtimeNeed = answers.generatorRuntimeNeed
+  const noisePreference = answers.generatorNoisePreference
+  const useCase = answers.generatorUseCase
+
+  if (powerBand === '15 to 62.5 kVA') {
+    if (runtimeNeed === 'Up to 8 hours per day') {
+      return createRecommendation('Small Range Gensets', '15 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (runtimeNeed === 'More than 8 hours per day') {
+      return createRecommendation('Small Range Gensets', '30 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (runtimeNeed === 'Continuous heavy load operation') {
+      return createRecommendation('Small Range Gensets', '50 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (noisePreference === 'Silent preferred') {
+      return createRecommendation('Small Range Gensets', '20 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    return createRecommendation('Small Range Gensets', '40 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['25 kVA Genset', '62.5 kVA Genset', '10 kVA Genset', '7.5 kVA Genset'],
+      description: 'Small-range gensets are shortlisted. Final rating should match the connected and surge load profile.',
+    })
+  }
+
+  if (powerBand === '75 to 160 kVA') {
+    if (runtimeNeed === 'Continuous heavy load operation') {
+      return createRecommendation('Medium Range Gensets', '160 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (noisePreference === 'Silent preferred') {
+      return createRecommendation('Medium Range Gensets', '125 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (runtimeNeed === 'Up to 8 hours per day') {
+      return createRecommendation('Medium Range Gensets', '100 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    return createRecommendation('Medium Range Gensets', '140 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['75 kVA Genset'],
+      description: 'Medium-range gensets are shortlisted. Final selection should be confirmed from load profile and duty pattern.',
+    })
+  }
+
+  if (powerBand === '180 to 250 kVA') {
+    if (runtimeNeed === 'Continuous heavy load operation') {
+      return createRecommendation('Medium Range Gensets', '250 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (noisePreference === 'Silent preferred') {
+      return createRecommendation('Medium Range Gensets', '200 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    return createRecommendation('Medium Range Gensets', '180 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+  }
+
+  if (powerBand === '320 to 625 kVA') {
+    if (runtimeNeed === 'Continuous heavy load operation') {
+      return createRecommendation('Large Range Gensets', '625 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (noisePreference === 'Open acceptable') {
+      return createRecommendation('Large Range Gensets', '400 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    if (runtimeNeed === 'Up to 8 hours per day') {
+      return createRecommendation('Large Range Gensets', '320 kVA Genset', { confidence: 'high', requiresConfirmation: false })
+    }
+
+    return createRecommendation('Large Range Gensets', '500 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['380 kVA Genset'],
+      description: 'Large-range gensets are shortlisted. Final rating should be confirmed against block load and future expansion.',
+    })
+  }
+
+  if (powerBand === '750 to 3750 kVA') {
+    if (runtimeNeed === 'Continuous heavy load operation' && useCase === 'Heavy industrial or infrastructure power') {
+      return createRecommendation('Industrial Range Gensets', '3750 kVA Genset', {
+        confidence: 'high',
+        requiresConfirmation: false,
+      })
+    }
+
+    if (runtimeNeed === 'More than 8 hours per day') {
+      return createRecommendation('Industrial Range Gensets', '2000 kVA Genset', {
+        confidence: 'high',
+        shortlist: ['2500 kVA Genset', '3000 kVA Genset'],
+        description: 'Industrial options are shortlisted for long-duration operation. Final rating depends on critical and future loads.',
+      })
+    }
+
+    if (useCase === 'Large industry or data center backup') {
+      return createRecommendation('Industrial Range Gensets', '1250 kVA Genset', {
+        confidence: 'high',
+        requiresConfirmation: false,
+      })
+    }
+
+    return createRecommendation('Industrial Range Gensets', '1500 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['1010 kVA Genset', '750 kVA Genset'],
+      description: 'Industrial gensets are shortlisted. Final model should be selected after critical load and redundancy review.',
+    })
+  }
+
+  if (useCase === 'Small business, retail or office backup') {
+    return createRecommendation('Small Range Gensets', '25 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['15 kVA Genset', '40 kVA Genset'],
+      description: 'Small-range gensets are shortlisted. Final rating should be validated from actual connected load.',
+    })
+  }
+
+  if (useCase === 'Commercial complex, hospital or institutional backup') {
+    return createRecommendation('Medium Range Gensets', '125 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['100 kVA Genset', '160 kVA Genset'],
+      description: 'Medium-range gensets are shortlisted for commercial and institutional backup duty.',
+    })
+  }
+
+  if (useCase === 'Large industry or data center backup') {
+    return createRecommendation('Large Range Gensets', '500 kVA Genset', {
+      confidence: 'medium',
+      shortlist: ['400 kVA Genset', '625 kVA Genset'],
+      description: 'Large-range gensets are shortlisted. Final sizing should be validated against load growth and redundancy plan.',
+    })
+  }
+
+  return createRecommendation('Industrial Range Gensets', '750 kVA Genset', {
+    confidence: 'medium',
+    shortlist: ['1010 kVA Genset', '1250 kVA Genset'],
+    description: 'Generator options are shortlisted. Final model should be confirmed with connected load, surge and runtime profile.',
+  })
+}
+
+function recommendGenerators(answers) {
+  if (answers.generatorProcurement === 'Rental generator only') {
+    return recommendGeneratorRental(answers)
+  }
+
+  if (
+    answers.generatorUseCase === 'Temporary event or construction power' &&
+    answers.generatorProcurement !== 'Purchase new generator'
+  ) {
+    return recommendGeneratorRental(answers)
+  }
+
+  return recommendGeneratorPurchase(answers)
 }
 
 function recommendErgonomic(answers, capacityUpper, heavyDuty) {
@@ -551,6 +824,18 @@ const RULE_MATRIX = [
 ]
 
 export function getRecommendation(answers) {
+  if (answers.solutionTrack === 'Generators') {
+    return recommendGenerators(answers)
+  }
+
+  if (answers.solutionTrack !== 'Cranes / Hoists') {
+    return createRecommendation('Material Handling', 'HW Series', {
+      confidence: 'medium',
+      shortlist: ['Gantry Crane', 'Electric Chain Hoist EH II (Baby)'],
+      description: 'Start by selecting whether you need cranes/hoists or generators for a more precise recommendation.',
+    })
+  }
+
   const capacityUpper = parseCapacity(answers)
   const liftUpper = parseLift(answers)
   const spanUpper = parseSpan(answers)

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRef } from 'react'
-import { chatbotQuestions, getRecommendation } from '../lib/chatbotTree'
+import { getChatbotQuestions, getRecommendation } from '../lib/chatbotTree'
 
 export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
   const [stepIndex, setStepIndex] = useState(0)
@@ -9,12 +9,14 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
   const closeButtonRef = useRef(null)
   const previousActiveElementRef = useRef(null)
 
+  const questions = useMemo(() => getChatbotQuestions(answers), [answers])
+
   const recommendation = useMemo(() => {
-    if (stepIndex < chatbotQuestions.length) {
+    if (stepIndex < questions.length) {
       return null
     }
     return getRecommendation(answers)
-  }, [answers, stepIndex])
+  }, [answers, questions.length, stepIndex])
 
   const resetAndClose = useCallback(() => {
     setStepIndex(0)
@@ -23,7 +25,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
   }, [onClose])
 
   const handleAnswer = (value) => {
-    const question = chatbotQuestions[stepIndex]
+    const question = questions[stepIndex]
     const nextAnswers = { ...answers, [question.id]: value }
 
     setAnswers(nextAnswers)
@@ -35,7 +37,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
       return
     }
 
-    const questionToRemove = chatbotQuestions[stepIndex - 1]
+    const questionToRemove = questions[stepIndex - 1]
     const nextAnswers = { ...answers }
     delete nextAnswers[questionToRemove.id]
 
@@ -107,7 +109,11 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
         : 'Needs confirmation'
     : null
 
-  const currentQuestion = chatbotQuestions[stepIndex]
+  const currentQuestion = questions[stepIndex]
+  const isEntryStep = stepIndex === 0 && !answers.solutionTrack
+  const branchStepTotal = Math.max(1, questions.length - 1)
+  const branchStepNumber = Math.max(1, stepIndex)
+  const progressPercent = Math.min(100, (branchStepNumber / branchStepTotal) * 100)
 
   return (
     <div
@@ -123,8 +129,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
       >
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
-            <p className="text-bsi-accent text-xs font-bold uppercase tracking-[0.16em]">Guided Selector</p>
-            <h2 className="font-headline text-bsi-primary mt-2 text-3xl font-extrabold">Help me choose</h2>
+            <h2 className="font-headline text-bsi-primary text-3xl font-extrabold underline decoration-2 underline-offset-4">Help me choose</h2>
           </div>
           <button
             ref={closeButtonRef}
@@ -180,25 +185,29 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
           </div>
         ) : (
           <div>
-            <div className="mb-5 flex items-center justify-between">
-              <p className="text-bsi-secondary text-sm">Step {stepIndex + 1} of {chatbotQuestions.length}</p>
-              {stepIndex > 0 ? (
-                <button
-                  type="button"
-                  onClick={handleBack}
-                  className="text-bsi-primary text-xs font-bold uppercase tracking-[0.14em]"
-                >
-                  Back
-                </button>
-              ) : null}
-            </div>
+            {!isEntryStep ? (
+              <div className="mb-5 flex items-center justify-between">
+                <p className="text-bsi-secondary text-sm">Step {branchStepNumber} of {branchStepTotal}</p>
+                {stepIndex > 0 ? (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className="text-bsi-primary text-xs font-bold uppercase tracking-[0.14em] transition-transform duration-150 hover:scale-105"
+                  >
+                    Back
+                  </button>
+                ) : null}
+              </div>
+            ) : null}
 
-            <div className="bg-bsi-surface-low mb-5 h-2 w-full rounded-full">
-              <div
-                className="bg-bsi-accent h-2 rounded-full transition-all"
-                style={{ width: `${((stepIndex + 1) / chatbotQuestions.length) * 100}%` }}
-              />
-            </div>
+            {!isEntryStep ? (
+              <div className="bg-bsi-surface-low mb-5 h-2 w-full rounded-full">
+                <div
+                  className="bg-bsi-accent h-2 rounded-full transition-all"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            ) : null}
 
             <h3 className="font-headline text-bsi-primary mb-4 text-2xl font-bold">{currentQuestion.label}</h3>
 
