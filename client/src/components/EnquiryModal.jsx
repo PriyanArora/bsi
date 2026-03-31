@@ -4,23 +4,37 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createPortal } from 'react-dom'
 import { toast } from 'sonner'
 import { enquirySchema } from '../lib/enquirySchema'
-import { CATEGORY_CATALOG, getProductsByCategory } from '../lib/productCatalog'
+import { CATEGORY_CATALOG, JAKSON_CATEGORY_CATALOG, getProductsByCategory } from '../lib/productCatalog'
 
-const PRODUCT_GROUPS = CATEGORY_CATALOG.map((category) => ({
-  categoryName: category.categoryName,
-  products: [
-    {
-      id: `category-${category.slug}`,
-      title: `${category.categoryName} (Category)`,
-      value: category.categoryName,
-    },
-    ...getProductsByCategory(category.categoryName).map((product) => ({
-      id: product.id,
-      title: product.title,
-      value: product.title,
-    })),
-  ],
-}))
+const buildProductGroups = (categories) =>
+  categories.map((category) => ({
+    categoryName: category.categoryName,
+    products: [
+      {
+        id: `category-${category.slug}`,
+        title: `${category.categoryName} (Category)`,
+        value: category.categoryName,
+      },
+      ...getProductsByCategory(category.categoryName).map((product) => ({
+        id: product.id,
+        title: product.title,
+        value: product.title,
+      })),
+    ],
+  }))
+
+const PRODUCT_SECTIONS = [
+  {
+    id: 'indef',
+    title: 'Indef Cranes and Hoists',
+    groups: buildProductGroups(CATEGORY_CATALOG),
+  },
+  {
+    id: 'jakson',
+    title: 'Jakson Diesel generators',
+    groups: buildProductGroups(JAKSON_CATEGORY_CATALOG),
+  },
+]
 
 const SERVICE_OPTIONS = [{ id: 'service-amc-care', title: 'AMC Care', value: 'AMC Care' }]
 
@@ -538,37 +552,50 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
                           onWheel={(event) => event.stopPropagation()}
                           onTouchMove={(event) => event.stopPropagation()}
                         >
-                          {PRODUCT_GROUPS.map((group) => (
-                            <div key={group.categoryName} className="mb-2">
-                              <p className="text-bsi-secondary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.15em]">
-                                {group.categoryName}
+                          {PRODUCT_SECTIONS.map((section, sectionIndex) => (
+                            <div
+                              key={section.id}
+                              className={[
+                                sectionIndex > 0 ? 'border-bsi-outline/20 mt-3 border-t pt-3' : '',
+                              ].join(' ')}
+                            >
+                              <p className="font-headline text-bsi-primary px-2 py-1 text-xs font-extrabold uppercase tracking-[0.14em]">
+                                {section.title}
                               </p>
-                              {group.products.map((product) => {
-                                const isSelected = selectedProducts.includes(product.value)
 
-                                return (
-                                  <button
-                                    key={product.id}
-                                    role="option"
-                                    aria-selected={isSelected}
-                                    type="button"
-                                    onClick={() => toggleProduct(product.value)}
-                                    className="hover:bg-bsi-surface-low flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm"
-                                  >
-                                    <span
-                                      className={[
-                                        'flex h-4 w-4 items-center justify-center rounded border text-[10px]',
-                                        isSelected
-                                          ? 'border-bsi-primary bg-bsi-primary text-white'
-                                          : 'border-bsi-outline/50 text-transparent',
-                                      ].join(' ')}
-                                    >
-                                      ✓
-                                    </span>
-                                    <span className="text-bsi-primary">{product.title}</span>
-                                  </button>
-                                )
-                              })}
+                              {section.groups.map((group) => (
+                                <div key={`${section.id}-${group.categoryName}`} className="mb-2">
+                                  <p className="text-bsi-secondary px-2 py-1 text-[10px] font-bold uppercase tracking-[0.15em]">
+                                    {group.categoryName}
+                                  </p>
+                                  {group.products.map((product) => {
+                                    const isSelected = selectedProducts.includes(product.value)
+
+                                    return (
+                                      <button
+                                        key={product.id}
+                                        role="option"
+                                        aria-selected={isSelected}
+                                        type="button"
+                                        onClick={() => toggleProduct(product.value)}
+                                        className="hover:bg-bsi-surface-low flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm"
+                                      >
+                                        <span
+                                          className={[
+                                            'flex h-4 w-4 items-center justify-center rounded border text-[10px]',
+                                            isSelected
+                                              ? 'border-bsi-primary bg-bsi-primary text-white'
+                                              : 'border-bsi-outline/50 text-transparent',
+                                          ].join(' ')}
+                                        >
+                                          ✓
+                                        </span>
+                                        <span className="text-bsi-primary">{product.title}</span>
+                                      </button>
+                                    )
+                                  })}
+                                </div>
+                              ))}
                             </div>
                           ))}
 
@@ -619,7 +646,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
               {...register('message')}
               aria-invalid={errors.message ? 'true' : 'false'}
               rows="3"
-              placeholder="Share your lifting requirements"
+              placeholder="Share your requirements"
               className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary min-h-28 w-full min-w-0 resize-none overflow-y-auto rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
             />
           </div>
