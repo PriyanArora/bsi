@@ -73,7 +73,6 @@ Enquiry
   companyName:        String    optional
   productOfInterest: String    optional
   message:           String    optional
-  source:            String    enum[direct, chatbot]  default: direct
   createdAt:         Date      default: now
 ```
 
@@ -99,7 +98,7 @@ Enquiry
 1. User clicks "Help me choose" in navbar
 2. Decision tree: application type, load capacity, lift height, usage frequency
 3. Recommends product category based on answers
-4. Opens enquiry modal with productOfInterest pre-selected and source=chatbot
+4. Opens enquiry modal with productOfInterest pre-selected
 5. User can modify any field before submitting
 
 ---

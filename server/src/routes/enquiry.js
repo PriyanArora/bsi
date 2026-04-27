@@ -13,14 +13,14 @@ const enquiryLimiter = rateLimit({                                              
 
 router.post("/", enquiryLimiter, async (req, res) => {
   try {
-    const { fullName, phone, email, companyName, productOfInterest, message, source } = req.body;
+    const { fullName, phone, email, companyName, productOfInterest, message } = req.body;
     const result = EnquirySchema.safeParse(req.body);  
                                                                                   
     if (!result.success) {
       return res.status(400).json({ error: result.error.issues[0].message });
     }
     
-    const enquiry = new Enquiry({ fullName, phone, email, companyName, productOfInterest, message, source });
+    const enquiry = new Enquiry({ fullName, phone, email, companyName, productOfInterest, message });
     await enquiry.save();  
 
     try{

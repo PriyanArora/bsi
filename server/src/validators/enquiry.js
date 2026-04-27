@@ -7,7 +7,6 @@ const EnquirySchema = z.object({
   companyName: z.string().optional(),
   productOfInterest: z.string().optional(),
   message: z.string().optional(),
-  source: z.enum(["direct", "chatbot"]).optional(),
 })
 .refine((data) => data.phone || data.email, {
   message: "Either phone or email is required",

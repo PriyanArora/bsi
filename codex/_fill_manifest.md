@@ -68,7 +68,7 @@ D5_why: Both offer free tiers. Vercel optimized for static/SPA delivery with CDN
 ## DATA / STRUCTURE
 
 ### web: Models
-model_1: Enquiry | fullName: String required | phone: String required | email: String optional | companyName: String optional | productOfInterest: String optional | message: String optional | source: String enum[direct,chatbot] default:direct | createdAt: Date default:now
+model_1: Enquiry | fullName: String required | phone: String required | email: String optional | companyName: String optional | productOfInterest: String optional | message: String optional | createdAt: Date default:now
 
 ---
 
@@ -92,7 +92,7 @@ Chatbot logic (frontend only):
   1. User clicks "Help me choose" in navbar
   2. Decision tree presents questions: application type (indoor/outdoor), load capacity range, lift height, usage frequency
   3. Based on answers, recommends a product category
-  4. Opens enquiry modal with productOfInterest pre-selected and source set to "chatbot"
+  4. Opens enquiry modal with productOfInterest pre-selected
   5. User can modify any field before submitting
 
 ---
@@ -178,8 +178,8 @@ phase_2_commit: feat(db): add MongoDB Atlas connection with Mongoose
 phase_3_name: Enquiry Model + Seed
 phase_3_goal: Enquiry Mongoose schema defined, seed script inserts test data, data verifiable in Atlas
 phase_3_checkboxes:
-  - Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, source, createdAt)
-  - Field validations on schema (required fields, enum for source)
+  - Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, createdAt)
+  - Field validations on schema (required and optional fields)
   - Seed script inserts 3-5 realistic sample enquiries
   - Seed is idempotent (safe to run multiple times)
   - Data visible in MongoDB Atlas dashboard
@@ -214,7 +214,7 @@ phase_6_checkboxes:
   - Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)
   - Email service is a separate module (not inline in route handler)
   - Enquiry endpoint: save to DB first, then send email. DB save failure → 500. Email failure → log error but still return success (enquiry is saved).
-  - Email contains formatted enquiry details (name, phone, product, message, source)
+  - Email contains formatted enquiry details (name, phone, product, message)
   - No hardcoded credentials — all from .env
   - Unit tests for email service (mock transporter)
 phase_6_proof: Submit enquiry via curl → email arrives in owner's Gmail. Show no hardcoded credentials. Run tests.
@@ -250,11 +250,11 @@ phase_9_checkboxes:
   - Chatbot opens from "Help me choose" button in navbar
   - Decision tree asks: application type, load capacity, lift height, usage frequency
   - Recommends product category based on answers
-  - Opens enquiry modal with productOfInterest pre-selected and source=chatbot
+  - Opens enquiry modal with productOfInterest pre-selected
   - Products page displays all product categories with specs and enquiry buttons
   - Product enquiry buttons open modal with product pre-selected
   - No regressions on existing enquiry flow
-phase_9_proof: Walk through chatbot flow → shows recommendation → opens enquiry form with product pre-selected. Submit → email shows source=chatbot. Products page buttons work.
+phase_9_proof: Walk through chatbot flow → shows recommendation → opens enquiry form with product pre-selected. Submit successfully. Products page buttons work.
 phase_9_commit: feat(ui): add chatbot decision tree and product pages
 
 phase_10_name: Contact + About Pages

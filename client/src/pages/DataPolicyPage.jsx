@@ -35,7 +35,6 @@ export default function DataPolicyPage() {
                 <li>Company name</li>
                 <li>Product or service interest</li>
                 <li>Message details submitted in enquiry</li>
-                <li>Enquiry source (for example, direct form or chatbot)</li>
                 <li>Technical data necessary for security and service operation (such as IP address and request metadata)</li>
               </ul>
             </section>

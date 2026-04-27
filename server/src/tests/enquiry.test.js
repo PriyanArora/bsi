@@ -23,7 +23,6 @@ describe("POST /api/enquiry", () => {
         fullName: "Priyan",
         phone: "9876543210",
         message: "Need product details",
-        source: "direct",
       });
       expect(res.status).toBe(201);
   });
@@ -33,7 +32,6 @@ describe("POST /api/enquiry", () => {
       fullName: "Priyan",
       email: "priyan@example.com",
       message: "Please contact me",
-      source: "chatbot",
     });
     expect(res.status).toBe(201);
   });

@@ -39,8 +39,8 @@
 - [x] Connection test passes (server starts and connects)
 
 ## P3 — Enquiry Model + Seed `[complete]`
-- [x] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, source, createdAt)
-- [x] Field validations on schema (required fields, enum for source)
+- [x] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, createdAt)
+- [x] Field validations on schema (required and optional fields)
 - [x] Seed script inserts 3-5 realistic sample enquiries
 - [x] Seed is idempotent (safe to run multiple times)
 - [x] Data visible in MongoDB Atlas dashboard
@@ -63,7 +63,7 @@
 - [x] Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)
 - [x] Email service is a separate module (not inline in route handler)
 - [x] Enquiry endpoint: save to DB first, then send email. DB save failure → 500. Email failure → log error but still return success.
-- [x] Email contains formatted enquiry details (name, phone, product, message, source)
+- [x] Email contains formatted enquiry details (name, phone, product, message)
 - [x] No hardcoded credentials — all from .env
 - [x] Unit tests for email service (mock transporter)
 
@@ -87,7 +87,7 @@
 - [ ] Chatbot opens from "Help me choose" button in navbar
 - [ ] Decision tree asks: application type, load capacity, lift height, usage frequency
 - [ ] Recommends product category based on answers
-- [ ] Opens enquiry modal with productOfInterest pre-selected and source=chatbot
+- [ ] Opens enquiry modal with productOfInterest pre-selected
 - [ ] Products page displays all product categories with specs and enquiry buttons
 - [ ] Product enquiry buttons open modal with product pre-selected
 - [ ] No regressions on existing enquiry flow

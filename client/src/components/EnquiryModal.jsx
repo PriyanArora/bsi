@@ -41,7 +41,7 @@ const SERVICE_OPTIONS = [{ id: 'service-amc-care', title: 'AMC Care', value: 'AM
 const API_BASE_URL = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '')
 const ENQUIRY_ENDPOINT = `${API_BASE_URL}/api/enquiry`
 
-export default function EnquiryModal({ isOpen, onClose, defaultProduct, source = 'website' }) {
+export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false)
   const [modalScale, setModalScale] = useState(1)
   const [productMenuPosition, setProductMenuPosition] = useState({
@@ -137,7 +137,6 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
       productOfInterest: defaultProduct ? [defaultProduct] : [],
       message: '',
       dataProtectionAccepted: false,
-      source,
     },
   })
 
@@ -147,10 +146,6 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
   useEffect(() => {
     setValue('productOfInterest', defaultProduct ? [defaultProduct] : [])
   }, [defaultProduct, setValue])
-
-  useEffect(() => {
-    setValue('source', source)
-  }, [source, setValue])
 
   useEffect(() => {
     if (!isOpen) {
@@ -163,11 +158,10 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
         productOfInterest: defaultProduct ? [defaultProduct] : [],
         message: '',
         dataProtectionAccepted: false,
-        source,
       })
       setIsProductMenuOpen(false)
     }
-  }, [isOpen, defaultProduct, source, reset])
+  }, [isOpen, defaultProduct, reset])
 
   useEffect(() => {
     if (!isOpen) {
@@ -347,7 +341,6 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
         productOfInterest: defaultProduct ? [defaultProduct] : [],
         message: '',
         dataProtectionAccepted: false,
-        source,
       })
       onClose()
     } catch (error) {
@@ -389,8 +382,6 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct, source =
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4 sm:space-y-5">
-          <input type="hidden" {...register('source')} />
-
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
             <div className="w-full min-w-0">
               <label htmlFor="firstName" className="text-bsi-secondary mb-1 block text-xs font-bold uppercase tracking-[0.15em]">First Name*</label>

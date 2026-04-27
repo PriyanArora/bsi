@@ -10,7 +10,6 @@ const enquiries = [
     companyName: "Mehta Fabrication Works",
     productOfInterest: "Electric Chain Hoist - 2 Ton",
     message: "Need pricing and delivery timeline for 2 units in Pune.",
-    source: "direct",
   },
   {
     fullName: "Nisha Verma",
@@ -19,7 +18,6 @@ const enquiries = [
     companyName: "Orbit Logistics",
     productOfInterest: "Wire Rope Hoist - 5 Ton",
     message: "Please share specs and maintenance schedule options.",
-    source: "chatbot",
   },
   {
     fullName: "Rahul Iyer",
@@ -27,7 +25,6 @@ const enquiries = [
     companyName: "Iyer Engineering",
     productOfInterest: "Jib Crane",
     message: "Looking for a compact setup for limited floor space.",
-    source: "direct",
   },
   {
     fullName: "Sneha Kulkarni",
@@ -35,14 +32,12 @@ const enquiries = [
     email: "sneha.kulkarni@novatech.in",
     companyName: "NovaTech Components",
     productOfInterest: "Manual Hoist",
-    source: "direct",
   },
   {
     fullName: "Karthik Rao",
     phone: "9556677889",
     email: "karthik.rao@shreeinfra.com",
     message: "Need a callback for EOT crane options this week.",
-    source: "chatbot",
   },
 ];
 

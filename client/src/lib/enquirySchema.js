@@ -11,5 +11,4 @@ export const enquirySchema = z.object({
   dataProtectionAccepted: z.literal(true, {
     errorMap: () => ({ message: 'Please accept the data protection notice.' }),
   }),
-  source: z.string().default('website'),
 })

@@ -27,11 +27,6 @@ const enquirySchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  source: {
-    type: String,
-    enum: ["direct", "chatbot"],
-    default: "direct",
-  },
   createdAt: {
     type: Date,
     default: Date.now,

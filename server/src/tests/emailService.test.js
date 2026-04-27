@@ -39,8 +39,7 @@ describe("sendEnquiryEmail", () => {
 			email: "priyan@example.com",
 			companyName: "Acme",
 			productOfInterest: "BSI Core",
-			message: "Please share pricing",
-			source: "website"
+			message: "Please share pricing"
 		};
 
 		await sendEnquiryEmail(enquiry);
@@ -62,8 +61,7 @@ describe("sendEnquiryEmail", () => {
 			email: "alex@example.com",
 			companyName: "Delta Ltd",
 			productOfInterest: "BSI Premium",
-			message: "Need implementation timeline",
-			source: "chatbot"
+			message: "Need implementation timeline"
 		};
 
 		await sendEnquiryEmail(enquiry);

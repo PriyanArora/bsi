@@ -57,7 +57,6 @@ function buildEmailContent(enquiry) {
 	const companyName = safeEnquiry.companyName || "N/A";
 	const productOfInterest = safeEnquiry.productOfInterest || "N/A";
 	const message = safeEnquiry.message || "N/A";
-	const source = safeEnquiry.source || "N/A";
 	const submittedAt = new Date().toISOString();
 
 	const subject = `New enquiry from ${fullName}`;
@@ -70,7 +69,6 @@ function buildEmailContent(enquiry) {
 		`Email: ${email}`,
 		`Company name: ${companyName}`,
 		`Product of interest: ${productOfInterest}`,
-		`Source: ${source}`,
 		`Submitted at: ${submittedAt}`,
 		"",
 		"Message:",
@@ -86,7 +84,6 @@ function buildEmailContent(enquiry) {
 				<tr><td><strong>Email:</strong></td><td>${email}</td></tr>
 				<tr><td><strong>Company name:</strong></td><td>${companyName}</td></tr>
 				<tr><td><strong>Product of interest:</strong></td><td>${productOfInterest}</td></tr>
-				<tr><td><strong>Source:</strong></td><td>${source}</td></tr>
 				<tr><td><strong>Submitted at:</strong></td><td>${submittedAt}</td></tr>
 			</table>
 			<p style="margin: 12px 0 4px;"><strong>Message:</strong></p>

@@ -43,7 +43,6 @@
   - `client`: `npm run lint` failed because `@eslint/js` is not installed locally.
 - Frontend/backend contract is inconsistent in several places:
   - Client uses `firstName` + `lastName`, then derives `fullName` before submission.
-  - Client sends `source: "website"` by default; backend validator only allows `direct` or `chatbot`.
   - Client allows multiple selected products and joins them into a string before submit.
   - Backend validator allows email-only submissions and does not enforce Indian mobile numbers starting with `6-9`, despite the project red lines saying it should.
 - Backend env var names diverge from the original summary:
@@ -59,6 +58,6 @@
 - Treat the repo as a partially documented production marketing site where implementation has advanced faster than the mentor workflow files.
 - The next useful future pass is not feature work by default; it is reconciliation:
   - bring docs/progress up to actual state,
-  - align frontend/backend validation and `source` values,
+  - align frontend/backend validation,
   - restore runnable local toolchains,
   - then verify the enquiry path end-to-end.

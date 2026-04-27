@@ -19,11 +19,9 @@ export default function App() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
   const [isChatbotOpen, setIsChatbotOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState('')
-  const [enquirySource, setEnquirySource] = useState('website')
 
   const handleEnquireClick = (productName) => {
     setSelectedProduct(productName || '')
-    setEnquirySource('website')
     setIsEnquiryOpen(true)
   }
 
@@ -33,7 +31,6 @@ export default function App() {
 
   const handleProductSelectedFromChatbot = (productName) => {
     setSelectedProduct(productName || '')
-    setEnquirySource('chatbot')
     setIsChatbotOpen(false)
     setIsEnquiryOpen(true)
   }
@@ -85,7 +82,6 @@ export default function App() {
             isOpen={isEnquiryOpen}
             onClose={() => setIsEnquiryOpen(false)}
             defaultProduct={selectedProduct}
-            source={enquirySource}
           />
         ) : null}
       </Suspense>

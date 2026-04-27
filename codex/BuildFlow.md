@@ -35,8 +35,8 @@
 
 ## P3 — Enquiry Model + Seed `[GATE G3 — requires G2]`
 **Goal:** Enquiry Mongoose schema defined, seed script inserts test data, data verifiable in Atlas
-- [ ] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, source, createdAt)
-- [ ] Field validations on schema (required fields, enum for source)
+- [ ] Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, createdAt)
+- [ ] Field validations on schema (required and optional fields)
 - [ ] Seed script inserts 3-5 realistic sample enquiries
 - [ ] Seed is idempotent (safe to run multiple times)
 - [ ] Data visible in MongoDB Atlas dashboard
@@ -68,7 +68,7 @@
 - [ ] Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)
 - [ ] Email service is a separate module (not inline in route handler)
 - [ ] Enquiry endpoint: save to DB first, then send email. DB save failure → 500. Email failure → log error but still return success (enquiry is saved).
-- [ ] Email contains formatted enquiry details (name, phone, product, message, source)
+- [ ] Email contains formatted enquiry details (name, phone, product, message)
 - [ ] No hardcoded credentials — all from .env
 - [ ] Unit tests for email service (mock transporter)
 **Proof:** Submit enquiry via curl → email arrives in owner's Gmail. Show no hardcoded credentials. Run tests.
@@ -101,11 +101,11 @@
 - [ ] Chatbot opens from "Help me choose" button in navbar
 - [ ] Decision tree asks: application type, load capacity, lift height, usage frequency
 - [ ] Recommends product category based on answers
-- [ ] Opens enquiry modal with productOfInterest pre-selected and source=chatbot
+- [ ] Opens enquiry modal with productOfInterest pre-selected
 - [ ] Products page displays all product categories with specs and enquiry buttons
 - [ ] Product enquiry buttons open modal with product pre-selected
 - [ ] No regressions on existing enquiry flow
-**Proof:** Walk through chatbot flow → shows recommendation → opens enquiry form with product pre-selected. Submit → email shows source=chatbot. Products page buttons work.
+**Proof:** Walk through chatbot flow → shows recommendation → opens enquiry form with product pre-selected. Submit successfully. Products page buttons work.
 **Commit:** `feat(ui): add chatbot decision tree and product pages`
 
 ## P10 — Contact + About Pages `[GATE G10 — requires G9]`
