@@ -19,8 +19,8 @@
 - [x] G0.5 Constraints & Red Lines — all questions answered + confirmed
 - [x] G0.6 Critique + cross-check — all concerns resolved
 - [x] G0.6 Fill manifest — all fields populated, user confirmed
-- [x] G0.6 Files generated — ProjectSummary, Claude_guide, BuildFlow, Progress
-- [x] G0.6 Verification — zero placeholders in any claude/ file
+- [x] G0.6 Files generated — ProjectSummary, Codex_guide, BuildFlow, Progress
+- [x] G0.6 Verification — zero placeholders in any codex/ file
 - [x] Unused ProjectSummary templates deleted
 
 ---

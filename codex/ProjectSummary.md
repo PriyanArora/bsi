@@ -150,7 +150,7 @@ root/
 │       ├── routes/        # Enquiry route, health route
 │       ├── services/      # Email service (Nodemailer)
 │       └── utils/         # Validation schemas, sanitisation
-├── claude/
+├── codex/
 ├── html/                  # Google Stitch prototype (reference only)
 └── .github/workflows/     # CI/CD
 ```

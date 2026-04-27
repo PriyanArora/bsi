@@ -1,6 +1,6 @@
 # G0 — Project Setup Questionnaire
 
-> Loaded on demand by CLAUDE.md when G0 is incomplete.
+> Loaded on demand by CODEX.md when G0 is incomplete.
 > 6 sub-gates, each must pass in order.
 
 ---
@@ -134,20 +134,20 @@ Complete ALL steps in order.
 
 **Step 5 — User confirms.** Explicit confirmation only.
 
-**Step 6 — Write `claude/_fill_manifest.md`.** Fill every section from G0.1–G0.5 answers. Actual values only — no placeholders. Must contain: IDENTITY, DEVELOPER, TECH STACK, COMMIT CONFIG, ARCHITECTURE DECISIONS, DATA/STRUCTURE, SEED/FIXTURES, CORE LOGIC, FEATURES, ROUTES/ENTRY POINTS, RED LINES, ENV VARS, PHASES (each with name, goal, checkboxes, proof, commit). Do not touch other files until manifest is complete.
+**Step 6 — Write `codex/_fill_manifest.md`.** Fill every section from G0.1–G0.5 answers. Actual values only — no placeholders. Must contain: IDENTITY, DEVELOPER, TECH STACK, COMMIT CONFIG, ARCHITECTURE DECISIONS, DATA/STRUCTURE, SEED/FIXTURES, CORE LOGIC, FEATURES, ROUTES/ENTRY POINTS, RED LINES, ENV VARS, PHASES (each with name, goal, checkboxes, proof, commit). Do not touch other files until manifest is complete.
 
 **Step 7 — User reviews manifest.** "Review the fill manifest. Correct anything before I generate files." Wait for confirmation.
 
 **Step 8 — Generate files from manifest.** One at a time, in order:
 1. **ProjectSummary.md** — select template by category, fill, save as `ProjectSummary.md`, delete unused templates
-2. **Claude_guide.md** — developer profile, scopes, TDD targets, red lines from manifest
+2. **Codex_guide.md** — developer profile, scopes, TDD targets, red lines from manifest
 3. **BuildFlow.md** — all phases with name, goal, checkboxes, proof, commit
 4. **Progress.md** — phase names and checkboxes, category noted
 
 At each file: re-read manifest → read template → write. Do not rely on memory.
 
-**Step 9 — Verify.** Read each generated file. Grep for every placeholder pattern listed in CLAUDE.md G0 status check — none may remain. Confirm unused templates deleted. Confirm every BuildFlow phase has a real proof command. Keep `_fill_manifest.md` as reference.
+**Step 9 — Verify.** Read each generated file. Grep for every placeholder pattern listed in CODEX.md G0 status check — none may remain. Confirm unused templates deleted. Confirm every BuildFlow phase has a real proof command. Keep `_fill_manifest.md` as reference.
 
-**Step 10 — Store `Claude_guide.md` in memory.**
+**Step 10 — Store `Codex_guide.md` in memory.**
 
-**G0 pass condition:** Manifest complete. ProjectSummary.md populated. Unused templates deleted. Zero placeholders in any claude/ file. User confirmed manifest before generation.
+**G0 pass condition:** Manifest complete. ProjectSummary.md populated. Unused templates deleted. Zero placeholders in any codex/ file. User confirmed manifest before generation.

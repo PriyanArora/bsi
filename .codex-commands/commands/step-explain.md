@@ -1,4 +1,4 @@
-Read claude/Progress.md, claude/BuildFlow.md, claude/Claude_guide.md, and claude/ProjectSummary.md.
+Read codex/Progress.md, codex/BuildFlow.md, codex/Codex_guide.md, and codex/ProjectSummary.md.
 
 Determine the current step as follows:
 - Find the current phase in Progress.md

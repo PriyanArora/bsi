@@ -1,6 +1,6 @@
 # Fill Manifest
 # Generated during G0.6. This is the single source of truth for all file generation.
-# Claude writes this FIRST, user reviews and corrects HERE, then Claude fills all templates from this.
+# Codex writes this FIRST, user reviews and corrects HERE, then Codex fills all templates from this.
 # Do not touch any template file until this manifest is confirmed by the user.
 
 ---

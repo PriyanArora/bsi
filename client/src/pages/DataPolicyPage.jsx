@@ -1,4 +1,4 @@
-export default function PrivacyPolicy() {
+export default function DataPolicyPage() {
   return (
     <section className="min-h-screen overflow-hidden bg-bsi-surface pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
         <section className="mx-auto max-w-5xl px-6 md:px-8">

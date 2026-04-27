@@ -1,6 +1,6 @@
-Save session progress to claude/Progress.md.
+Save session progress to codex/Progress.md.
 
-1. Read claude/Progress.md + claude/BuildFlow.md
+1. Read codex/Progress.md + codex/BuildFlow.md
 2. Update Progress.md:
    - Check completed items (`- [ ]` → `- [x]`)
    - Update Current Phase if phase completed

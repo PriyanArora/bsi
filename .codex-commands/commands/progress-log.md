@@ -1,6 +1,6 @@
 Detailed progress report — full project status with blockers and overall completion.
 
-Read claude/Progress.md, claude/BuildFlow.md, and claude/Claude_guide.md.
+Read codex/Progress.md, codex/BuildFlow.md, and codex/Codex_guide.md.
 
 Report:
 1. **Current Phase** — number + name

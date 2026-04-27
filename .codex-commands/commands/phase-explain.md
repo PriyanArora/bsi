@@ -1,4 +1,4 @@
-Read claude/Progress.md, claude/BuildFlow.md, claude/Claude_guide.md, and claude/ProjectSummary.md.
+Read codex/Progress.md, codex/BuildFlow.md, codex/Codex_guide.md, and codex/ProjectSummary.md.
 
 Identify the current phase from Progress.md. Then produce a deep explanation of that phase structured exactly as follows:
 
