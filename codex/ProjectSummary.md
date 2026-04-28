@@ -18,20 +18,21 @@ Browser (React SPA)
   └── Chatbot Overlay (decision tree, frontend only)
         │
         ▼
-  POST /api/enquiry ──► Express API (Render/Railway)
+  POST /api/enquiry ──► Vercel Function
                             │
-                    ┌───────┴───────┐
-                    ▼               ▼
-              MongoDB Atlas    Nodemailer
-              (enquiry backup)  (Gmail OAuth2 → owner inbox)
+                            ▼
+                         Resend API
+                            │
+                            ▼
+                      Owner inbox
 ```
-**Core Constraint:** Enquiry submission must reliably reach the owner's Gmail inbox and be saved to MongoDB as backup. This is the money path — if it breaks, the site has no business value.
+**Core Constraint:** Enquiry submission must reliably reach the owner's inbox without relying on a cold custom backend. This is the money path — if it breaks, the site has no business value.
 
 ---
 
 ## Features
 - Product showcase — display Bajaj Indef cranes/hoists with images, specs, and enquiry buttons
-- Enquiry form — modal with validated fields, submits to API, emails owner, saves to MongoDB
+- Enquiry form — modal with validated fields, submits to a serverless endpoint, emails owner
 - Hardcoded chatbot — decision-tree wizard guiding users to the right product, pre-fills enquiry form
 - SEO — static meta tags per page, sitemap.xml, robots.txt, Google Search Console ready
 - Floating "Enquire Now" button — persistent on every page, opens enquiry modal
@@ -45,8 +46,7 @@ Browser (React SPA)
 | Layer | Technology | Host |
 |-------|-----------|------|
 | Frontend | React + Vite, React Router v7, Tailwind CSS, Shadcn/ui, Aceternity UI, Framer Motion, React Hook Form + Zod | Vercel |
-| Backend | Node.js + Express, Nodemailer (Gmail OAuth2), express-rate-limit, dotenv | Render or Railway |
-| Database | MongoDB Atlas + Mongoose | MongoDB Atlas (free tier) |
+| Submission Layer | Vercel Functions + Resend Email API | Vercel + Resend |
 | CI/CD | GitHub Actions | GitHub |
 
 ---
@@ -54,45 +54,30 @@ Browser (React SPA)
 ## Architecture Decisions
 **D1 — SPA over SSR:** React + Vite (client-side SPA), not Next.js/Remix. Static meta tags + sitemap sufficient for SEO. SPA is simpler, minimal maintenance, no server-side rendering overhead. Deploys to Vercel CDN for fast loads.
 
-**D2 — Gmail OAuth2 over app passwords:** Nodemailer with Gmail OAuth2. More secure, no credential rotation needed, no "less secure apps" setting. Industry standard for programmatic Gmail access.
+**D2 — Resend over Gmail OAuth2 SMTP:** Use an HTTPS email provider from a serverless function instead of Gmail SMTP. This removes SMTP port restrictions, avoids custom always-on backend hosting, and keeps provider secrets out of the browser.
 
 **D3 — Hardcoded chatbot over AI:** Decision-tree wizard built entirely in React (frontend only). Zero maintenance, zero cost, no AI API dependency. Product categories are finite and well-defined.
 
-**D4 — MongoDB for enquiry backup:** Store all enquiries in MongoDB Atlas alongside emailing them. Email can fail silently or get lost. MongoDB backup ensures no enquiry is ever lost. Free tier sufficient.
+**D4 — No custom database at launch:** Do not maintain a custom enquiry database in the initial production architecture. The first production goal is reliable delivery with simpler operations; owned persistence can be added later only if business reporting or backup requirements justify it.
 
-**D5 — Separate frontend/backend hosting:** Frontend on Vercel, backend on Render or Railway. Both offer free tiers. Vercel optimized for SPA delivery with CDN. Render/Railway for Node.js backend.
+**D5 — Single hosting surface:** Deploy the site and its submission endpoint on Vercel. This avoids cold-start concerns from a separately hosted Express service and reduces operational overhead.
 
 ---
 
 ## Data Models
-```
-Enquiry
-  fullName:          String    required
-  phone:             String    required
-  email:             String    optional
-  companyName:        String    optional
-  productOfInterest: String    optional
-  message:           String    optional
-  createdAt:         Date      default: now
-```
-
----
-
-## Seed Data
-3-5 sample enquiries with realistic Indian names, phone numbers (10-digit, starts with 6-9), and varied product interests. Idempotent — clears existing seed data before inserting. Development/testing only.
+No custom persistent application models at launch. Enquiry payload exists only as a validated request body sent to the serverless submission handler and forwarded to the email provider.
 
 ---
 
 ## Core Service Logic
 **Enquiry flow:**
 1. User fills enquiry form (from floating button or chatbot flow)
-2. Frontend validates with Zod (fullName required, phone required + Indian format, email optional + format check)
+2. Frontend validates with Zod (firstName + lastName required, phone required + Indian format, email optional + format check)
 3. POST to /api/enquiry with form data
-4. Backend validates + sanitizes input
-5. Save enquiry document to MongoDB via Mongoose
-6. Send email to owner via Nodemailer (Gmail OAuth2) with formatted HTML email
-7. Return success/failure response to frontend
-8. Frontend shows success toast or error message
+4. Serverless handler validates + sanitizes input
+5. Serverless handler sends email to owner through Resend API
+6. Return success/failure response to frontend
+7. Frontend shows success toast or error message
 
 **Chatbot flow (frontend only):**
 1. User clicks "Help me choose" in navbar
@@ -119,8 +104,7 @@ Enquiry
 ### Public (no auth)
 | Method | Path | Purpose |
 |--------|------|---------|
-| POST | /api/enquiry | Validate + sanitize + save to MongoDB + send email |
-| GET | /api/health | Health check for uptime monitoring |
+| POST | /api/enquiry | Validate + sanitize + send enquiry email via Resend |
 
 ### Auth Routes
 None — no authentication in this project.
@@ -134,24 +118,14 @@ None — no protected resources.
 ```
 root/
 ├── client/
+│   ├── api/               # Co-located Vercel serverless submission handler
 │   └── src/
+│       ├── assets/        # Product, logo, and brand imagery
 │       ├── components/    # Shared UI (Navbar, Footer, EnquiryModal, Chatbot)
-│       ├── pages/         # Home, Products, About, Contact, NotFound
-│       ├── hooks/         # Custom hooks
-│       ├── services/      # API calls (enquiry submission)
-│       ├── lib/           # Shadcn/ui utilities
-│       └── utils/         # Validation schemas, helpers
-├── server/
-│   └── src/
-│       ├── config/        # DB connection, env validation
-│       ├── middleware/     # Rate limiter, error handler, CORS
-│       ├── models/        # Enquiry Mongoose model
-│       ├── routes/        # Enquiry route, health route
-│       ├── services/      # Email service (Nodemailer)
-│       └── utils/         # Validation schemas, sanitisation
+│       ├── lib/           # Validation, catalogs, and helpers
+│       └── pages/         # Home, Products, About, Contact, NotFound
 ├── codex/
-├── html/                  # Google Stitch prototype (reference only)
-└── .github/workflows/     # CI/CD
+└── .codex-commands/
 ```
 
 ---
@@ -159,12 +133,6 @@ root/
 ## Environment Variables
 | Key | Description | Required |
 |-----|------------|---------|
-| PORT | Express server port | yes |
-| NODE_ENV | Environment (development/production) | yes |
-| MONGODB_URI | MongoDB Atlas connection string | yes |
-| GMAIL_CLIENT_ID | Google OAuth2 client ID | yes |
-| GMAIL_CLIENT_SECRET | Google OAuth2 client secret | yes |
-| GMAIL_REFRESH_TOKEN | Google OAuth2 refresh token | yes |
-| SENDER_EMAIL | Gmail address for sending | yes |
-| RECEIVER_EMAIL | Owner's email for receiving enquiries | yes |
-| FRONTEND_URL | Frontend origin for CORS | yes |
+| RESEND_API_KEY | Resend API key used by the serverless handler | yes |
+| ENQUIRY_FROM_EMAIL | Verified sender address/domain used for enquiry emails | yes |
+| RECEIVER_EMAIL | Owner's email address that receives enquiry notifications | yes |

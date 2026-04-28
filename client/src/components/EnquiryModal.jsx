@@ -38,8 +38,7 @@ const PRODUCT_SECTIONS = [
 
 const SERVICE_OPTIONS = [{ id: 'service-amc-care', title: 'AMC Care', value: 'AMC Care' }]
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '')
-const ENQUIRY_ENDPOINT = `${API_BASE_URL}/api/enquiry`
+const ENQUIRY_ENDPOINT = '/api/enquiry'
 
 export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false)
@@ -310,19 +309,11 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
   }, [isProductMenuOpen, updateProductMenuPosition])
 
   const onSubmit = async (formData) => {
-    const fullName = `${formData.firstName} ${formData.lastName}`.trim()
-
-    const requestPayload = {
-      ...formData,
-      fullName,
-      productOfInterest: (formData.productOfInterest || []).join(', '),
-    }
-
     try {
       const response = await fetch(ENQUIRY_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestPayload),
+        body: JSON.stringify(formData),
       })
 
       const responsePayload = await response.json().catch(() => ({}))

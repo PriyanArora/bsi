@@ -11,7 +11,7 @@ tagline: Authorized Bajaj Indef dealer website — product showcase, guided chat
 problem: Industrial buyers looking for cranes and hoists have no easy way to discover BSI Solutionz's product range, get guided to the right product for their needs, or submit enquiries online. The owner needs a professional web presence for marketing and lead generation.
 type: production
 category: web
-core_constraint: Enquiry submission must reliably reach the owner's Gmail inbox and be saved to MongoDB as backup. This is the money path — if it breaks, the site has no business value.
+core_constraint: Enquiry submission must reliably reach the owner's inbox without depending on a cold custom backend. This is the money path — if it breaks, the site has no business value.
 
 ---
 
@@ -28,8 +28,7 @@ dev_goal: Able to host end-to-end full-stack websites independently
 | Layer | Technology | Host |
 |-------|-----------|------|
 | Frontend | React + Vite, React Router v7, Tailwind CSS, Shadcn/ui, Aceternity UI, Framer Motion, React Hook Form + Zod | Vercel |
-| Backend | Node.js + Express, Nodemailer (Gmail OAuth2), express-rate-limit, dotenv | Render or Railway |
-| Database | MongoDB Atlas + Mongoose | MongoDB Atlas (free tier) |
+| Submission Layer | Vercel Functions + Resend Email API | Vercel + Resend |
 | CI/CD | GitHub Actions | GitHub |
 
 ---
@@ -47,46 +46,45 @@ D1_title: SPA over SSR
 D1_decision: React + Vite (client-side SPA), not Next.js/Remix
 D1_why: Static meta tags + sitemap sufficient for SEO. SPA is simpler, minimal maintenance, no server-side rendering overhead. Deploys to Vercel CDN for fast loads.
 
-D2_title: Gmail OAuth2 over app passwords
-D2_decision: Nodemailer with Gmail OAuth2 (client ID, client secret, refresh token)
-D2_why: More secure, no credential rotation needed, no "less secure apps" setting. Industry standard for programmatic Gmail access.
+D2_title: Resend over Gmail OAuth2 SMTP
+D2_decision: Use Resend through a serverless submission function
+D2_why: Removes SMTP port restrictions, avoids a custom always-on backend, and keeps provider secrets out of the browser.
 
 D3_title: Hardcoded chatbot over AI
 D3_decision: Decision-tree wizard built entirely in React (frontend only)
 D3_why: Zero maintenance, zero cost, no AI API dependency. Product categories are finite and well-defined. Chatbot recommends a product, then opens the enquiry modal with product pre-selected.
 
-D4_title: MongoDB for enquiry backup
-D4_decision: Store all enquiries in MongoDB Atlas alongside emailing them
-D4_why: Email can fail silently or get lost. MongoDB backup ensures no enquiry is ever lost. Free tier is sufficient for expected volume.
+D4_title: No custom database at launch
+D4_decision: Do not maintain a custom enquiry database in the initial production architecture
+D4_why: The first production goal is reliable delivery with simpler operations. Owned persistence can be added later only if business reporting or backup requirements justify it.
 
-D5_title: Separate frontend/backend hosting
-D5_decision: Frontend on Vercel, backend on Render or Railway
-D5_why: Both offer free tiers. Vercel optimized for static/SPA delivery with CDN. Render/Railway for Node.js backend with environment variable management.
+D5_title: Single hosting surface
+D5_decision: Frontend and submission endpoint on Vercel
+D5_why: Avoids cold-start concerns from a separately hosted Express service and reduces operational overhead.
 
 ---
 
 ## DATA / STRUCTURE
 
 ### web: Models
-model_1: Enquiry | fullName: String required | phone: String required | email: String optional | companyName: String optional | productOfInterest: String optional | message: String optional | createdAt: Date default:now
+model_1: none | no custom persistent application model at launch | enquiry payload exists only as validated request body
 
 ---
 
 ## SEED / FIXTURES / TEST DATA
-strategy: Create a seed script that inserts 3-5 sample enquiries with realistic Indian names, phone numbers (10-digit, starts with 6-9), and varied product interests. Idempotent — clears existing seed data before inserting. Used for development/testing only, never in production.
+strategy: No seed data at launch because the production architecture does not keep a custom enquiry database. Use sanitized example payloads only for manual testing and automated tests.
 
 ---
 
 ## CORE LOGIC
 logic:
   1. User fills enquiry form (from floating button or chatbot flow)
-  2. Frontend validates with Zod (fullName required, phone required + Indian format 10 digits starting 6-9, email optional + format check, other fields optional)
+  2. Frontend validates with Zod (firstName + lastName required, phone required + Indian format 10 digits starting 6-9, email optional + format check, other fields optional)
   3. POST to /api/enquiry with form data
-  4. Backend validates + sanitizes input (express-validator or Zod)
-  5. Save enquiry document to MongoDB via Mongoose
-  6. Send email to owner via Nodemailer (Gmail OAuth2) with enquiry details formatted as HTML email
-  7. Return success/failure response to frontend
-  8. Frontend shows success toast or error message
+  4. Serverless handler validates + sanitizes input
+  5. Serverless handler sends email to owner through Resend API
+  6. Return success/failure response to frontend
+  7. Frontend shows success toast or error message
 
 Chatbot logic (frontend only):
   1. User clicks "Help me choose" in navbar
@@ -99,7 +97,7 @@ Chatbot logic (frontend only):
 
 ## FEATURES
 feature_1: Product showcase — display Bajaj Indef cranes/hoists with images, specs, and enquiry buttons
-feature_2: Enquiry form — modal with validated fields, submits to API, emails owner, saves to MongoDB
+feature_2: Enquiry form — modal with validated fields, submits to a serverless endpoint, emails owner
 feature_3: Hardcoded chatbot — decision-tree wizard guiding users to the right product, pre-fills enquiry form
 feature_4: SEO — static meta tags per page, sitemap.xml, robots.txt, Google Search Console ready
 feature_5: Floating "Enquire Now" button — persistent on every page, opens enquiry modal
@@ -121,8 +119,7 @@ frontend_pages:
   - GET /* | public | 404 — catch-all error page
 
 public_routes:
-  - POST /api/enquiry | public | Validate + sanitize + save enquiry to MongoDB + send email via Nodemailer
-  - GET /api/health | public | Health check for uptime monitoring
+  - POST /api/enquiry | public | Validate + sanitize + send enquiry email via Resend
 
 auth_routes: none
 
@@ -131,94 +128,87 @@ protected_routes: none
 ---
 
 ## RED LINES
-redline_1: No Gmail OAuth2 credentials or any secrets in the repo — ever. .env only, .gitignore enforced.
+redline_1: No provider API keys or secrets in the repo — ever. Env vars only, no browser exposure.
 redline_2: No public GET endpoint for enquiry data — enquiries are write-only from the public internet.
 redline_3: No AI/LLM dependency — chatbot must be a hardcoded decision tree with zero external API calls.
 redline_4: Phone number must be validated as Indian format (10 digits, starts with 6-9) on both frontend and backend.
-redline_5: No unauthenticated access to stored enquiry data. Owner reads from Gmail inbox or MongoDB Atlas dashboard directly.
+redline_5: No browser-side direct call to the email provider with a secret API key.
 
 ---
 
 ## ENV VARS
-env_1: PORT | Express server port | yes
-env_2: MONGODB_URI | MongoDB Atlas connection string | yes
-env_3: GMAIL_CLIENT_ID | Google OAuth2 client ID for Nodemailer | yes
-env_4: GMAIL_CLIENT_SECRET | Google OAuth2 client secret for Nodemailer | yes
-env_5: GMAIL_REFRESH_TOKEN | Google OAuth2 refresh token for Nodemailer | yes
-env_6: SENDER_EMAIL | Gmail address used to send enquiry emails | yes
-env_7: RECEIVER_EMAIL | Owner's email address that receives enquiry notifications | yes
-env_8: FRONTEND_URL | Frontend origin URL for CORS whitelist | yes
-env_9: NODE_ENV | Environment flag (development/production) | yes
+env_1: RESEND_API_KEY | Resend API key used by the serverless handler | yes
+env_2: ENQUIRY_FROM_EMAIL | Verified sender address or domain used for enquiry emails | yes
+env_3: RECEIVER_EMAIL | Owner's email address that receives enquiry notifications | yes
 
 ---
 
 ## PHASES
 
 phase_1_name: Repo Setup
-phase_1_goal: Clean repo with monorepo structure (client/ + server/), .gitignore, dependencies installed, env example files
+phase_1_goal: Clean repo with client/ as the app root, co-located serverless submission code, .gitignore, dependencies installed, env example files
 phase_1_checkboxes:
   - Conventional initial commit
   - .gitignore covers secrets, deps, build artifacts (node_modules, .env, dist)
-  - Folder structure: client/ (React+Vite) and server/ (Express)
-  - .env.example in server/ with all keys listed (no values)
-  - Dependencies install cleanly in both client/ and server/
-phase_1_proof: Show `git log --oneline -1`. Show `ls client/ server/`. Show .gitignore contents. Run `npm install` in both dirs.
-phase_1_commit: chore(init): initialise monorepo with client and server structure
+  - Folder structure: client/ app with co-located client/api/ submission endpoint
+  - .env.example in client/ with all keys listed (no values)
+  - Dependencies install cleanly in client/
+phase_1_proof: Show `git log --oneline -1`. Show `ls client/`. Show .gitignore contents. Run `npm install` in client/.
+phase_1_commit: chore(init): initialise client app and co-located submission structure
 
-phase_2_name: MongoDB Connection
-phase_2_goal: Mongoose connects to MongoDB Atlas from server/, config from .env, connection verified
+phase_2_name: Resend Setup
+phase_2_goal: Verified email delivery provider configured for this project, with no browser-exposed secrets
 phase_2_checkboxes:
-  - Mongoose connection module reads MONGODB_URI from .env
-  - Connection success/failure logged with structured logging
-  - Config from env, not hardcoded
-  - Connection test passes (server starts and connects)
-phase_2_proof: Start server, show console log confirming MongoDB connected. Show no hardcoded URI in code.
-phase_2_commit: feat(db): add MongoDB Atlas connection with Mongoose
+  - Resend account created for the project
+  - Sending domain or sender address verified
+  - API key created and stored only in deployment env vars
+  - Gmail OAuth2 credentials and MongoDB dependency marked for removal from production plan
+phase_2_proof: Show verified sender in Resend dashboard. Show env var names only, with values redacted. Show no client-side secret exposure.
+phase_2_commit: chore(email): configure resend and retire gmail oauth plan
 
-phase_3_name: Enquiry Model + Seed
-phase_3_goal: Enquiry Mongoose schema defined, seed script inserts test data, data verifiable in Atlas
+phase_3_name: Submission Endpoint
+phase_3_goal: Serverless POST /api/enquiry endpoint exists on the frontend host and sends enquiries through Resend
 phase_3_checkboxes:
-  - Enquiry schema matches manifest (fullName, phone, email, companyName, productOfInterest, message, createdAt)
-  - Field validations on schema (required and optional fields)
-  - Seed script inserts 3-5 realistic sample enquiries
-  - Seed is idempotent (safe to run multiple times)
-  - Data visible in MongoDB Atlas dashboard
-phase_3_proof: Run seed script. Show MongoDB Atlas screenshot or `mongosh` query showing inserted documents.
-phase_3_commit: feat(db): add Enquiry model and seed script
-
-phase_4_name: Express Server + Enquiry Endpoint
-phase_4_goal: Express server with POST /api/enquiry that validates input and saves to MongoDB. GET /api/health returns status.
-phase_4_checkboxes:
-  - Express server starts on PORT from .env
-  - POST /api/enquiry validates and saves enquiry to MongoDB
-  - GET /api/health returns JSON status
-  - Input sanitized (no raw user input stored)
-  - CORS configured to allow FRONTEND_URL only
+  - POST /api/enquiry exists as a serverless handler
+  - Input sanitized before provider call
+  - Email payload contains enquiry details in a readable format
   - Error path returns meaningful JSON error (not stack trace)
-phase_4_proof: Use curl or Postman: POST valid enquiry → 201 + saved to DB. POST invalid enquiry → 400 + error message. GET /api/health → 200.
-phase_4_commit: feat(api): add enquiry endpoint with validation and health check
+  - No custom always-on backend required
+phase_3_proof: POST valid enquiry → success JSON and email arrives. POST invalid enquiry → 400 + error message.
+phase_3_commit: feat(api): add serverless enquiry submission endpoint
 
-phase_5_name: Enquiry Validation + Rate Limiting + Tests
-phase_5_goal: Zod validation on backend, rate limiting on enquiry endpoint, integration tests passing
+phase_4_name: Validation + Abuse Controls
+phase_4_goal: Enquiry submission is validated and protected without a custom Express server
+phase_4_checkboxes:
+  - Zod schema validates: firstName required, lastName required, phone required (Indian 10-digit), email optional (valid format), other fields optional
+  - Abuse control added at the submission layer (provider, middleware, or platform-friendly rate limiting)
+  - Tests or reproducible proof cover valid and invalid submissions
+  - All tests or manual proof pass
+phase_4_proof: Submit valid enquiry → success. Submit invalid phone → 400. Demonstrate the abuse-control configuration or provider rule.
+phase_4_commit: feat(api): add submission validation and abuse controls
+
+phase_5_name: Enquiry Form Integration
+phase_5_goal: Frontend enquiry form submits to the serverless endpoint and handles responses cleanly
 phase_5_checkboxes:
-  - Zod schema validates: fullName required, phone required (Indian 10-digit), email optional (valid format), other fields optional
-  - express-rate-limit applied to POST /api/enquiry
-  - Integration tests: valid submission → 201, missing fullName → 400, invalid phone → 400, rate limit exceeded → 429
-  - All tests pass
-phase_5_proof: Run test suite, show all passing. Show rate limiter config.
-phase_5_commit: feat(api): add Zod validation, rate limiting, and integration tests
+  - Enquiry modal opens from floating button and navbar
+  - Form uses Shadcn/ui components + React Hook Form + Zod
+  - Client-side validation matches submission endpoint
+  - Successful submission calls POST /api/enquiry and shows success toast
+  - Error state shows user-friendly message
+  - Form resets after successful submission
+phase_5_proof: Open modal, submit valid enquiry → toast + email received. Submit invalid phone → client-side error shown. Show network tab confirming API call.
+phase_5_commit: feat(ui): connect enquiry form to serverless submission flow
 
-phase_6_name: Nodemailer Service
-phase_6_goal: Email service module using Gmail OAuth2. Enquiry endpoint sends email on successful save.
+phase_6_name: Delivery Verification
+phase_6_goal: Production-style email delivery is verified with provider logs and no Gmail SMTP dependency remains
 phase_6_checkboxes:
-  - Nodemailer transporter configured with Gmail OAuth2 (clientId, clientSecret, refreshToken)
-  - Email service is a separate module (not inline in route handler)
-  - Enquiry endpoint: save to DB first, then send email. DB save failure → 500. Email failure → log error but still return success (enquiry is saved).
-  - Email contains formatted enquiry details (name, phone, product, message)
-  - No hardcoded credentials — all from .env
-  - Unit tests for email service (mock transporter)
-phase_6_proof: Submit enquiry via curl → email arrives in owner's Gmail. Show no hardcoded credentials. Run tests.
-phase_6_commit: feat(email): add Nodemailer service with Gmail OAuth2
+  - Resend activity logs show successful deliveries
+  - From address/domain authentication passes
+  - No Google OAuth2 / Gmail SMTP dependency remains in the production path
+  - No MongoDB dependency remains in the production path
+  - Secrets stored only in deployment env vars
+phase_6_proof: Submit enquiry → email arrives and corresponding provider log entry exists. Show no Gmail/Mongo production dependency in architecture.
+phase_6_commit: feat(email): verify provider delivery and remove legacy dependencies
 
 phase_7_name: React Skeleton + Routing
 phase_7_goal: React app with React Router v7, layout (navbar + footer), all pages render, Tailwind configured
@@ -233,15 +223,15 @@ phase_7_proof: Run `npm run dev` in client/. Click through all nav links. Show 4
 phase_7_commit: feat(ui): add React skeleton with routing and layout
 
 phase_8_name: Enquiry Form
-phase_8_goal: Enquiry modal with Shadcn form components, React Hook Form + Zod validation, connected to backend API
+phase_8_goal: Enquiry modal with Shadcn form components, React Hook Form + Zod validation, connected to the serverless submission endpoint
 phase_8_checkboxes:
   - Enquiry modal opens from floating button and navbar
   - Form uses Shadcn/ui components + React Hook Form + Zod
-  - Client-side validation matches backend (fullName required, phone Indian format, email optional format)
+  - Client-side validation matches the submission handler (firstName + lastName required, phone Indian format, email optional format)
   - Successful submission calls POST /api/enquiry and shows success toast
   - Error state shows user-friendly message
   - Form resets after successful submission
-phase_8_proof: Open modal, submit valid enquiry → toast + email received + saved in DB. Submit invalid phone → client-side error shown. Show network tab confirming API call.
+phase_8_proof: Open modal, submit valid enquiry → toast + email received. Submit invalid phone → client-side error shown. Show network tab confirming API call.
 phase_8_commit: feat(ui): add enquiry form modal with validation and API integration
 
 phase_9_name: Chatbot + Product Pages
@@ -297,12 +287,12 @@ phase_13_name: Environment Config
 phase_13_goal: All environment configs documented and working for dev and production
 phase_13_checkboxes:
   - .env.example updated with all current keys
-  - Server starts cleanly with only .env values
-  - Missing env var → server fails fast with clear error message
+  - Submission endpoint runs cleanly with only env values
+  - Missing env var → endpoint fails fast with clear error message
   - No hardcoded values in any file
-  - CORS correctly restricts to FRONTEND_URL
-phase_13_proof: Delete .env, start server → see clear error for each missing var. Restore .env → server starts. Test CORS from wrong origin → blocked.
-phase_13_commit: chore(config): harden environment configuration and validation
+  - No email provider secret exposed to the browser bundle
+phase_13_proof: Remove required env var → see clear failure. Restore env vars → submission succeeds. Confirm no client-side secret exposure in built assets.
+phase_13_commit: chore(config): harden serverless environment configuration
 
 phase_14_name: Performance
 phase_14_goal: Lighthouse audit passing, bundle optimised, images optimised
@@ -315,28 +305,26 @@ phase_14_checkboxes:
 phase_14_proof: Run Lighthouse audit, show scores. Show bundle analysis output.
 phase_14_commit: perf(ui): optimise bundle size and loading performance
 
-phase_15_name: Deploy Backend
-phase_15_goal: Express API live on Render or Railway, connected to MongoDB Atlas, email sending works
+phase_15_name: Deploy Frontend + Submission Endpoint
+phase_15_goal: React app and its serverless submission endpoint live on Vercel, with provider env vars configured
 phase_15_checkboxes:
-  - Server deployed and reachable at public URL
-  - GET /api/health returns 200
-  - POST /api/enquiry works from deployed URL (saves to Atlas + sends email)
-  - All env vars set in host platform (not in repo)
+  - Frontend deployed to Vercel at production URL
+  - POST /api/enquiry works in the deployed environment and sends email
+  - All env vars set in Vercel (not in repo)
   - HTTPS enforced
-phase_15_proof: curl deployed /api/health → 200. curl POST enquiry → 201 + email received. Show env vars in host dashboard (values redacted).
-phase_15_commit: chore(deploy): deploy backend to Render/Railway
+phase_15_proof: Visit deployment, submit enquiry → email received. Show env vars in dashboard with values redacted.
+phase_15_commit: chore(deploy): deploy frontend and submission endpoint to vercel
 
-phase_16_name: Deploy Frontend
-phase_16_goal: React app live on Vercel, DNS configured, connects to production backend
+phase_16_name: Domain + Production Verification
+phase_16_goal: DNS pointed to Vercel, production site verified end-to-end, no separate backend host involved
 phase_16_checkboxes:
   - Frontend deployed to Vercel at production URL
   - DNS pointed to Vercel (domain configured)
-  - Frontend connects to production backend API
   - Enquiry form works end-to-end in production
   - All pages load correctly
   - HTTPS via Vercel
 phase_16_proof: Visit production URL. Submit enquiry → email received. Navigate all pages. Show HTTPS in browser.
-phase_16_commit: chore(deploy): deploy frontend to Vercel with DNS
+phase_16_commit: chore(deploy): connect production domain and verify enquiry flow
 
 phase_17_name: CI/CD
 phase_17_goal: GitHub Actions pipeline — tests on push, deploy on merge to main
