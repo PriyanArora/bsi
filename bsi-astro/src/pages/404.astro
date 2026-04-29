@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Page Not Found | BSI Solutionz">
+  <Fragment slot="head">
+    <meta name="description" content="The page you requested could not be found." />
+    <meta property="og:title" content="404 - Page Not Found" />
+    <meta property="og:description" content="The page you requested could not be found." />
+  </Fragment>
+
+  <section class="bg-bsi-surface flex min-h-[70vh] items-center justify-center px-6 pb-16 pt-[calc(var(--bsi-navbar-height)+2rem)] text-center">
+    <div class="max-w-xl">
+      <p class="font-headline text-bsi-accent text-8xl font-extrabold tracking-tight">404</p>
+      <h1 class="font-headline text-bsi-primary mt-4 text-3xl font-bold">Page not found</h1>
+      <p class="text-bsi-secondary mt-4 text-base leading-relaxed">
+        The page you are looking for does not exist or may have been moved.
+      </p>
+      <a
+        href="/"
+        class="bg-bsi-primary mt-8 inline-flex rounded-full px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:bg-bsi-primary-container"
+      >
+        Back to Home
+      </a>
+    </div>
+  </section>
+</Layout>

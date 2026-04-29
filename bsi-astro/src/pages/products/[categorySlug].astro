@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CATEGORY_CATALOG, JAKSON_CATEGORY_CATALOG, getCategoryBySlug, getProductsByCategory } from '../../lib/productCatalog.js';
+import { getProductImage } from '../../lib/productImages.js';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  const categories = [...CATEGORY_CATALOG, ...JAKSON_CATEGORY_CATALOG];
+  return categories.map((category) => ({
+    params: { categorySlug: category.slug },
+    props: {
+      categoryName: category.categoryName,
+      description: category.description
+    }
+  }));
+}
+
+const { categorySlug } = Astro.params;
+const categoryName = Astro.props.categoryName ?? '';
+const description = Astro.props.description ?? '';
+const pageTitle = `${categoryName} - BSI Solutionz Product Catalog`;
+const ogTitle = `${categoryName} | BSI Solutionz`;
+const category = getCategoryBySlug(categorySlug);
+const products = category ? getProductsByCategory(category.categoryName) : [];
+const isGeneratorRentalsCategory = category?.slug === 'generator-rentals' || category?.slug === 'rental-generators';
+---
+
+<Layout title={pageTitle}>
+  <Fragment slot="head">
+    <meta name="description" content={description} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og-products-placeholder.png" />
+  </Fragment>
+
+  {category ? (
+    <main class="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
+      <div class="mx-auto max-w-7xl px-6 md:px-8">
+        <header class="mb-12 pl-2 sm:pl-4 md:mb-14 md:pl-8 lg:mb-16 lg:pl-16">
+          <a
+            href="/products"
+            class="text-bsi-secondary hover:text-bsi-primary mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] transition"
+          >
+            <span aria-hidden="true">&larr;</span>
+            All Categories
+          </a>
+
+          <h1 class="font-headline text-bsi-primary mb-5 max-w-4xl text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+            {category.categoryName}
+          </h1>
+
+          <p class="text-bsi-secondary max-w-3xl text-base leading-relaxed sm:text-lg">
+            {category.description}
+          </p>
+        </header>
+
+        <section class="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-3 md:px-8 lg:gap-8 lg:px-16">
+          {products.map((product) => {
+            const productImage = isGeneratorRentalsCategory ? '' : getProductImage(category, product);
+
+            return (
+              <article
+                class={[
+                  'border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full flex-col rounded-none border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transform-gpu transition-transform duration-200 ease hover:-translate-y-1 hover:scale-[1.01]',
+                  isGeneratorRentalsCategory ? 'min-h-84' : 'min-h-112'
+                ].join(' ')}
+              >
+                {!isGeneratorRentalsCategory ? (
+                  <div class="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
+                    {productImage ? (
+                      <img
+                        src={productImage}
+                        alt={product.title}
+                        loading="lazy"
+                        class="h-full w-full rounded-none object-contain"
+                      />
+                    ) : (
+                      <img
+                        src="/product-placeholder.svg"
+                        alt={`${product.title} placeholder`}
+                        loading="lazy"
+                        class="h-full w-full rounded-none object-contain"
+                      />
+                    )}
+                  </div>
+                ) : null}
+
+                <h3 class="font-headline text-bsi-primary mb-3 text-xl font-bold">{product.title}</h3>
+
+                <p
+                  class={[
+                    'text-bsi-secondary grow leading-relaxed',
+                    isGeneratorRentalsCategory ? 'mb-4' : 'mb-7',
+                    product.featured ? 'text-base' : 'text-sm'
+                  ].join(' ')}
+                >
+                  {product.description}
+                </p>
+
+                <div class="mt-auto flex items-start justify-between gap-4 pt-2">
+                  <div class="flex min-h-10 flex-col justify-start">
+                    <span class="text-bsi-secondary text-[10px] font-bold uppercase tracking-[0.2em]">
+                      {product.specLabel}
+                    </span>
+                    <span class="text-bsi-primary text-sm font-semibold">{product.spec}</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    class={[
+                      'bg-bsi-primary-container h-10 shrink-0 rounded-none px-0 text-sm font-bold tracking-[0.08em] whitespace-nowrap text-white transition hover:bg-bsi-primary',
+                      isGeneratorRentalsCategory ? 'w-44' : 'w-32'
+                    ].join(' ')}
+                  >
+                    {isGeneratorRentalsCategory ? 'Check Availability' : 'Enquire Now'}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </section>
+      </div>
+    </main>
+  ) : (
+    <section class="flex min-h-[65vh] items-center justify-center px-6 pt-[calc(var(--bsi-navbar-height)+2rem)] text-center">
+      <div class="max-w-lg">
+        <p class="text-bsi-secondary mb-3 text-xs font-bold uppercase tracking-[0.2em]">Catalog</p>
+        <h1 class="font-headline text-bsi-primary text-4xl font-extrabold">Category not found</h1>
+        <p class="text-bsi-secondary mt-4 text-sm leading-relaxed">
+          This category does not exist in the current catalog. Please go back to Products and choose an available
+          category.
+        </p>
+        <a
+          href="/products"
+          class="bg-bsi-primary mt-8 inline-flex rounded-full px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:opacity-90"
+        >
+          Back to Products
+        </a>
+      </div>
+    </section>
+  )}
+</Layout>

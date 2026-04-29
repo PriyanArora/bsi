@@ -1,0 +1,17 @@
+---
+import indefLogo from '../../assets/logos/indef-logo.png';
+
+const trustItem = {
+  imageSrc: typeof indefLogo === 'string' ? indefLogo : indefLogo?.src || '',
+  label: 'Authorized Bajaj Indef Dealer'
+};
+---
+
+<section class="trust-strip-live-gradient w-full border-y border-[#C5D3E4] py-7 sm:py-8">
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-4 px-6 sm:gap-6 md:gap-9 md:px-8">
+    <div class="flex items-center gap-3 text-base font-semibold text-[#0D1F3C] sm:text-[1.05rem]">
+      <img src={trustItem.imageSrc} alt="" aria-hidden="true" class="trust-indef-logo object-contain" />
+      <span>{trustItem.label}</span>
+    </div>
+  </div>
+</section>

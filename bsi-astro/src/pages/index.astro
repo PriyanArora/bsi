@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import TrustStrip from '../components/home/TrustStrip.astro';
+import FeaturedProducts from '../components/home/FeaturedProducts.astro';
+import LogoMarquee from '../components/home/LogoMarquee.astro';
+import WhyChooseUs from '../components/home/WhyChooseUs.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+---
+
+<Layout title="BSI Solutionz - Authorized Bajaj Indef Dealer | Cranes & Hoists">
+  <Fragment slot="head">
+    <meta
+      name="description"
+      content="BSI Solutionz is an authorized Bajaj Indef dealer providing electric chain hoists, wire rope hoists, EOT cranes and material handling solutions across India."
+    />
+    <meta
+      name="keywords"
+      content="BSI Solutionz, Bajaj Indef dealer, electric chain hoist, wire rope hoist, EOT crane, material handling"
+    />
+    <meta property="og:title" content="BSI Solutionz - Cranes & Hoists" />
+    <meta
+      property="og:description"
+      content="Premium industrial lifting solutions. Authorized Bajaj Indef Dealer."
+    />
+    <meta property="og:image" content="/shared/brand-logo.png" />
+  </Fragment>
+
+  <HeroSection />
+  <div class="home-mobile-stack-order">
+    <div class="home-trust-strip-slot">
+      <TrustStrip />
+    </div>
+    <div class="home-featured-products-slot">
+      <FeaturedProducts />
+    </div>
+    <div class="home-logo-marquee-slot">
+      <LogoMarquee />
+    </div>
+  </div>
+  <WhyChooseUs />
+  <Testimonials />
+</Layout>

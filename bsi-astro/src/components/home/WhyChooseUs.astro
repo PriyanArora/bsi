@@ -1,0 +1,61 @@
+---
+import IndustrialGridBackground from '../ui/IndustrialGridBackground.astro';
+
+const trustPoints = [
+  {
+    icon: 'verified',
+    title: 'Authorized Bajaj Indef Dealer',
+    description: 'Genuine parts and certified engineering directly from the industry leader.'
+  },
+  {
+    icon: 'engineering',
+    title: 'Custom Engineering',
+    description: "We don't just sell products; we design solutions for your unique spatial challenges."
+  },
+  {
+    icon: 'support_agent',
+    title: '24/7 Service Support',
+    description: 'Minimal downtime with our rapid-response technical maintenance teams.'
+  }
+];
+---
+
+<section class="section-pad relative overflow-hidden bg-white">
+  <IndustrialGridBackground
+    theme="light"
+    cellSize={92}
+    lineOpacity={0.2}
+    markerOpacity={0.2}
+    markerSize={5}
+    fadeEdges={false}
+    className="absolute inset-0"
+  />
+
+  <div class="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:gap-14 md:px-8 lg:grid-cols-2 lg:gap-16">
+    <div class="h-fit lg:sticky lg:top-32">
+      <h2 class="font-headline text-bsi-primary text-3xl leading-tight font-extrabold sm:text-4xl md:text-5xl">
+        Why BSI Solutionz ?
+      </h2>
+
+      <div class="mt-8 flex flex-col gap-8 sm:mt-10 sm:gap-10">
+        {trustPoints.map((point) => (
+          <article class="flex gap-5">
+            <div class="bg-bsi-primary-container flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-white">
+              <span class="material-symbols-outlined">{point.icon}</span>
+            </div>
+            <div>
+              <h4 class="text-bsi-primary text-lg font-bold">{point.title}</h4>
+              <p class="text-bsi-secondary mt-2 leading-relaxed">{point.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex pt-4 lg:self-stretch lg:pt-0">
+      <div class="bg-white text-bsi-secondary flex h-64 w-full items-center justify-center rounded-none border border-slate-200 text-sm font-medium uppercase tracking-[0.08em] sm:h-80 lg:h-full">
+        placeholder image
+      </div>
+    </div>
+  </div>
+</section>
