@@ -19,6 +19,10 @@ const SHARED_FOLDER = 'shared'
 const CATEGORY_TITLE_SHARED_IMAGE_BY_SLUG = {
   'electric-chain-hoists': 'hc-plus',
   'manual-hoists': 'indef-c',
+  '7-5-58-5-kva-genset': '7.5-58.5-kVA-Genset',
+  '82-5-160-kva-genset': '82.5-160-kVA-MHP-Genset-Jakson-Genset-in-india',
+  '180-500-kva-genset': '180-500-kVA-LHP-Genset-Jakson-Genset-in-india',
+  '650-3750-kva-genset': '650-3750-kVA-HHP-Genset-Jakson-Genset-1',
 }
 
 const SHARED_IMAGE_BY_PRODUCT_ID = {
@@ -42,6 +46,10 @@ const SHARED_IMAGE_BY_PRODUCT_ID = {
   'manual-hoists-indef-r': 'indef-r',
   'material-handling-indef-r': 'indef-r',
   'manual-hoists-indef-c': 'indef-c',
+  'jakson-genset-7-5-58-5-kva': '7.5-58.5-kVA-Genset',
+  'jakson-genset-82-5-160-kva': '82.5-160-kVA-MHP-Genset-Jakson-Genset-in-india',
+  'jakson-genset-180-500-kva': '180-500-kVA-LHP-Genset-Jakson-Genset-in-india',
+  'jakson-genset-650-3750-kva': '650-3750-kVA-HHP-Genset-Jakson-Genset-1',
   'wire-rope-hoist-hw': 'hw-wire-rope-hoist',
   'material-handling-hw-series': 'hw-wire-rope-hoist',
   'wire-rope-hoist-ir': 'ir-hoist',

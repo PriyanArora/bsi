@@ -1,5 +1,12 @@
 ---
 import IndustrialGridBackground from '../ui/IndustrialGridBackground.astro';
+import amcImage from '../../assets/shared/amc.jpg';
+import indefCraneImage from '../../assets/shared/indef-crane.png';
+import indefHoistsImage from '../../assets/shared/indef-hoists.jpg';
+import jaksonGeneratorImage from '../../assets/shared/jakson-generator.png';
+
+const normalizeAsset = (asset: string | { src: string } | undefined) =>
+  typeof asset === 'string' ? asset : asset?.src || '';
 
 const featuredProducts = [
   {
@@ -7,27 +14,27 @@ const featuredProducts = [
     title: 'Indef Hoists',
     description:
       'From electric chain hoists and manual chain pulley blocks to wire rope hoists, we offer dependable lifting options for light, medium, and heavy duty operations across plants and warehouses.',
-    mediaPlaceholder: 'placeholder'
+    image: normalizeAsset(indefHoistsImage)
   },
   {
     label: 'Crane Solutions',
     title: 'Indef Cranes',
     description:
       'Our Indef crane range covers single girder, double girder, underslung, gantry, semi gantry, jib, and light rail systems built for smooth and safe movement across every bay.',
-    mediaPlaceholder: 'placeholder'
+    image: normalizeAsset(indefCraneImage)
   },
   {
     label: 'Service Support',
     title: 'AMC care',
     description:
       'We support every installation with AMC care through annual maintenance contracts that include scheduled inspections, preventive servicing, and quick support to keep downtime low.',
-    mediaPlaceholder: 'placeholder'
+    image: normalizeAsset(amcImage)
   },
   {
     label: 'Power Backup',
     title: 'Jakson Diesel Generators',
     description: 'placeholder (include rental generator)',
-    mediaPlaceholder: 'placeholder'
+    image: normalizeAsset(jaksonGeneratorImage)
   }
 ];
 ---
@@ -45,8 +52,7 @@ const featuredProducts = [
 
   <div class="relative z-10 mx-auto max-w-7xl px-6 md:px-8 xl:max-w-368">
     <div class="mb-16 text-center">
-      <h2 class="font-headline text-bsi-primary text-3xl font-bold sm:text-4xl">Engineered Performance</h2>
-      <p class="text-bsi-secondary mt-4">Explore our flagship industrial lifting solutions</p>
+      <h2 class="font-headline text-bsi-primary text-3xl font-bold sm:text-4xl">Our Flagship Industrial Solutions</h2>
     </div>
 
     <div class="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -54,8 +60,13 @@ const featuredProducts = [
         <article
           class="border-bsi-outline/30 bg-bsi-surface-lowest group w-full max-w-xl rounded-none border p-6 shadow-sm transition-transform duration-200 ease transform-gpu hover:-translate-y-1 hover:scale-[1.01] md:max-w-none md:p-7"
         >
-          <div class="bg-bsi-surface text-bsi-secondary mb-6 flex h-52 items-center justify-center rounded-none border border-slate-200 text-sm font-medium uppercase tracking-[0.08em] sm:h-56">
-            {product.mediaPlaceholder}
+          <div class="bg-bsi-surface mb-6 h-52 overflow-hidden rounded-none border border-slate-200 sm:h-56">
+            <img
+              src={product.image}
+              alt={product.title}
+              loading="lazy"
+              class="h-full w-full object-cover"
+            />
           </div>
           <h3 class="font-headline text-bsi-primary text-xl font-bold">{product.title}</h3>
           <p class="text-bsi-secondary mt-4 text-sm leading-relaxed">{product.description}</p>

@@ -59,34 +59,32 @@ export const CATEGORY_CATALOG = [
 
 export const JAKSON_CATEGORY_CATALOG = [
   {
-    categoryName: 'Small Range Gensets',
-    slug: 'small-range-gensets',
-    description: 'Jakson RLHP diesel gensets for small businesses, shops and residential backup applications.',
-    productsCount: 9
+    categoryName: '7.5 - 58.5 kVA Genset',
+    slug: '7-5-58-5-kva-genset',
+    description: 'Cummins-powered RLHP gensets with enhanced cooling, 4G telematics, and over 8 hours of operation for residential and light commercial backup.',
+    productsCount: 1,
+    directDetail: true
   },
   {
-    categoryName: 'Medium Range Gensets',
-    slug: 'medium-range-gensets',
-    description: 'Jakson LHP and MHP diesel gensets for medium industries, commercial complexes and hospitals.',
-    productsCount: 8
+    categoryName: '82.5 - 160 kVA Genset',
+    slug: '82-5-160-kva-genset',
+    description: 'Cummins-powered LHP gensets with enhanced cooling, fuel and DEF monitoring, and extended service intervals for commercial and institutional uptime.',
+    productsCount: 1,
+    directDetail: true
   },
   {
-    categoryName: 'Large Range Gensets',
-    slug: 'large-range-gensets',
-    description: 'Jakson MHP and HHP diesel gensets for large industries, data centers and heavy-duty operations.',
-    productsCount: 5
+    categoryName: '180 - 500 kVA Genset',
+    slug: '180-500-kva-genset',
+    description: 'Cummins-powered MHP gensets with high-temperature performance, eco-friendly emissions, and smart fuel and DEF monitoring for heavy-duty standby use.',
+    productsCount: 1,
+    directDetail: true
   },
   {
-    categoryName: 'Industrial Range Gensets',
-    slug: 'industrial-range-gensets',
-    description: 'Jakson HHP diesel gensets for heavy industrial applications, power plants and large infrastructure.',
-    productsCount: 8
-  },
-  {
-    categoryName: 'Rental Generators',
-    slug: 'rental-generators',
-    description: 'Available rental generator capacity bands for events, offices, construction, industrial backup and infrastructure applications.',
-    productsCount: 5
+    categoryName: '650 - 3750 kVA Genset',
+    slug: '650-3750-kva-genset',
+    description: 'Cummins-powered HHP gensets with G3/G2 transient response, enhanced cooling, 4G telematics, and high-capacity backup for critical infrastructure loads.',
+    productsCount: 1,
+    directDetail: true
   }
 ]
 
@@ -524,319 +522,60 @@ export const PRODUCT_CATALOG = [
     featured: false
   },
   {
-    id: 'jakson-genset-7-5-kva',
-    title: '7.5 kVA Genset',
-    description: 'Compact RLHP silent genset for residential and small business backup.',
-    specLabel: 'Power',
-    spec: '7.5 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
+    id: 'jakson-genset-7-5-58-5-kva',
+    title: '7.5 - 58.5 kVA Genset',
+    description: 'Compact Jakson diesel genset range suited to residential backup, retail sites, offices and other light-duty standby applications.',
+    specLabel: 'Power Range',
+    spec: '7.5 - 58.5 kVA',
+    categoryName: '7.5 - 58.5 kVA Genset',
+    featured: true,
+    detailItems: [
+      'Category: Compact diesel genset range',
+      'Use case: Residential, retail and small business backup',
+      'Output: 7.5 - 58.5 kVA'
+    ]
   },
   {
-    id: 'jakson-genset-10-kva',
-    title: '10 kVA Genset',
-    description: 'Silent RLHP genset for compact retail and residential backup needs.',
-    specLabel: 'Power',
-    spec: '10 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
+    id: 'jakson-genset-82-5-160-kva',
+    title: '82.5 - 160 kVA Genset',
+    description: 'Jakson diesel gensets built for medium commercial facilities, institutions, clinics and industrial support loads requiring dependable standby power.',
+    specLabel: 'Power Range',
+    spec: '82.5 - 160 kVA',
+    categoryName: '82.5 - 160 kVA Genset',
+    featured: true,
+    detailItems: [
+      'Category: Mid-range diesel genset platform',
+      'Use case: Commercial buildings, hospitals and institutional backup',
+      'Output: 82.5 - 160 kVA'
+    ]
   },
   {
-    id: 'jakson-genset-15-kva',
-    title: '15 kVA Genset',
-    description: 'Three-phase RLHP genset for light commercial backup continuity.',
-    specLabel: 'Power',
-    spec: '15 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
+    id: 'jakson-genset-180-500-kva',
+    title: '180 - 500 kVA Genset',
+    description: 'Jakson heavy-duty diesel gensets designed for plants, large facilities, industrial operations and mission-critical commercial standby requirements.',
+    specLabel: 'Power Range',
+    spec: '180 - 500 kVA',
+    categoryName: '180 - 500 kVA Genset',
+    featured: true,
+    detailItems: [
+      'Category: Heavy-duty diesel genset range',
+      'Use case: Industrial plants, factories and critical facility backup',
+      'Output: 180 - 500 kVA'
+    ]
   },
   {
-    id: 'jakson-genset-20-kva',
-    title: '20 kVA Genset',
-    description: 'Silent RLHP genset for shops, clinics and small facilities.',
-    specLabel: 'Power',
-    spec: '20 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-25-kva',
-    title: '25 kVA Genset',
-    description: 'Three-phase RLHP genset for small industrial and commercial backup.',
-    specLabel: 'Power',
-    spec: '25 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-30-kva',
-    title: '30 kVA Genset',
-    description: 'Silent RLHP genset for business and facility standby power.',
-    specLabel: 'Power',
-    spec: '30 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-40-kva',
-    title: '40 kVA Genset',
-    description: 'Three-phase RLHP genset for commercial and institutional backup.',
-    specLabel: 'Power',
-    spec: '40 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-50-kva',
-    title: '50 kVA Genset',
-    description: 'Silent RLHP genset for resilient mixed-use standby applications.',
-    specLabel: 'Power',
-    spec: '50 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-62-5-kva',
-    title: '62.5 kVA Genset',
-    description: 'Upper small-range genset retained from the supplied model list.',
-    specLabel: 'Power',
-    spec: '62.5 kVA',
-    categoryName: 'Small Range Gensets',
-    featured: true
-  },
-  {
-    id: 'jakson-genset-75-kva',
-    title: '75 kVA Genset',
-    description: 'Medium-range genset retained from the supplied model list.',
-    specLabel: 'Power',
-    spec: '75 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-100-kva',
-    title: '100 kVA Genset',
-    description: 'Three-phase LHP genset for commercial and industrial continuity power.',
-    specLabel: 'Power',
-    spec: '100 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-125-kva',
-    title: '125 kVA Genset',
-    description: 'LHP genset for hospitals, complexes and industrial backup applications.',
-    specLabel: 'Power',
-    spec: '125 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-140-kva',
-    title: '140 kVA Genset',
-    description: 'Telematics-enabled LHP genset for dependable medium-scale standby power.',
-    specLabel: 'Power',
-    spec: '140 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-160-kva',
-    title: '160 kVA Genset',
-    description: 'LHP genset for medium industrial and healthcare continuity power.',
-    specLabel: 'Power',
-    spec: '160 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-180-kva',
-    title: '180 kVA Genset',
-    description: 'MHP genset for industries, hospitals and monitored backup applications.',
-    specLabel: 'Power',
-    spec: '180 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-200-kva',
-    title: '200 kVA Genset',
-    description: 'MHP genset with smart monitoring for medium-scale operations.',
-    specLabel: 'Power',
-    spec: '200 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-250-kva',
-    title: '250 kVA Genset',
-    description: 'MHP genset for critical commercial and hospital backup support.',
-    specLabel: 'Power',
-    spec: '250 kVA',
-    categoryName: 'Medium Range Gensets',
-    featured: true
-  },
-  {
-    id: 'jakson-genset-320-kva',
-    title: '320 kVA Genset',
-    description: 'Open MHP genset for large industries and data center support.',
-    specLabel: 'Power',
-    spec: '320 kVA',
-    categoryName: 'Large Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-380-kva',
-    title: '380 kVA Genset',
-    description: 'Open MHP genset for large industrial backup applications.',
-    specLabel: 'Power',
-    spec: '380 kVA',
-    categoryName: 'Large Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-400-kva',
-    title: '400 kVA Genset',
-    description: 'Open MHP genset for high-demand facility and data center use.',
-    specLabel: 'Power',
-    spec: '400 kVA',
-    categoryName: 'Large Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-500-kva',
-    title: '500 kVA Genset',
-    description: 'High-capacity MHP genset for large industries and heavy-duty backup.',
-    specLabel: 'Power',
-    spec: '500 kVA',
-    categoryName: 'Large Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-625-kva',
-    title: '625 kVA Genset',
-    description: 'Large-range genset retained from the supplied model list.',
-    specLabel: 'Power',
-    spec: '625 kVA',
-    categoryName: 'Large Range Gensets',
-    featured: true
-  },
-  {
-    id: 'jakson-genset-750-kva',
-    title: '750 kVA Genset',
-    description: 'HHP genset for heavy industrial applications and infrastructure backup.',
-    specLabel: 'Power',
-    spec: '750 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-1010-kva',
-    title: '1010 kVA Genset',
-    description: 'High-load HHP genset for industrial and infrastructure applications.',
-    specLabel: 'Power',
-    spec: '1010 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-1250-kva',
-    title: '1250 kVA Genset',
-    description: 'HHP genset for demanding plant, utility and infrastructure power.',
-    specLabel: 'Power',
-    spec: '1250 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-1500-kva',
-    title: '1500 kVA Genset',
-    description: 'Very high-capacity HHP genset for major standby operations.',
-    specLabel: 'Power',
-    spec: '1500 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-2000-kva',
-    title: '2000 kVA Genset',
-    description: 'Mission-critical HHP genset for large industrial backup systems.',
-    specLabel: 'Power',
-    spec: '2000 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-2500-kva',
-    title: '2500 kVA Genset',
-    description: 'High-capacity HHP genset for plants and infrastructure environments.',
-    specLabel: 'Power',
-    spec: '2500 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-3000-kva',
-    title: '3000 kVA Genset',
-    description: 'Ultra-high-capacity HHP genset for industrial standby support.',
-    specLabel: 'Power',
-    spec: '3000 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: false
-  },
-  {
-    id: 'jakson-genset-3750-kva',
-    title: '3750 kVA Genset',
-    description: 'Flagship HHP genset for very large industrial and infrastructure loads.',
-    specLabel: 'Power',
-    spec: '3750 kVA',
-    categoryName: 'Industrial Range Gensets',
-    featured: true
-  },
-  {
-    id: 'rental-generators-15-62-5-kva',
-    title: '15 - 62.5 kVA Rental Generator',
-    description: 'Silent rental generators for small events, shops and offices.',
-    specLabel: 'Capacity',
-    spec: '15 - 62.5 kVA',
-    categoryName: 'Rental Generators',
-    featured: false
-  },
-  {
-    id: 'rental-generators-75-125-kva',
-    title: '75 - 125 kVA Rental Generator',
-    description: 'Silent/open rental generators for events and construction sites.',
-    specLabel: 'Capacity',
-    spec: '75 - 125 kVA',
-    categoryName: 'Rental Generators',
-    featured: false
-  },
-  {
-    id: 'rental-generators-160-250-kva',
-    title: '160 - 250 kVA Rental Generator',
-    description: 'Silent/open rental generators for large events and backup use.',
-    specLabel: 'Capacity',
-    spec: '160 - 250 kVA',
-    categoryName: 'Rental Generators',
-    featured: true
-  },
-  {
-    id: 'rental-generators-320-500-kva',
-    title: '320 - 500 kVA Rental Generator',
-    description: 'Open rental generators for major events and heavy industry.',
-    specLabel: 'Capacity',
-    spec: '320 - 500 kVA',
-    categoryName: 'Rental Generators',
-    featured: true
-  },
-  {
-    id: 'rental-generators-625-1010-kva',
-    title: '625 - 1010 kVA Rental Generator',
-    description: 'Open rental generators for infrastructure and factory operations.',
-    specLabel: 'Capacity',
-    spec: '625 - 1010 kVA',
-    categoryName: 'Rental Generators',
-    featured: true
+    id: 'jakson-genset-650-3750-kva',
+    title: '650 - 3750 kVA Genset',
+    description: 'High-capacity Jakson diesel gensets for large industrial campuses, utilities, infrastructure projects and very high-load standby applications.',
+    specLabel: 'Power Range',
+    spec: '650 - 3750 kVA',
+    categoryName: '650 - 3750 kVA Genset',
+    featured: true,
+    detailItems: [
+      'Category: High-capacity diesel genset range',
+      'Use case: Utilities, infrastructure and major industrial backup systems',
+      'Output: 650 - 3750 kVA'
+    ]
   }
 ]
 

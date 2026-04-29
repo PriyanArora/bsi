@@ -31,7 +31,15 @@ import { JAKSON_CATEGORY_CATALOG } from '../../lib/productCatalog.js';
       <h2 class="text-bsi-secondary relative top-9 mt-14 mb-14 px-2 text-base font-semibold tracking-[0.08em] uppercase sm:px-4 sm:text-lg md:mb-16 md:px-8 lg:mb-20 lg:px-16">
         Jakson Diesel generators
       </h2>
-      <ProductGrid categories={JAKSON_CATEGORY_CATALOG} showPlaceholderOnMissingImage sortCategories={false} />
+      <ProductGrid
+        categories={JAKSON_CATEGORY_CATALOG}
+        showPlaceholderOnMissingImage
+        sortCategories={false}
+        showProductCounts={false}
+        titleClass="lg:min-h-[3.5rem]"
+        linkCards={false}
+        ctaLabel="Enquire Now"
+      />
     </div>
     <ProductsCTA />
   </main>

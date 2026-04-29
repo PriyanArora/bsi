@@ -1,13 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { CATEGORY_CATALOG, JAKSON_CATEGORY_CATALOG, getCategoryBySlug, getProductsByCategory } from '../../lib/productCatalog.js';
+import { CATEGORY_CATALOG, getCategoryBySlug, getProductsByCategory } from '../../lib/productCatalog.js';
 import { getProductImage } from '../../lib/productImages.js';
 
 export const prerender = true;
 
 export function getStaticPaths() {
-  const categories = [...CATEGORY_CATALOG, ...JAKSON_CATEGORY_CATALOG];
-  return categories.map((category) => ({
+  return CATEGORY_CATALOG.map((category) => ({
     params: { categorySlug: category.slug },
     props: {
       categoryName: category.categoryName,
@@ -23,7 +22,6 @@ const pageTitle = `${categoryName} - BSI Solutionz Product Catalog`;
 const ogTitle = `${categoryName} | BSI Solutionz`;
 const category = getCategoryBySlug(categorySlug);
 const products = category ? getProductsByCategory(category.categoryName) : [];
-const isGeneratorRentalsCategory = category?.slug === 'generator-rentals' || category?.slug === 'rental-generators';
 ---
 
 <Layout title={pageTitle}>
@@ -57,41 +55,35 @@ const isGeneratorRentalsCategory = category?.slug === 'generator-rentals' || cat
 
         <section class="grid grid-cols-1 gap-6 px-2 sm:px-4 md:grid-cols-3 md:px-8 lg:gap-8 lg:px-16">
           {products.map((product) => {
-            const productImage = isGeneratorRentalsCategory ? '' : getProductImage(category, product);
+            const productImage = getProductImage(category, product);
 
             return (
               <article
-                class={[
-                  'border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full flex-col rounded-none border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transform-gpu transition-transform duration-200 ease hover:-translate-y-1 hover:scale-[1.01]',
-                  isGeneratorRentalsCategory ? 'min-h-84' : 'min-h-112'
-                ].join(' ')}
+                class="border-bsi-outline/30 bg-bsi-surface-lowest group flex h-full min-h-112 flex-col rounded-none border p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transform-gpu transition-transform duration-200 ease hover:-translate-y-1 hover:scale-[1.01]"
               >
-                {!isGeneratorRentalsCategory ? (
-                  <div class="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
-                    {productImage ? (
-                      <img
-                        src={productImage}
-                        alt={product.title}
-                        loading="lazy"
-                        class="h-full w-full rounded-none object-contain"
-                      />
-                    ) : (
-                      <img
-                        src="/product-placeholder.svg"
-                        alt={`${product.title} placeholder`}
-                        loading="lazy"
-                        class="h-full w-full rounded-none object-contain"
-                      />
-                    )}
-                  </div>
-                ) : null}
+                <div class="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
+                  {productImage ? (
+                    <img
+                      src={productImage}
+                      alt={product.title}
+                      loading="lazy"
+                      class="h-full w-full rounded-none object-contain"
+                    />
+                  ) : (
+                    <img
+                      src="/product-placeholder.svg"
+                      alt={`${product.title} placeholder`}
+                      loading="lazy"
+                      class="h-full w-full rounded-none object-contain"
+                    />
+                  )}
+                </div>
 
                 <h3 class="font-headline text-bsi-primary mb-3 text-xl font-bold">{product.title}</h3>
 
                 <p
                   class={[
-                    'text-bsi-secondary grow leading-relaxed',
-                    isGeneratorRentalsCategory ? 'mb-4' : 'mb-7',
+                    'text-bsi-secondary grow leading-relaxed mb-7',
                     product.featured ? 'text-base' : 'text-sm'
                   ].join(' ')}
                 >
@@ -110,12 +102,9 @@ const isGeneratorRentalsCategory = category?.slug === 'generator-rentals' || cat
                     type="button"
                     data-open-enquiry
                     data-product-name={product.title}
-                    class={[
-                      'bg-bsi-primary-container h-10 shrink-0 rounded-none px-0 text-sm font-bold tracking-[0.08em] whitespace-nowrap text-white transition hover:bg-bsi-primary',
-                      isGeneratorRentalsCategory ? 'w-44' : 'w-32'
-                    ].join(' ')}
+                    class="bg-bsi-primary-container h-10 w-32 shrink-0 rounded-none px-0 text-sm font-bold tracking-[0.08em] whitespace-nowrap text-white transition hover:bg-bsi-primary"
                   >
-                    {isGeneratorRentalsCategory ? 'Check Availability' : 'Enquire Now'}
+                    Enquire Now
                   </button>
                 </div>
               </article>
