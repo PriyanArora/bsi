@@ -102,14 +102,15 @@ function toTokens(value) {
 function buildImageIndex() {
   const byFolder = new Map()
 
-  Object.entries(ASSET_IMAGES).forEach(([relativePath, src]) => {
+  Object.entries(ASSET_IMAGES).forEach(([relativePath, asset]) => {
     const parts = relativePath.split('/')
     const fileName = parts[parts.length - 1] || ''
     const folder = parts[parts.length - 2] || ''
     const baseName = fileName.replace(/\.[^.]+$/, '')
+    const resolvedSrc = typeof asset === 'string' ? asset : asset?.src || ''
 
     const record = {
-      src,
+      src: resolvedSrc,
       folder,
       baseName,
       normalizedBase: normalize(baseName),
