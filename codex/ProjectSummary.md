@@ -1,24 +1,26 @@
 # BSI Solutionz — Project Summary (Web)
 
-> Authorized Bajaj Indef dealer website — product showcase, guided chatbot, and enquiry system for industrial crane and hoist buyers in India.
+> Authorized Bajaj Indef dealer website — Astro marketing site with React islands for enquiry capture and guided product selection.
 
-**Problem:** Industrial buyers looking for cranes and hoists have no easy way to discover BSI Solutionz's product range, get guided to the right product for their needs, or submit enquiries online. The owner needs a professional web presence for marketing and lead generation.
+**Problem:** Industrial buyers need a clear way to discover BSI Solutionz's crane, hoist, and generator offerings, get guided toward the right category, and submit an enquiry that reaches the owner reliably.
 
 ---
 
 ## System Overview
-```
-Browser (React SPA)
+```text
+Browser (Astro pages + React islands)
   ├── / Home
   ├── /products
+  ├── /products/[categorySlug]
   ├── /about
   ├── /contact
-  ├── /* 404
-  ├── Enquiry Modal (floating button + chatbot flow)
-  └── Chatbot Overlay (decision tree, frontend only)
+  ├── /privacy-policy
+  ├── /404
+  ├── Enquiry Modal (floating button + CTA triggers)
+  └── Chatbot Overlay (hardcoded decision tree)
         │
         ▼
-  POST /api/enquiry ──► Vercel Function
+  POST /api/enquiry ──► Astro API route
                             │
                             ▼
                          Resend API
@@ -26,106 +28,105 @@ Browser (React SPA)
                             ▼
                       Owner inbox
 ```
-**Core Constraint:** Enquiry submission must reliably reach the owner's inbox without relying on a cold custom backend. This is the money path — if it breaks, the site has no business value.
+
+**Core Constraint:** The money path is enquiry delivery. Any future provider or architecture change must preserve reliable delivery while keeping secrets out of the browser.
+
+**Current Architecture Note:** The promoted Astro app still uses the same-origin `/api/enquiry` route under `client/src/pages/api/`. A future “frontend-only + SendGrid” change is not implemented and must not expose provider secrets client-side.
 
 ---
 
 ## Features
-- Product showcase — display Bajaj Indef cranes/hoists with images, specs, and enquiry buttons
-- Enquiry form — modal with validated fields, submits to a serverless endpoint, emails owner
-- Hardcoded chatbot — decision-tree wizard guiding users to the right product, pre-fills enquiry form
-- SEO — static meta tags per page, sitemap.xml, robots.txt, Google Search Console ready
-- Floating "Enquire Now" button — persistent on every page, opens enquiry modal
-- Contact page — company contact info, location, office hours (no duplicate form)
-- About page — company mission, experience, industries served
-- 404 page — friendly error page for invalid routes
+- Static Astro page routes for home, products, category detail, about, contact, privacy, and 404
+- React islands for navbar/mobile nav, smooth scrolling, enquiry modal, chatbot modal, and floating enquiry trigger
+- Product catalog for Bajaj Indef lifting equipment and Jakson diesel generator ranges
+- Hardcoded recommendation chatbot that hands off into the enquiry modal
+- Shared enquiry flow from floating button, chatbot, product cards, category cards, AMC CTA, and About CTA
+- SEO metadata, sitemap, robots, and LocalBusiness JSON-LD
+- Responsive industrial-style UI with hero parallax, logo marquee, and hover motion
 
 ---
 
 ## Tech Stack
 | Layer | Technology | Host |
 |-------|-----------|------|
-| Frontend | React + Vite, React Router v7, Tailwind CSS, Shadcn/ui, Aceternity UI, Framer Motion, React Hook Form + Zod | Vercel |
-| Submission Layer | Vercel Functions + Resend Email API | Vercel + Resend |
+| Frontend | Astro 6, React 19 islands, Tailwind CSS 4, Lenis, Sonner, React Hook Form + Zod | Vercel |
+| Submission Layer | Astro API route + Resend Email API | Vercel + Resend |
 | CI/CD | GitHub Actions | GitHub |
 
 ---
 
 ## Architecture Decisions
-**D1 — SPA over SSR:** React + Vite (client-side SPA), not Next.js/Remix. Static meta tags + sitemap sufficient for SEO. SPA is simpler, minimal maintenance, no server-side rendering overhead. Deploys to Vercel CDN for fast loads.
+**D1 — Astro over SPA:** The site now uses Astro file routes and server-rendered HTML for public pages. This keeps the marketing site crawlable while limiting hydration to the surfaces that actually need client-side state.
 
-**D2 — Resend over Gmail OAuth2 SMTP:** Use an HTTPS email provider from a serverless function instead of Gmail SMTP. This removes SMTP port restrictions, avoids custom always-on backend hosting, and keeps provider secrets out of the browser.
+**D2 — React islands for interactivity:** Navbar state, modal orchestration, chatbot logic, and the enquiry form remain in React instead of being rewritten into imperative DOM code.
 
-**D3 — Hardcoded chatbot over AI:** Decision-tree wizard built entirely in React (frontend only). Zero maintenance, zero cost, no AI API dependency. Product categories are finite and well-defined.
+**D3 — Same-origin submission path over browser-exposed secrets:** The current enquiry path stays behind `/api/enquiry`. If the provider changes later, the secret boundary must remain server-side or move to a browser-safe external workflow.
 
-**D4 — No custom database at launch:** Do not maintain a custom enquiry database in the initial production architecture. The first production goal is reliable delivery with simpler operations; owned persistence can be added later only if business reporting or backup requirements justify it.
+**D4 — Hardcoded chatbot over AI:** Product selection is finite and deterministic. A decision tree is cheaper, safer, and easier to maintain than an LLM integration.
 
-**D5 — Single hosting surface:** Deploy the site and its submission endpoint on Vercel. This avoids cold-start concerns from a separately hosted Express service and reduces operational overhead.
+**D5 — No custom database at launch:** Enquiries are validated, forwarded, and delivered. Owned persistence can be added later only if business reporting or recovery needs justify it.
 
 ---
 
 ## Data Models
-No custom persistent application models at launch. Enquiry payload exists only as a validated request body sent to the serverless submission handler and forwarded to the email provider.
+No custom persistent application model at launch. The enquiry payload exists only as validated request data sent through the submission path.
 
 ---
 
 ## Core Service Logic
-**Enquiry flow:**
-1. User fills enquiry form (from floating button or chatbot flow)
-2. Frontend validates with Zod (firstName + lastName required, phone required + Indian format, email optional + format check)
-3. POST to /api/enquiry with form data
-4. Serverless handler validates + sanitizes input
-5. Serverless handler sends email to owner through Resend API
-6. Return success/failure response to frontend
-7. Frontend shows success toast or error message
+**Enquiry flow**
+1. User opens the enquiry modal from any CTA.
+2. React Hook Form + Zod validate the payload client-side.
+3. The modal POSTs JSON to `/api/enquiry`.
+4. The Astro API route parses, validates, and sanitizes the payload again.
+5. The shared handler sends the enquiry through Resend.
+6. The UI shows success or error feedback through Sonner toasts.
 
-**Chatbot flow (frontend only):**
-1. User clicks "Help me choose" in navbar
-2. Decision tree: application type, load capacity, lift height, usage frequency
-3. Recommends product category based on answers
-4. Opens enquiry modal with productOfInterest pre-selected
-5. User can modify any field before submitting
+**Chatbot flow**
+1. User opens “Help me choose”.
+2. The hardcoded question tree asks about solution track and use case details.
+3. The chatbot recommends a category/product.
+4. The recommendation hands off into the same enquiry modal with product context prefilled.
 
 ---
 
-## Frontend Pages
-| Page | Route | Auth | Guard behaviour |
-|------|-------|------|-----------------|
-| Home | `/` | public | — |
-| Products | `/products` | public | — |
-| About Us | `/about` | public | — |
-| Contact | `/contact` | public | — |
-| 404 | `/*` | public | Catch-all for invalid routes |
-
----
-
-## API Reference
-
-### Public (no auth)
+## Public Routes
 | Method | Path | Purpose |
 |--------|------|---------|
-| POST | /api/enquiry | Validate + sanitize + send enquiry email via Resend |
-
-### Auth Routes
-None — no authentication in this project.
-
-### Protected Routes
-None — no protected resources.
+| GET | / | Home page |
+| GET | /products | Product landing page |
+| GET | /products/[categorySlug] | Static category detail page |
+| GET | /about | About page |
+| GET | /contact | Contact page |
+| GET | /privacy-policy | Privacy policy page |
+| POST | /api/enquiry | Validate, sanitize, and send enquiry email |
 
 ---
 
 ## File Structure
-```
+```text
 root/
 ├── client/
-│   ├── api/               # Co-located Vercel serverless submission handler
-│   └── src/
-│       ├── assets/        # Product, logo, and brand imagery
-│       ├── components/    # Shared UI (Navbar, Footer, EnquiryModal, Chatbot)
-│       ├── lib/           # Validation, catalogs, and helpers
-│       └── pages/         # Home, Products, About, Contact, NotFound
-├── codex/
-└── .codex-commands/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── about/
+│   │   │   ├── contact/
+│   │   │   ├── home/
+│   │   │   ├── layout/
+│   │   │   ├── products/
+│   │   │   ├── react/
+│   │   │   └── ui/
+│   │   ├── layouts/
+│   │   ├── lib/
+│   │   ├── pages/
+│   │   │   ├── api/
+│   │   │   └── products/
+│   │   └── styles/
+│   ├── astro.config.mjs
+│   └── package.json
+└── codex/
 ```
 
 ---
@@ -133,6 +134,6 @@ root/
 ## Environment Variables
 | Key | Description | Required |
 |-----|------------|---------|
-| RESEND_API_KEY | Resend API key used by the serverless handler | yes |
-| ENQUIRY_FROM_EMAIL | Verified sender address/domain used for enquiry emails | yes |
-| RECEIVER_EMAIL | Owner's email address that receives enquiry notifications | yes |
+| RESEND_API_KEY | Resend API key used by the current enquiry handler | yes |
+| ENQUIRY_FROM_EMAIL | Verified sender address/domain | yes |
+| RECEIVER_EMAIL | Inbox that receives enquiry notifications | yes |

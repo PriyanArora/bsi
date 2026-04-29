@@ -4,47 +4,51 @@
 **Repository:** `/home/priyan/Desktop/bsi`
 
 ## Current Shape
-- Repo now centers on `client/`, which contains the React + Vite app and a co-located `client/api/` serverless enquiry handler.
-- The old `server/` directory has been removed after the architecture pivot away from Express, MongoDB, and Gmail SMTP.
-- Guidance/docs were renamed to Codex-scoped paths.
-- Hidden command folder was renamed to `.codex-commands` because a root-level `.codex` file already exists.
-
-## Actual Product Scope
-- Business site for BSI Solutionz with product catalog, enquiry capture, recommendation chatbot, SEO metadata, and supporting pages.
-- Frontend includes both Bajaj Indef lifting systems and Jakson diesel generator catalog flows.
+- `client/` is now the promoted Astro app.
+- The old Vite implementation has been retired from the repo.
+- The temporary `bsi-astro/` staging workspace is gone.
+- The temporary `.codex-commands/` helper bundle is gone.
 
 ## What Exists In Code
-- App shell:
-  - Router, shared layout, navbar, footer, mobile nav, floating enquiry button.
-  - Home, products, product category, about, contact, privacy, and 404 pages.
-- Enquiry system:
-  - Modal form using React Hook Form + Zod.
-  - Same-origin submission target at `/api/enquiry`.
-  - `client/api/enquiry.js` serverless handler plus shared validation/email assembly logic.
-  - Vite dev middleware mirrors `/api/enquiry` locally so `npm run dev` still exercises the submission path without a separate backend.
-- Recommendation flow:
-  - Hardcoded decision-tree chatbot for crane/hoist and generator discovery.
-  - Product recommendation handoff into the same enquiry modal.
-- Content/polish:
-  - Product catalog helpers and image mapping.
-  - Page transitions, smooth scrolling, SEO tags, and multiple styled landing sections.
+- Public routes are Astro pages under `client/src/pages/`.
+- Shared page shell lives in `client/src/layouts/Layout.astro`.
+- Interactive surfaces live in React islands under `client/src/components/react/`.
+- Product, about, contact, and home sections are static Astro components.
+- The enquiry path is currently:
+  - `client/src/components/react/EnquiryModal.jsx`
+  - `client/src/pages/api/enquiry.js`
+  - `client/src/pages/api/_shared/enquiry-handler.js`
 
-## Progress Reality
-- Frontend implementation is well beyond the original early-phase tracker.
-- Routing, layout, chatbot flow, product detail flow, contact/about pages, SEO tags, and animation work already exist in code.
-- Current blockers are no longer backend construction; they are provider setup, delivery verification, abuse controls, and deployment.
+## Migration Outcome
+- Astro parity work is complete enough for the Astro app to replace the Vite app.
+- Final parity fixes already applied:
+  - restored home hero parallax,
+  - restored static CTA enquiry triggers through the shared event bus,
+  - adjusted footer back-to-top placement to avoid overlap and align with the contact column.
 
-## Current Risks / Gaps
-- Resend is not yet configured with live credentials, so enquiry delivery is not yet verified end-to-end.
-- Submission path currently has validation but no dedicated abuse/rate-limit layer.
-- Placeholder content remains in parts of the site:
-  - featured products copy/media placeholders,
-  - Google Maps placeholder on contact page,
-  - some placeholder/home/about content still needs final replacement.
-- Structured data and Search Console verification are still missing.
-- Commit history still does not follow the documented conventional-commit rule.
+## Actual Product Scope
+- Business marketing site for BSI Solutionz
+- Bajaj Indef lifting systems catalog
+- Jakson diesel generator catalog
+- Guided recommendation chatbot
+- Enquiry capture flow
+- SEO/public-site pages
+
+## Current Risks / Open Decisions
+- Live provider delivery has not been re-verified with production credentials.
+- Abuse/rate-limit protection is still not implemented beyond validation.
+- Placeholder content still remains in approved placeholder areas:
+  - featured products media/copy,
+  - contact-page map,
+  - some home/about placeholder content.
+- The requested future direction of “frontend-only + SendGrid” is still an architecture decision, not current code.
+- Direct browser calls to a provider like SendGrid are not acceptable if they require a secret API key.
 
 ## Working Mental Model
-- Treat the repo as a nearly complete marketing frontend whose critical remaining work is operational rather than visual.
-- The money path is now: browser form -> same-origin serverless handler -> Resend -> owner inbox.
-- Do not reintroduce browser-exposed email secrets or a sleeping custom backend unless there is a clear business reason to add owned persistence later.
+- Treat the repo as an Astro marketing site with React islands, not as a Vite SPA.
+- The current money path is:
+  browser form -> same-origin Astro API route -> Resend -> owner inbox
+- If the submission architecture changes later, preserve:
+  - secret isolation,
+  - same user-facing enquiry flow,
+  - identical product/context handoff behavior.

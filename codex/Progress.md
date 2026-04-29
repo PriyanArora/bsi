@@ -4,9 +4,9 @@
 **Current Phase:** P2
 **Project Category:** web
 **Last Updated:** 2026-04-28
-**Session Notes:** The legacy `server/` backend has been removed. The repo now uses a client-only Vercel shape with a co-located `client/api/enquiry.js` serverless handler and matching Vite dev middleware. The remaining blockers are provider provisioning, delivery verification, abuse controls, and production deployment. Frontend implementation is materially ahead of the original tracker and is recorded below.
+**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. The remaining work is operational: provider verification, abuse controls, deployment, and any explicit future decision about replacing the current submission architecture.
 
-> Gates are still blocked by missing proof for provider setup and deployment, even when implementation code already exists.
+> Current code is Astro-first. Any future “frontend-only + SendGrid” change must be treated as a deliberate architecture change, not assumed current truth.
 
 ---
 
@@ -16,122 +16,114 @@
 - [x] G0.3 Architecture + category detected + confirmed
 - [x] G0.4 Features & Structure — all questions answered + confirmed
 - [x] G0.5 Constraints & Red Lines — all questions answered + confirmed
-- [x] G0.6 Critique + cross-check — all concerns resolved
-- [x] G0.6 Fill manifest — all fields populated, user confirmed
-- [x] G0.6 Files generated — ProjectSummary, Codex_guide, BuildFlow, Progress
-- [x] G0.6 Verification — zero placeholders in any codex/ file
-- [x] Unused ProjectSummary templates deleted
+- [x] G0.6 Fill manifest, generated docs, and verification completed
 
 ---
 
 ## P1 — Repo Setup `[complete]`
-- [x] `.gitignore` covers secrets, deps, and build artifacts
-- [x] Repo shape is now `client/` with co-located `client/api/` serverless submission code
-- [x] `client/.env.example` exists for the current architecture
+- [x] `client/` is the promoted Astro app
+- [x] `.gitignore` covers generated/build artifacts and env files
+- [x] `client/.env.example` exists
 - [x] Client dependencies install cleanly
-- [x] Legacy `server/` backend removed from the repo
+- [x] Old Vite staging/app duplication has been removed
 
 ## P2 — Resend Setup `[in progress]`
 - [ ] Resend account created for the project
 - [ ] Sending domain or sender address verified
-- [ ] API key created and stored only in deployment env vars
-- [x] Gmail OAuth2 and MongoDB are removed from the real submission path and from the repo
+- [ ] API key stored only in deployment/local env vars
+- [x] Future provider-change risk is documented: do not expose secrets in the browser
 
-## P3 — Submission Endpoint `[in progress]`
-- [x] `client/api/enquiry.js` exists as the serverless handler target
-- [x] Shared handler sanitizes and validates input before provider call
-- [x] Email payload is built in readable text and HTML formats for the owner inbox
+## P3 — Submission Endpoint `[complete in code, pending live provider proof]`
+- [x] `client/src/pages/api/enquiry.js` exists as the Astro submission route
+- [x] Shared handler sanitizes and validates payloads
+- [x] Owner email payload is generated in readable text and HTML forms
 - [x] Error paths return structured JSON without stack traces
-- [x] Local `npm run dev` keeps `/api/enquiry` working through Vite middleware
 - [ ] Live provider-backed delivery verified with real env values
 
 ## P4 — Validation + Abuse Controls `[in progress]`
-- [x] Frontend Zod validation exists for first name, last name, phone, email, and consent
-- [x] Serverless handler re-validates the submitted payload
-- [ ] Abuse control added at the submission layer
-- [ ] Tests or reproducible live proof cover valid and invalid submissions
-- [ ] End-to-end submission verified against real provider credentials
+- [x] Frontend Zod validation exists
+- [x] Submission route re-validates normalized payloads
+- [ ] Abuse/rate-limit control added
+- [ ] Reproducible proof covers valid and invalid submissions
 
 ## P5 — Enquiry Form Integration `[complete in code, pending live provider proof]`
-- [x] Enquiry modal opens from floating button and navbar
-- [x] Form uses React Hook Form + Zod
-- [x] Client submits to same-origin `/api/enquiry`
-- [x] Success path shows toast and resets the form
-- [x] Error path shows user-friendly toast messaging
-- [x] Chatbot handoff still opens the same enquiry form with product preselection
+- [x] Floating button opens the modal
+- [x] Static CTAs open the modal through the shared event bus
+- [x] Success path resets the form and shows a toast
+- [x] Error path shows a user-friendly message
+- [x] Chatbot handoff preserves product context
 
 ## P6 — Delivery Verification `[not started]`
-- [ ] Resend activity logs show successful deliveries
+- [ ] Provider activity logs show successful deliveries
 - [ ] From address/domain authentication passes
-- [ ] Deployed env vars verified in Vercel
-- [ ] Production enquiry reaches owner inbox reliably
+- [ ] Reply-to behavior verified
+- [ ] Production-style enquiry reaches owner inbox reliably
 
-## P7 — React Skeleton + Routing `[complete]`
-- [x] React + Vite app in `client/`
-- [x] Tailwind configured
-- [x] React Router routes for home, products, category detail, about, contact, privacy, and 404
-- [x] Shared layout with navbar, footer, mobile nav, and floating enquiry button
-- [x] Navigation works through the current route tree
+## P7 — Astro App Shell + Routing `[complete]`
+- [x] Astro routes exist for home, products, category detail, about, contact, privacy, and 404
+- [x] Shared layout shell is in place
+- [x] React islands power the interactive surfaces
+- [x] `npm run build` succeeds in `client/`
 
-## P8 — Enquiry Form `[complete in code, pending live provider proof]`
-- [x] Modal UI is built and integrated
-- [x] Product selection flow supports direct entry and chatbot-led entry
-- [x] Form validation, consent, and reset logic are implemented
-- [x] Submit path no longer depends on a separate custom backend
+## P8 — Enquiry Form UX `[complete]`
+- [x] Product selection flow supports category/product/service choices
+- [x] Chatbot handoff preselects product context
+- [x] Modal scaling/focus/close behavior is implemented
+- [x] Shared submission target remains `/api/enquiry`
 
 ## P9 — Chatbot + Product Pages `[complete]`
-- [x] “Help me choose” opens the chatbot
-- [x] Decision tree exists for crane/hoist and generator discovery
-- [x] Recommendations lead into the enquiry flow with preselected product context
-- [x] Products page and category pages expose enquiry actions
-- [x] AMC CTA and category/product enquiry paths are implemented
+- [x] Navbar and mobile nav open the chatbot
+- [x] Recommendation flow exists for cranes/hoists and generators
+- [x] Products landing and category pages render from catalog data
+- [x] Product and category CTAs preserve enquiry context
+- [x] No parity regressions remain in the shared enquiry flow
 
 ## P10 — Contact + About Pages `[in progress]`
 - [x] Contact page includes phone, email, address, office hours, and contact guidance
-- [x] About page includes company positioning, supporting sections, and testimonials
-- [x] Floating enquiry flow is preserved instead of duplicating a contact form
-- [x] Responsive layout work is present across both pages
-- [ ] Map/content placeholders still remain in parts of the content
+- [x] About page includes mission, experience, industries served, and testimonials
+- [x] No duplicate contact form exists outside the modal
+- [ ] Approved placeholder content still remains in some sections
 
 ## P11 — SEO `[in progress]`
-- [x] Unique page titles and descriptions are present through `react-helmet-async`
-- [x] Open Graph tags exist on public pages
+- [x] Unique page titles and descriptions are rendered through Astro head content
+- [x] OG tags exist on public pages
 - [x] `robots.txt` and `sitemap.xml` exist in `client/public`
-- [ ] JSON-LD local business schema not yet added
-- [ ] Google Search Console verification tag not yet added
+- [x] LocalBusiness JSON-LD exists in the shared layout
+- [ ] Search Console verification tag not yet added
 
-## P12 — Polish + Animations `[in progress]`
-- [x] Page transitions are implemented with Framer Motion
-- [x] Home page includes the current custom visual treatment and preserved section styling
-- [x] Product/logo imagery is lazy loaded in multiple grids and sections
-- [x] Mobile/orientation handling exists for modal scaling and layout flow
-- [ ] Performance verification and final content cleanup still pending
+## P12 — Polish + Interactivity `[in progress]`
+- [x] Smooth scrolling is wired through Lenis
+- [x] Home hero desktop parallax is restored
+- [x] Footer back-to-top behavior works and final alignment change is applied
+- [x] Responsive layout and hover motion are present across the approved pages
+- [ ] Performance review and final content cleanup still pending
 
 ## P13 — Environment Config `[in progress]`
-- [x] `client/.env.example` reflects the new serverless env shape
-- [x] Provider secrets remain server-side only; no `VITE_` secret exposure is used
-- [x] Missing required env vars fail explicitly inside the shared submission handler
-- [ ] Real local and deployed env values still need to be provisioned and verified
+- [x] `client/.env.example` matches the current submission path
+- [x] Missing env vars fail explicitly server-side
+- [x] Provider secrets remain off the browser bundle
+- [ ] Real local and deployed env values still need verification
 
 ## P14 — Performance `[not started]`
-- [ ] Lighthouse audit run after architecture migration
-- [ ] Bundle size review
-- [ ] Image compression audit
-- [ ] Mobile performance verification
+- [ ] Lighthouse review run on the promoted Astro site
+- [ ] Asset review completed
+- [ ] Bundle/output review completed
+- [ ] Mobile performance verified
 
-## P15 — Deploy Frontend + Submission Endpoint `[not started]`
-- [ ] Vercel project created for the `client/` app
-- [ ] `/api/enquiry` works in the deployed environment
-- [ ] Production env vars set in Vercel
-- [ ] HTTPS confirmed
+## P15 — Deploy Astro App + Submission Endpoint `[not started]`
+- [ ] Vercel project points at `client/`
+- [ ] Public routes load correctly in deployment
+- [ ] `/api/enquiry` works in deployment
+- [ ] Deployment env vars are configured
 
 ## P16 — Domain + Production Verification `[not started]`
-- [ ] Squarespace DNS pointed at Vercel
-- [ ] Production site loads correctly on the custom domain
-- [ ] Live enquiry reaches inbox in production
-- [ ] Final cross-page production smoke test completed
+- [ ] Custom domain points at Vercel
+- [ ] HTTPS works
+- [ ] Cross-page production smoke test completed
+- [ ] Production enquiry reaches the owner inbox
 
 ## P17 — CI/CD `[not started]`
-- [ ] Test/build automation defined
-- [ ] CI pipeline wired
-- [ ] Deploy protections verified
+- [ ] Build verification is wired into CI
+- [ ] Any required tests/checks run in CI
+- [ ] Deployment protections are documented
+- [ ] Failed verification blocks merge/deploy
