@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { CATEGORY_CATALOG } from '../../lib/productCatalog.js';
 import { getCategoryTitleImage } from '../../lib/productImages.js';
 
@@ -46,17 +47,22 @@ const CROPPED_IMAGE_SLUGS = new Set([
           ].join(' ')}
         >
           {categoryImage ? (
-            <img
+            <Image
               src={categoryImage}
-              alt={`${category.categoryName} title`}
+              alt={`${category.categoryName} product category`}
               loading="lazy"
+              decoding="async"
+              width={520}
+              sizes="(max-width: 767px) 88vw, (max-width: 1023px) 40vw, 260px"
               class={['h-full w-full', useCroppedImage ? 'object-cover' : 'object-contain'].join(' ')}
             />
           ) : showPlaceholderOnMissingImage ? (
             <img
               src="/product-placeholder.svg"
-              alt={`${category.categoryName} placeholder`}
+              alt=""
               loading="lazy"
+              width="1200"
+              height="800"
               class={['h-full w-full', useCroppedImage ? 'object-cover' : 'object-contain'].join(' ')}
             />
           ) : (

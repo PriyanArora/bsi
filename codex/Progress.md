@@ -3,8 +3,8 @@
 **Current Gate:** G2 (Resend Setup)
 **Current Phase:** P2
 **Project Category:** web
-**Last Updated:** 2026-04-28
-**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. The remaining work is operational: provider verification, abuse controls, deployment, and any explicit future decision about replacing the current submission architecture.
+**Last Updated:** 2026-05-03
+**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. Pre-deploy local hardening is now in place: the enquiry endpoint has server-side rate limiting, reproducible local endpoint proof exists, CI build verification is wired, visible placeholder copy has been cleaned up, and local build/output review is documented in `codex/PreDeployReport.md`. Remaining work requires external provider access, verification tokens, browser Lighthouse/mobile review, Vercel deployment, or production domain access.
 
 > Current code is Astro-first. Any future “frontend-only + SendGrid” change must be treated as a deliberate architecture change, not assumed current truth.
 
@@ -40,11 +40,11 @@
 - [x] Error paths return structured JSON without stack traces
 - [ ] Live provider-backed delivery verified with real env values
 
-## P4 — Validation + Abuse Controls `[in progress]`
+## P4 — Validation + Abuse Controls `[complete]`
 - [x] Frontend Zod validation exists
 - [x] Submission route re-validates normalized payloads
-- [ ] Abuse/rate-limit control added
-- [ ] Reproducible proof covers valid and invalid submissions
+- [x] Abuse/rate-limit control added
+- [x] Reproducible proof covers valid, invalid, and rate-limited submissions
 
 ## P5 — Enquiry Form Integration `[complete in code, pending live provider proof]`
 - [x] Floating button opens the modal
@@ -78,25 +78,25 @@
 - [x] Product and category CTAs preserve enquiry context
 - [x] No parity regressions remain in the shared enquiry flow
 
-## P10 — Contact + About Pages `[in progress]`
+## P10 — Contact + About Pages `[complete]`
 - [x] Contact page includes phone, email, address, office hours, and contact guidance
-- [x] About page includes mission, experience, industries served, and testimonials
+- [x] About page includes mission, experience, industries served, and service/support content
 - [x] No duplicate contact form exists outside the modal
-- [ ] Approved placeholder content still remains in some sections
+- [x] Visible placeholder content cleanup completed
 
 ## P11 — SEO `[in progress]`
 - [x] Unique page titles and descriptions are rendered through Astro head content
 - [x] OG tags exist on public pages
 - [x] `robots.txt` and `sitemap.xml` exist in `client/public`
 - [x] LocalBusiness JSON-LD exists in the shared layout
-- [ ] Search Console verification tag not yet added
+- [ ] Search Console verification token not yet available
 
-## P12 — Polish + Interactivity `[in progress]`
+## P12 — Polish + Interactivity `[complete]`
 - [x] Smooth scrolling is wired through Lenis
 - [x] Home hero desktop parallax is restored
 - [x] Footer back-to-top behavior works and final alignment change is applied
 - [x] Responsive layout and hover motion are present across the approved pages
-- [ ] Performance review and final content cleanup still pending
+- [x] Performance review and final content cleanup completed locally
 
 ## P13 — Environment Config `[in progress]`
 - [x] `client/.env.example` matches the current submission path
@@ -104,10 +104,10 @@
 - [x] Provider secrets remain off the browser bundle
 - [ ] Real local and deployed env values still need verification
 
-## P14 — Performance `[not started]`
+## P14 — Performance `[in progress]`
 - [ ] Lighthouse review run on the promoted Astro site
-- [ ] Asset review completed
-- [ ] Bundle/output review completed
+- [x] Asset review completed
+- [x] Bundle/output review completed
 - [ ] Mobile performance verified
 
 ## P15 — Deploy Astro App + Submission Endpoint `[not started]`
@@ -122,8 +122,8 @@
 - [ ] Cross-page production smoke test completed
 - [ ] Production enquiry reaches the owner inbox
 
-## P17 — CI/CD `[not started]`
-- [ ] Build verification is wired into CI
-- [ ] Any required tests/checks run in CI
-- [ ] Deployment protections are documented
+## P17 — CI/CD `[in progress]`
+- [x] Build verification is wired into CI
+- [x] Any required tests/checks run in CI
+- [x] Deployment protections are documented
 - [ ] Failed verification blocks merge/deploy

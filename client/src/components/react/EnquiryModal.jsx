@@ -347,6 +347,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby="enquiry-modal-title"
       className="fixed inset-0 z-200 flex items-center justify-center overflow-hidden bg-black/55 p-4 sm:p-4 md:p-5"
       onClick={onClose}
     >
@@ -360,7 +361,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
-          <h2 className="font-headline text-bsi-primary text-xl font-extrabold sm:text-2xl">Tell Us Your Requirement</h2>
+          <h2 id="enquiry-modal-title" className="font-headline text-bsi-primary text-xl font-extrabold sm:text-2xl">Tell Us Your Requirement</h2>
           <button
             ref={closeButtonRef}
             type="button"
@@ -379,6 +380,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
               <input
                 id="firstName"
                 {...register('firstName')}
+                autoComplete="given-name"
                 aria-invalid={errors.firstName ? 'true' : 'false'}
                 aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                 placeholder="First name"
@@ -395,6 +397,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
               <input
                 id="lastName"
                 {...register('lastName')}
+                autoComplete="family-name"
                 aria-invalid={errors.lastName ? 'true' : 'false'}
                 aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                 placeholder="Last name"
@@ -412,6 +415,7 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
             <input
               id="companyName"
               {...register('companyName')}
+              autoComplete="organization"
               placeholder="Company"
               className="border-bsi-outline/40 bg-bsi-surface-low text-bsi-primary w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm focus:border-bsi-primary focus:outline-none"
             />
@@ -423,6 +427,9 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
               <input
                 id="phone"
                 {...register('phone')}
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel"
                 aria-invalid={errors.phone ? 'true' : 'false'}
                 aria-describedby={errors.phone ? 'phone-error' : undefined}
                 placeholder="10-digit mobile number"
@@ -439,6 +446,8 @@ export default function EnquiryModal({ isOpen, onClose, defaultProduct }) {
               <input
                 id="email"
                 {...register('email')}
+                type="email"
+                autoComplete="email"
                 aria-invalid={errors.email ? 'true' : 'false'}
                 aria-describedby={errors.email ? 'email-error' : undefined}
                 placeholder="name@company.com"

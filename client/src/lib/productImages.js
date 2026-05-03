@@ -115,10 +115,8 @@ function buildImageIndex() {
     const fileName = parts[parts.length - 1] || ''
     const folder = parts[parts.length - 2] || ''
     const baseName = fileName.replace(/\.[^.]+$/, '')
-    const resolvedSrc = typeof asset === 'string' ? asset : asset?.src || ''
-
     const record = {
-      src: resolvedSrc,
+      asset,
       folder,
       baseName,
       normalizedBase: normalize(baseName),
@@ -179,7 +177,7 @@ function getBestMatch(candidates, query) {
     }
   })
 
-  return best?.src || ''
+  return best?.asset || ''
 }
 
 function getSharedImageByName(baseName) {
@@ -188,7 +186,7 @@ function getSharedImageByName(baseName) {
 
   const normalizedBaseName = normalize(baseName)
   const exactSharedImage = sharedImages.find((image) => image.normalizedBase === normalizedBaseName)
-  if (exactSharedImage) return exactSharedImage.src
+  if (exactSharedImage) return exactSharedImage.asset
 
   return getBestMatch(sharedImages, baseName)
 }
@@ -204,9 +202,9 @@ export function getCategoryTitleImage(category) {
   const images = IMAGE_INDEX.get(folder) || []
 
   const titleImage = images.find((image) => image.isTitle)
-  if (titleImage) return titleImage.src
+  if (titleImage) return titleImage.asset
 
-  return images[0]?.src || ''
+  return images[0]?.asset || ''
 }
 
 export function getProductImage(category, product) {

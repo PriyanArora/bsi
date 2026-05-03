@@ -118,6 +118,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby="chatbot-modal-title"
       className="fixed inset-0 z-190 flex items-start justify-center overflow-y-auto bg-black/60 p-3 pt-24 sm:items-center sm:p-4"
       onClick={resetAndClose}
     >
@@ -128,7 +129,7 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
       >
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
-            <h2 className="font-headline text-bsi-primary text-3xl font-extrabold underline decoration-2 underline-offset-4">Help me choose</h2>
+            <h2 id="chatbot-modal-title" className="font-headline text-bsi-primary text-3xl font-extrabold underline decoration-2 underline-offset-4">Help me choose</h2>
           </div>
           <button
             ref={closeButtonRef}

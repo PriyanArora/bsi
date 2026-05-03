@@ -8,14 +8,14 @@ const trustPoints = [
     description: 'Genuine parts and certified engineering directly from the industry leader.'
   },
   {
-    icon: 'engineering',
-    title: 'Custom Engineering',
-    description: "We don't just sell products; we design solutions for your unique spatial challenges."
+    icon: 'workspace_premium',
+    title: '10+ Years of Experience',
+    description: 'Practical lifting, hoist, crane, and service knowledge built across real industrial sites.'
   },
   {
-    icon: 'support_agent',
-    title: '24/7 Service Support',
-    description: 'Minimal downtime with our rapid-response technical maintenance teams.'
+    icon: 'handshake',
+    title: 'After Installation Support',
+    description: 'Reliable follow-up for service queries, maintenance planning, parts support, and day-to-day equipment care.'
   }
 ];
 ---
@@ -31,31 +31,24 @@ const trustPoints = [
     className="absolute inset-0"
   />
 
-  <div class="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:gap-14 md:px-8 lg:grid-cols-2 lg:gap-16">
-    <div class="h-fit lg:sticky lg:top-32">
+  <div class="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
+    <div class="max-w-4xl">
       <h2 class="font-headline text-bsi-primary text-3xl leading-tight font-extrabold sm:text-4xl md:text-5xl">
         Why BSI Solutionz ?
       </h2>
-
-      <div class="mt-8 flex flex-col gap-8 sm:mt-10 sm:gap-10">
-        {trustPoints.map((point) => (
-          <article class="flex gap-5">
-            <div class="bg-bsi-primary-container flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-white">
-              <span class="material-symbols-outlined">{point.icon}</span>
-            </div>
-            <div>
-              <h4 class="text-bsi-primary text-lg font-bold">{point.title}</h4>
-              <p class="text-bsi-secondary mt-2 leading-relaxed">{point.description}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+      <p class="text-bsi-secondary mt-5 max-w-3xl text-base leading-relaxed sm:text-lg">
+        We keep the work practical from selection to handover. The focus is genuine equipment, experienced guidance, and support that remains available after installation.
+      </p>
     </div>
 
-    <div class="flex pt-4 lg:self-stretch lg:pt-0">
-      <div class="bg-white text-bsi-secondary flex h-64 w-full items-center justify-center rounded-none border border-slate-200 text-sm font-medium uppercase tracking-[0.08em] sm:h-80 lg:h-full">
-        placeholder image
-      </div>
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {trustPoints.map((point) => (
+        <article class="border-bsi-outline/30 bg-white/75 p-6 shadow-[0_10px_30px_rgba(16,37,68,0.04)] backdrop-blur-sm">
+          <span class="material-symbols-outlined text-bsi-accent text-4xl leading-none">{point.icon}</span>
+          <h4 class="text-bsi-primary mt-5 text-xl font-bold">{point.title}</h4>
+          <p class="text-bsi-secondary mt-3 text-sm leading-relaxed sm:text-base">{point.description}</p>
+        </article>
+      ))}
     </div>
   </div>
 </section>

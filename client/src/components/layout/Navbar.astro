@@ -1,0 +1,185 @@
+---
+const { pathname = '/' } = Astro.props;
+
+const navLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'Products', to: '/products' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+];
+
+const logoImg = '/shared/brand-logo-navbar.webp';
+---
+
+<nav data-mobile-nav-root class="fixed top-0 z-100 w-full px-3 pt-3 sm:px-6 sm:pt-4 md:px-8">
+  <div class="mx-auto flex w-full max-w-7xl items-center justify-between rounded-[2rem] border border-white/70 bg-white/68 px-3 py-2.5 shadow-[0_10px_32px_rgba(0,32,69,0.13)] backdrop-blur-xl supports-backdrop-filter:bg-white/58 sm:px-5 sm:py-3 md:px-6">
+    <a href="/" class="shrink-0">
+      <img
+        src={logoImg}
+        alt="BSI Solutionz logo"
+        width="320"
+        height="160"
+        decoding="async"
+        fetchpriority="high"
+        class="h-9 w-auto sm:h-10 md:h-12"
+      />
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      {navLinks.map(({ label, to }) => (
+        <a
+          href={to}
+          class:list={[
+            'relative inline-block pb-1 font-headline text-sm font-semibold tracking-tight text-[#0D1F3C] after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:origin-left after:bg-[#FFD100] after:transition-transform after:duration-200 after:ease-in-out',
+            pathname === to ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100',
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-open-chatbot
+        class="min-h-10 whitespace-nowrap rounded-full border border-[#D2DAE6] bg-[#0D2E5A] px-3 py-2 font-headline text-[11px] font-bold text-white shadow-sm transition-colors duration-200 ease-in-out hover:bg-[#12386B] sm:px-4 sm:text-sm"
+      >
+        Help me choose
+      </button>
+
+      <button
+        type="button"
+        data-mobile-nav-open
+        class="text-bsi-secondary hover:text-bsi-primary inline-flex h-10 w-10 items-center justify-center rounded-full p-2 transition sm:h-9 sm:w-9 md:hidden"
+        aria-label="Open menu"
+        aria-controls="mobile-navigation"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    data-mobile-nav-overlay
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 z-130 bg-black/45 opacity-0 transition-opacity duration-200"
+  />
+
+  <aside
+    id="mobile-navigation"
+    data-mobile-nav-panel
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+    aria-hidden="true"
+    inert
+    class="fixed top-0 right-0 z-140 flex h-full w-[90%] max-w-[20rem] translate-x-full flex-col border-l border-[#D8DEE8] bg-[#F4F6F9] p-5 shadow-2xl transition-transform duration-300 ease-out sm:w-[84%] sm:max-w-sm sm:p-6"
+  >
+    <div class="mb-6 flex items-center justify-between">
+      <h2 class="font-headline text-lg font-bold text-[#0D1F3C]">Menu</h2>
+      <button
+        type="button"
+        data-mobile-nav-close
+        class="text-bsi-secondary hover:text-bsi-primary rounded-full p-2 transition"
+        aria-label="Close menu"
+      >
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-3">
+      {navLinks.map(({ label, to }) => (
+        <a
+          href={to}
+          data-mobile-nav-link
+          class:list={[
+            'rounded px-3 py-2 font-headline text-sm font-semibold',
+            pathname === to ? 'bg-[#FFD100] text-[#0D1F3C]' : 'text-[#0D1F3C] hover:bg-white',
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </aside>
+</nav>
+
+<script is:inline>
+  const navRoot = document.querySelector('[data-mobile-nav-root]')
+
+  if (navRoot) {
+    const openButton = navRoot.querySelector('[data-mobile-nav-open]')
+    const closeButton = navRoot.querySelector('[data-mobile-nav-close]')
+    const overlay = navRoot.querySelector('[data-mobile-nav-overlay]')
+    const panel = navRoot.querySelector('[data-mobile-nav-panel]')
+    const navLinks = navRoot.querySelectorAll('[data-mobile-nav-link]')
+    let previousActiveElement = null
+    let previousOverflow = ''
+
+    const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+
+    const setOpenState = (isOpen) => {
+      if (!overlay || !panel || !openButton) return
+
+      openButton.setAttribute('aria-expanded', String(isOpen))
+      overlay.classList.toggle('pointer-events-none', !isOpen)
+      overlay.classList.toggle('opacity-0', !isOpen)
+      overlay.classList.toggle('opacity-100', isOpen)
+      panel.classList.toggle('translate-x-full', !isOpen)
+      panel.classList.toggle('translate-x-0', isOpen)
+      panel.toggleAttribute('inert', !isOpen)
+      panel.setAttribute('aria-hidden', String(!isOpen))
+    }
+
+    const openMenu = () => {
+      previousActiveElement = document.activeElement
+      previousOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      setOpenState(true)
+      closeButton?.focus()
+    }
+
+    const closeMenu = () => {
+      document.body.style.overflow = previousOverflow
+      setOpenState(false)
+      previousActiveElement?.focus?.()
+    }
+
+    const handleKeyDown = (event) => {
+      if (panel?.getAttribute('aria-hidden') === 'true') return
+
+      if (event.key === 'Escape') {
+        closeMenu()
+        return
+      }
+
+      if (event.key !== 'Tab' || !panel) return
+
+      const focusableElements = panel.querySelectorAll(focusableSelector)
+      if (!focusableElements.length) return
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+
+      if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault()
+        firstElement.focus()
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault()
+        lastElement.focus()
+      }
+    }
+
+    openButton?.addEventListener('click', openMenu)
+    closeButton?.addEventListener('click', closeMenu)
+    overlay?.addEventListener('click', closeMenu)
+    navLinks.forEach((link) => link.addEventListener('click', closeMenu))
+    window.addEventListener('keydown', handleKeyDown)
+  }
+</script>

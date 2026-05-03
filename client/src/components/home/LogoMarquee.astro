@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import indianOilLogo from '../../assets/logos/IndianOilLogo.png';
 import vardhmanLogo from '../../assets/logos/VardhmanLogo.png';
 import unileverLogo from '../../assets/logos/UnileverLogo.png';
@@ -8,18 +9,15 @@ import nestleLogo from '../../assets/logos/NestleLogo.png';
 import escortsKubotaLogo from '../../assets/logos/EscortsKubotaLogo.png';
 import danoneLogo from '../../assets/logos/DanoneLogo.png';
 
-const normalizeAsset = (asset: string | { src: string } | undefined) =>
-  typeof asset === 'string' ? asset : asset?.src || '';
-
 const industryLogos = [
-  { src: normalizeAsset(indianOilLogo), label: 'Indian Oil' },
-  { src: normalizeAsset(vardhmanLogo), label: 'Vardhman' },
-  { src: normalizeAsset(unileverLogo), label: 'Unilever' },
-  { src: normalizeAsset(toshibaLogo), label: 'Toshiba' },
-  { src: normalizeAsset(thyssenkruppLogo), label: 'Thyssenkrupp' },
-  { src: normalizeAsset(nestleLogo), label: 'Nestle' },
-  { src: normalizeAsset(escortsKubotaLogo), label: 'Escorts Kubota' },
-  { src: normalizeAsset(danoneLogo), label: 'Danone' }
+  { src: indianOilLogo, label: 'Indian Oil' },
+  { src: vardhmanLogo, label: 'Vardhman' },
+  { src: unileverLogo, label: 'Unilever' },
+  { src: toshibaLogo, label: 'Toshiba' },
+  { src: thyssenkruppLogo, label: 'Thyssenkrupp' },
+  { src: nestleLogo, label: 'Nestle' },
+  { src: escortsKubotaLogo, label: 'Escorts Kubota' },
+  { src: danoneLogo, label: 'Danone' }
 ];
 ---
 
@@ -32,13 +30,15 @@ const industryLogos = [
 
   <div class="flex overflow-hidden">
     <div class="animate-bsi-marquee flex min-w-max gap-8 whitespace-nowrap px-6 sm:gap-10 sm:px-8 lg:gap-14">
-      <div class="flex items-center gap-8 sm:gap-10 lg:gap-14">
+      <div class="flex items-center gap-8 sm:gap-10 lg:gap-14" aria-hidden="true">
         {industryLogos.map((item) => (
           <div class="flex h-16 w-36 items-center justify-center sm:h-18 sm:w-40 lg:h-20 lg:w-44">
-            <img
+            <Image
               src={item.src}
-              alt={`${item.label} logo`}
+              alt=""
               loading="lazy"
+              decoding="async"
+              width={176}
               class="h-full w-full object-contain"
             />
           </div>
@@ -47,10 +47,12 @@ const industryLogos = [
       <div class="flex items-center gap-8 sm:gap-10 lg:gap-14">
         {industryLogos.map((item) => (
           <div class="flex h-16 w-36 items-center justify-center sm:h-18 sm:w-40 lg:h-20 lg:w-44">
-            <img
+            <Image
               src={item.src}
               alt={`${item.label} logo`}
               loading="lazy"
+              decoding="async"
+              width={176}
               class="h-full w-full object-contain"
             />
           </div>

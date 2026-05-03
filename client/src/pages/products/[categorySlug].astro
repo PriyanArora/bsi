@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { CATEGORY_CATALOG, getCategoryBySlug, getProductsByCategory } from '../../lib/productCatalog.js';
 import { getProductImage } from '../../lib/productImages.js';
@@ -19,21 +20,13 @@ const { categorySlug } = Astro.params;
 const categoryName = Astro.props.categoryName ?? '';
 const description = Astro.props.description ?? '';
 const pageTitle = `${categoryName} - BSI Solutionz Product Catalog`;
-const ogTitle = `${categoryName} | BSI Solutionz`;
 const category = getCategoryBySlug(categorySlug);
 const products = category ? getProductsByCategory(category.categoryName) : [];
 ---
 
-<Layout title={pageTitle}>
-  <Fragment slot="head">
-    <meta name="description" content={description} />
-    <meta property="og:title" content={ogTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content="/og-products-placeholder.png" />
-  </Fragment>
-
+<Layout title={pageTitle} description={description} image="/og-products-placeholder.png">
   {category ? (
-    <main class="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
+    <div class="relative overflow-hidden pb-24 pt-[calc(var(--bsi-navbar-height)+2rem)]">
       <div class="mx-auto max-w-7xl px-6 md:px-8">
         <header class="mb-12 pl-2 sm:pl-4 md:mb-14 md:pl-8 lg:mb-16 lg:pl-16">
           <a
@@ -63,17 +56,22 @@ const products = category ? getProductsByCategory(category.categoryName) : [];
               >
                 <div class="border-bsi-outline/30 mb-5 flex h-44 w-full items-center justify-center rounded-none border bg-white p-3">
                   {productImage ? (
-                    <img
+                    <Image
                       src={productImage}
                       alt={product.title}
                       loading="lazy"
+                      decoding="async"
+                      width={520}
+                      sizes="(max-width: 767px) 88vw, (max-width: 1023px) 28vw, 300px"
                       class="h-full w-full rounded-none object-contain"
                     />
                   ) : (
                     <img
                       src="/product-placeholder.svg"
-                      alt={`${product.title} placeholder`}
+                      alt=""
                       loading="lazy"
+                      width="1200"
+                      height="800"
                       class="h-full w-full rounded-none object-contain"
                     />
                   )}
@@ -112,7 +110,7 @@ const products = category ? getProductsByCategory(category.categoryName) : [];
           })}
         </section>
       </div>
-    </main>
+    </div>
   ) : (
     <section class="flex min-h-[65vh] items-center justify-center px-6 pt-[calc(var(--bsi-navbar-height)+2rem)] text-center">
       <div class="max-w-lg">

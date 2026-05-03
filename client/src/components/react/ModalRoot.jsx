@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { Toaster } from 'sonner'
-import EnquiryModal from './EnquiryModal'
-import ChatbotModal from './ChatbotModal'
 import { onChatbotOpen, onEnquiryOpen } from '../../lib/shellEvents'
+
+const EnquiryModal = lazy(() => import('./EnquiryModal'))
+const ChatbotModal = lazy(() => import('./ChatbotModal'))
 
 export default function ModalRoot() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
@@ -42,16 +43,22 @@ export default function ModalRoot() {
 
   return (
     <>
-      <EnquiryModal
-        isOpen={isEnquiryOpen}
-        onClose={handleEnquiryClose}
-        defaultProduct={selectedProduct}
-      />
-      <ChatbotModal
-        isOpen={isChatbotOpen}
-        onClose={handleChatbotClose}
-        onProductSelected={handleProductSelected}
-      />
+      <Suspense fallback={null}>
+        {isEnquiryOpen ? (
+          <EnquiryModal
+            isOpen={isEnquiryOpen}
+            onClose={handleEnquiryClose}
+            defaultProduct={selectedProduct}
+          />
+        ) : null}
+        {isChatbotOpen ? (
+          <ChatbotModal
+            isOpen={isChatbotOpen}
+            onClose={handleChatbotClose}
+            onProductSelected={handleProductSelected}
+          />
+        ) : null}
+      </Suspense>
       <Toaster richColors position="top-right" />
     </>
   )

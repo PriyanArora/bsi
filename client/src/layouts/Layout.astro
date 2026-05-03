@@ -1,12 +1,20 @@
 ---
 import '../styles/global.css';
-import Navbar from '../components/react/Navbar.jsx';
+import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
-import FloatingEnquireButton from '../components/react/FloatingEnquireButton.jsx';
 import ModalRoot from '../components/react/ModalRoot.jsx';
-import SmoothScrollProvider from '../components/react/SmoothScrollProvider.jsx';
+import SmoothScroll from '../components/layout/SmoothScroll.astro';
 
-const { title = 'BSI Solutionz - Authorized Bajaj Indef Dealer' } = Astro.props;
+const {
+  title = 'BSI Solutionz - Authorized Bajaj Indef Dealer',
+  description = 'Authorized Bajaj Indef dealer providing industrial cranes, hoists, material handling systems, AMC care, and diesel generator solutions.',
+  image = '/shared/brand-logo.png',
+  noindex = false,
+} = Astro.props;
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || 'https://bsisolutionz.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const socialImageUrl = new URL(image, siteUrl).toString();
 ---
 
 <!doctype html>
@@ -14,8 +22,32 @@ const { title = 'BSI Solutionz - Authorized Bajaj Indef Dealer' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow'} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script type="application/ld+json">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500&family=Mada:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <meta property="og:site_name" content="BSI Solutionz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    {googleSiteVerification ? <meta name="google-site-verification" content={googleSiteVerification} /> : null}
+    <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -37,16 +69,36 @@ const { title = 'BSI Solutionz - Authorized Bajaj Indef Dealer' } = Astro.props;
     <slot name="head" />
   </head>
   <body class="bg-bsi-surface min-h-screen overflow-x-clip font-body text-bsi-primary">
-    <SmoothScrollProvider client:load />
-    <Navbar client:load pathname={Astro.url.pathname} />
-    <main class="page-transition">
+    <a
+      href="#main-content"
+      class="sr-only fixed top-4 left-4 z-[300] bg-bsi-primary px-4 py-2 text-sm font-bold text-white focus:not-sr-only"
+    >
+      Skip to content
+    </a>
+    <Navbar pathname={Astro.url.pathname} />
+    <SmoothScroll />
+    <main id="main-content" tabindex="-1" class="page-transition">
       <slot />
     </main>
-    <FloatingEnquireButton client:load />
+    <div
+      class="fixed right-4 z-50 sm:right-5 md:right-6 lg:right-8"
+      style="bottom: max(1rem, env(safe-area-inset-bottom));"
+    >
+      <div class="inline-block p-px">
+        <button
+          type="button"
+          data-open-enquiry
+          class="floating-enquire-gradient relative z-10 rounded-none px-5 py-3 text-sm font-bold text-white transition-all duration-300 hover:brightness-110 sm:px-6 sm:py-3 sm:text-base md:px-7 md:text-lg"
+        >
+          Enquire Now
+        </button>
+      </div>
+    </div>
     <Footer />
     <ModalRoot client:load />
     <script is:inline>
       const ENQUIRY_EVENT = 'bsi:open-enquiry'
+      const CHATBOT_EVENT = 'bsi:open-chatbot'
       const backToTopButton = document.querySelector('[data-back-to-top]')
 
       document.addEventListener('click', (event) => {
@@ -55,17 +107,32 @@ const { title = 'BSI Solutionz - Authorized Bajaj Indef Dealer' } = Astro.props;
         }
 
         const enquiryTrigger = event.target.closest('[data-open-enquiry]')
-        if (!enquiryTrigger) {
+        if (enquiryTrigger) {
+          const productName = enquiryTrigger.getAttribute('data-product-name') || ''
+          if (!window.__bsiModalRootReady) {
+            window.__bsiPendingEnquiries = window.__bsiPendingEnquiries || []
+            window.__bsiPendingEnquiries.push(productName)
+          }
+
+          window.dispatchEvent(
+            new CustomEvent(ENQUIRY_EVENT, {
+              detail: {
+                productName,
+              },
+            })
+          )
           return
         }
 
-        window.dispatchEvent(
-          new CustomEvent(ENQUIRY_EVENT, {
-            detail: {
-              productName: enquiryTrigger.getAttribute('data-product-name') || '',
-            },
-          })
-        )
+        const chatbotTrigger = event.target.closest('[data-open-chatbot]')
+        if (chatbotTrigger) {
+          if (!window.__bsiModalRootReady) {
+            window.__bsiPendingChatbotOpens = window.__bsiPendingChatbotOpens || []
+            window.__bsiPendingChatbotOpens.push(true)
+          }
+
+          window.dispatchEvent(new CustomEvent(CHATBOT_EVENT))
+        }
       })
 
       if (backToTopButton) {
@@ -74,6 +141,7 @@ const { title = 'BSI Solutionz - Authorized Bajaj Indef Dealer' } = Astro.props;
             window.__lenis.scrollTo(0, { duration: 1.2 })
             return
           }
+
           window.scrollTo({ top: 0, behavior: 'smooth' })
         })
       }

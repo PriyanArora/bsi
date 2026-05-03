@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
-import Lenis from 'lenis'
+<script>
+  import Lenis from 'lenis'
 
-export default function SmoothScrollProvider() {
-  useEffect(() => {
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  if (!reducedMotionQuery.matches) {
     const root = document.documentElement
     const body = document.body
+
     root.classList.add('lenis', 'lenis-smooth')
     body.classList.add('lenis', 'lenis-smooth')
 
@@ -20,21 +22,23 @@ export default function SmoothScrollProvider() {
     window.__lenis = lenis
 
     let rafId = 0
-    const raf = (time) => {
+    const raf = (time: number) => {
       lenis.raf(time)
       rafId = window.requestAnimationFrame(raf)
     }
 
     rafId = window.requestAnimationFrame(raf)
 
-    return () => {
-      window.cancelAnimationFrame(rafId)
-      lenis.destroy()
-      delete window.__lenis
-      root.classList.remove('lenis', 'lenis-smooth')
-      body.classList.remove('lenis', 'lenis-smooth')
-    }
-  }, [])
-
-  return null
-}
+    window.addEventListener(
+      'pagehide',
+      () => {
+        window.cancelAnimationFrame(rafId)
+        lenis.destroy()
+        delete window.__lenis
+        root.classList.remove('lenis', 'lenis-smooth')
+        body.classList.remove('lenis', 'lenis-smooth')
+      },
+      { once: true }
+    )
+  }
+</script>

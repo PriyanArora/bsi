@@ -1,4 +1,4 @@
-import { EnquiryRequestError, sendEnquiryEmail } from './_shared/enquiry-handler.js'
+import { EnquiryRequestError, checkEnquiryRateLimit, sendEnquiryEmail } from './_shared/enquiry-handler.js'
 
 const parseRequestBody = async (request) => {
   const rawBody = await request.text()
@@ -27,6 +27,7 @@ export const GET = methodNotAllowed
 
 export const POST = async ({ request }) => {
   try {
+    checkEnquiryRateLimit(request, process.env)
     const requestBody = await parseRequestBody(request)
     const { providerId } = await sendEnquiryEmail(requestBody, process.env)
 

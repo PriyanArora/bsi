@@ -1,6 +1,9 @@
 import { enquirySchema } from '../../../lib/enquirySchema.js'
 
 const RESEND_API_URL = 'https://api.resend.com/emails'
+const DEFAULT_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000
+const DEFAULT_RATE_LIMIT_MAX = 5
+const rateLimitBuckets = new Map()
 
 export class EnquiryRequestError extends Error {
   constructor(status, message) {
@@ -49,6 +52,50 @@ const getEnvValue = (env, key) => {
   }
 
   return value.trim()
+}
+
+const getOptionalPositiveInteger = (env, key, fallback) => {
+  const value = Number.parseInt(env?.[key] || '', 10)
+  return Number.isFinite(value) && value > 0 ? value : fallback
+}
+
+const getClientIdentifier = (request) => {
+  const forwardedFor = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+  const realIp = request.headers.get('x-real-ip')?.trim()
+  const cfConnectingIp = request.headers.get('cf-connecting-ip')?.trim()
+
+  return forwardedFor || realIp || cfConnectingIp || 'unknown-client'
+}
+
+export function checkEnquiryRateLimit(request, env = process.env, now = Date.now()) {
+  const windowMs = getOptionalPositiveInteger(env, 'ENQUIRY_RATE_LIMIT_WINDOW_MS', DEFAULT_RATE_LIMIT_WINDOW_MS)
+  const maxRequests = getOptionalPositiveInteger(env, 'ENQUIRY_RATE_LIMIT_MAX', DEFAULT_RATE_LIMIT_MAX)
+  const identifier = getClientIdentifier(request)
+  const currentBucket = rateLimitBuckets.get(identifier)
+
+  if (!currentBucket || currentBucket.resetAt <= now) {
+    rateLimitBuckets.set(identifier, {
+      count: 1,
+      resetAt: now + windowMs,
+    })
+    return
+  }
+
+  if (currentBucket.count >= maxRequests) {
+    throw new EnquiryRequestError(429, 'Too many enquiry attempts. Please try again later.')
+  }
+
+  currentBucket.count += 1
+
+  for (const [key, bucket] of rateLimitBuckets.entries()) {
+    if (bucket.resetAt <= now) {
+      rateLimitBuckets.delete(key)
+    }
+  }
+}
+
+export function resetEnquiryRateLimitForTests() {
+  rateLimitBuckets.clear()
 }
 
 export function normalizeEnquiryPayload(rawPayload = {}) {

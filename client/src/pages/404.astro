@@ -2,13 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="404 - Page Not Found | BSI Solutionz">
-  <Fragment slot="head">
-    <meta name="description" content="The page you requested could not be found." />
-    <meta property="og:title" content="404 - Page Not Found" />
-    <meta property="og:description" content="The page you requested could not be found." />
-  </Fragment>
-
+<Layout
+  title="404 - Page Not Found | BSI Solutionz"
+  description="The page you requested could not be found."
+  noindex
+>
   <section class="bg-bsi-surface flex min-h-[70vh] items-center justify-center px-6 pb-16 pt-[calc(var(--bsi-navbar-height)+2rem)] text-center">
     <div class="max-w-xl">
       <p class="font-headline text-bsi-accent text-8xl font-extrabold tracking-tight">404</p>

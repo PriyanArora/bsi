@@ -37,10 +37,8 @@
 ## Current Risks / Open Decisions
 - Live provider delivery has not been re-verified with production credentials.
 - Abuse/rate-limit protection is still not implemented beyond validation.
-- Placeholder content still remains in approved placeholder areas:
-  - featured products media/copy,
-  - contact-page map,
-  - some home/about placeholder content.
+- Visible placeholder copy has been removed from home/about content.
+- Product placeholder assets still exist as intentional catalog fallbacks for missing images.
 - The requested future direction of “frontend-only + SendGrid” is still an architecture decision, not current code.
 - Direct browser calls to a provider like SendGrid are not acceptable if they require a secret API key.
 

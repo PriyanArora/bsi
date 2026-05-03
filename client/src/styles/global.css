@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500&family=Mada:wght@400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -147,7 +143,28 @@
 	select:focus-visible {
 		outline: 2px solid #FFD100;
 		outline-offset: 2px;
-		}
+	}
+}
+
+html.lenis,
+html.lenis body {
+	height: auto;
+}
+
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+	overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+	overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+	pointer-events: none;
 }
 
 /* -- BSI Brand Tokens -------------------------- */
@@ -353,10 +370,11 @@
 	}
 
 	.hero-text-description {
-		width: 60%;
-		max-width: 60%;
-		font-size: 0.60rem;
-		padding-right: 0;
+		width: 100%;
+		max-width: 20rem;
+		font-size: 0.95rem;
+		line-height: 1.55;
+		padding: 6px 10px 6px 0;
 	}
 
 	.hero-title {
@@ -365,10 +383,11 @@
 
 	.hero-crane-wrap {
 		order: 2;
-		margin-top: -0.75rem;
+		margin-top: 0.5rem;
 	}
 
 	.hero-crane-image {
+		width: 128%;
 		margin-top: 0;
 	}
 
@@ -469,41 +488,8 @@
 }
 
 /* -- BSI Utilities ----------------------------- */
-.lenis.lenis-smooth {
-	scroll-behavior: auto;
-}
-
-html.lenis,
-html.lenis body {
-	height: auto;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-	overscroll-behavior: contain;
-}
-
 .material-symbols-outlined {
 	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-
-.moving-border {
-	position: relative;
-	background: #1a365d;
-	overflow: hidden;
-}
-.moving-border::before {
-	content: "";
-	position: absolute;
-	top: -50%;
-	left: -50%;
-	width: 200%;
-	height: 200%;
-	background: conic-gradient(from 0deg, transparent, transparent, transparent, #dd8d00);
-	animation: bsi-rotate 4s linear infinite;
-}
-
-@keyframes bsi-rotate {
-	100% { transform: rotate(360deg); }
 }
 
 @keyframes bsi-marquee {
@@ -540,6 +526,10 @@ html.lenis body {
 	}
 
 	.page-transition {
+		animation: none;
+	}
+
+	.floating-enquire-gradient {
 		animation: none;
 	}
 }
