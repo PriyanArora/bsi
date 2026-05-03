@@ -49,10 +49,10 @@ export default function Navbar({ pathname = '/' }) {
           <button
             type="button"
             onClick={() => setIsMobileNavOpen(true)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C] sm:h-9 sm:w-9 md:hidden"
+            className="text-bsi-secondary hover:text-bsi-primary inline-flex h-10 w-10 items-center justify-center rounded-full p-2 transition sm:h-9 sm:w-9 md:hidden"
             aria-label="Open menu"
           >
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
@@ -62,7 +62,6 @@ export default function Navbar({ pathname = '/' }) {
       <MobileNav
         isOpen={isMobileNavOpen}
         onClose={() => setIsMobileNavOpen(false)}
-        onHelpClick={openChatbot}
         pathname={pathname}
       />
     </nav>

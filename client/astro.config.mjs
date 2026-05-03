@@ -12,8 +12,12 @@ export default defineConfig({
   integrations: [react()],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['padding-prescribe-popsicle.ngrok-free.dev']
+    }
   },
+
 
   adapter: vercel()
 });

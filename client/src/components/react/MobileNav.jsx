@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: 'Contact', to: '/contact' },
 ]
 
-export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
+export default function MobileNav({ isOpen, onClose, pathname }) {
   const panelRef = useRef(null)
   const previousActiveElementRef = useRef(null)
 
@@ -85,10 +85,10 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
           <button
             type="button"
             onClick={() => onClose?.()}
-            className="inline-flex h-9 w-9 items-center justify-center rounded border border-[#C7D0DD] bg-white text-[#0D1F3C]"
+            className="text-bsi-secondary hover:text-bsi-primary rounded-full p-2 transition"
             aria-label="Close menu"
           >
-            X
+            <span className="material-symbols-outlined">close</span>
           </button>
         </div>
 
@@ -106,17 +106,6 @@ export default function MobileNav({ isOpen, onClose, onHelpClick, pathname }) {
             </a>
           ))}
         </nav>
-
-        <button
-          type="button"
-          onClick={() => {
-            onClose?.()
-            onHelpClick?.()
-          }}
-          className="mt-6 inline-flex w-full justify-center rounded-full border border-[#D2DAE6] bg-[#0D2E5A] px-4 py-2.5 font-headline text-sm font-bold text-white transition-colors duration-200 hover:bg-[#12386B]"
-        >
-          Help me choose
-        </button>
       </aside>
     </>
   )

@@ -512,7 +512,7 @@ html.lenis body {
 }
 
 .animate-bsi-marquee {
-	animation: bsi-marquee 60s linear infinite;
+	animation: bsi-marquee 35s linear infinite;
 }
 
 .page-transition {
