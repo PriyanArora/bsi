@@ -100,14 +100,6 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
     return null
   }
 
-  const confidenceLabel = recommendation
-    ? recommendation.confidence === 'high'
-      ? 'High confidence'
-      : recommendation.confidence === 'medium'
-        ? 'Medium confidence'
-        : 'Needs confirmation'
-    : null
-
   const currentQuestion = questions[stepIndex]
   const isEntryStep = stepIndex === 0 && !answers.solutionTrack
   const branchStepTotal = Math.max(1, questions.length - 1)
@@ -149,9 +141,6 @@ export default function ChatbotModal({ isOpen, onClose, onProductSelected }) {
               <h3 className="font-headline mt-2 text-2xl font-bold">{recommendation.primaryProduct}</h3>
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
                 Category: {recommendation.category}
-              </p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/75">
-                Decision Confidence: {confidenceLabel}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-slate-200">{recommendation.description}</p>
               {recommendation.shortlist?.length > 0 ? (
