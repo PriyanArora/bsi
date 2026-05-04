@@ -169,12 +169,3 @@
 - [ ] Production enquiry reaches the owner inbox
 **Proof:** Run a production smoke test across routes and the enquiry flow.
 **Commit:** `chore(deploy): verify production domain and delivery`
-
-## P17 — CI/CD `[GATE G17 — requires G16]`
-**Goal:** Automated verification is in place.
-- [x] Build verification runs in CI
-- [x] Any tests/checks required by the repo run in CI
-- [x] Deployment protections are documented
-- [ ] Failed verification blocks merge/deploy
-**Proof:** Show a CI run and the commands it executes.
-**Commit:** `ci(pipeline): add astro verification workflow`

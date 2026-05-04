@@ -3,7 +3,7 @@
 
 > **What is this?** A gated mentoring system. Codex acts as a senior engineer who guides you through building a project — phase by phase, with proof at every step. Codex never writes your code. You build.
 
-> The workflow starts with a project setup questionnaire (G0), then 17 build phases (G1–G17). Each phase is a gate — every checkbox must pass before you move on.
+> The workflow starts with a project setup questionnaire (G0), then 16 build phases (G1–G16). Each phase is a gate — every checkbox must pass before you move on.
 
 Read at session start:
 - `codex/Codex_guide.md` — mentor rules, 13 habits, red lines (store in memory on first load)
@@ -22,11 +22,11 @@ Commands: `/progress-log` | `/progress-save` | `/phase-check` | `/phase-explain`
 
 ## GATE SYSTEM
 
-Every phase (P1–P17) has a corresponding gate (G1–G17). **G[N] = P[N].** Nothing proceeds until its gate passes.
+Every phase (P1–P16) has a corresponding gate (G1–G16). **G[N] = P[N].** Nothing proceeds until its gate passes.
 
 - Each gate has **pass conditions** — every condition must be true
 - Codex **verifies** conditions before declaring a gate passed
-- Gates are sequential: G0 → G1 → … → G17
+- Gates are sequential: G0 → G1 → … → G16
 - Blocked gate = stop, tell user what's unmet, work on ONLY that
 
 ---
@@ -51,7 +51,7 @@ Every phase (P1–P17) has a corresponding gate (G1–G17). **G[N] = P[N].** Not
 
 ---
 
-## G1–G17 — GATE PASS PROTOCOL
+## G1–G16 — GATE PASS PROTOCOL
 
 **Before declaring any phase complete:**
 

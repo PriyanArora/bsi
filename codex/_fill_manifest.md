@@ -27,15 +27,14 @@ dev_goal: Able to ship and maintain production marketing sites and enquiry flows
 |-------|-----------|------|
 | Frontend | Astro 6, React 19 islands, Tailwind CSS 4, desktop-only Lenis, Sonner, React Hook Form + Zod | Vercel |
 | Submission Layer | Astro API route + Resend Email API | Vercel + Resend |
-| CI/CD | GitHub Actions | GitHub |
 
 ---
 
 ## COMMIT CONFIG
-scopes: ui, api, email, seo, config, deploy, perf, ci
+scopes: ui, api, email, seo, config, deploy, perf
 tdd_targets: normalizeEnquiryPayload, sendEnquiryEmail, chatbotDecisionTree
 docker_phase: none
-ci_phase: P17
+ci_phase: none
 
 ---
 
@@ -192,7 +191,3 @@ phase_15_commit: chore(deploy): deploy astro site and enquiry route
 phase_16_name: Domain + Production Verification
 phase_16_goal: Custom domain and full production smoke test are complete
 phase_16_commit: chore(deploy): verify production domain and delivery
-
-phase_17_name: CI/CD
-phase_17_goal: Automated verification is in place
-phase_17_commit: ci(pipeline): add astro verification workflow

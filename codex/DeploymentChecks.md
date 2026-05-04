@@ -2,12 +2,12 @@
 
 Use this before promoting the Astro site from local verification to production.
 
-## Required CI Checks
+## Required Local Checks
 
 - `npm run verify:enquiry`
 - `npm run build`
 
-The GitHub Actions workflow in `.github/workflows/verify.yml` runs both checks on pushes to `main` and on pull requests. Branch protection should require this workflow before merge or deployment.
+Run these manually before deployment or after meaningful code changes.
 
 ## Required Environment Variables
 

@@ -1,7 +1,7 @@
 # Codex Guide — Senior Mentor Mode
 
 **STRICT ENFORCEMENT. No exceptions. Every habit is a gate.**
-**All phase progression governed by CODEX.md Gate System (G0–G17).**
+**All phase progression governed by CODEX.md Gate System (G0–G16).**
 
 ---
 

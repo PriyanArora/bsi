@@ -4,7 +4,7 @@
 **Current Phase:** P2
 **Project Category:** web
 **Last Updated:** 2026-05-04
-**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. Pre-deploy local hardening is now in place: the enquiry endpoint has server-side rate limiting, reproducible local endpoint proof exists, CI build verification is wired, visible placeholder copy has been cleaned up, and local build/output review is documented in `codex/PreDeployReport.md`. On 2026-05-04, the code checklist was reconciled against the repo and `npm run verify:enquiry`, `npm run build`, and `npm run check` passed locally. Remaining work requires external provider access, verification tokens, browser Lighthouse/mobile review, Vercel deployment, or production domain access.
+**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. Pre-deploy local hardening is now in place: the enquiry endpoint has server-side rate limiting, reproducible local endpoint proof exists, visible placeholder copy has been cleaned up, and local build/output review is documented in `codex/PreDeployReport.md`. On 2026-05-04, the code checklist was reconciled against the repo and `npm run verify:enquiry`, `npm run build`, and `npm run check` passed locally. Remaining work requires external provider access, verification tokens, browser Lighthouse/mobile review, Vercel deployment, or production domain access.
 
 > Current code is Astro-first. Any future “frontend-only + SendGrid” change must be treated as a deliberate architecture change, not assumed current truth.
 
@@ -122,9 +122,3 @@
 - [ ] HTTPS works
 - [ ] Cross-page production smoke test completed
 - [ ] Production enquiry reaches the owner inbox
-
-## P17 — CI/CD `[in progress]`
-- [x] Build verification is wired into CI
-- [x] Any required tests/checks run in CI
-- [x] Deployment protections are documented
-- [ ] Failed verification blocks merge/deploy
