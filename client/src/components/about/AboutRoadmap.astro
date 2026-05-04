@@ -1,0 +1,256 @@
+---
+const steps = [
+  {
+    id: 1,
+    title: 'Requirement shared',
+    description: 'Client outlines load, usage, or power needs.',
+    delay: '0.4s'
+  },
+  {
+    id: 2,
+    title: 'Site visit optional',
+    description: 'Engineer checks layout, access, and site constraints.',
+    delay: '1.8s'
+  },
+  {
+    id: 3,
+    title: 'Technical planning',
+    description: 'Equipment and specs are finalized for the site.',
+    delay: '3.3s'
+  },
+  {
+    id: 4,
+    title: 'Proposal approval',
+    description: 'Quote, drawings, and timelines are confirmed.',
+    delay: '4.8s'
+  },
+  {
+    id: 5,
+    title: 'Preparation',
+    description: 'Equipment is manufactured, sourced, or scheduled.',
+    delay: '6.3s'
+  },
+  {
+    id: 6,
+    title: 'Delivery',
+    description: 'Logistics are arranged around site readiness.',
+    delay: '7.8s'
+  },
+  {
+    id: 7,
+    title: 'Installation setup',
+    description: 'Assembly, alignment, wiring, and setup are completed.',
+    delay: '9.3s'
+  },
+  {
+    id: 8,
+    title: 'Testing commissioning',
+    description: 'Load, safety, and performance checks are completed.',
+    delay: '10.8s'
+  },
+  {
+    id: 9,
+    title: 'Handover support',
+    description: 'Training, documentation, and service support are provided.',
+    delay: '12.4s'
+  }
+];
+---
+
+<ol class="process-flow" aria-label="BSI Solutionz work process">
+  {steps.map((step) => (
+    <li class="process-step" style={`--delay: ${step.delay};`}>
+      <button
+        type="button"
+        class="process-dot"
+        aria-describedby={`process-step-${step.id}`}
+        aria-label={`${step.title}. ${step.description}`}
+      >
+        {step.id}
+      </button>
+      <div class="process-copy" id={`process-step-${step.id}`}>
+        <h4>{step.title}</h4>
+        <p>{step.description}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .process-flow {
+    position: relative;
+    display: grid;
+    gap: clamp(18px, 2.3vw, 26px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .process-flow::before,
+  .process-flow::after {
+    position: absolute;
+    left: 23px;
+    width: 2px;
+    border-radius: 999px;
+    content: '';
+  }
+
+  .process-flow::before {
+    top: 24px;
+    bottom: 24px;
+    background: rgba(16, 37, 68, 0.7);
+  }
+
+  .process-flow::after {
+    top: 24px;
+    height: 0;
+    background: #22c55e;
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.34);
+    animation: process-line-fill 14s linear 0.2s forwards;
+  }
+
+  .process-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+
+  .process-dot {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(16, 37, 68, 0.74);
+    border-radius: 999px;
+    background: #faf8f2;
+    color: #102544;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 900;
+    box-shadow: 0 0 0 7px rgba(250, 248, 242, 0.92);
+    animation: process-dot-complete 0.35s ease forwards;
+    animation-delay: var(--delay);
+  }
+
+  .process-dot:focus-visible {
+    outline: 2px solid #e2b100;
+    outline-offset: 3px;
+  }
+
+  .process-copy {
+    min-width: 0;
+    padding-top: 2px;
+  }
+
+  .process-copy h4 {
+    margin: 0;
+    color: #102544;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.28rem);
+    font-weight: 900;
+    line-height: 1.22;
+  }
+
+  .process-copy p {
+    margin: 8px 0 0;
+    color: #4a5a73;
+    font-size: clamp(0.88rem, 1.3vw, 1rem);
+    line-height: 1.45;
+    opacity: 0;
+    transform: translateY(4px);
+    animation: process-copy-in 0.36s ease forwards;
+    animation-delay: calc(var(--delay) + 0.12s);
+  }
+
+  @keyframes process-line-fill {
+    0% {
+      height: 0;
+    }
+    8%,
+    11% {
+      height: 12%;
+    }
+    19%,
+    22% {
+      height: 24%;
+    }
+    30%,
+    33% {
+      height: 36%;
+    }
+    41%,
+    44% {
+      height: 48%;
+    }
+    52%,
+    55% {
+      height: 60%;
+    }
+    63%,
+    66% {
+      height: 72%;
+    }
+    74%,
+    77% {
+      height: 84%;
+    }
+    86%,
+    89% {
+      height: 94%;
+    }
+    100% {
+      height: calc(100% - 48px);
+    }
+  }
+
+  @keyframes process-dot-complete {
+    to {
+      border-color: #15803d;
+      background: #22c55e;
+      color: #ffffff;
+      box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.13), 0 0 20px rgba(34, 197, 94, 0.28);
+    }
+  }
+
+  @keyframes process-copy-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .process-flow {
+      gap: 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .process-flow::after,
+    .process-dot,
+    .process-copy p {
+      animation: none;
+    }
+
+    .process-flow::after {
+      height: calc(100% - 48px);
+    }
+
+    .process-dot {
+      border-color: #15803d;
+      background: #22c55e;
+      color: #ffffff;
+      box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.13);
+    }
+
+    .process-copy p {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

@@ -1,27 +1,22 @@
 ---
 import { Image } from 'astro:assets';
-import indefCraneImage from '../../assets/shared/indef-crane.png';
+import AboutRoadmap from './AboutRoadmap.astro';
 import amcImage from '../../assets/shared/amc.jpg';
 
 const services = [
   {
-    icon: 'engineering',
-    title: 'Site led engineering',
+    title: 'Optional Site inspection',
     description: 'We study span, duty cycle, headroom, bay movement, power access, and operator needs before recommending equipment.'
   },
   {
-    icon: 'precision_manufacturing',
     title: 'Installation coordination',
-    description: 'Our team plans the work around site readiness, civil inputs, erection sequence, safety access, and commissioning checks.'
+    description: 'Our team plans the work around site readiness, civil inputs, assembly sequence, safety access, and commissioning checks.'
   },
   {
-    icon: 'support_agent',
     title: 'Follow up service',
     description: 'After handover, we stay available for service calls, parts support, preventive maintenance, and practical troubleshooting.'
   }
 ];
-
-const sectors = ['Manufacturing', 'Warehousing', 'Irrigation', 'Steel and fabrication', 'Infrastructure', 'Process plants'];
 ---
 
 <section class="space-y-6 px-2 sm:px-4 md:px-8 lg:px-16">
@@ -29,113 +24,80 @@ const sectors = ['Manufacturing', 'Warehousing', 'Irrigation', 'Steel and fabric
     <article class="border-bsi-outline/30 bg-bsi-surface-lowest rounded-lg border p-6 sm:p-8 lg:col-span-7 lg:p-10">
       <p class="text-bsi-accent mb-3 text-xs font-bold uppercase tracking-[0.2em]">Our Mission</p>
       <h2 class="font-headline text-bsi-primary text-3xl leading-tight font-extrabold sm:text-4xl md:text-5xl">
-        Build lifting systems that work cleanly on real industrial floors.
+        Installing lifting systems and diesel generators built for real industrial environments.
       </h2>
       <p class="text-bsi-secondary mt-6 max-w-3xl text-base leading-relaxed sm:text-lg">
-        As an authorized Bajaj Indef dealer, BSI Solutionz has defined the standard for industrial lifting and material handling for over two decades.
+        Built on a decade of stellar service, BSI Solutionz continues to define the standard for industrial lifting and material handling.
       </p>
       <p class="text-bsi-secondary mt-4 max-w-3xl text-base leading-relaxed sm:text-lg">
-        Our job is to make the right equipment easier to select, install, operate, and maintain. We focus on practical engineering, clear coordination, and dependable support after the machine is running.
+        Our job is to make the right equipment easier to select, install, operate, and maintain. We focus on clear coordination and dependable support after the machine is up and running.
       </p>
     </article>
 
     <aside class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
-      <article class="bg-bsi-primary-container rounded-lg p-6 text-white sm:p-7">
-        <span class="material-symbols-outlined text-bsi-accent mb-4 text-4xl">verified</span>
-        <h3 class="font-headline text-2xl font-bold">Authorized Bajaj Indef dealer</h3>
-        <p class="text-bsi-on-primary-container mt-3 text-sm leading-relaxed">
-          Genuine product access, brand backed equipment knowledge, and support aligned with Indef lifting standards.
-        </p>
-      </article>
-
       <article class="border-bsi-outline/30 bg-bsi-surface-lowest rounded-lg border p-6 sm:p-7">
-        <div class="font-headline text-bsi-accent text-5xl font-extrabold">20+</div>
+        <div class="font-headline text-bsi-accent text-5xl font-extrabold">10+</div>
         <h3 class="text-bsi-primary mt-2 text-xl font-bold">Years in industrial lifting</h3>
         <p class="text-bsi-secondary mt-3 text-sm leading-relaxed">
           Experience across cranes, hoists, material handling systems, AMC support, and diesel generator requirements.
         </p>
       </article>
+
+      <article class="border-bsi-outline/30 bg-bsi-surface-lowest rounded-lg border p-6 sm:p-7">
+        <div class="font-headline text-bsi-accent text-5xl font-extrabold">20+</div>
+        <h3 class="text-bsi-primary mt-2 text-xl font-bold">Years in generator expertise</h3>
+        <p class="text-bsi-secondary mt-3 text-sm leading-relaxed">
+          Experience across diesel generators, power backup systems, installation support, AMC care, and clientele across India.
+        </p>
+      </article>
     </aside>
   </div>
 
-  <article class="border-bsi-outline/30 bg-bsi-surface-lowest overflow-hidden rounded-lg border">
-    <div class="grid grid-cols-1 lg:grid-cols-2">
-      <div class="p-6 sm:p-8 lg:p-10">
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch">
+    <article class="border-bsi-outline/30 bg-bsi-surface-lowest rounded-lg border p-6 sm:p-8 lg:col-span-7 lg:p-10">
+      <div class="mb-8">
         <p class="text-bsi-accent mb-3 text-xs font-bold uppercase tracking-[0.2em]">How we work</p>
-        <h3 class="font-headline text-bsi-primary text-3xl font-extrabold leading-tight">Measured before it is recommended.</h3>
+        <h3 class="font-headline text-bsi-primary text-3xl font-extrabold leading-tight">Process that keeps projects moving.</h3>
+      </div>
+      <AboutRoadmap />
+    </article>
+
+    <div class="grid grid-cols-1 gap-6 lg:col-span-5">
+      <article class="border-bsi-outline/30 bg-bsi-surface-lowest rounded-lg border p-6 sm:p-8 lg:p-10">
+        <p class="text-bsi-accent mb-3 text-xs font-bold uppercase tracking-[0.2em]">Project clarity</p>
+        <h3 class="font-headline text-bsi-primary text-3xl font-extrabold leading-tight">Engineering judgment before every recommendation.</h3>
         <div class="mt-8 grid gap-5">
-          {services.map((service) => (
-            <div class="flex gap-4">
-              <span class="material-symbols-outlined bg-bsi-surface text-bsi-accent h-11 w-11 shrink-0 rounded-lg p-2.5">{service.icon}</span>
-              <div>
-                <h4 class="text-bsi-primary font-bold">{service.title}</h4>
-                <p class="text-bsi-secondary mt-1 text-sm leading-relaxed">{service.description}</p>
-              </div>
+          {services.map((service, index) => (
+            <div>
+              <h4 class="text-bsi-primary font-bold">
+                <span class="text-bsi-accent mr-2 font-extrabold">{index + 1}.</span>
+                {service.title}
+              </h4>
+              <p class="text-bsi-secondary mt-1 text-sm leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>
-      </div>
+      </article>
 
-      <div class="relative min-h-80 bg-white">
+      <article class="relative overflow-hidden rounded-lg bg-bsi-primary p-6 text-white sm:p-8 lg:p-10">
         <Image
-          src={indefCraneImage}
-          alt="Indef crane installation"
+          src={amcImage}
+          alt="BSI Solutionz service support"
           loading="lazy"
           decoding="async"
-          width={720}
-          sizes="(max-width: 1023px) 88vw, 50vw"
-          class="absolute inset-0 h-full w-full object-cover"
+          width={640}
+          sizes="(max-width: 1023px) 88vw, 35vw"
+          class="absolute inset-0 h-full w-full object-cover opacity-30"
         />
-      </div>
+        <div class="absolute inset-0 bg-bsi-primary/75" />
+        <div class="relative">
+          <p class="text-bsi-accent mb-3 text-xs font-bold uppercase tracking-[0.2em]">After handover</p>
+          <h3 class="font-headline text-3xl font-extrabold leading-tight">Support that stays reachable.</h3>
+          <p class="mt-5 text-lg leading-relaxed text-slate-100">
+            Commissioning is not where the relationship ends. We help with operator queries, service planning, wear part replacement, and AMC care so the equipment remains reliable after installation.
+          </p>
+        </div>
+      </article>
     </div>
-  </article>
-
-  <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
-    <article class="border-bsi-outline/30 bg-bsi-surface-lowest rounded-lg border p-6 sm:p-8 lg:col-span-7 lg:p-10">
-      <p class="text-bsi-accent mb-3 text-xs font-bold uppercase tracking-[0.2em]">Where we fit</p>
-      <h3 class="font-headline text-bsi-primary text-3xl font-extrabold leading-tight">Industrial equipment for teams that need uptime.</h3>
-      <p class="text-bsi-secondary mt-5 text-base leading-relaxed">
-        We support facilities where lifting equipment is part of daily production, not an occasional purchase. The work usually starts with a constraint, such as limited headroom, awkward bay access, repeated maintenance trouble, or a new production line that needs dependable movement from day one.
-      </p>
-      <div class="mt-7 flex flex-wrap gap-3">
-        {sectors.map((sector) => (
-          <span class="border-bsi-outline/40 text-bsi-primary rounded-full border bg-white px-4 py-2 text-sm font-semibold">
-            {sector}
-          </span>
-        ))}
-      </div>
-    </article>
-
-    <article class="relative overflow-hidden rounded-lg bg-bsi-primary p-6 text-white sm:p-8 lg:col-span-5 lg:p-10">
-      <Image
-        src={amcImage}
-        alt="BSI Solutionz service support"
-        loading="lazy"
-        decoding="async"
-        width={640}
-        sizes="(max-width: 1023px) 88vw, 35vw"
-        class="absolute inset-0 h-full w-full object-cover opacity-30"
-      />
-      <div class="absolute inset-0 bg-bsi-primary/75" />
-      <div class="relative">
-        <p class="text-bsi-accent mb-3 text-xs font-bold uppercase tracking-[0.2em]">After handover</p>
-        <h3 class="font-headline text-3xl font-extrabold leading-tight">Support that stays reachable.</h3>
-        <p class="mt-5 text-sm leading-relaxed text-slate-100">
-          Commissioning is not where the relationship ends. We help with operator queries, service planning, wear part replacement, and AMC care so the equipment remains reliable after installation.
-        </p>
-      </div>
-    </article>
   </div>
-
-  <button
-    type="button"
-    data-open-enquiry
-    class="bg-bsi-accent group flex w-full cursor-pointer items-center justify-between rounded-lg p-6 text-left text-white sm:p-8 lg:p-10"
-  >
-    <div>
-      <h4 class="font-headline text-2xl font-bold">Discuss a requirement</h4>
-      <p class="mt-2 text-sm">Share your lifting, hoist, crane, or service requirement with the BSI Solutionz team.</p>
-    </div>
-    <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_forward</span>
-  </button>
 </section>
