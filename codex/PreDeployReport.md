@@ -1,11 +1,13 @@
 # Pre-Deploy Local Verification
 
 Generated: 2026-05-03
+Rechecked: 2026-05-04
 
 ## Commands Run
 
 - `npm run verify:enquiry`
 - `npm run build`
+- `npm run check`
 
 ## Enquiry Endpoint Proof
 
@@ -18,6 +20,8 @@ Generated: 2026-05-03
 ## Build Output Review
 
 `npm run build` completed successfully and generated 14 static pages.
+
+`npm run check` completed successfully with 0 errors, 0 warnings, and 0 hints.
 
 Static output size:
 
@@ -47,11 +51,11 @@ Removed the remaining visible placeholder copy from the home featured products s
 
 ## JavaScript Review
 
-- Removed Lenis smooth-scroll hydration and dependency
+- Lenis smooth scrolling is restored as a desktop-only enhancement; phones use native scrolling to preserve pinch zoom
 - Removed unused shadcn and tw-animate-css package imports
 - Converted the navbar and mobile menu from React to static Astro plus a small inline script
 - Converted the floating enquiry button from React to static HTML
-- Deferred the modal island with `client:idle`
+- Hydrates the modal root as a React island with `client:load`
 - Split enquiry and chatbot modal code into lazy-loaded chunks
 
 ## Still Needs External Verification

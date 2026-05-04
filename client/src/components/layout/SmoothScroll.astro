@@ -2,8 +2,13 @@
   import Lenis from 'lenis'
 
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  const desktopPointerQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
+  const desktopWidthQuery = window.matchMedia('(min-width: 1024px)')
 
-  if (!reducedMotionQuery.matches) {
+  const canUseSmoothScroll =
+    !reducedMotionQuery.matches && desktopPointerQuery.matches && desktopWidthQuery.matches
+
+  if (canUseSmoothScroll) {
     const root = document.documentElement
     const body = document.body
 
@@ -11,28 +16,20 @@
     body.classList.add('lenis', 'lenis-smooth')
 
     const lenis = new Lenis({
-      duration: 1.26,
-      lerp: 0.08,
+      autoRaf: true,
+      duration: 0.95,
+      lerp: 0.1,
       smoothWheel: true,
+      syncTouch: false,
       wheelMultiplier: 0.9,
-      touchMultiplier: 1,
-      syncTouch: true,
+      prevent: (node) => Boolean(node.closest('[role="dialog"], [data-native-scroll]')),
     })
 
     window.__lenis = lenis
 
-    let rafId = 0
-    const raf = (time: number) => {
-      lenis.raf(time)
-      rafId = window.requestAnimationFrame(raf)
-    }
-
-    rafId = window.requestAnimationFrame(raf)
-
     window.addEventListener(
       'pagehide',
       () => {
-        window.cancelAnimationFrame(rafId)
         lenis.destroy()
         delete window.__lenis
         root.classList.remove('lenis', 'lenis-smooth')

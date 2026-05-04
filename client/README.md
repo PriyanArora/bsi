@@ -6,7 +6,7 @@ Astro + React build of the BSI Solutionz marketing site.
 - Astro
 - React islands
 - Tailwind CSS
-- Lenis smooth scrolling
+- Desktop-only Lenis smooth scrolling
 - Sonner notifications
 
 ## Scripts

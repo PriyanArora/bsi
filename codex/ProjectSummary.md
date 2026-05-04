@@ -49,7 +49,7 @@ Browser (Astro pages + React islands)
 ## Tech Stack
 | Layer | Technology | Host |
 |-------|-----------|------|
-| Frontend | Astro 6, React 19 islands, Tailwind CSS 4, Lenis, Sonner, React Hook Form + Zod | Vercel |
+| Frontend | Astro 6, React 19 islands, Tailwind CSS 4, desktop-only Lenis, Sonner, React Hook Form + Zod | Vercel |
 | Submission Layer | Astro API route + Resend Email API | Vercel + Resend |
 | CI/CD | GitHub Actions | GitHub |
 

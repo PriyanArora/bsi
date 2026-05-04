@@ -1,9 +1,10 @@
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { Toaster } from 'sonner'
-import { onChatbotOpen, onEnquiryOpen } from '../../lib/shellEvents'
-
 const EnquiryModal = lazy(() => import('./EnquiryModal'))
 const ChatbotModal = lazy(() => import('./ChatbotModal'))
+
+const ENQUIRY_EVENT = 'bsi:open-enquiry'
+const CHATBOT_EVENT = 'bsi:open-chatbot'
 
 export default function ModalRoot() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
@@ -11,19 +12,48 @@ export default function ModalRoot() {
   const [selectedProduct, setSelectedProduct] = useState('')
 
   useEffect(() => {
-    const unsubscribeEnquiry = onEnquiryOpen((productName) => {
+    const openEnquiry = (productName = '') => {
       setSelectedProduct(productName || '')
       setIsChatbotOpen(false)
       setIsEnquiryOpen(true)
-    })
+    }
 
-    const unsubscribeChatbot = onChatbotOpen(() => {
+    const openChatbot = () => {
       setIsChatbotOpen(true)
-    })
+    }
+
+    const enquiryListener = (event) => openEnquiry(event?.detail?.productName || '')
+    const chatbotListener = () => openChatbot()
+
+    window.__bsiOpenEnquiry = openEnquiry
+    window.__bsiOpenChatbot = openChatbot
+    window.__bsiModalRootReady = true
+    window.addEventListener(ENQUIRY_EVENT, enquiryListener)
+    window.addEventListener(CHATBOT_EVENT, chatbotListener)
+
+    const pendingEnquiries = window.__bsiPendingEnquiries || []
+    const pendingChatbotOpens = window.__bsiPendingChatbotOpens || []
+    window.__bsiPendingEnquiries = []
+    window.__bsiPendingChatbotOpens = []
+
+    pendingEnquiries.forEach((productName) => openEnquiry(productName))
+    if (pendingChatbotOpens.length > 0) {
+      openChatbot()
+    }
 
     return () => {
-      unsubscribeEnquiry()
-      unsubscribeChatbot()
+      window.removeEventListener(ENQUIRY_EVENT, enquiryListener)
+      window.removeEventListener(CHATBOT_EVENT, chatbotListener)
+
+      if (window.__bsiOpenEnquiry === openEnquiry) {
+        delete window.__bsiOpenEnquiry
+      }
+
+      if (window.__bsiOpenChatbot === openChatbot) {
+        delete window.__bsiOpenChatbot
+      }
+
+      delete window.__bsiModalRootReady
     }
   }, [])
 

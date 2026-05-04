@@ -21,7 +21,10 @@ const socialImageUrl = new URL(image, siteUrl).toString();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
+    />
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow'} />
     <link rel="canonical" href={canonicalUrl} />
@@ -101,6 +104,16 @@ const socialImageUrl = new URL(image, siteUrl).toString();
       const CHATBOT_EVENT = 'bsi:open-chatbot'
       const backToTopButton = document.querySelector('[data-back-to-top]')
 
+      const queueEnquiryOpen = (productName) => {
+        window.__bsiPendingEnquiries = window.__bsiPendingEnquiries || []
+        window.__bsiPendingEnquiries.push(productName)
+      }
+
+      const queueChatbotOpen = () => {
+        window.__bsiPendingChatbotOpens = window.__bsiPendingChatbotOpens || []
+        window.__bsiPendingChatbotOpens.push(true)
+      }
+
       document.addEventListener('click', (event) => {
         if (!(event.target instanceof Element)) {
           return
@@ -109,11 +122,12 @@ const socialImageUrl = new URL(image, siteUrl).toString();
         const enquiryTrigger = event.target.closest('[data-open-enquiry]')
         if (enquiryTrigger) {
           const productName = enquiryTrigger.getAttribute('data-product-name') || ''
-          if (!window.__bsiModalRootReady) {
-            window.__bsiPendingEnquiries = window.__bsiPendingEnquiries || []
-            window.__bsiPendingEnquiries.push(productName)
+          if (typeof window.__bsiOpenEnquiry === 'function') {
+            window.__bsiOpenEnquiry(productName)
+            return
           }
 
+          queueEnquiryOpen(productName)
           window.dispatchEvent(
             new CustomEvent(ENQUIRY_EVENT, {
               detail: {
@@ -126,11 +140,12 @@ const socialImageUrl = new URL(image, siteUrl).toString();
 
         const chatbotTrigger = event.target.closest('[data-open-chatbot]')
         if (chatbotTrigger) {
-          if (!window.__bsiModalRootReady) {
-            window.__bsiPendingChatbotOpens = window.__bsiPendingChatbotOpens || []
-            window.__bsiPendingChatbotOpens.push(true)
+          if (typeof window.__bsiOpenChatbot === 'function') {
+            window.__bsiOpenChatbot()
+            return
           }
 
+          queueChatbotOpen()
           window.dispatchEvent(new CustomEvent(CHATBOT_EVENT))
         }
       })
@@ -138,7 +153,7 @@ const socialImageUrl = new URL(image, siteUrl).toString();
       if (backToTopButton) {
         backToTopButton.addEventListener('click', () => {
           if (window.__lenis && typeof window.__lenis.scrollTo === 'function') {
-            window.__lenis.scrollTo(0, { duration: 1.2 })
+            window.__lenis.scrollTo(0, { duration: 0.9 })
             return
           }
 

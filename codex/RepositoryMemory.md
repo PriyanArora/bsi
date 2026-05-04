@@ -1,6 +1,6 @@
 # Repository Memory
 
-**Recorded:** 2026-04-28
+**Recorded:** 2026-05-04
 **Repository:** `/home/priyan/Desktop/bsi`
 
 ## Current Shape
@@ -36,7 +36,7 @@
 
 ## Current Risks / Open Decisions
 - Live provider delivery has not been re-verified with production credentials.
-- Abuse/rate-limit protection is still not implemented beyond validation.
+- Abuse/rate-limit protection is implemented in the Astro enquiry route and covered by local endpoint proof.
 - Visible placeholder copy has been removed from home/about content.
 - Product placeholder assets still exist as intentional catalog fallbacks for missing images.
 - The requested future direction of “frontend-only + SendGrid” is still an architecture decision, not current code.

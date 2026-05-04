@@ -3,8 +3,8 @@
 **Current Gate:** G2 (Resend Setup)
 **Current Phase:** P2
 **Project Category:** web
-**Last Updated:** 2026-05-03
-**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. Pre-deploy local hardening is now in place: the enquiry endpoint has server-side rate limiting, reproducible local endpoint proof exists, CI build verification is wired, visible placeholder copy has been cleaned up, and local build/output review is documented in `codex/PreDeployReport.md`. Remaining work requires external provider access, verification tokens, browser Lighthouse/mobile review, Vercel deployment, or production domain access.
+**Last Updated:** 2026-05-04
+**Session Notes:** The Astro app has replaced the old Vite app in `client/`. Public pages now live under `client/src/pages/`, interactive UI is isolated in React islands under `client/src/components/react/`, and the current enquiry path remains `client/src/pages/api/enquiry.js` -> Resend. The visual parity pass is complete, including restored hero parallax, restored static CTA enquiry triggers, and the final footer back-to-top alignment change. Pre-deploy local hardening is now in place: the enquiry endpoint has server-side rate limiting, reproducible local endpoint proof exists, CI build verification is wired, visible placeholder copy has been cleaned up, and local build/output review is documented in `codex/PreDeployReport.md`. On 2026-05-04, the code checklist was reconciled against the repo and `npm run verify:enquiry`, `npm run build`, and `npm run check` passed locally. Remaining work requires external provider access, verification tokens, browser Lighthouse/mobile review, Vercel deployment, or production domain access.
 
 > Current code is Astro-first. Any future “frontend-only + SendGrid” change must be treated as a deliberate architecture change, not assumed current truth.
 
@@ -92,7 +92,7 @@
 - [ ] Search Console verification token not yet available
 
 ## P12 — Polish + Interactivity `[complete]`
-- [x] Smooth scrolling is wired through Lenis
+- [x] Smooth scrolling is wired through desktop-only Lenis; phones use native scrolling to preserve pinch zoom
 - [x] Home hero desktop parallax is restored
 - [x] Footer back-to-top behavior works and final alignment change is applied
 - [x] Responsive layout and hover motion are present across the approved pages
@@ -107,6 +107,7 @@
 ## P14 — Performance `[in progress]`
 - [ ] Lighthouse review run on the promoted Astro site
 - [x] Asset review completed
+- [x] Lazy loading confirmed on below-fold images
 - [x] Bundle/output review completed
 - [ ] Mobile performance verified
 
