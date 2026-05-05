@@ -9,7 +9,7 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bsisolutionz.com',
+  site: 'https://www.bsisolutionz.com',
   integrations: [react()],
 
   vite: {
