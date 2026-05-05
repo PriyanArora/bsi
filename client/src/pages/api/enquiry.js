@@ -1,5 +1,7 @@
 import { EnquiryRequestError, checkEnquiryRateLimit, sendEnquiryEmail } from './_shared/enquiry-handler.js'
 
+export const prerender = false
+
 const parseRequestBody = async (request) => {
   const rawBody = await request.text()
 
