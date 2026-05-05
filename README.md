@@ -49,3 +49,17 @@ npm run dev
 npm run build
 npm run check
 ```
+
+LightHouse review done:
+
+Desktop Scores,
+Performance - 83
+Accessibility - 98
+Best Practices - 100
+SEO - 100
+
+Mobile Scores,
+Performance - 74
+Accessibility - 98
+Best Practices - 100
+SEO - 100
